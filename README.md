@@ -5,14 +5,14 @@
 #Layouts:
 
 * http://forumkyiv-org.azurewebsites.net/HTML/about.html
-* http://forumkyiv-org.azurewebsites.net/HTML/about.htmlaccreditation.html
-* http://forumkyiv-org.azurewebsites.net/HTML/about.htmlarchive.html
-* http://forumkyiv-org.azurewebsites.net/HTML/about.htmlbussines.html
-* http://forumkyiv-org.azurewebsites.net/HTML/about.htmlindex.html
-* http://forumkyiv-org.azurewebsites.net/HTML/about.htmlmaterials.html
-* http://forumkyiv-org.azurewebsites.net/HTML/about.htmlnews.html
-* http://forumkyiv-org.azurewebsites.net/HTML/about.htmlorg.html
-* http://forumkyiv-org.azurewebsites.net/HTML/about.htmlpanel.html
-* http://forumkyiv-org.azurewebsites.net/HTML/about.htmlparticipation.html
-* http://forumkyiv-org.azurewebsites.net/HTML/about.htmlspeaker.html
-* http://forumkyiv-org.azurewebsites.net/HTML/about.htmlspeakers.html
+* http://forumkyiv-org.azurewebsites.net/HTML/accreditation.html
+* http://forumkyiv-org.azurewebsites.net/HTML/archive.html
+* http://forumkyiv-org.azurewebsites.net/HTML/bussines.html
+* http://forumkyiv-org.azurewebsites.net/HTML/index.html
+* http://forumkyiv-org.azurewebsites.net/HTML/materials.html
+* http://forumkyiv-org.azurewebsites.net/HTML/news.html
+* http://forumkyiv-org.azurewebsites.net/HTML/org.html
+* http://forumkyiv-org.azurewebsites.net/HTML/panel.html
+* http://forumkyiv-org.azurewebsites.net/HTML/participation.html
+* http://forumkyiv-org.azurewebsites.net/HTML/speaker.html
+* http://forumkyiv-org.azurewebsites.net/HTML/speakers.html
