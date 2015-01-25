@@ -1,601 +1,198 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>bussines</title>
+{% extends "base.html" %}
 
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
-    <link rel="stylesheet" type="text/css" href="css/owl.theme.css">
-    <script src="js/jquery-1.9.1.min.js"></script>
-    <script src="js/owl.carousel.js"></script>
+{% load static core_tags %}
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
-    <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+{% block content %}
 
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-</head>
-<body>
-    <div id="for_wrapper">
-        <div class="for_header">
-            <div class="for_top_header">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="for_left_header">
-                                <div class="for_top_logo">
-                                    <a href="#">
-                                        <img src="images/for_top_logo.png" alt="logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="for_right_header">
-                                <div class="for_lang_search">
-                                    <div class="for_search">
-                                        <form>
-                                            <input class="for_form_text" type="text">
-                                            <input class="for_form_sub" type="submit" value="">
-                                        </form>
-                                    </div>
-                                    <div class="for_lang">
-                                        <ul>
-                                            <li>
-                                                <a href="#">
-                                                    Укр
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Рус
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Eng
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="for_top_menu">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                Головна
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                КМЕФ 2015
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Про форум
-                                            </a>
-                                            <ul>
-                                                <li>
-                                                    <a href="#">
-                                                        Місія
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Організатори
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        Наглядова рада
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Новини
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Прес-центр
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Матеріали
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Архів форумів
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                Контакти
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="pad"></div>
-                        </div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="for_pathway">
+                <a href="#">Головна</a> > <a href="#">Новини</a> > Бізнес- сніданок «Фінансування проектів розвитку»
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="for_block_bussines">
+                <div class="for_block_title">
+                    <div class="for_block_title_top">
+                        <a href="#">
+                            Бізнес- сніданок «Фінансування проектів розвитку»
+                        </a>
+                    </div>
+                    <div class="for_block_title_bot">
+                        <div class="for_block_title_bot_in"></div>
                     </div>
                 </div>
-            </div>
-            <div class="for_slider">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div id="for_top_slider" class="owl-carousel owl-theme">
-                                <div class="item">
-                                    <div class="for_slide_block_1">
-                                        2 жовтня 2015. Україна, Київ, готель Hilton Kyiv
-                                    </div>
-                                    <div class="for_slide_block_2">
-                                        Україна:<br>
-                                        з третього світу в перший
-                                    </div>
-                                    <div class="for_slide_block_3">
-                                        Реальні інструменти економічного розвитку:<br>
-                                        пріоритетні галузі та “точки зростання”
-                                    </div>
-                                    <div class="for_slide_block_4">
-                                        <a href="#">
-                                            Реєстрація
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="for_slide_block_1">
-                                        2 жовтня 2015. Україна, Київ, готель Hilton Kyiv
-                                    </div>
-                                    <div class="for_slide_block_2">
-                                        Україна:<br>
-                                        з третього світу в перший
-                                    </div>
-                                    <div class="for_slide_block_3">
-                                        Реальні інструменти економічного розвитку:<br>
-                                        пріоритетні галузі та “точки зростання”
-                                    </div>
-                                    <div class="for_slide_block_4">
-                                        <a href="#">
-                                            Реєстрація
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="for_slide_block_1">
-                                        2 жовтня 2015. Україна, Київ, готель Hilton Kyiv
-                                    </div>
-                                    <div class="for_slide_block_2">
-                                        Україна:<br>
-                                        з третього світу в перший
-                                    </div>
-                                    <div class="for_slide_block_3">
-                                        Реальні інструменти економічного розвитку:<br>
-                                        пріоритетні галузі та “точки зростання”
-                                    </div>
-                                    <div class="for_slide_block_4">
-                                        <a href="#">
-                                            Реєстрація
-                                        </a>
-                                    </div>
-                                </div>
+                <div class="for_block_bus_cont">
+                    <p>
+                        12 листопада в Києві відбулась дискусія на тему «Фінансування проектів розвитку. Перспективи та
+                        проблеми створення і<br>
+                        функціонування Банку розвитку в Україні»
+                    </p>
+                    <img src="images/for_bussines.jpg" alt="image">
+
+                    <p class="for_under">
+                        Pахід відкрив серію фахових зустрічей, що передуватимуть другому Київському міжнародному
+                        економічному форуму (КМЕФ), який<br>
+                        відбудеться у столиці 8 жовтня 2015 року. В круглому столі, що пройшов у столичному готелі
+                        Hilton Kyiv, взяли участь більше<br>
+                        двадцяти українських та іноземних фінансових експертів, топ-менеджерів банків і урядовців.<br>
+                        <br>
+                        Цей захід відкрив серію фахових зустрічей, що передуватимуть другому Київському міжнародному
+                        економічному форуму (КМЕФ),<br>
+                        який відбудеться у столиці 8 жовтня 2015 року. В круглому столі, що пройшов у столичному готелі
+                        Hilton Kyiv, взяли участь більше<br>
+                        двадцяти українських та іноземних фінансових експертів, топ-менеджерів банків і урядовців.
+                    </p>
+                </div>
+                <div class="for_block_doc_cont">
+                    <div class="for_block_doc_item">
+                        <div class="for_block_doc_img">
+                            <a href="#">
+                                <img src="images/for_doc_1.jpg" alt="image">
+                            </a>
+                        </div>
+                        <div class="for_block_doc_right">
+                            <div class="for_block_doc_date">20.12.2013</div>
+                            <div class="for_block_doc_text">
+                                Дискусія "Як зробити хай-тек<br>
+                                локомотивом української<br>
+                                економіки"
+                            </div>
+                            <div class="for_block_doc_download">
+                                <a href="#">
+                                    Завнтажити PDF
+                                </a>
                             </div>
                         </div>
+                        <div class="pad"></div>
                     </div>
+                    <div class="pad"></div>
                 </div>
             </div>
         </div>
-        <div class="for_body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="for_pathway">
-                            <a href="#">Головна</a> > <a href="#">Новини</a> > Бізнес- сніданок «Фінансування проектів розвитку»
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="for_block_bussines">
-                            <div class="for_block_title">
-                                <div class="for_block_title_top">
-                                    <a href="#">
-                                        Бізнес- сніданок «Фінансування проектів розвитку»
-                                    </a>
-                                </div>
-                                <div class="for_block_title_bot">
-                                    <div class="for_block_title_bot_in"></div>
-                                </div>
-                            </div>
-                            <div class="for_block_bus_cont">
-                                <p>
-                                    12 листопада в Києві відбулась дискусія на тему «Фінансування проектів розвитку. Перспективи та проблеми створення і<br>
-                                    функціонування Банку розвитку в Україні»
-                                </p>
-                                <img src="images/for_bussines.jpg" alt="image">
-                                <p class="for_under">
-                                    Pахід відкрив серію фахових зустрічей, що передуватимуть другому Київському міжнародному економічному форуму (КМЕФ), який<br>
-                                    відбудеться у столиці 8 жовтня 2015 року. В круглому столі, що пройшов у столичному готелі Hilton Kyiv, взяли участь більше<br>
-                                    двадцяти українських та іноземних фінансових експертів, топ-менеджерів банків і урядовців.<br>
-                                    <br>
-                                    Цей захід відкрив серію фахових зустрічей, що передуватимуть другому Київському міжнародному економічному форуму (КМЕФ),<br>
-                                    який відбудеться у столиці 8 жовтня 2015 року. В круглому столі, що пройшов у столичному готелі Hilton Kyiv, взяли участь більше<br>
-                                    двадцяти українських та іноземних фінансових експертів, топ-менеджерів банків і урядовців.
-                                </p>
-                            </div>
-                            <div class="for_block_doc_cont">
-                                <div class="for_block_doc_item">
-                                    <div class="for_block_doc_img">
-                                        <a href="#">
-                                            <img src="images/for_doc_1.jpg" alt="image">
-                                        </a>
-                                    </div>
-                                    <div class="for_block_doc_right">
-                                        <div class="for_block_doc_date">20.12.2013</div>
-                                        <div class="for_block_doc_text">
-                                            Дискусія "Як зробити хай-тек<br>
-                                            локомотивом української<br>
-                                            економіки"
-                                        </div>
-                                        <div class="for_block_doc_download">
-                                            <a href="#">
-                                                Завнтажити PDF
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="pad"></div>
-                                </div>
-                                <div class="pad"></div>
-                            </div>
-                        </div>
-                    </div>
+    </div>
+</div>
+<div class="for_repost">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <span>Поділитися:</span>
+                <a href="#">
+                    <img src="images/for_repost_1.jpg" alt="link">
+                </a>
+                <a href="#">
+                    <img src="images/for_repost_2.jpg" alt="link">
+                </a>
+                <a href="#">
+                    <img src="images/for_repost_3.jpg" alt="link">
+                </a>
+                <a href="#">
+                    <img src="images/for_repost_4.jpg" alt="link">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="for_block_organization">
+                <div class="for_block_org_title">
+                    Організатори форуму
+                </div>
+                <div class="for_block_org_links">
+                    <a href="#">
+                        <img src="images/for_org_1.png" alt="organizator">
+                    </a>
+                    <a href="#">
+                        <img src="images/for_org_2.png" alt="organizator">
+                    </a>
                 </div>
             </div>
-            <div class="for_repost">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <span>Поділитися:</span>
-                            <a href="#">
-                                <img src="images/for_repost_1.jpg" alt="link">
-                            </a>
-                            <a href="#">
-                                <img src="images/for_repost_2.jpg" alt="link">
-                            </a>
-                            <a href="#">
-                                <img src="images/for_repost_3.jpg" alt="link">
-                            </a>
-                            <a href="#">
-                                <img src="images/for_repost_4.jpg" alt="link">
-                            </a>
-                        </div>
-                    </div>
+            <div class="for_block_partners">
+                <div class="for_block_part_title">
+                    Партнери
                 </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="for_block_organization">
-                            <div class="for_block_org_title">
-                                Організатори форуму
-                            </div>
-                            <div class="for_block_org_links">
-                                <a href="#">
-                                    <img src="images/for_org_1.png" alt="organizator">
-                                </a>
-                                <a href="#">
-                                    <img src="images/for_org_2.png" alt="organizator">
-                                </a>
-                            </div>
+                <div class="for_block_part_cont">
+                    <div id="for_bot_slider" class="owl-carousel owl-theme">
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_1.png" alt="partner">
+                            </a>
                         </div>
-                        <div class="for_block_partners">
-                            <div class="for_block_part_title">
-                                Партнери
-                            </div>
-                            <div class="for_block_part_cont">
-                                <div id="for_bot_slider" class="owl-carousel owl-theme">
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_1.png" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_2.jpg" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_3.jpg" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_4.jpg" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_5.jpg" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_6.jpg" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_7.jpg" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_1.png" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_2.jpg" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_3.jpg" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_4.jpg" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_5.jpg" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_6.jpg" alt="partner">
-                                        </a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#">
-                                            <img src="images/for_part_7.jpg" alt="partner">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_2.jpg" alt="partner">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_3.jpg" alt="partner">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_4.jpg" alt="partner">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_5.jpg" alt="partner">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_6.jpg" alt="partner">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_7.jpg" alt="partner">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_1.png" alt="partner">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_2.jpg" alt="partner">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_3.jpg" alt="partner">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_4.jpg" alt="partner">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_5.jpg" alt="partner">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_6.jpg" alt="partner">
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#">
+                                <img src="images/for_part_7.jpg" alt="partner">
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="for_top_foot">
-                        <div class="for_top_left_foot">
-                            <div class="for_bot_logo">
-                                <a href="#">
-                                    <img src="images/for_top_logo.png" alt="logo">
-                                </a>
-                            </div>
-                            <div class="for_search for__bot_search">
-                                <form>
-                                    <input class="for_form_text" type="text">
-                                    <input class="for_form_sub" type="submit" value="">
-                                </form>
-                            </div>
-                            <div class="pad"></div>
-                        </div>
-                        <div class="for_top_right_foot">
-                            <span class="for_add">
-                                Приєднуйтесь до нас:
-                            </span>
-                            <a href="#">
-                                <img src="images/for_add_1.jpg" alt="facebook">
-                            </a>
-                            <a href="#">
-                                <img src="images/for_add_2.jpg" alt="youtube">
-                            </a>
-                        </div>
-                        <div class="pad"></div>
-                    </div>
-                    <div class="for_bot_foot">
-                        <div class="for_contacts">
-                            <span>Контактна  інформація</span><br>
-                            Тел.: +38 (044) 496-30-36<br>
-                            info@forumkyiv.org
-                        </div>
-                        <div class="for_footer_list">
-                            <div class="row">
-                                <div class="col-xs-2">
-                                    <div class="for_footer_item">
-                                        <ul>
-                                            <li>
-                                                КМЕФ 2015
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Програма
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Спікери
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Місце проведення
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Пакети учасників
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Реєстрації
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-xs-2">
-                                    <div class="for_footer_item">
-                                        <ul>
-                                            <li>
-                                                Про форум
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Програма
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Місія
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Організатори
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Наглядова рада
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-xs-2">
-                                    <div class="for_footer_item">
-                                        <ul>
-                                            <li>
-                                                Прес-центр
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Акредитація ЗМІ
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Прес-релізи
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-xs-2">
-                                    <div class="for_footer_item">
-                                        <ul>
-                                            <li>
-                                                Матеріали
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Відео
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Фото
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    Документи
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-xs-2">
-                                    <div class="for_footer_item">
-                                        <ul>
-                                            <li>
-                                                Архів Форумів
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    КМЕФ 2014
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-xs-2">
-                                    <div class="for_footer_item">
-                                        <ul>
-                                            <li>
-                                                <a href="#">
-                                                    Контакти
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pad"></div>
-                        </div>
-                        <div class="pad"></div>
-                    </div>
-                    <div class="for_copyright">
-                        © 2015 KIEF. All Rights Reserved.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+</div>
 
-
-
-    <script>
-        $(document).ready(function() {
-            $("#for_top_slider").owlCarousel({
-                autoPlay : 5000,
-                slideSpeed : 300,
-                paginationSpeed : 400,
-                singleItem:true
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $("#for_bot_slider").owlCarousel({
-                navigation : true,
-                autoPlay : 5000,
-                items : 10,
-                itemsCustom : [1199, 10],
-                itemsCustom : [979, 10],
-                itemsCustom : [768, 10],
-                itemsCustom : [479, 10]
-            });
-        });
-    </script>
-
-
-</body>
-</html>
+{% endblock %}
