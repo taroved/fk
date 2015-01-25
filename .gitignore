@@ -8,5 +8,41 @@
 Vagrantfile.local
 /docs/_build/
 /db.sqlite3
+
 .idea/
+
 .idea
+
+temp/
+dist/
+node_modules/
+# bower_components/
+**/*.js
+**/*.js.map
+app.css
+_SpecRunner.html
+.DS_Store
+test-results.xml
+.idea
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Build results
+
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+
+
+# Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
+!packages/*/build/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
