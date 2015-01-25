@@ -8,3 +8,5 @@
 Vagrantfile.local
 /docs/_build/
 /db.sqlite3
+.idea/
+.idea
