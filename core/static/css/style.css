@@ -109,7 +109,7 @@ ul
 
 .for_header
 {
-    background: #0098cf url("/images/for_header.jpg") top center no-repeat;
+    background: #0098cf url("/static/images/for_header.jpg") top center no-repeat;
     height: 584px;
     margin-bottom: 45px;
 }
@@ -151,7 +151,7 @@ ul
     height: 20px;
     line-height: 22px;
     padding-left: 26px;
-    background: url("/images/for_lang.png") left top no-repeat;
+    background: url("/static/images/for_lang.png") left top no-repeat;
     margin-bottom: 0;
 }
 .for_lang > ul > li
@@ -213,7 +213,7 @@ ul
     margin-left: 3px;
     width: 20px;
     height: 20px;
-    background: url("/images/for_search.png") left top no-repeat;
+    background: url("/static/images/for_search.png") left top no-repeat;
     cursor: pointer;
 }
 .for_top_menu > ul
@@ -382,11 +382,11 @@ ul
     margin-left: -25px;
     height: 14px;
     width: 50px;
-    background: #fff url("/images/for_block.png") top center no-repeat;
+    background: #fff url("/static/images/for_block.png") top center no-repeat;
 }
 .for_block_title_bot_back
 {
-    background: #f2fafd url("/images/for_block.png") top center no-repeat;
+    background: #f2fafd url("/static/images/for_block.png") top center no-repeat;
 }
 .for_block_news
 {
@@ -818,12 +818,12 @@ ul
 #for_bot_slider .owl-prev
 {
     left: 0;
-    background: url("/images/for_arrow_left.png") left top no-repeat;
+    background: url("/static/images/for_arrow_left.png") left top no-repeat;
 }
 #for_bot_slider .owl-next
 {
     right: 0;
-    background: url("/images/for_arrow_right.png") left top no-repeat;
+    background: url("/static/images/for_arrow_right.png") left top no-repeat;
 }
 .for_pathway
 {
@@ -1095,7 +1095,7 @@ ul
     line-height: 19px;
     color: #072033;
     padding-left: 20px;
-    background: url("/images/for_circle.png") left 7px no-repeat;
+    background: url("/static/images/for_circle.png") left 7px no-repeat;
     margin-bottom: 24px;
 }
 .for_block_ab_list_in ul li:last-child
@@ -1163,14 +1163,14 @@ ul
     line-height: 19px;
     color: #989ca2;
     padding: 0 0 0 40px;
-    background: url("/images/for_mail.png") left center no-repeat;
+    background: url("/static/images/for_mail.png") left center no-repeat;
     cursor: pointer;
     margin-right: -15px;
 }
 .for_ac_form_go input:hover
 {
     color: #0098cf;
-    background: url("/images/for_mail_hover.png") left center no-repeat;
+    background: url("/static/images/for_mail_hover.png") left center no-repeat;
 }
 .for_block_bussines
 {

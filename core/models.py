@@ -1,9 +1,7 @@
 from django.db import models
+from wagtail.wagtailcore.fields import RichTextField
 
 from wagtail.wagtailcore.models import Page
-
-class AboutPage(Page):
-    pass
 
 class AccreditationPage(Page):
     pass
@@ -42,6 +40,10 @@ class SpeakerPage(Page):
     pass
 
 class SpeakersPage(Page):
+    pass
+
+class ContentPage(Page):
+    content = RichTextField()
     pass
 
 class EmptyPage(Page):
