@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2414d32d-45f0-44d8-9d6a-72ec2f38cacd" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\X\forumkyiv.org\core\templates\core\about.html" afterPath="$PROJECT_DIR$/core/templates/core/content_page.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/accreditation.html" afterPath="$PROJECT_DIR$/core/templates/core/accreditation.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/archive.html" afterPath="$PROJECT_DIR$/core/templates/core/archive.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/base.html" afterPath="$PROJECT_DIR$/core/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/bussines.html" afterPath="$PROJECT_DIR$/core/templates/core/bussines.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/home_page.html" afterPath="$PROJECT_DIR$/core/templates/core/home_page.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/materials.html" afterPath="$PROJECT_DIR$/core/templates/core/materials.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/models.py" afterPath="$PROJECT_DIR$/core/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/news.html" afterPath="$PROJECT_DIR$/core/templates/core/news.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/org.html" afterPath="$PROJECT_DIR$/core/templates/core/org.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/participation.html" afterPath="$PROJECT_DIR$/core/templates/core/participation.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/program.html" afterPath="$PROJECT_DIR$/core/templates/core/program.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/rada.html" afterPath="$PROJECT_DIR$/core/templates/core/rada.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/speaker.html" afterPath="$PROJECT_DIR$/core/templates/core/speaker.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/speakers.html" afterPath="$PROJECT_DIR$/core/templates/core/speakers.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/static/css/style.css" afterPath="$PROJECT_DIR$/core/static/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/templates/core/content_page.html" afterPath="$PROJECT_DIR$/core/templates/core/content_page.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="forumkyiv.org.iws" />
@@ -59,18 +45,18 @@
       <file leaf-file-name="content_page.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/templates/core/content_page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.1923075" vertical-offset="0" max-vertical-offset="289">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="306">
+              <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.8461537" vertical-offset="204" max-vertical-offset="7888">
-              <caret line="24" column="62" selection-start-line="24" selection-start-column="62" selection-end-line="24" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.22427441" vertical-offset="357" max-vertical-offset="7922">
+              <caret line="26" column="73" selection-start-line="26" selection-start-column="73" selection-end-line="26" selection-end-column="73" />
               <folding>
                 <element signature="n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
               </folding>
@@ -78,10 +64,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="38.740635" vertical-offset="6481" max-vertical-offset="27506">
+            <state vertical-scroll-proportion="-229.13792" vertical-offset="6634" max-vertical-offset="27506">
               <caret line="1172" column="28" selection-start-line="1172" selection-start-column="28" selection-end-line="1172" selection-end-column="28" />
               <folding />
             </state>
@@ -114,9 +100,9 @@
         <option value="$PROJECT_DIR$/core/templates/core/accreditation.html" />
         <option value="$PROJECT_DIR$/core/templates/core/about.html" />
         <option value="$PROJECT_DIR$/core/models.py" />
+        <option value="$PROJECT_DIR$/core/static/css/style.css" />
         <option value="$PROJECT_DIR$/core/templates/core/content_page.html" />
         <option value="$PROJECT_DIR$/core/templates/base.html" />
-        <option value="$PROJECT_DIR$/core/static/css/style.css" />
       </list>
     </option>
   </component>
@@ -213,6 +199,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="forumkyiv.org" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="forumkyiv.org" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -862,29 +870,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/core/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-229.13792" vertical-offset="6634" max-vertical-offset="27506">
+          <caret line="1172" column="28" selection-start-line="1172" selection-start-column="28" selection-end-line="1172" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/core/templates/core/content_page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1923075" vertical-offset="0" max-vertical-offset="289">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="306">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.8461537" vertical-offset="204" max-vertical-offset="7888">
-          <caret line="24" column="62" selection-start-line="24" selection-start-column="62" selection-end-line="24" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.22427441" vertical-offset="357" max-vertical-offset="7922">
+          <caret line="26" column="73" selection-start-line="26" selection-start-column="73" selection-end-line="26" selection-end-column="73" />
           <folding>
             <element signature="n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/static/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="38.740635" vertical-offset="6481" max-vertical-offset="27506">
-          <caret line="1172" column="28" selection-start-line="1172" selection-start-column="28" selection-end-line="1172" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>

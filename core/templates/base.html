@@ -24,6 +24,8 @@
     <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock
         %}{% block title_suffix %}{% endblock %}{% endblock %}</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}" />
+
     {% compress css %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">

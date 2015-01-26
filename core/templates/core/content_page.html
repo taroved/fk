@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
 {% load static core_tags %}
+{% load wagtailcore_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
 
-    TEST
+{{ self.content|richtext }}
 
 {% endblock %}
