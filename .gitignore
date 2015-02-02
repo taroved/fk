@@ -17,8 +17,6 @@ temp/
 dist/
 node_modules/
 # bower_components/
-**/*.js
-**/*.js.map
 app.css
 _SpecRunner.html
 .DS_Store
