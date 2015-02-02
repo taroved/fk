@@ -2,11 +2,16 @@
 
 {% load static core_tags %}
 {% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
 
-    {{ self.body | richtext }}
+    {% if self.image %}
+        {% image self.image width-400 style="float: left" %}
+    {% endif %}
+
+    {{ self.body|richtext }}
 
 {% endblock %}

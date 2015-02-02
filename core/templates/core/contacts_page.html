@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load static core_tags %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+
+    <div style="text-align: center">
+        {% for item in self.items.all %}
+
+            <h4 style="color: #0098cf">{{ item.title }}:</h4>
+            <p>{{ item.info | linebreaksbr }}</p>
+            <br/>
+
+        {% endfor %}
+    </div>
+    <br/>
+    <br/>
+
+{% endblock %}

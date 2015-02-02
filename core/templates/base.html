@@ -1,5 +1,4 @@
 {% load compress static wagtailuserbar %}
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -26,19 +25,22 @@
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}" />
 
     {% compress css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/gray.css' %}">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.css' %}">
+        <!-- Bootstrap -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+        <!-- Styles -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    {% endcompress %}
 
-    <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    {% endcompress %} {% compress js %}
+    {% compress js %}
     <script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/jquery.gray.js' %}"></script>
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -233,7 +235,20 @@
     </div>
 
     <div class="for_body">
-        {% block content %}{% endblock %}
+        <div class="container">
+            <div class="for_block_title">
+                <div class="for_block_title_top">
+                    <a href="{{ self.url }}">
+                        {{ self.title }}
+                    </a>
+                </div>
+                <div class="for_block_title_bot">
+                    <div class="for_block_title_bot_in"></div>
+                </div>
+            </div>
+
+            {% block content %}{% endblock %}
+        </div>
     </div>
 
     <div class="container">

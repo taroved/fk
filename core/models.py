@@ -1,50 +1,274 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models
+from modelcluster.fields import ParentalKey
+from django.utils.translation import ugettext_lazy as _
+from modelcluster.tags import ClusterTaggableManager
+from taggit.models import TaggedItemBase
+from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 
-from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.models import Page, Orderable
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsearch import index
+
+
+EVENT_TYPE_CHOICES = (
+    ('forum', "Forum"),
+    ('event', "Event"),
+)
+
 
 class AccreditationPage(Page):
     pass
 
+
 class ArchivePage(Page):
     pass
+
 
 class BussinesPage(Page):
     pass
 
+
+class HomePageVideoItem(Orderable):
+    page = ParentalKey('core.HomePage', related_name='videos')
+
+
 class HomePage(Page):
-    pass
+
+    class Meta:
+        verbose_name = "Homepage"
+
 
 class MaterialsPage(Page):
     pass
 
+
+class NewsPageTag(TaggedItemBase):
+    content_object = ParentalKey('core.NewsPage', related_name='tagged_items')
+
+
+class NewsIndexPage(Page):
+
+    @property
+    def news(self):
+        # Get list of live blog pages that are descendants of this page
+        news = NewsPage.objects.live().descendant_of(self)
+        # Order by most recent date first
+        news = news.order_by('-date')
+        return news
+
+    def get_context(self, request):
+        news = self.news
+        # Filter by tag
+        tag = request.GET.get('tag')
+        if tag:
+            news = news.filter(tags__name=tag)
+        # Pagination
+        page = request.GET.get('page')
+        paginator = Paginator(news, 10)  # Show 10 news per page
+        try:
+            news = paginator.page(page)
+        except PageNotAnInteger:
+            news = paginator.page(1)
+        except EmptyPage:
+            news = paginator.page(paginator.num_pages)
+        # Update template context
+        context = super(NewsIndexPage, self).get_context(request)
+        context['news'] = news
+        return context
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+    ]
+
+
 class NewsPage(Page):
-    pass
+    image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    date = models.DateField("date")
+    short = models.TextField()
+    body = RichTextField()
+    # tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
+
+    @property
+    def news_index(self):
+        # Find closest ancestor which is a index
+        return self.get_ancestors().type(NewsIndexPage).last()
+
+    subpage_types = ['core.NewsPage']
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        ImageChooserPanel('image'),
+        FieldPanel("date"),
+        FieldPanel("short"),
+        FieldPanel("body", classname="full"),
+    ]
+
+
 
 class OrgPage(Page):
     pass
 
+
 class PanelPage(Page):
     pass
+
 
 class ParticipationPage(Page):
     pass
 
-class ProgramPage(Page):
-    pass
 
 class RadaPage(Page):
     pass
 
-class SpeakerPage(Page):
-    pass
 
-class SpeakersPage(Page):
-    pass
+class EventIndexPage(Page):
+
+    @property
+    def events(self):
+        # Get list of live event pages that are descendants of this page
+        events = EventPage.objects.live().descendant_of(self)
+        # Filter events list to get ones that are either
+        # running now or start in the future
+        events = events.filter(date_from__gte=date.today())
+        # Order by date
+        events = events.order_by('date_from')
+        return events
+
+    subpage_types = ['core.EventPage']
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+    ]
+
+
+class EventPageSpeaker(Orderable):
+    event_page = ParentalKey('core.EventPage', related_name='speakers')
+
+
+class EventPage(Page):
+    title_long = models.CharField(max_length=100, blank=True, default='')
+    type = models.CharField(max_length=10, choices=EVENT_TYPE_CHOICES, default=EVENT_TYPE_CHOICES[0][0])
+    date_from = models.DateField("Start date")
+    date_to = models.DateField("End date", null=True, blank=True, help_text="Not required if event is on a single day")
+    description = RichTextField(null=True)
+    signup_link = models.URLField(blank=True)
+
+    has_report = models.BooleanField(default=False)
+
+    subpage_types = ['core.EventLocationPage', 'core.EventTimetablePage', 'core.ContentPage']
+
+    @property
+    def event_index(self):
+        # Find closest ancestor which is an event index
+        return self.get_ancestors().type(EventIndexPage).last()
+
+    search_fields = Page.search_fields + (
+        index.SearchField('description'),
+    )
+
+
+EventPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('title_long', classname="full title"),
+    FieldPanel('type'),
+    FieldPanel('date_from'),
+    FieldPanel('date_to'),
+    FieldPanel('signup_link'),
+    FieldPanel('description', classname="full"),
+    FieldPanel('has_report'),
+    InlinePanel(EventPage, 'speakers', label="Speakers"),
+]
+
+
+class EventLocationPage(Page):
+    logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    name = models.CharField(max_length=255, null=True, blank=True)
+    city = models.CharField(max_length=255, null=True, blank=True)
+    street = models.CharField(max_length=255, null=True, blank=True)
+    country = models.CharField(max_length=255, null=True, blank=True)
+    zip_code = models.IntegerField(max_length=20, null=True, blank=True)
+    location = models.CharField(max_length=255, blank=True, default='')
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+
+
+EventLocationPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('name'),
+    ImageChooserPanel('logo'),
+    FieldPanel('country'),
+    FieldPanel('city'),
+    FieldPanel('street'),
+    FieldPanel('zip_code'),
+    FieldPanel('location'),
+    FieldPanel('latitude'),
+    FieldPanel('longitude'),
+]
+
+
+class EventTimetablePage(Page):
+    comment = RichTextField(blank=True)
+
+
+class EventTimetableItem(models.Model):
+    title = models.CharField(max_length=255, blank=True, default='')
+    time_from = models.TimeField("Start time", null=True, blank=True)
+    time_to = models.TimeField("End time", null=True, blank=True)
+    location = models.CharField(max_length=255, blank=True, default='')
+    description = RichTextField(blank=True)
+
+    search_fields = Page.search_fields + (
+        index.SearchField('description'),
+    )
+
+
+class SpeakerPage(Page):
+    full_name = models.CharField(max_length=100, blank=True, default='')
+    photo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    position = models.CharField(max_length=100, blank=True, default='')
+    about = RichTextField(blank=True, default='')
+
+    content_panels = [
+        FieldPanel('full_name', classname="full title"),
+        ImageChooserPanel('photo'),
+        FieldPanel('position'),
+        FieldPanel('about', classname="full"),
+    ]
+
+
+class AllSpeakersIndexPage(Page):
+
+    def speakers(self):
+        speakers = SpeakerPage.objects.live().descendant_of(self)
+        return speakers
+
+    subpage_types = ['core.SpeakerPage']
+
 
 class ContentPage(Page):
-    content = RichTextField()
+    body = RichTextField()
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        FieldPanel('body', classname="full"),
+    ]
+
+
+class ContactsPageItem(Orderable):
+    page = ParentalKey('core.ContactsPage', related_name='items')
+    title = models.CharField(max_length=100, blank=True, null=True)
+    info = models.TextField()
+
+    def __unicode__(self):
+        return self.title
+
+
+class ContactsPage(Page):
     pass
 
-class EmptyPage(Page):
-    pass
+ContactsPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    InlinePanel(ContactsPage, 'items', label="Contacts"),
+]

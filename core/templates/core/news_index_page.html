@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+
+    <div class="for_block_news_cont">
+        <div class="cox-xs-12">
+            <div class="for_block_news_cont_top">
+                <div class="for_block_news_left">
+                    <a href="{% pageurl self.news.0 %}">
+                        {% image self.news.0.image max-569x314 %}
+                    </a>
+                </div>
+                <div class="for_block_news_right">
+                    <div class="for_block_news_date">
+                        {{ self.news.0.date|date:"d.m.Y" }}
+                    </div>
+                    <div class="for_block_news_title">
+                        <a href="{% pageurl self.news.0 %}">
+                            {{ self.news.0.title }}
+                        </a>
+                    </div>
+                    <div class="for_block_news_text">
+                        {{ self.news.0.short|linebreaksbr }}
+                    </div>
+                </div>
+                <div class="pad"></div>
+            </div>
+        </div>
+        <div class="for_block_news_cont_bot">
+            <div class="row">
+                {% for news_item in self.news|slice:"1:5" %}
+                    <div class="col-xs-6">
+                    <div class="for_block_news_small for_block_news_small_news">
+                        <div class="for_block_news_small_left">
+                            <a href="{% pageurl news_item %}">
+                                {% image news_item.image max-270x146 class="grayscale grayscale-fade" %}
+                            </a>
+                        </div>
+                        <div class="for_block_news_small_right">
+                            <div class="for_block_news_small_date">
+                                {{ news_item.date|date:"d.m.Y" }}
+                            </div>
+                            <div class="for_block_news_small_text">
+                                {{ news_item.short|linebreaksbr }}
+                            </div>
+                        </div>
+                        <div class="pad"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="for_news_list">
+            {% for news_item in self.news|slice:"6:10" %}
+            <div class="for_news_item">
+                <div class="for_news_item_date">
+                    {{ news_item.date|date:"d.m.Y" }}
+                </div>
+                <div class="for_news_item_title">
+                    {{ news_item.title }}
+                </div>
+                <div class="for_news_item_text">
+                    {{ news_item.short }}
+                    <a href="{% pageurl news_item %}">докладніше</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
