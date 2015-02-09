@@ -52,7 +52,7 @@ class NewsIndexPage(Page):
 
     @property
     def news(self):
-        # Get list of live blog pages that are descendants of this page
+        # Get list of live blog  pages that are descendants of this page
         news = NewsPage.objects.live().descendant_of(self)
         # Order by most recent date first
         news = news.order_by('-date')
