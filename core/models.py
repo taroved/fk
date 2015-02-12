@@ -98,6 +98,28 @@ class NewsPageTag(TaggedItemBase):
     content_object = ParentalKey('core.NewsPage', related_name='tagged_items')
 
 
+class NewsPage(Page):
+    image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    date = models.DateField("date")
+    short = models.TextField()
+    body = RichTextField()
+    # tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
+
+    @property
+    def news_index(self):
+        # Find closest ancestor which is a index
+        return self.get_ancestors().type(NewsIndexPage).last()
+
+    subpage_types = ['core.NewsPage']
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        ImageChooserPanel('image'),
+        FieldPanel("date"),
+        FieldPanel("short"),
+        FieldPanel("body", classname="full"),
+    ]
+
 class NewsIndexPage(Page):
     @property
     def news(self):
@@ -131,29 +153,7 @@ class NewsIndexPage(Page):
         FieldPanel('title', classname="full title"),
     ]
 
-
-class NewsPage(Page):
-    image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
-    date = models.DateField("date")
-    short = models.TextField()
-    body = RichTextField()
-    # tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
-
-    @property
-    def news_index(self):
-        # Find closest ancestor which is a index
-        return self.get_ancestors().type(NewsIndexPage).last()
-
     subpage_types = ['core.NewsPage']
-
-    content_panels = [
-        FieldPanel('title', classname="full title"),
-        ImageChooserPanel('image'),
-        FieldPanel("date"),
-        FieldPanel("short"),
-        FieldPanel("body", classname="full"),
-    ]
-
 
 class OrgPage(Page):
     pass
