@@ -4,10 +4,11 @@ from modelcluster.fields import ParentalKey
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
-from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel
+from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel
 from wagtail.wagtailcore.fields import RichTextField
 
 from wagtail.wagtailcore.models import Page, Orderable
+from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 
@@ -35,13 +36,62 @@ class HomePageVideoItem(Orderable):
 
 
 class HomePage(Page):
-
     class Meta:
         verbose_name = "Homepage"
 
 
+class MaterialPage(Page):
+    description = models.TextField(default='')
+    preview = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    content_panels = [
+        MultiFieldPanel([
+            FieldPanel('title', classname="title full"),
+            FieldPanel('description', classname="description full"),
+            ImageChooserPanel('preview')
+        ])
+    ]
+
+
+class PhotoAlbumPage(MaterialPage):
+    link = models.URLField(default='')
+
+    content_panels = MaterialPage.content_panels  + [
+        FieldPanel('link', classname="link full"),
+    ]
+
+
+class DocumentPage(MaterialPage):
+    doc = models.ForeignKey(
+        'wagtaildocs.Document',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    content_panels = MaterialPage.content_panels  + [
+        DocumentChooserPanel('doc'),
+    ]
+
+
+class VideoPage(MaterialPage):
+    link = models.URLField(default='')
+    code = models.TextField(default='')
+    content_panels = MaterialPage.content_panels  + [
+        FieldPanel('link', classname="link full"),
+        FieldPanel('code', classname="code full"),
+    ]
+
+
 class MaterialsPage(Page):
-    pass
+    subpage_types = ['core.PhotoAlbumPage', 'core.DocumentPage', 'core.VideoPage']
 
 
 class NewsPageTag(TaggedItemBase):
@@ -49,7 +99,6 @@ class NewsPageTag(TaggedItemBase):
 
 
 class NewsIndexPage(Page):
-
     @property
     def news(self):
         # Get list of live blog  pages that are descendants of this page
@@ -106,7 +155,6 @@ class NewsPage(Page):
     ]
 
 
-
 class OrgPage(Page):
     pass
 
@@ -124,7 +172,6 @@ class RadaPage(Page):
 
 
 class EventIndexPage(Page):
-
     @property
     def events(self):
         # Get list of live event pages that are descendants of this page
@@ -239,7 +286,6 @@ class SpeakerPage(Page):
 
 
 class AllSpeakersIndexPage(Page):
-
     def speakers(self):
         speakers = SpeakerPage.objects.live().descendant_of(self)
         return speakers
@@ -267,6 +313,7 @@ class ContactsPageItem(Orderable):
 
 class ContactsPage(Page):
     pass
+
 
 ContactsPage.content_panels = [
     FieldPanel('title', classname="full title"),
