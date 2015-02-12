@@ -36,6 +36,12 @@ class HomePageVideoItem(Orderable):
 
 
 class HomePage(Page):
+
+    @property
+    def top_news(self):
+        news = NewsPage.objects.live().descendant_of(self).order_by('-date')  # or get News Page
+        return news
+
     class Meta:
         verbose_name = "Homepage"
 
@@ -120,6 +126,7 @@ class NewsPage(Page):
         FieldPanel("body", classname="full"),
     ]
 
+
 class NewsIndexPage(Page):
     @property
     def news(self):
@@ -154,6 +161,7 @@ class NewsIndexPage(Page):
     ]
 
     subpage_types = ['core.NewsPage']
+
 
 class OrgPage(Page):
     pass
@@ -204,12 +212,12 @@ class EventPage(Page):
 
     has_report = models.BooleanField(default=False)
 
-    subpage_types = ['core.EventLocationPage', 'core.EventTimetablePage', 'core.ContentPage']
-
     @property
     def event_index(self):
         # Find closest ancestor which is an event index
         return self.get_ancestors().type(EventIndexPage).last()
+
+    subpage_types = ['core.EventLocationPage', 'core.EventTimetablePage', 'core.ContentPage']
 
     search_fields = Page.search_fields + (
         index.SearchField('description'),

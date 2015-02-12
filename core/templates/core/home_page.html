@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 
 {% load static core_tags %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content_title %}
+{# empty on home page #}
+{% endblock %}
+
 
 {% block content %}
 <div class="container">
@@ -19,81 +27,73 @@
                 </div>
             </div>
             <div class="for_block_news_cont">
+                {% if self.top_news.0 %}
                 <div class="cox-xs-12">
                     <div class="for_block_news_cont_top">
                         <div class="for_block_news_left">
-                            <a href="#">
-                                <img src="{% static 'images/for_news_photo_1.jpg' %}" alt="image">
+                            <a href="{% pageurl self.top_news.0 %}">
+                                {% image self.top_news.0.image fill-569x314 %}
                             </a>
                         </div>
                         <div class="for_block_news_right">
                             <div class="for_block_news_date">
-                                20.12.2013
+                                {{ self.top_news.0.date|date:"d.m.Y" }}
                             </div>
                             <div class="for_block_news_title">
-                                <a href="#">
-                                    Освіта: від соціального баласту
-                                    до локомотиву розвитку
-                                    власної економіки
+                                <a href="{% pageurl self.top_news.0 %}">
+                                    {{ self.top_news.0.title }}
                                 </a>
                             </div>
                             <div class="for_block_news_text">
-                                Як зробити hi-tech-галузь локомотивом української<br>
-                                економіки? За участю представників найбільших світових<br>
-                                вендорів, R&D-компаній, венчурних фондів та парламенту<br>
-                                України будуть визначені шляхи створення сприятливих умов<br>
-                                для швидкого та ефективного розвитку сфери ІТ-технологій у
-                                країні.
+                                {{ self.top_news.0.short|linebreaksbr }}
                             </div>
                         </div>
                         <div class="pad"></div>
                     </div>
                 </div>
+                {% endif %}
                 <div class="for_block_news_cont_bot">
                     <div class="row">
+                        {% if self.top_news.1 %}
                         <div class="col-xs-6">
                             <div class="for_block_news_small">
                                 <div class="for_block_news_small_left">
-                                    <a href="#">
-                                        <img src="{% static 'images/for_news_photo_3.jpg' %}" alt="image">
-                                        <img src="{% static 'images/for_news_photo_2.jpg' %}" alt="image">
+                                    <a href="{% pageurl self.top_news.1 %}">
+                                        {% image self.top_news.1.image fill-270x146  %}
                                     </a>
                                 </div>
                                 <div class="for_block_news_small_right">
                                     <div class="for_block_news_small_date">
-                                        20.12.2013
+                                        {{ self.top_news.1.date|date:"d.m.Y" }}
                                     </div>
                                     <div class="for_block_news_small_text">
-                                        Освіта: від соціального<br>
-                                        баласту до локомотиву<br>
-                                        баласту до локомотиву<br>
-                                        розвитку власної економіки”
+                                        {{ self.top_news.1.short|linebreaksbr }}
                                     </div>
                                 </div>
                                 <div class="pad"></div>
                             </div>
                         </div>
+                        {% endif %}
+                        {% if self.top_news.2 %}
                         <div class="col-xs-6">
                             <div class="for_block_news_small">
                                 <div class="for_block_news_small_left">
-                                    <a href="#">
-                                        <img src="{% static 'images/for_news_photo_3.jpg' %}" alt="image">
-                                        <img src="{% static 'images/for_news_photo_2.jpg' %}" alt="image">
+                                    <a href="{% pageurl self.top_news.2 %}">
+                                        {% image self.top_news.2.image fill-270x146  %}
                                     </a>
                                 </div>
                                 <div class="for_block_news_small_right">
                                     <div class="for_block_news_small_date">
-                                        20.12.2013
+                                        {{ self.top_news.2.date|date:"d.m.Y" }}
                                     </div>
                                     <div class="for_block_news_small_text">
-                                        Освіта: від соціального<br>
-                                        баласту до локомотиву<br>
-                                        розвитку власної економіки”
+                                        {{ self.top_news.2.short|linebreaksbr }}
                                     </div>
                                 </div>
                                 <div class="pad"></div>
                             </div>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
