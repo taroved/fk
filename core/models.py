@@ -350,13 +350,13 @@ class EventTimetableItem(models.Model):
 
 
 class SpeakerPage(Page):
-    full_name = models.CharField(max_length=100, blank=True, default='')
+    # full_name = models.CharField(max_length=100, blank=True, default='')
     photo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     position = models.CharField(max_length=100, blank=True, default='')
     about = RichTextField(blank=True, default='')
 
     content_panels = [
-        FieldPanel('full_name', classname="full title"),
+        FieldPanel('title', classname="full title"),
         ImageChooserPanel('photo'),
         FieldPanel('position'),
         FieldPanel('about', classname="full"),
