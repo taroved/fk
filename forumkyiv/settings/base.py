@@ -42,7 +42,10 @@ INSTALLED_APPS = (
     'taggit',
     'modelcluster',
 
-    'wagtail.wagtailcore',
+    'overextends',
+    'core',
+
+   'wagtail.wagtailcore',
     'wagtail.wagtailadmin',
     'wagtail.wagtaildocs',
     'wagtail.wagtailsnippets',
@@ -52,9 +55,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailembeds',
     'wagtail.wagtailsearch',
     'wagtail.wagtailredirects',
-    'wagtail.wagtailforms',
-
-    'core',
+    'wagtail.wagtailforms'
 )
 
 MIDDLEWARE_CLASSES = (
