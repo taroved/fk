@@ -238,6 +238,17 @@ class RadaPage(Page):
     pass
 
 
+class PartnerPage(Page):
+    logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    description = models.TextField()
+    link = models.URLField()
+
+    content_panels = [
+        ImageChooserPanel('logo'),
+        FieldPanel('description', classname="full description"),
+        FieldPanel('link', classname="full link"),
+    ]
+
 class EventIndexPage(Page):
     @property
     def events(self):
