@@ -154,26 +154,6 @@ class HomePageVideoItem(Orderable):
     ]
 
 
-class HomePage(Page):
-
-    forum_page = models.ForeignKey('wagtailcore.Page', null=True, blank=True,
-                                   on_delete=models.SET_NULL, related_name='+')
-
-    @property
-    def top_news(self):
-        news = NewsPage.objects.live().descendant_of(self).order_by('-date')  # or get News Page
-        return news
-
-    class Meta:
-        verbose_name = "Homepage"
-
-
-HomePage.content_panels = Page.content_panels + [
-    PageChooserPanel('forum_page'),
-    InlinePanel(HomePage, 'videos', label="Videos", panels=HomePageVideoItem.panels),
-]
-
-
 class MaterialsPage(Page):
     subpage_types = ['core.PhotoAlbumPage', 'core.DocumentPage', 'core.VideoPage']
 
@@ -405,4 +385,24 @@ class ContactsPage(Page):
 ContactsPage.content_panels = [
     FieldPanel('title', classname="full title"),
     InlinePanel(ContactsPage, 'items', label="Contacts"),
+]
+
+
+class HomePage(Page):
+
+    forum_page = models.ForeignKey('wagtailcore.Page', null=True, blank=True,
+                                   on_delete=models.SET_NULL, related_name='+')
+
+    @property
+    def top_news(self):
+        news = NewsPage.objects.live().descendant_of(self).order_by('-date')  # or get News Page
+        return news
+
+    class Meta:
+        verbose_name = "Homepage"
+
+
+HomePage.content_panels = Page.content_panels + [
+    PageChooserPanel('forum_page', page_type=EventPage),
+    InlinePanel(HomePage, 'videos', label="Videos", panels=HomePageVideoItem.panels),
 ]
