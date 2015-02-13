@@ -12,28 +12,14 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
+from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from wagtail.wagtailsnippets.models import register_snippet
 
 
 EVENT_TYPE_CHOICES = (
     ('forum', "Forum"),
     ('event', "Event"),
 )
-
-
-# class PageLinkFields(models.Model):
-#     link_page = models.ForeignKey('wagtailcore.Page', null=True, blank=True,
-#                                   on_delete=models.SET_NULL, related_name='+')
-#
-#     @property
-#     def link(self):
-#         return self.link_page.url
-#
-#     class Meta:
-#         abstract = True
-#
-#     panels = [
-#         PageChooserPanel('link_page'),
-#     ]
 
 
 class AccreditationPage(Page):
@@ -46,6 +32,21 @@ class ArchivePage(Page):
 
 class BussinesPage(Page):
     pass
+
+
+
+@register_snippet
+class Advert(models.Model):
+    url = models.URLField(null=True, blank=True)
+    image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+
+    panels = [
+        FieldPanel('url'),
+        ImageChooserPanel('image'),
+    ]
+
+    def __unicode__(self):
+        return self.url
 
 
 # class MaterialFields(models.Model):
@@ -399,6 +400,22 @@ ContactsPage.content_panels = [
 ]
 
 
+class HomePageAdvertPlacement(Orderable, models.Model):
+    page = ParentalKey('core.HomePage', related_name='advert_placements')
+    advert = models.ForeignKey('core.Advert', related_name='+')
+
+    class Meta:
+        verbose_name = "Advert Placement"
+        verbose_name_plural = "Advert Placements"
+
+    def __unicode__(self):
+        return self.page.title + " -> " + self.advert.url
+
+    panels = [
+        SnippetChooserPanel('advert', Advert),
+    ]
+
+
 class HomePage(Page):
 
     forum_page = models.ForeignKey('wagtailcore.Page', null=True, blank=True,
@@ -416,4 +433,5 @@ class HomePage(Page):
 HomePage.content_panels = Page.content_panels + [
     PageChooserPanel('forum_page', page_type=EventPage),
     InlinePanel(HomePage, 'videos', label="Videos", panels=HomePageVideoItem.panels),
+    InlinePanel(HomePage, 'advert_placements', label="Adverts"),
 ]
