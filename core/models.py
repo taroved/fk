@@ -16,12 +16,6 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 
-EVENT_TYPE_CHOICES = (
-    ('forum', "Forum"),
-    ('event', "Event"),
-)
-
-
 class AccreditationPage(Page):
     pass
 
@@ -34,19 +28,20 @@ class BussinesPage(Page):
     pass
 
 
-
 @register_snippet
 class Advert(models.Model):
+    text = models.CharField(max_length=255, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 
     panels = [
+        FieldPanel('text'),
         FieldPanel('url'),
         ImageChooserPanel('image'),
     ]
 
     def __unicode__(self):
-        return self.url
+        return "%s (%s)" % (self.text, self.url)
 
 
 # class MaterialFields(models.Model):
@@ -250,32 +245,32 @@ class PartnerPage(Page):
         FieldPanel('link', classname="full link"),
     ]
 
-class EventIndexPage(Page):
+class ForumIndexPage(Page):
+
     @property
-    def events(self):
+    def forums(self):
         # Get list of live event pages that are descendants of this page
-        events = EventPage.objects.live().descendant_of(self)
+        forums = ForumPage.objects.live().descendant_of(self)
         # Filter events list to get ones that are either
         # running now or start in the future
-        events = events.filter(date_from__gte=date.today())
+        forums = forums.filter(date_from__gte=date.today())
         # Order by date
-        events = events.order_by('date_from')
-        return events
+        forums = forums.order_by('date_from')
+        return forums
 
-    subpage_types = ['core.EventPage']
+    subpage_types = ['core.ForumPage']
 
     content_panels = [
         FieldPanel('title', classname="full title"),
     ]
 
 
-class EventPageSpeaker(Orderable):
-    event_page = ParentalKey('core.EventPage', related_name='speakers')
+class ForumPageSpeaker(Orderable):
+    forum_page = ParentalKey('core.ForumPage', related_name='speakers')
 
 
-class EventPage(Page):
+class ForumPage(Page):
     title_long = models.CharField(max_length=100, blank=True, default='')
-    type = models.CharField(max_length=10, choices=EVENT_TYPE_CHOICES, default=EVENT_TYPE_CHOICES[0][0])
     date_from = models.DateField("Start date")
     date_to = models.DateField("End date", null=True, blank=True, help_text="Not required if event is on a single day")
     description = RichTextField(null=True)
@@ -284,18 +279,18 @@ class EventPage(Page):
     has_report = models.BooleanField(default=False)
 
     @property
-    def event_index(self):
+    def forum_index(self):
         # Find closest ancestor which is an event index
-        return self.get_ancestors().type(EventIndexPage).last()
+        return self.get_ancestors().type(ForumIndexPage).last()
 
-    subpage_types = ['core.EventLocationPage', 'core.EventTimetablePage', 'core.ContentPage']
+    subpage_types = ['core.ForumLocationPage', 'core.ForumTimetablePage', 'core.ContentPage']
 
     search_fields = Page.search_fields + (
         index.SearchField('description'),
     )
 
 
-EventPage.content_panels = [
+ForumPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('title_long', classname="full title"),
     FieldPanel('type'),
@@ -304,11 +299,11 @@ EventPage.content_panels = [
     FieldPanel('signup_link'),
     FieldPanel('description', classname="full"),
     FieldPanel('has_report'),
-    InlinePanel(EventPage, 'speakers', label="Speakers"),
+    InlinePanel(ForumPage, 'speakers', label="Speakers"),
 ]
 
 
-class EventLocationPage(Page):
+class ForumLocationPage(Page):
     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     name = models.CharField(max_length=255, null=True, blank=True)
     city = models.CharField(max_length=255, null=True, blank=True)
@@ -320,7 +315,7 @@ class EventLocationPage(Page):
     longitude = models.FloatField(null=True, blank=True)
 
 
-EventLocationPage.content_panels = [
+ForumLocationPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('name'),
     ImageChooserPanel('logo'),
@@ -334,11 +329,11 @@ EventLocationPage.content_panels = [
 ]
 
 
-class EventTimetablePage(Page):
+class ForumTimetablePage(Page):
     comment = RichTextField(blank=True)
 
 
-class EventTimetableItem(models.Model):
+class ForumTimetableItem(models.Model):
     title = models.CharField(max_length=255, blank=True, default='')
     time_from = models.TimeField("Start time", null=True, blank=True)
     time_to = models.TimeField("End time", null=True, blank=True)
@@ -431,7 +426,7 @@ class HomePage(Page):
 
 
 HomePage.content_panels = Page.content_panels + [
-    PageChooserPanel('forum_page', page_type=EventPage),
+    PageChooserPanel('forum_page', page_type=ForumPage),
     InlinePanel(HomePage, 'videos', label="Videos", panels=HomePageVideoItem.panels),
     InlinePanel(HomePage, 'advert_placements', label="Adverts"),
 ]

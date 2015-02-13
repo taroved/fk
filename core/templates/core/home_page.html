@@ -201,12 +201,15 @@
                 </div>
             </div>
             <div class="for_block_banners_cont">
+                {{ self.advert_placements.all|length }}
                 {% for advert_placement in self.advert_placements.all %}
+                    1
                     <div class="col-xs-6">
                         <div class="for_block_banner_item">
-                            <a href="{{ advert_placement.advert.url }}">
-                                <img src="{% image advert_placement.image %}" alt="banner">
-                            </a>
+                            {{ advert_placement }}
+{#                            <a href="{{ advert_placement }}">#}
+{#                                <img src="{% image advert_placement.image %}" alt="banner">#}
+{#                            </a>#}
                         </div>
                     </div>
                 {% endfor %}
