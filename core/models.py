@@ -1,10 +1,11 @@
+from datetime import date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models
 from modelcluster.fields import ParentalKey
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
-from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel
+from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel, PageChooserPanel
 from wagtail.wagtailcore.fields import RichTextField
 
 from wagtail.wagtailcore.models import Page, Orderable
@@ -19,6 +20,22 @@ EVENT_TYPE_CHOICES = (
 )
 
 
+# class PageLinkFields(models.Model):
+#     link_page = models.ForeignKey('wagtailcore.Page', null=True, blank=True,
+#                                   on_delete=models.SET_NULL, related_name='+')
+#
+#     @property
+#     def link(self):
+#         return self.link_page.url
+#
+#     class Meta:
+#         abstract = True
+#
+#     panels = [
+#         PageChooserPanel('link_page'),
+#     ]
+
+
 class AccreditationPage(Page):
     pass
 
@@ -31,27 +48,8 @@ class BussinesPage(Page):
     pass
 
 
-class MaterialFields(models.Model):
-    description = models.TextField(blank=True, null=True, default='')
-    preview = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    class Meta:
-        abstract = True
-
-    panels = [
-        ImageChooserPanel('preview'),
-        FieldPanel('description', classname="description full"),
-    ]
-
-
-# class MaterialPage(Page):
-# description = models.TextField(default='')
+# class MaterialFields(models.Model):
+#     description = models.TextField(blank=True, null=True, default='')
 #     preview = models.ForeignKey(
 #         'wagtailimages.Image',
 #         null=True,
@@ -60,25 +58,36 @@ class MaterialFields(models.Model):
 #         related_name='+'
 #     )
 #
-#     content_panels = [
-#         MultiFieldPanel([
-#             FieldPanel('title', classname="title full"),
-#             FieldPanel('description', classname="description full"),
-#             ImageChooserPanel('preview')
-#         ])
+#     class Meta:
+#         abstract = True
+#
+#     panels = [
+#         ImageChooserPanel('preview'),
+#         FieldPanel('description', classname="description full"),
 #     ]
 
 
-class PhotoAlbumPage(Page, MaterialFields):
+class PhotoAlbumPage(Page):
     link = models.URLField(default='')
+
+    preview = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    description = models.TextField(blank=True, null=True, default='')
 
     content_panels = [
         FieldPanel('title', classname="title full"),
         FieldPanel('link', classname="link full"),
-    ] + MaterialFields.panels
+        ImageChooserPanel('preview'),
+        FieldPanel('description', classname="full"),
+    ]
 
 
-class DocumentPage(Page, MaterialFields):
+class DocumentPage(Page):
     doc = models.ForeignKey(
         'wagtaildocs.Document',
         null=True,
@@ -86,35 +95,70 @@ class DocumentPage(Page, MaterialFields):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    preview = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    description = models.TextField(blank=True, null=True, default='')
 
     content_panels = [
-        FieldPanel('title', classname="title full"),
-        DocumentChooserPanel('doc'),
-    ] + MaterialFields.panels
+        # FieldPanel('title', classname="title full"),
+        # DocumentChooserPanel('doc'),
+        ImageChooserPanel('preview'),
+        FieldPanel('description', classname="full")
+    ]
 
 
-class VideoPage(Page, MaterialFields):
+class VideoPage(Page):
     link = models.URLField(default='')
     code = models.TextField(default='')
+    preview = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    description = models.TextField(blank=True, null=True, default='')
 
     content_panels = [
         FieldPanel('title', classname="title full"),
         FieldPanel('link', classname="full"),
         FieldPanel('code', classname="full"),
-    ] + MaterialFields.panels
+        ImageChooserPanel('preview'),
+        FieldPanel('description', classname="full")
+    ]
 
 
-class HomePageVideoItem(Orderable, MaterialFields):
+class HomePageVideoItem(Orderable):
     page = ParentalKey('core.HomePage', related_name='videos')
     link = models.URLField(default='')
     code = models.TextField(default='')
+    preview = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    description = models.TextField(blank=True, null=True, default='')
+
     panels = [
         FieldPanel('link', classname="full"),
         FieldPanel('code', classname="full"),
-    ] + MaterialFields.panels
+        ImageChooserPanel('preview'),
+        FieldPanel('description', classname="full")
+    ]
 
 
 class HomePage(Page):
+
+    forum_page = models.ForeignKey('wagtailcore.Page', null=True, blank=True,
+                                   on_delete=models.SET_NULL, related_name='+')
+
     @property
     def top_news(self):
         news = NewsPage.objects.live().descendant_of(self).order_by('-date')  # or get News Page
@@ -125,6 +169,7 @@ class HomePage(Page):
 
 
 HomePage.content_panels = Page.content_panels + [
+    PageChooserPanel('forum_page'),
     InlinePanel(HomePage, 'videos', label="Videos", panels=HomePageVideoItem.panels),
 ]
 
