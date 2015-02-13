@@ -31,12 +31,90 @@ class BussinesPage(Page):
     pass
 
 
-class HomePageVideoItem(Orderable):
+class MaterialFields(models.Model):
+    description = models.TextField(blank=True, null=True, default='')
+    preview = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    class Meta:
+        abstract = True
+
+    panels = [
+        ImageChooserPanel('preview'),
+        FieldPanel('description', classname="description full"),
+    ]
+
+
+# class MaterialPage(Page):
+# description = models.TextField(default='')
+#     preview = models.ForeignKey(
+#         'wagtailimages.Image',
+#         null=True,
+#         blank=True,
+#         on_delete=models.SET_NULL,
+#         related_name='+'
+#     )
+#
+#     content_panels = [
+#         MultiFieldPanel([
+#             FieldPanel('title', classname="title full"),
+#             FieldPanel('description', classname="description full"),
+#             ImageChooserPanel('preview')
+#         ])
+#     ]
+
+
+class PhotoAlbumPage(Page, MaterialFields):
+    link = models.URLField(default='')
+
+    content_panels = [
+        FieldPanel('title', classname="title full"),
+        FieldPanel('link', classname="link full"),
+    ] + MaterialFields.panels
+
+
+class DocumentPage(Page, MaterialFields):
+    doc = models.ForeignKey(
+        'wagtaildocs.Document',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    content_panels = [
+        FieldPanel('title', classname="title full"),
+        DocumentChooserPanel('doc'),
+    ] + MaterialFields.panels
+
+
+class VideoPage(Page, MaterialFields):
+    link = models.URLField(default='')
+    code = models.TextField(default='')
+
+    content_panels = [
+        FieldPanel('title', classname="title full"),
+        FieldPanel('link', classname="full"),
+        FieldPanel('code', classname="full"),
+    ] + MaterialFields.panels
+
+
+class HomePageVideoItem(Orderable, MaterialFields):
     page = ParentalKey('core.HomePage', related_name='videos')
+    link = models.URLField(default='')
+    code = models.TextField(default='')
+    panels = [
+        FieldPanel('link', classname="full"),
+        FieldPanel('code', classname="full"),
+    ] + MaterialFields.panels
 
 
 class HomePage(Page):
-
     @property
     def top_news(self):
         news = NewsPage.objects.live().descendant_of(self).order_by('-date')  # or get News Page
@@ -46,54 +124,9 @@ class HomePage(Page):
         verbose_name = "Homepage"
 
 
-class MaterialPage(Page):
-    description = models.TextField(default='')
-    preview = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    content_panels = [
-        MultiFieldPanel([
-            FieldPanel('title', classname="title full"),
-            FieldPanel('description', classname="description full"),
-            ImageChooserPanel('preview')
-        ])
-    ]
-
-
-class PhotoAlbumPage(MaterialPage):
-    link = models.URLField(default='')
-
-    content_panels = MaterialPage.content_panels  + [
-        FieldPanel('link', classname="link full"),
-    ]
-
-
-class DocumentPage(MaterialPage):
-    doc = models.ForeignKey(
-        'wagtaildocs.Document',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    content_panels = MaterialPage.content_panels  + [
-        DocumentChooserPanel('doc'),
-    ]
-
-
-class VideoPage(MaterialPage):
-    link = models.URLField(default='')
-    code = models.TextField(default='')
-    content_panels = MaterialPage.content_panels  + [
-        FieldPanel('link', classname="link full"),
-        FieldPanel('code', classname="code full"),
-    ]
+HomePage.content_panels = Page.content_panels + [
+    InlinePanel(HomePage, 'videos', label="Videos", panels=HomePageVideoItem.panels),
+]
 
 
 class MaterialsPage(Page):
@@ -128,6 +161,7 @@ class NewsPage(Page):
 
 
 class NewsIndexPage(Page):
+
     @property
     def news(self):
         # Get list of live blog  pages that are descendants of this page
@@ -136,7 +170,7 @@ class NewsIndexPage(Page):
         news = news.order_by('-date')
         return news
 
-    def get_context(self, request):
+    def get_context(self, request, **kwargs):
         news = self.news
         # Filter by tag
         tag = request.GET.get('tag')
@@ -156,11 +190,11 @@ class NewsIndexPage(Page):
         context['news'] = news
         return context
 
+    subpage_types = ['core.NewsPage']
+
     content_panels = [
         FieldPanel('title', classname="full title"),
     ]
-
-    subpage_types = ['core.NewsPage']
 
 
 class OrgPage(Page):
