@@ -273,9 +273,12 @@ class ForumIndexPage(Page):
     ]
 
 
+
 class ForumPageSpeaker(Orderable):
     forum_page = ParentalKey('core.ForumPage', related_name='speakers')
 
+class ForumPageSpeakers(Page):
+    pass
 
 class ForumPage(Page):
     title_long = models.CharField(max_length=100, blank=True, default='')
