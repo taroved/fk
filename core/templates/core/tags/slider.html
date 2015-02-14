@@ -1,0 +1,34 @@
+{% load wagtailcore_tags %}
+<div class="for_slider">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="for_top_slider" class="owl-carousel owl-theme">
+                    {% for item in items %}
+                    <div class="item">
+                        {{ item.text|richtext }}
+{#                        <div class="for_slide_block_1">#}
+{#                            2 жовтня 2015. Україна, Київ, готель Hilton Kyiv#}
+{#                        </div>#}
+{#                        <div class="for_slide_block_2">#}
+{#                            Україна:#}
+{#                            <br>з третього світу в перший#}
+{#                        </div>#}
+{#                        <div class="for_slide_block_3">#}
+{#                            Реальні інструменти економічного розвитку:#}
+{#                            <br>пріоритетні галузі та “точки зростання”#}
+{#                        </div>#}
+                        {% if item.button_link %}
+                            <div class="for_slide_block_4">
+                                <a href="{{ item.button_link }}">
+                                    {{ item.button_text }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

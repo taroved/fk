@@ -1,6 +1,7 @@
 from datetime import date
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models
+from django.utils.html import strip_tags
 from modelcluster.fields import ParentalKey
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.tags import ClusterTaggableManager
@@ -44,23 +45,23 @@ class Advert(models.Model):
         return "%s (%s)" % (self.text, self.url)
 
 
-# class MaterialFields(models.Model):
-#     description = models.TextField(blank=True, null=True, default='')
-#     preview = models.ForeignKey(
-#         'wagtailimages.Image',
-#         null=True,
-#         blank=True,
-#         on_delete=models.SET_NULL,
-#         related_name='+'
-#     )
-#
-#     class Meta:
-#         abstract = True
-#
-#     panels = [
-#         ImageChooserPanel('preview'),
-#         FieldPanel('description', classname="description full"),
-#     ]
+@register_snippet
+class SliderItem(models.Model):
+    text = RichTextField(null=True, blank=True)
+    button_text = models.CharField(max_length=50, null=True, blank=True)
+    button_link = models.URLField(null=True, blank=True)
+
+    panels = [
+        FieldPanel('text', classname="full"),
+        MultiFieldPanel([
+            FieldPanel('button_text'),
+            FieldPanel('button_link'),
+        ])
+    ]
+
+    def __unicode__(self):
+
+        return strip_tags(self.text.replace(">", "> "))
 
 
 class PhotoAlbumPage(Page):
