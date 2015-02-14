@@ -60,7 +60,6 @@ class SliderItem(models.Model):
     ]
 
     def __unicode__(self):
-
         return strip_tags(self.text.replace(">", "> "))
 
 
@@ -183,7 +182,6 @@ class NewsPage(Page):
 
 
 class NewsIndexPage(Page):
-
     @property
     def news(self):
         # Get list of live blog  pages that are descendants of this page
@@ -234,8 +232,10 @@ class ParticipationPage(Page):
 class RadaPage(Page):
     pass
 
+
 class PartnerListPage(Page):
     subpage_types = ['core.PartnerPage']
+
 
 class PartnerPage(Page):
     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
@@ -253,8 +253,8 @@ class PartnerPage(Page):
 class OrganizatorPage(PartnerPage):
     pass
 
-class ForumIndexPage(Page):
 
+class ForumIndexPage(Page):
     @property
     def forums(self):
         # Get list of live event pages that are descendants of this page
@@ -403,6 +403,27 @@ ContactsPage.content_panels = [
 ]
 
 
+class PressTopPage(Page):
+    date = models.DateField()
+    description = models.TextField()
+    content = RichTextField(default='')
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        FieldPanel('date', classname="date"),
+        FieldPanel('description', classname="full description"),
+        FieldPanel('content', classname="full content"),
+    ]
+
+
+class PressTopListPage(Page):
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+    ]
+
+    subpage_types = ['core.PressTopPage']
+
+
 class HomePageAdvertPlacement(Orderable, models.Model):
     page = ParentalKey('core.HomePage', related_name='advert_placements')
     advert = models.ForeignKey('core.Advert', related_name='+')
@@ -420,7 +441,6 @@ class HomePageAdvertPlacement(Orderable, models.Model):
 
 
 class HomePage(Page):
-
     forum_page = models.ForeignKey('wagtailcore.Page', null=True, blank=True,
                                    on_delete=models.SET_NULL, related_name='+')
 

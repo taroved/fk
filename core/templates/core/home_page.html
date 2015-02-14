@@ -200,33 +200,32 @@
                 </div>
             </div>
             <div class="for_block_banners_cont">
-                {{ self.advert_placements.all|length }}
+{#                {{ self.advert_placements.all|length }}#}
                 {% for advert_placement in self.advert_placements.all %}
-                    1
                     <div class="col-xs-6">
                         <div class="for_block_banner_item">
                             {{ advert_placement }}
                             <a href="{{ advert_placement }}">
-                                <img src="{% image advert_placement.image %}" alt="banner">
+{#                                <img src="{% image advert_placement.image %}" alt="banner">#}
                             </a>
                         </div>
                     </div>
                 {% endfor %}
 
-                <div class="col-xs-6">
-                    <div class="for_block_banner_item">
-                        <a href="#">
-                            <img src="{% static 'images/for_banner_1.jpg' %}" alt="banner">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="for_block_banner_item">
-                        <a href="#">
-                            <img src="{% static 'images/for_banner_2.jpg' %}" alt="banner">
-                        </a>
-                    </div>
-                </div>
+{#                <div class="col-xs-6">#}
+{#                    <div class="for_block_banner_item">#}
+{#                        <a href="#">#}
+{#                            <img src="{% static 'images/for_banner_1.jpg' %}" alt="banner">#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-xs-6">#}
+{#                    <div class="for_block_banner_item">#}
+{#                        <a href="#">#}
+{#                            <img src="{% static 'images/for_banner_2.jpg' %}" alt="banner">#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
             </div>
         </div>
     </div>
