@@ -219,7 +219,7 @@ class NewsIndexPage(Page):
 
 
 class OrgPage(Page):
-    pass
+    subpage_types = ['core.OrganizatorPage']
 
 
 class PanelPage(Page):
@@ -247,6 +247,10 @@ class PartnerPage(Page):
         FieldPanel('description', classname="full description"),
         FieldPanel('link', classname="full link"),
     ]
+
+
+class OrganizatorPage(PartnerPage):
+    pass
 
 class ForumIndexPage(Page):
 
