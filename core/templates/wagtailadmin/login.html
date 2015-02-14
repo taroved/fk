@@ -1,0 +1,46 @@
+{% overextends "wagtailadmin/login.html" %}
+{% load i18n %}
+
+{% block furniture %}
+   <div class="content-wrapper">
+        {% if form.errors %}
+            <div class="messages">
+                <ul>
+                    <li class="error">{% blocktrans %}Your {{ username_field }} and password didn't match. Please try again.{% endblocktrans %}</li>
+                </ul>
+            </div>
+        {% endif %}
+
+        <form action="{% url 'wagtailadmin_login' %}" method="post" autocomplete="off">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <h1>{% trans "Sign in to Kyiv International Economic Forum" %}</h1>
+
+
+            <ul class="fields">
+                <li class="full">
+                    <div class="field iconfield">
+                        {{ form.username.label_tag }}
+                        <div class="input icon-user">
+                            {{ form.username }}
+                        </div>
+                    </div>
+                </li>
+                <li class="full">
+                    <div class="field iconfield">
+                        {{ form.password.label_tag }}
+                        <div class="input icon-password">
+                            {{ form.password }}
+                        </div>
+                    </div>
+                    {% if show_password_reset %}
+                        <p class="help"><a href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans "Forgotten it?" %}</a></p>
+                    {% endif %}
+                </li>
+                <li class="submit">
+                    <input type="submit" value="{% trans 'Sign in' %}" tabindex="3"/>
+                </li>
+            </ul>
+        </form>
+    </div>
+{% endblock %}
