@@ -1,4 +1,4 @@
-{% load compress static wagtailuserbar core_tags %}
+{% load compress static wagtailuserbar wagtailcore_tags core_tags %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -258,6 +258,21 @@
 
     <div class="for_body">
         <div class="container">
+
+            {% if self.get_ancestors|length > 1 %}
+
+                <div class="col-xs-12">
+                    <div class="for_pathway">
+                    {% for page in self.get_ancestors %}
+                        {% if page.is_root == False %}
+                            <a href="{% pageurl page %}">{{ page.title }}</a> >
+                        {% endif %}
+                    {% endfor %}
+                    <a href="{% pageurl self %}">{{ self.title }}</a>
+                    </div>
+                </div>
+            {% endif %}
+
             {% block content_title %}
 
                 <div class="for_block_title">
