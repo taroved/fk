@@ -173,7 +173,7 @@ class MaterialsPage(Page):
 
 
 # class NewsPageTag(TaggedItemBase):
-#     content_object = ParentalKey('core.NewsPage', related_name='tagged_items')
+# content_object = ParentalKey('core.NewsPage', related_name='tagged_items')
 
 
 class NewsPage(Page):
@@ -236,7 +236,6 @@ class NewsIndexPage(Page):
 
 
 class OrgPage(Page):
-
     @property
     def organizers(self):
         return OrganizerPage.objects.live().all()
@@ -257,14 +256,13 @@ class RadaPage(Page):
 
 
 class PartnerListPage(Page):
-
     @property
     def partners(self):
         return Partner.objects.all()
 
 
 # class PartnerPage(Page):
-#     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+# logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 #     description = models.TextField()
 #     link = models.URLField()
 #
@@ -456,11 +454,18 @@ class PressTopPage(Page):
 
 
 class PressTopListPage(Page):
+
+    @property
+    def items(self):
+        items = PressTopPage.objects.all()
+        return items
+
     content_panels = [
         FieldPanel('title', classname="full title"),
     ]
 
-    subpage_types = ['core.PressTopPage']
+
+subpage_types = ['core.PressTopPage']
 
 
 class HomePageAdvertPlacement(Orderable, models.Model):
