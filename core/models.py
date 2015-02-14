@@ -233,6 +233,8 @@ class ParticipationPage(Page):
 class RadaPage(Page):
     pass
 
+class PartnerListPage(Page):
+    subpage_types = ['core.PartnerPage']
 
 class PartnerPage(Page):
     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
@@ -240,6 +242,7 @@ class PartnerPage(Page):
     link = models.URLField()
 
     content_panels = [
+        FieldPanel('title', classname="full title"),
         ImageChooserPanel('logo'),
         FieldPanel('description', classname="full description"),
         FieldPanel('link', classname="full link"),
