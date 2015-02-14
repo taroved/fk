@@ -252,7 +252,10 @@ class RadaPage(Page):
 
 
 class PartnerListPage(Page):
-    subpage_types = ['core.PartnerPage']
+
+    @property
+    def partners(self):
+        return Partner.objects.all()
 
 
 class PartnerPage(Page):
