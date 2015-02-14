@@ -278,8 +278,8 @@ class PartnerListPage(Page):
 
 class OrganizerPage(Page):
     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
-    link = models.URLField()
-    description = models.TextField()
+    link = models.URLField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
 
     content_panels = [
         FieldPanel('title', classname="full title"),
