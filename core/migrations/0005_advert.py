@@ -8,7 +8,6 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailimages', '0005_make_filter_spec_unique'),
         ('core', '0004_materialspage'),
     ]
 

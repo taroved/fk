@@ -8,12 +8,6 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailimages', '0005_make_filter_spec_unique'),
-        ('wagtailforms', '0001_initial'),
-        ('wagtaildocs', '0002_initial_data'),
-        ('wagtailcore', '0010_change_page_owner_to_null_on_delete'),
-        ('wagtailredirects', '0001_initial'),
-        ('wagtailsearch', '0001_initial'),
         ('core', '0002_auto_20150209_1535'),
     ]
 

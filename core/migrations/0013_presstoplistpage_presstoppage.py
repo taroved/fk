@@ -8,7 +8,6 @@ import wagtail.wagtailcore.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailcore', '0016_auto_20150214_1726'),
         ('core', '0012_slideritem'),
     ]
 

@@ -1,0 +1,89 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+<div class="for_block_partners">
+    <div class="for_block_part_title">
+        Партнери
+    </div>
+    <div class="for_block_part_cont">
+        <div id="for_bot_slider" class="owl-carousel owl-theme">
+            {% for partner in partners %}
+            <div class="item">
+                <a href="{{ partner.link }}">
+                    {% image partner.logo height-35 %}
+                </a>
+            </div>
+            {% endfor %}
+
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_1.png' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_2.jpg' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_3.jpg' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_4.jpg' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_5.jpg' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_6.jpg' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_7.jpg' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_1.png' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_2.jpg' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_3.jpg' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_4.jpg' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_5.jpg' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_6.jpg' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="item">#}
+{#                <a href="#">#}
+{#                    <img src="{% static 'images/for_part_7.jpg' %}" alt="partner">#}
+{#                </a>#}
+{#            </div>#}
+        </div>
+    </div>
+</div>

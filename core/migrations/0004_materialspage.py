@@ -7,7 +7,6 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailcore', '0010_change_page_owner_to_null_on_delete'),
         ('core', '0003_auto_20150213_1048'),
     ]
 

@@ -9,11 +9,6 @@ import wagtail.wagtailcore.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailimages', '0005_make_filter_spec_unique'),
-        ('wagtailredirects', '0001_initial'),
-        ('wagtailforms', '0001_initial'),
-        ('wagtailcore', '0010_change_page_owner_to_null_on_delete'),
-        ('wagtailsearch', '0001_initial'),
         ('core', '0006_auto_20150213_2042'),
     ]
 

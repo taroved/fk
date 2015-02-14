@@ -63,6 +63,24 @@ class SliderItem(models.Model):
         return strip_tags(self.text.replace(">", "> "))
 
 
+@register_snippet
+class Partner(models.Model):
+    title = models.CharField(max_length=255, help_text=_("The title as you'd like it to be seen by the public"))
+    logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    link = models.URLField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+
+    panels = [
+        FieldPanel('title', classname="full title"),
+        ImageChooserPanel('logo'),
+        FieldPanel('link', classname="full link"),
+        FieldPanel('description', classname="full description"),
+    ]
+
+    def __unicode__(self):
+        return "%s (%s)" % (self.title, self.link)
+
+
 class PhotoAlbumPage(Page):
     link = models.URLField(default='')
 
