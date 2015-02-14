@@ -1,48 +1,48 @@
 {% extends "base.html" %}
 
-{% load static core_tags %}
+{% load static core_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="for_block_org">
-                <div class="for_block_title for_block_title_org">
-                    <div class="for_block_title_top">
-                        <a href="#">
-                            Асоціація «Інноваційний розвиток України»
-                        </a>
-                    </div>
-                    <div class="for_block_title_bot">
-                        <div class="for_block_title_bot_in"></div>
-                    </div>
-                </div>
-                <div class="for_block_org_cont">
-                    <div class="for_block_org_logo">
-                        <img src="images/for_org.jpg" alt="logo">
-                    </div>
-                    <div class="for_block_org_right">
-                        <div class="for_block_org_right_top">
-                            Асоціація «Інноваційний розвиток України» об’єднyє провідні міжнародні та національні
-                            компанії<br>
-                            у сфері інформаційних та інших високих технологій, машинобудування, мікроелектроніки,<br>
-                            енергоефективності, освіти й науки.<br>
-                            Місією Асоціації є створення умов для високотехнологічного бізнесу в Україні
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                {% for organizer in self.organizers %}
+
+                    <div class="for_block_org">
+                        <div class="for_block_title for_block_title_org">
+                            <div class="for_block_title_top">
+                                <a href="{{ organizer.link }}">
+                                    {{ organizer.title }}
+                                </a>
+                            </div>
+                            <div class="for_block_title_bot">
+                                <div class="for_block_title_bot_in"></div>
+                            </div>
                         </div>
-                        <div class="for_block_org_right_bot">
-                            <a href="#">
-                                www.uaid.com.ua
-                            </a>
+                        <div class="for_block_org_cont">
+                            <div class="for_block_org_logo">
+                                {% image organizer.logo max-269x120 %}
+                            </div>
+                            <div class="for_block_org_right">
+                                <div class="for_block_org_right_top">
+                                    {{ organizer.description }}
+                                </div>
+                                <div class="for_block_org_right_bot">
+                                    <a href="{{ organizer.link }}">
+                                        {{ organizer.link }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="pad"></div>
                         </div>
                     </div>
-                    <div class="pad"></div>
-                </div>
+
+                {% endfor %}
             </div>
         </div>
     </div>
-</div>
 
 {% endblock %}
