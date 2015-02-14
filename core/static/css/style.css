@@ -1613,3 +1613,6 @@ footer
     color: #fff;
 }
 
+img.full-width{
+    width: 100%;
+}
