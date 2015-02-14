@@ -1,0 +1,14 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+<div class="for_block_organization">
+    <div class="for_block_org_title">
+        Організатори форуму
+    </div>
+    <div class="for_block_org_links">
+        {% for organizer in organizers %}
+            <a href="{% pageurl organizer %}">
+                {% image organizer.logo height-45 %}
+            </a>
+        {% endfor %}
+    </div>
+</div>

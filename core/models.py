@@ -172,8 +172,8 @@ class MaterialsPage(Page):
     subpage_types = ['core.PhotoAlbumPage', 'core.DocumentPage', 'core.VideoPage']
 
 
-class NewsPageTag(TaggedItemBase):
-    content_object = ParentalKey('core.NewsPage', related_name='tagged_items')
+# class NewsPageTag(TaggedItemBase):
+#     content_object = ParentalKey('core.NewsPage', related_name='tagged_items')
 
 
 class NewsPage(Page):
@@ -236,7 +236,12 @@ class NewsIndexPage(Page):
 
 
 class OrgPage(Page):
-    subpage_types = ['core.OrganizatorPage']
+
+    @property
+    def organizers(self):
+        return OrganizerPage.objects.live().all()
+
+    subpage_types = ['core.OrganizerPage']
 
 
 class PanelPage(Page):
@@ -258,21 +263,30 @@ class PartnerListPage(Page):
         return Partner.objects.all()
 
 
-class PartnerPage(Page):
+# class PartnerPage(Page):
+#     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+#     description = models.TextField()
+#     link = models.URLField()
+#
+#     content_panels = [
+#         FieldPanel('title', classname="full title"),
+#         ImageChooserPanel('logo'),
+#         FieldPanel('link', classname="full link"),
+#         FieldPanel('description', classname="full description"),
+#     ]
+
+
+class OrganizerPage(Page):
     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
-    description = models.TextField()
     link = models.URLField()
+    description = models.TextField()
 
     content_panels = [
         FieldPanel('title', classname="full title"),
         ImageChooserPanel('logo'),
-        FieldPanel('description', classname="full description"),
         FieldPanel('link', classname="full link"),
+        FieldPanel('description', classname="full description"),
     ]
-
-
-class OrganizatorPage(PartnerPage):
-    pass
 
 
 class ForumIndexPage(Page):
@@ -294,12 +308,13 @@ class ForumIndexPage(Page):
     ]
 
 
-
 class ForumPageSpeaker(Orderable):
     forum_page = ParentalKey('core.ForumPage', related_name='speakers')
 
+
 class ForumPageSpeakers(Page):
     pass
+
 
 class ForumPage(Page):
     title_long = models.CharField(max_length=100, blank=True, default='')

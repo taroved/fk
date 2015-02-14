@@ -8,6 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('wagtaildocs', '0002_initial_data'),
         ('core', '0002_auto_20150209_1535'),
     ]
 

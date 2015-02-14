@@ -1,5 +1,5 @@
 from django import template
-from core.models import SliderItem, Partner
+from core.models import SliderItem, Partner, OrganizerPage
 
 register = template.Library()
 
@@ -16,6 +16,14 @@ def slider(context):
 def partners(context):
     return {
         'partners': Partner.objects.all(),
+        'request': context['request'],
+    }
+
+
+@register.inclusion_tag('core/tags/organizers.html', takes_context=True)
+def organizers(context):
+    return {
+        'organizers': OrganizerPage.objects.live().all(),
         'request': context['request'],
     }
 
