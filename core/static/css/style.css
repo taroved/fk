@@ -1519,6 +1519,113 @@ ul {
     margin-bottom: 70px;
 }
 
+.for_block_rada_cont {
+    margin-bottom: 60px;
+}
+
+.for_block_rada_cont .col-xs-3:nth-child(-n+4) > .for_block_sp_item {
+    margin-bottom: 0;
+}
+
+.for_block_prog {
+    margin-bottom: 95px;
+}
+
+.for_block_prog_cont table {
+    width: 100%;
+    font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+    margin-bottom: 26px;
+}
+
+.for_block_prog_cont table tr {
+    border-bottom: 1px solid #b4b4b4;
+}
+
+.for_block_prog_cont table tr td {
+    padding: 28px 0;
+    vertical-align: middle;
+}
+
+.for_block_prog_cont table tr:first-child td {
+    padding: 0;
+    vertical-align: top;
+}
+
+.for_block_prog_cont table tr td:nth-child(-n+2) {
+    width: 200px;
+}
+
+.for_block_prog_cont table tr:first-child td > div {
+    text-align: center !important;
+}
+
+.for_block_prog_cont table tr:first-child td:nth-child(-n+2) > div {
+    margin-bottom: 18px;
+    border-right: 1px solid #dadada;
+}
+
+.for_block_prog_cont table tr td:first-child > div {
+    display: table-cell;
+    vertical-align: middle;
+    width: 200px;
+    border-right: 1px solid #dadada;
+    padding-right: 14px;
+    text-align: right;
+    font-size: 20px;
+    color: #061f33;
+}
+
+.for_block_prog_cont table tr:first-child td:first-child > div {
+    padding: 0;
+    display: block;
+}
+
+.for_block_prog_cont table tr td:first-child div span {
+    display: block;
+    font-size: 18px;
+    color: #989ca2;
+}
+
+.for_block_prog_cont table tr td:nth-child(2) div span {
+    display: block;
+    text-align: right;
+    margin-right: 32px;
+    font-size: 18px;
+    color: #989ca2;
+}
+
+.for_table_title {
+    font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
+}
+
+.for_table_title:hover {
+    color: #061f33;
+}
+
+.for_block_prog_cont table tr td:last-child {
+    font-size: 19px;
+}
+
+.for_block_prog_cont table ul li a {
+    color: #061f33;
+    padding-left: 17px;
+    background: url("../images/for_circle.png") left center no-repeat;
+}
+
+.for_block_prog_cont table ul li a:hover {
+    color: #0098cf;
+    text-decoration: underline;
+    background: url("../images/for_circle_hover.png") left center no-repeat;
+}
+
+.for_block_prog_bot {
+    font-size: 16px;
+    color: #989ca2;
+    margin-left: 400px;
+    font-family: 'PFBeauSansPro-ThinItalic';
+
+}
+
 /********** FOOTER **********/
 
 footer {
