@@ -510,6 +510,12 @@ ul {
     margin-bottom: 42px;
 }
 
+.for_block_doc_cont .row,
+.for_block_photo_cont .row,
+.for_block_video .row {
+    margin-bottom: 15px;
+}
+
 .for_block_video_cont {
     overflow: hidden;
 }

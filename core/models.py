@@ -171,18 +171,38 @@ class HomePageVideoItem(Orderable):
     ]
 
 
-class MaterialsPage(Page):
+class MaterialsPage(RoutablePageMixin, Page):
+    subpage_urls = (
+        url(r'^$', 'materials', name='materials'),
+        url(r'^videos/$', 'videos_view', name='videos_view'),
+        url(r'^albums/$', 'albums_view', name='albums_view'),
+        url(r'^documents/$', 'documents_view', name='documents_view'),
+    )
+
     def albums(self):
-        albums = PhotoAlbumPage.objects.live().all()[:4]
+        albums = PhotoAlbumPage.objects.live().all()
         return albums
 
     def documents(self):
-        documents = DocumentPage.objects.live().all()[:3]
+        documents = DocumentPage.objects.live().all()
         return documents
 
     def videos(self):
-        videos = VideoPage.objects.live().all()[:4]
+        videos = VideoPage.objects.live().all()
         return videos
+
+
+    def materials(self, request):
+        return render_to_response("core/materials_page.html", {'self': self, 'request': request})
+
+    def albums_view(self, request):
+        return render_to_response("core/materials_albums_page.html", {'self': self, 'request': request})
+
+    def documents_view(self, request):
+        return render_to_response("core/materials_documents_page.html", {'self': self, 'request': request})
+
+    def videos_view(self, request):
+        return render_to_response("core/materials_video_page.html", {'self': self, 'request': request})
 
     subpage_types = ['core.PhotoAlbumPage', 'core.DocumentPage', 'core.VideoPage']
 
@@ -281,8 +301,8 @@ class PartnerListPage(Page):
 # description = models.TextField()
 # link = models.URLField()
 #
-#     content_panels = [
-#         FieldPanel('title', classname="full title"),
+# content_panels = [
+# FieldPanel('title', classname="full title"),
 #         ImageChooserPanel('logo'),
 #         FieldPanel('link', classname="full link"),
 #         FieldPanel('description', classname="full description"),
