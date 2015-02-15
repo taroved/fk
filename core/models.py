@@ -548,7 +548,7 @@ class HomePageAdvertPlacement(Orderable, models.Model):
 
 
 class HomePage(Page):
-    forum_page = models.ForeignKey('wagtailcore.Page', null=True, blank=True,
+    forum_page = models.ForeignKey('core.ForumPage', null=True, blank=True,
                                    on_delete=models.SET_NULL, related_name='+')
 
     @property
