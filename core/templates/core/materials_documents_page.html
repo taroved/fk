@@ -11,55 +11,53 @@
 {% block content %}
 
     <div class="for_block_doc_mat">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="for_block_title">
-                        <div class="for_block_title_top">
-                            <a href="#">
-                                Документи
-                            </a>
-                        </div>
-                        <div class="for_block_title_bot">
-                            <div class="for_block_title_bot_in"></div>
-                        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="for_block_title">
+                    <div class="for_block_title_top">
+                        <a href="#">
+                            Документи
+                        </a>
                     </div>
-                    <div class="for_block_doc_cont for_block_doc_cont_mat">
-                        {% for document in self.documents %}
+                    <div class="for_block_title_bot">
+                        <div class="for_block_title_bot_in"></div>
+                    </div>
+                </div>
+                <div class="for_block_doc_cont for_block_doc_cont_mat">
+                    {% for document in self.documents %}
 
-                            {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                        {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                            </div>
+                            <div class="row">
+                        {% endif %}
+
+                        <div class="for_block_doc_item">
+                            <div class="for_block_doc_img">
+                                <a href="#">
+                                    {% image document.preview fill-98x146 %}
+                                </a>
+                            </div>
+                            <div class="for_block_doc_right">
+                                <div class="for_block_doc_date">
+                                    {{ document.latest_revision_created_at|date:"d.m.Y" }}
                                 </div>
-                                <div class="row">
-                            {% endif %}
-
-                            <div class="for_block_doc_item">
-                                <div class="for_block_doc_img">
-                                    <a href="#">
-                                        {% image document.preview fill-98x146 %}
+                                <div class="for_block_doc_text">
+                                    {{ document.description }}
+                                </div>
+                                <div class="for_block_doc_download">
+                                    <a href="{{ document.doc.url }}">
+                                        Завнтажити
                                     </a>
                                 </div>
-                                <div class="for_block_doc_right">
-                                    <div class="for_block_doc_date">
-                                        {{ document.latest_revision_created_at|date:"d.m.Y" }}
-                                    </div>
-                                    <div class="for_block_doc_text">
-                                        {{ document.description }}
-                                    </div>
-                                    <div class="for_block_doc_download">
-                                        <a href="{{ document.doc.url }}">
-                                            Завнтажити
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="pad"></div>
                             </div>
-
-                        {% endfor %}
-
-
-                        <div class="pad"></div>
+                            <div class="pad"></div>
                         </div>
-                </div>
+
+                    {% endfor %}
+
+
+                    <div class="pad"></div>
+                    </div>
             </div>
         </div>
     </div>

@@ -6,31 +6,29 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
+<div class="row">
+    <div class="col-xs-12">
 
-                <div class="for_block_org">
-                    <div class="for_block_org_cont">
-                        <div class="for_block_org_logo">
-                            {% image self.logo max-269x120 %}
-                        </div>
-                        <div class="for_block_org_right">
-                            <div class="for_block_org_right_top">
-                                {{ self.description }}
-                            </div>
-                            <div class="for_block_org_right_bot">
-                                <a href="{{ self.link }}">
-                                    {{ self.link }}
-                                </a>
-                            </div>
-                        </div>
-                        <div class="pad"></div>
+        <div class="for_block_org">
+            <div class="for_block_org_cont">
+                <div class="for_block_org_logo">
+                    {% image self.logo max-269x120 %}
+                </div>
+                <div class="for_block_org_right">
+                    <div class="for_block_org_right_top">
+                        {{ self.description }}
+                    </div>
+                    <div class="for_block_org_right_bot">
+                        <a href="{{ self.link }}">
+                            {{ self.link }}
+                        </a>
                     </div>
                 </div>
-
+                <div class="pad"></div>
             </div>
         </div>
+
     </div>
+</div>
 
 {% endblock %}
