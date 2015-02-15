@@ -172,6 +172,18 @@ class HomePageVideoItem(Orderable):
 
 
 class MaterialsPage(Page):
+    def albums(self):
+        albums = PhotoAlbumPage.objects.live().all()[:4]
+        return albums
+
+    def documents(self):
+        documents = DocumentPage.objects.live().all()[:3]
+        return documents
+
+    def videos(self):
+        videos = VideoPage.objects.live().all()[:4]
+        return videos
+
     subpage_types = ['core.PhotoAlbumPage', 'core.DocumentPage', 'core.VideoPage']
 
 
@@ -267,7 +279,7 @@ class PartnerListPage(Page):
 # class PartnerPage(Page):
 # logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 # description = models.TextField()
-#     link = models.URLField()
+# link = models.URLField()
 #
 #     content_panels = [
 #         FieldPanel('title', classname="full title"),

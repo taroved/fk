@@ -1,266 +1,174 @@
 {% extends "base.html" %}
 
 {% load static core_tags %}
+{% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
+{% block content_title %}{% endblock %}
+
+
 {% block content %}
 
-<div class="container">
-    <div class="row">
-{#        <div class="col-xs-12">#}
-{#            <div class="for_pathway for_pathway_mat">#}
-{#                <a href="#">Головна</a> > Матеріали#}
-{#            </div>#}
-{#        </div>#}
-        <div class="col-xs-12">
-            <div class="for_block_video">
-                <div class="for_block_title for_block_title_video">
-                    <div class="for_block_title_top">
-                        <a href="#">
-                            Відео
-                        </a>
-                    </div>
-                    <div class="for_block_title_bot">
-                        <div class="for_block_title_bot_in"></div>
-                    </div>
-                </div>
-                <div class="for_block_video_cont for_block_video_cont_mat">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <div class="for_block_video_item">
-                                <div class="for_block_video_view">
-                                    <a href="#">
-                                        <img src="images/for_play.png" class="for_play" alt="image">
-                                        <span class="for_video_shadow"></span>
-                                        <img src="images/for_block_video_1.jpg" class="for_video_1" alt="image">
-                                    </a>
-                                </div>
-                                <div class="for_block_video_date">
-                                    20.12.2013
-                                </div>
-                                <div class="for_block_video_text">
-                                    Віктор Галасюк на дебатах<br>
-                                    "Яка економічна стратегія<br>
-                                    потрібна Україні?"
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_video_item">
-                                <div class="for_block_video_view">
-                                    <a href="#">
-                                        <img src="images/for_play.png" class="for_play" alt="image">
-                                        <span class="for_video_shadow"></span>
-                                        <img src="images/for_block_video_1.jpg" class="for_video_1" alt="image">
-                                    </a>
-                                </div>
-                                <div class="for_block_video_date">
-                                    20.12.2013
-                                </div>
-                                <div class="for_block_video_text">
-                                    Віктор Галасюк на дебатах<br>
-                                    "Яка економічна стратегія<br>
-                                    потрібна Україні?"
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_video_item">
-                                <div class="for_block_video_view">
-                                    <a href="#">
-                                        <img src="images/for_play.png" class="for_play" alt="image">
-                                        <span class="for_video_shadow"></span>
-                                        <img src="images/for_block_video_1.jpg" class="for_video_1" alt="image">
-                                    </a>
-                                </div>
-                                <div class="for_block_video_date">
-                                    20.12.2013
-                                </div>
-                                <div class="for_block_video_text">
-                                    Віктор Галасюк на дебатах<br>
-                                    "Яка економічна стратегія<br>
-                                    потрібна Україні?"
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_video_item">
-                                <div class="for_block_video_view">
-                                    <a href="#">
-                                        <img src="images/for_play.png" class="for_play" alt="image">
-                                        <span class="for_video_shadow"></span>
-                                        <img src="images/for_block_video_1.jpg" class="for_video_1" alt="image">
-                                    </a>
-                                </div>
-                                <div class="for_block_video_date">
-                                    20.12.2013
-                                </div>
-                                <div class="for_block_video_text">
-                                    Віктор Галасюк на дебатах<br>
-                                    "Яка економічна стратегія<br>
-                                    потрібна Україні?"
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="for_block_all">
-                    <a href="#">
-                        всі відео
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="for_block_photo_mat">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="for_block_title for_block_photo_title">
-                    <div class="for_block_title_top">
+                <div class="for_block_video">
+                    <div class="for_block_title for_block_title_video">
+                        <div class="for_block_title_top">
+                            <a href="#">
+                                Відео
+                            </a>
+                        </div>
+                        <div class="for_block_title_bot">
+                            <div class="for_block_title_bot_in"></div>
+                        </div>
+                    </div>
+                    <div class="for_block_video_cont for_block_video_cont_mat">
+                        <div class="row">
+                            {% for video in self.videos %}
+
+                                <div class="col-xs-3">
+                                    <div class="for_block_video_item">
+                                        <div class="for_block_video_view">
+                                            <a href="{{ video.link }}">
+                                                <img src="{% static 'images/for_play.png' %}" class="for_play"
+                                                     alt="image">
+                                                <span class="for_video_shadow"></span>
+                                                {% image video.preview fill-569x314-c100 %}
+                                            </a>
+                                        </div>
+                                        <div class="for_block_video_date">
+                                            {{ video.latest_revision_created_at|date:"d.m.Y" }}
+                                        </div>
+                                        <div class="for_block_video_text">
+                                            {{ video.description }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="for_block_all">
                         <a href="#">
-                            Фотоальбоми
+                            всі відео
                         </a>
                     </div>
-                    <div class="for_block_title_bot">
-                        <div class="for_block_title_bot_in for_block_title_bot_back"></div>
-                    </div>
-                </div>
-                <div class="for_block_photo_cont">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <div class="for_block_photo_item">
-                                <a href="#">
-                                    <span></span>
-                                    <img src="images/for_photo.jpg" alt="photo">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_photo_item">
-                                <a href="#">
-                                    <span></span>
-                                    <img src="images/for_photo.jpg" alt="photo">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_photo_item">
-                                <a href="#">
-                                    <span></span>
-                                    <img src="images/for_photo.jpg" alt="photo">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_photo_item">
-                                <a href="#">
-                                    <span></span>
-                                    <img src="images/for_photo.jpg" alt="photo">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="for_block_all">
-                    <a href="#">
-                        всі фотоальбоми
-                    </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="for_block_doc_mat">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="for_block_title">
-                    <div class="for_block_title_top">
+    <div class="for_block_photo_mat">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="for_block_title for_block_photo_title">
+                        <div class="for_block_title_top">
+                            <a href="#">
+                                Фотоальбоми
+                            </a>
+                        </div>
+                        <div class="for_block_title_bot">
+                            <div class="for_block_title_bot_in for_block_title_bot_back"></div>
+                        </div>
+                    </div>
+                    <div class="for_block_photo_cont">
+                        <div class="row">
+
+                            {% for album in self.albums %}
+
+                                <div class="col-xs-3">
+                                    <div class="for_block_video_item">
+                                        <div class="for_block_video_view">
+                                            <a href="{{ album.link }}">
+                                                <span class="for_video_shadow"></span>
+                                                {% image album.preview fill-569x314-c100 %}
+                                            </a>
+                                        </div>
+                                        <div class="for_block_video_date">
+                                            {{ album.latest_revision_created_at|date:"d.m.Y" }}
+                                        </div>
+                                        <div class="for_block_video_text">
+                                            {{ album.description }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {#                                <div class="col-xs-3">#}
+                                {#                                    <div class="for_block_photo_item">#}
+                                {#                                        <a href="#">#}
+                                {#                                            <span></span>#}
+                                {#                                            <img src="images/for_photo.jpg" alt="photo">#}
+                                {#                                        </a>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
+
+                            {% endfor %}
+
+
+                        </div>
+                    </div>
+                    <div class="for_block_all">
                         <a href="#">
-                            Документи
+                            всі фотоальбоми
                         </a>
                     </div>
-                    <div class="for_block_title_bot">
-                        <div class="for_block_title_bot_in"></div>
-                    </div>
-                </div>
-                <div class="for_block_doc_cont for_block_doc_cont_mat">
-                    <div class="for_block_doc_item">
-                        <div class="for_block_doc_img">
-                            <a href="#">
-                                <img src="images/for_doc_1.jpg" alt="image">
-                            </a>
-                        </div>
-                        <div class="for_block_doc_right">
-                            <div class="for_block_doc_date">20.12.2013</div>
-                            <div class="for_block_doc_text">
-                                Дискусія "Як зробити хай-тек<br>
-                                локомотивом української<br>
-                                економіки"
-                            </div>
-                            <div class="for_block_doc_download">
-                                <a href="#">
-                                    Завнтажити PDF
-                                </a>
-                            </div>
-                        </div>
-                        <div class="pad"></div>
-                    </div>
-                    <div class="for_block_doc_item">
-                        <div class="for_block_doc_img">
-                            <a href="#">
-                                <img src="images/for_doc_2.jpg" alt="image">
-                            </a>
-                        </div>
-                        <div class="for_block_doc_right">
-                            <div class="for_block_doc_date">20.12.2013</div>
-                            <div class="for_block_doc_text">
-                                Дискусія "Як зробити хай-тек<br>
-                                локомотивом української<br>
-                                економіки"
-                            </div>
-                            <div class="for_block_doc_download">
-                                <a href="#">
-                                    Завнтажити PTT
-                                </a>
-                            </div>
-                        </div>
-                        <div class="pad"></div>
-                    </div>
-                    <div class="for_block_doc_item">
-                        <div class="for_block_doc_img">
-                            <a href="#">
-                                <img src="images/for_doc_3.jpg" alt="image">
-                            </a>
-                        </div>
-                        <div class="for_block_doc_right">
-                            <div class="for_block_doc_date">20.12.2013</div>
-                            <div class="for_block_doc_text">
-                                Дискусія "Як зробити хай-тек<br>
-                                локомотивом української<br>
-                                економіки"
-                            </div>
-                            <div class="for_block_doc_download">
-                                <a href="#">
-                                    Завнтажити PTT
-                                </a>
-                            </div>
-                        </div>
-                        <div class="pad"></div>
-                    </div>
-                    <div class="pad"></div>
-                </div>
-                <div class="for_block_all">
-                    <a href="#">
-                        всі документи
-                    </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="for_block_doc_mat">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="for_block_title">
+                        <div class="for_block_title_top">
+                            <a href="#">
+                                Документи
+                            </a>
+                        </div>
+                        <div class="for_block_title_bot">
+                            <div class="for_block_title_bot_in"></div>
+                        </div>
+                    </div>
+                    <div class="for_block_doc_cont for_block_doc_cont_mat">
+                        {% for document in self.documents %}
+
+                            <div class="for_block_doc_item">
+                                <div class="for_block_doc_img">
+                                    <a href="#">
+                                        {% image document.preview fill-98x146 %}
+                                    </a>
+                                </div>
+                                <div class="for_block_doc_right">
+                                    <div class="for_block_doc_date">
+                                        {{ document.latest_revision_created_at|date:"d.m.Y" }}
+                                    </div>
+                                    <div class="for_block_doc_text">
+                                        {{ document.description }}
+                                    </div>
+                                    <div class="for_block_doc_download">
+                                        <a href="{{ document.doc.url }}">
+                                            Завнтажити
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="pad"></div>
+                            </div>
+
+                        {% endfor %}
+
+
+                        <div class="pad"></div>
+                    </div>
+                    <div class="for_block_all">
+                        <a href="#">
+                            всі документи
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
