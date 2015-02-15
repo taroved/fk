@@ -1,19 +1,19 @@
+# coding=utf-8
 from datetime import date
+
 from django.conf.urls import url
+from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models
 from django.shortcuts import render_to_response, redirect
 from django.utils.html import strip_tags
+from django.utils.text import slugify
 from modelcluster.fields import ParentalKey
 from django.utils.translation import ugettext_lazy as _
-from modelcluster.tags import ClusterTaggableManager
-from taggit.models import TaggedItemBase
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
 from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel, PageChooserPanel
 from wagtail.wagtailcore.fields import RichTextField
-
 from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -441,7 +441,7 @@ class ForumTimetableItem(models.Model):
 class SpeakerPage(Page):
     # full_name = models.CharField(max_length=100, blank=True, default='')
     photo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
-    position = models.CharField(max_length=100, blank=True, default='')
+    position = models.CharField(max_length=255, blank=True, default='')
     about = RichTextField(blank=True, default='')
 
     content_panels = [
