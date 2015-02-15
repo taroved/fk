@@ -531,8 +531,7 @@ class PressTopListPage(Page):
         FieldPanel('title', classname="full title"),
     ]
 
-
-subpage_types = ['core.PressTopPage']
+    subpage_types = ['core.PressTopPage']
 
 
 class HomePageAdvertPlacement(Orderable, models.Model):
@@ -550,6 +549,16 @@ class HomePageAdvertPlacement(Orderable, models.Model):
     panels = [
         SnippetChooserPanel('advert', Advert),
     ]
+
+
+# class HomePageMaterialVideo(Orderable):
+#     page = ParentalKey('core.HomePage', related_name='material_videos')
+#     video = models.ForeignKey('core.VideoPage', related_name='+')
+#
+#     panels = [
+#         PageChooserPanel('video', page_type=VideoPage),
+#     ]
+
 
 
 class HomePage(Page):
