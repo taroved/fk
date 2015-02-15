@@ -366,8 +366,6 @@ class ForumPage(RoutablePageMixin, Page):
         return redirect(self.signup_link)
 
 
-    # subpage_types = ['core.ForumLocationPage', 'core.ForumTimetablePage', 'core.ContentPage']
-
     search_fields = Page.search_fields + (
         index.SearchField('description'),
     )
@@ -502,7 +500,8 @@ class HomePageAdvertPlacement(Orderable, models.Model):
         verbose_name_plural = "Advert Placements"
 
     def __unicode__(self):
-        return self.page.title + " -> " + self.advert.url
+        return self.page.title
+        # return self.page.title + " -> " + self.advert.url
 
     panels = [
         SnippetChooserPanel('advert', Advert),
