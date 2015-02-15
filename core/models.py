@@ -291,7 +291,7 @@ class ForumIndexPage(Page):
     @property
     def forums(self):
         # Get list of live event pages that are descendants of this page
-        forums = ForumPage.objects.live().descendant_of(self)
+        forums = ForumPage.objects.live().desForumPageFormcendant_of(self)
         # Filter events list to get ones that are either
         # running now or start in the future
         forums = forums.filter(date_from__gte=date.today())
@@ -320,7 +320,6 @@ class ForumPage(Page):
     date_to = models.DateField("End date", null=True, blank=True, help_text="Not required if event is on a single day")
     description = RichTextField(null=True)
     signup_link = models.URLField(blank=True)
-
     has_report = models.BooleanField(default=False)
 
     @property
@@ -455,7 +454,6 @@ class PressTopPage(Page):
 
 class PressTopListPage(Page):
 
-    @property
     def items(self):
         items = PressTopPage.objects.all()
         return items

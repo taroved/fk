@@ -7,8 +7,20 @@
 
 {% block content %}
 
-    {% for item in items %}
-        <h1>{{ item.title }}</h1>
+
+    {% for item in self.items %}
+        <div class="for_news_item">
+            <div class="for_news_item_title">
+                {{ item.title }}
+            </div>
+
+            <div class="for_news_item_text">
+                <i>{{ item.date|date:"d.m.Y" }}</i>
+                &nbsp;&nbsp;
+                {{ item.description }}
+                <a href="{% pageurl item %}">докладніше</a>
+            </div>
+        </div>
     {% endfor %}
 
 {% endblock %}
