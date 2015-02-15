@@ -1,11 +1,14 @@
 from datetime import date
+from django.conf.urls import url
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models
+from django.shortcuts import render_to_response, redirect
 from django.utils.html import strip_tags
 from modelcluster.fields import ParentalKey
 from django.utils.translation import ugettext_lazy as _
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
+from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
 from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel, PageChooserPanel
 from wagtail.wagtailcore.fields import RichTextField
 
@@ -291,7 +294,7 @@ class ForumIndexPage(Page):
     @property
     def forums(self):
         # Get list of live event pages that are descendants of this page
-        forums = ForumPage.objects.live().desForumPageFormcendant_of(self)
+        forums = ForumPage.objects.live().descendant_of(self)
         # Filter events list to get ones that are either
         # running now or start in the future
         forums = forums.filter(date_from__gte=date.today())
@@ -308,24 +311,57 @@ class ForumIndexPage(Page):
 
 class ForumPageSpeaker(Orderable):
     forum_page = ParentalKey('core.ForumPage', related_name='speakers')
+    # speaker_page = ParentalKey('core.SpeakerPage', related_name='+')
 
 
 class ForumPageSpeakers(Page):
     pass
 
 
-class ForumPage(Page):
+class ForumPage(RoutablePageMixin, Page):
+    subpage_urls = (
+        url(r'^location/$', 'location', name='location'),
+        url(r'^timetable/$', 'timetable', name='timetable'),
+        url(r'^speakers/$', 'speakers', name='speakers'),
+        url(r'^registration/$', 'registration', name='registration'),
+    )
+
     title_long = models.CharField(max_length=100, blank=True, default='')
     date_from = models.DateField("Start date")
     date_to = models.DateField("End date", null=True, blank=True, help_text="Not required if event is on a single day")
     description = RichTextField(null=True)
     signup_link = models.URLField(blank=True)
     has_report = models.BooleanField(default=False)
+    # location
+    location_logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True,
+                                      on_delete=models.SET_NULL, related_name='+',
+                                      verbose_name="logo")
+    location_name = models.CharField(max_length=255, null=True, blank=True, verbose_name="name")
+    location_city = models.CharField(max_length=255, null=True, blank=True, verbose_name="city")
+    location_street = models.CharField(max_length=255, null=True, blank=True, verbose_name="street")
+    location_country = models.CharField(max_length=255, null=True, blank=True, verbose_name="country")
+    location_zip_code = models.CharField(max_length=20, null=True, blank=True, verbose_name="zip_code")
+    location_map_code = models.CharField(max_length=255, blank=True, default='', verbose_name="map_code")
+    # end location
+
 
     @property
     def forum_index(self):
         # Find closest ancestor which is an event index
         return self.get_ancestors().type(ForumIndexPage).last()
+
+    def speakers(self, request):
+        return render_to_response('core/forum_speakers_page.html', {'self': self, 'request': request})
+
+    def location(self, request):
+        return render_to_response('core/forum_location_page.html', {'self': self, 'request': request})
+
+    def timetable(self, request):
+        return render_to_response('core/forum_timetable_page.html', {'self': self, 'request': request})
+
+    def registration(self, request):
+        return redirect(self.signup_link)
+
 
     subpage_types = ['core.ForumLocationPage', 'core.ForumTimetablePage', 'core.ContentPage']
 
@@ -335,41 +371,29 @@ class ForumPage(Page):
 
 
 ForumPage.content_panels = [
-    FieldPanel('title', classname="full title"),
-    FieldPanel('title_long', classname="full title"),
-    FieldPanel('type'),
-    FieldPanel('date_from'),
-    FieldPanel('date_to'),
-    FieldPanel('signup_link'),
-    FieldPanel('description', classname="full"),
+    MultiFieldPanel([
+        FieldPanel('title', classname="full title"),
+        FieldPanel('title_long', classname="full title"),
+        FieldPanel('description', classname="full"),
+        FieldPanel('signup_link'),
+    ], heading="Main"),
+    MultiFieldPanel([
+        FieldPanel('date_from'),
+        FieldPanel('date_to'),
+    ], heading="Dates"),
     FieldPanel('has_report'),
+
+    MultiFieldPanel([
+        FieldPanel('location_name'),
+        ImageChooserPanel('location_logo'),
+        FieldPanel('location_country'),
+        FieldPanel('location_city'),
+        FieldPanel('location_street'),
+        FieldPanel('location_zip_code'),
+        FieldPanel('location_map_code'),
+    ], heading="Location", classname="collapsible collapsed"),
+
     InlinePanel(ForumPage, 'speakers', label="Speakers"),
-]
-
-
-class ForumLocationPage(Page):
-    logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
-    name = models.CharField(max_length=255, null=True, blank=True)
-    city = models.CharField(max_length=255, null=True, blank=True)
-    street = models.CharField(max_length=255, null=True, blank=True)
-    country = models.CharField(max_length=255, null=True, blank=True)
-    zip_code = models.IntegerField(max_length=20, null=True, blank=True)
-    location = models.CharField(max_length=255, blank=True, default='')
-    latitude = models.FloatField(null=True, blank=True)
-    longitude = models.FloatField(null=True, blank=True)
-
-
-ForumLocationPage.content_panels = [
-    FieldPanel('title', classname="full title"),
-    FieldPanel('name'),
-    ImageChooserPanel('logo'),
-    FieldPanel('country'),
-    FieldPanel('city'),
-    FieldPanel('street'),
-    FieldPanel('zip_code'),
-    FieldPanel('location'),
-    FieldPanel('latitude'),
-    FieldPanel('longitude'),
 ]
 
 
@@ -379,8 +403,8 @@ class ForumTimetablePage(Page):
 
 class ForumTimetableItem(models.Model):
     title = models.CharField(max_length=255, blank=True, default='')
-    time_from = models.TimeField("Start time", null=True, blank=True)
-    time_to = models.TimeField("End time", null=True, blank=True)
+    time_from = models.DateTimeField("Start time", null=True, blank=True)
+    time_to = models.DateTimeField("End time", null=True, blank=True)
     location = models.CharField(max_length=255, blank=True, default='')
     description = RichTextField(blank=True)
 

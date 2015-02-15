@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load static core_tags wagtailimages_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content_title %}
+
+<div class="for_block_title">
+    <div class="for_block_title_top">
+        <a href="{{ self.url }}">
+            МІСЦЕ ПРОВЕДЕННЯ
+        </a>
+    </div>
+    <div class="for_block_title_bot">
+        <div class="for_block_title_bot_in"></div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-xs-12 text-center">
+        {% image self.location_logo max-150x150 class=".img-responsive" %}
+        <p>
+        {{ self.location_name }} <br/>
+        {{ self.location_street }} <br/>
+        {{ self.location_city }}, {{ self.location_zip_code }} <br/>
+        {{ self.location_country }}
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <iframe src="{{ self.location_map_code }}" width="100%" height="480"></iframe>
+</div>
+
+{% endblock %}
