@@ -155,27 +155,6 @@ class VideoPage(Page):
     ]
 
 
-class HomePageVideoItem(Orderable):
-    page = ParentalKey('core.HomePage', related_name='videos')
-    link = models.URLField(default='')
-    code = models.TextField(default='')
-    preview = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    description = models.TextField(blank=True, null=True, default='')
-
-    panels = [
-        FieldPanel('link', classname="full"),
-        FieldPanel('code', classname="full"),
-        ImageChooserPanel('preview'),
-        FieldPanel('description', classname="full")
-    ]
-
-
 class MaterialsPage(RoutablePageMixin, Page):
     subpage_urls = (
         url(r'^$', 'materials', name='materials'),
@@ -551,14 +530,13 @@ class HomePageAdvertPlacement(Orderable, models.Model):
     ]
 
 
-# class HomePageMaterialVideo(Orderable):
-#     page = ParentalKey('core.HomePage', related_name='material_videos')
-#     video = models.ForeignKey('core.VideoPage', related_name='+')
-#
-#     panels = [
-#         PageChooserPanel('video', page_type=VideoPage),
-#     ]
+class HomePageMaterialVideo(Orderable):
+    page = ParentalKey('core.HomePage', related_name='material_videos')
+    video = models.ForeignKey('core.VideoPage', related_name='+')
 
+    panels = [
+        PageChooserPanel('video', page_type=VideoPage),
+    ]
 
 
 class HomePage(Page):
@@ -566,15 +544,9 @@ class HomePage(Page):
                                    on_delete=models.SET_NULL, related_name='+')
 
     @property
-    def top_videos(self):
-        videos = HomePageVideoItem.objects.live().all()[:4]
-        return videos
-
-    @property
     def top_news(self):
         news = NewsPage.objects.live().descendant_of(self).order_by('-date')  # or get News Page
         return news
-
 
     class Meta:
         verbose_name = "Homepage"
@@ -582,6 +554,6 @@ class HomePage(Page):
 
 HomePage.content_panels = Page.content_panels + [
     PageChooserPanel('forum_page', page_type=ForumPage),
-    InlinePanel(HomePage, 'videos', label="Videos", panels=HomePageVideoItem.panels),
+    InlinePanel(HomePage, 'material_videos', label="Videos"),
     InlinePanel(HomePage, 'advert_placements', label="Adverts"),
 ]
