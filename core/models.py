@@ -366,7 +366,7 @@ class ForumPage(RoutablePageMixin, Page):
         return redirect(self.signup_link)
 
 
-    subpage_types = ['core.ForumLocationPage', 'core.ForumTimetablePage', 'core.ContentPage']
+    # subpage_types = ['core.ForumLocationPage', 'core.ForumTimetablePage', 'core.ContentPage']
 
     search_fields = Page.search_fields + (
         index.SearchField('description'),
