@@ -1,3 +1,5 @@
+# coding=utf-8
+from datetime import date
 from django import template
 from core.models import SliderItem, Partner, OrganizerPage
 
@@ -28,3 +30,11 @@ def organizers(context):
     }
 
 
+@register.simple_tag
+def copyright_years(start_year=2015):
+    year = date.today().year
+    if not start_year == year:
+        year_interval = "%s — %s" % (start_year, year)
+    else:
+        year_interval = str(year)
+    return year_interval
