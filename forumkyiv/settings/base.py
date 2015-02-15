@@ -149,6 +149,8 @@ LOGIN_REDIRECT_URL = 'wagtailadmin_home'
 
 WAGTAIL_SITE_NAME = "forumkyiv"
 
+WAGTAILSEARCH_RESULTS_TEMPLATE = 'core/search_results.html'
+
 # Use Elasticsearch as the search backend for extra performance and better search results:
 # http://wagtail.readthedocs.org/en/latest/howto/performance.html#search
 # http://wagtail.readthedocs.org/en/latest/core_components/search/backends.html#elasticsearch-backend

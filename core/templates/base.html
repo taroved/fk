@@ -61,7 +61,6 @@
 <body class="{% block body_class %}{% endblock %}">
 {% wagtailuserbar %}
 
-
 <div id="for_wrapper">
     <div class="for_header">
         <div class="for_top_header">
@@ -78,8 +77,8 @@
                         <div class="for_right_header">
                             <div class="for_lang_search">
                                 <div class="for_search">
-                                    <form>
-                                        <input class="for_form_text" type="text">
+                                    <form action="{% url 'wagtailsearch_search' %}" method="get">
+                                        <input class="for_form_text" type="text" name="q" >
                                         <input class="for_form_sub" type="submit" value="">
                                     </form>
                                 </div>
@@ -206,7 +205,8 @@
                                 <a href="{% pageurl page %}">{{ page.title }}</a> >
                             {% endif %}
                         {% endfor %}
-                        <a href="{% pageurl self %}">{{ self.title }}</a>
+
+                        <a href="{{ self.url }}">{{ self.title }}</a>
                     </div>
                 </div>
             {% endif %}

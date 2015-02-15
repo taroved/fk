@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block title %}Search{% if search_results %} Results{% endif %}{% endblock %}
+
+{% block content_title %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="for_block_title">
+                <div class="for_block_title_top">
+                    <a href="{{ self.url }}">
+                        Результати пошуку {% if request.GET.q %}"{{ request.GET.q }}"{% endif %}
+                    </a>
+                </div>
+                <div class="for_block_title_bot">
+                    <div class="for_block_title_bot_in"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+    {% block search_box %}
+        {% include "core/includes/search_box.html" with query_string=query_string only %}
+    {% endblock %}
+
+    {% with query.editors_picks.all as editors_picks %}
+        {% if editors_picks %}
+            <div class="well">
+            <h3>Editors picks</h3>
+                <ul>
+                    {% for editors_pick in editors_picks %}
+                        <li>
+                            <h4><a href="{% pageurl editors_pick.page %}">{{ editors_pick.page.title }}</a></h4>
+                            <p>{{ editors_pick.description|safe }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <ul>
+        {% for result in search_results %}
+            <li>
+                <h4><a href="{% pageurl result.specific %}">{{ result.specific }}</a></h4>
+                {% if result.specific.search_description %}
+                    {{ result.specific.search_description|safe }}
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>Нічого не знайдено</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
