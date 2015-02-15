@@ -325,8 +325,9 @@ class ForumPage(RoutablePageMixin, Page):
     subpage_urls = (
         url(r'^$', 'forum', name='forum'),
         url(r'^location/$', 'location', name='location'),
+        url(r'^packages/$', 'packages', name='packages'),
         url(r'^timetable/$', 'timetable', name='timetable'),
-        url(r'^speakers/$', 'speakers', name='speakers'),
+        url(r'^speakers/$', 'speakers_view', name='speakers_view'),
         url(r'^registration/$', 'registration', name='registration'),
     )
 
@@ -357,11 +358,14 @@ class ForumPage(RoutablePageMixin, Page):
     def forum(self, request):
         return render_to_response('core/forum_page.html', {'self': self, 'request': request})
 
-    def speakers(self, request):
+    def speakers_view(self, request):
         return render_to_response('core/forum_speakers_page.html', {'self': self, 'request': request})
 
     def location(self, request):
         return render_to_response('core/forum_location_page.html', {'self': self, 'request': request})
+
+    def packages(self, request):
+        return render_to_response('core/forum_packages_page.html', {'self': self, 'request': request})
 
     def timetable(self, request):
         return render_to_response('core/forum_timetable_page.html', {'self': self, 'request': request})
