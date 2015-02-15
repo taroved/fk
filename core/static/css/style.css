@@ -341,6 +341,13 @@ ul {
 
 /********** BODY **********/
 
+.for_body .rich-text {
+    font-family: "PFBeauSansPro-Light",Arial,sans-serif;
+    font-size: 19px;
+    line-height: 23px;
+    color: #061F33;
+}
+
 .for_block_title {
     min-width: 230px;
     margin: 0 auto 45px;

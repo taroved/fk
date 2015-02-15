@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static core_tags %}
+{% load wagtailcore_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -26,9 +27,7 @@
                 {#                </div>#}
                 <div class="for_block_ac_cont">
                     <div class="for_block_ac_cont_title">
-                        Урочистий банкет збере понад 100 видатних особистостей - бізнесменів, урядовців та<br>
-                        експертів, які зможуть насолодитися приємним спілкуванням та вишуканою<br>
-                        атмосферою готелю Hilton Kyiv
+                        {{ self.body|richtext }}
                     </div>
                     <div class="for_block_ac_form">
                         <form>

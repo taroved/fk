@@ -21,7 +21,12 @@ from wagtail.wagtailsnippets.models import register_snippet
 
 
 class AccreditationPage(Page):
-    pass
+    body = RichTextField(blank=True, null=True)
+
+    content_panels = [
+        FieldPanel('title', classname="title full"),
+        FieldPanel('body', classname="full"),
+    ]
 
 
 class ArchivePage(Page):
