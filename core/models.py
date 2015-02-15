@@ -266,7 +266,7 @@ class PartnerListPage(Page):
 
 # class PartnerPage(Page):
 # logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
-#     description = models.TextField()
+# description = models.TextField()
 #     link = models.URLField()
 #
 #     content_panels = [
@@ -373,26 +373,26 @@ class ForumPage(RoutablePageMixin, Page):
 
 ForumPage.content_panels = [
     MultiFieldPanel([
-        FieldPanel('title', classname="full title"),
-        FieldPanel('title_long', classname="full title"),
-        FieldPanel('description', classname="full"),
-        FieldPanel('signup_link'),
-    ], heading="Main"),
+                        FieldPanel('title', classname="full title"),
+                        FieldPanel('title_long', classname="full title"),
+                        FieldPanel('description', classname="full"),
+                        FieldPanel('signup_link'),
+                    ], heading="Main"),
     MultiFieldPanel([
-        FieldPanel('date_from'),
-        FieldPanel('date_to'),
-    ], heading="Dates"),
+                        FieldPanel('date_from'),
+                        FieldPanel('date_to'),
+                    ], heading="Dates"),
     FieldPanel('has_report'),
 
     MultiFieldPanel([
-        FieldPanel('location_name'),
-        ImageChooserPanel('location_logo'),
-        FieldPanel('location_country'),
-        FieldPanel('location_city'),
-        FieldPanel('location_street'),
-        FieldPanel('location_zip_code'),
-        FieldPanel('location_map_code'),
-    ], heading="Location", classname="collapsible collapsed"),
+                        FieldPanel('location_name'),
+                        ImageChooserPanel('location_logo'),
+                        FieldPanel('location_country'),
+                        FieldPanel('location_city'),
+                        FieldPanel('location_street'),
+                        FieldPanel('location_zip_code'),
+                        FieldPanel('location_map_code'),
+                    ], heading="Location", classname="collapsible collapsed"),
 
     InlinePanel(ForumPage, 'speakers', label="Speakers"),
 ]
@@ -478,7 +478,6 @@ class PressTopPage(Page):
 
 
 class PressTopListPage(Page):
-
     def items(self):
         items = PressTopPage.objects.all()
         return items
@@ -513,9 +512,15 @@ class HomePage(Page):
                                    on_delete=models.SET_NULL, related_name='+')
 
     @property
+    def top_videos(self):
+        videos = HomePageVideoItem.objects.live().all()[:4]
+        return videos
+
+    @property
     def top_news(self):
         news = NewsPage.objects.live().descendant_of(self).order_by('-date')  # or get News Page
         return news
+
 
     class Meta:
         verbose_name = "Homepage"

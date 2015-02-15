@@ -7,516 +7,454 @@
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content_title %}
-{# empty on home page #}
+    {# empty on home page #}
 {% endblock %}
 
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="for_block_news">
-            <div class="for_block_title">
-                <div class="for_block_title_top">
-                    <a href="#">
-                        Новини
-                    </a>
-                </div>
-                <div class="for_block_title_bot">
-                    <div class="for_block_title_bot_in"></div>
-                </div>
-            </div>
-            <div class="for_block_news_cont">
-                {% if self.top_news.0 %}
-                <div class="cox-xs-12">
-                    <div class="for_block_news_cont_top">
-                        <div class="for_block_news_left">
-                            <a href="{% pageurl self.top_news.0 %}">
-                                {% image self.top_news.0.image fill-569x314-c100 %}
-                            </a>
-                        </div>
-                        <div class="for_block_news_right">
-                            <div class="for_block_news_date">
-                                {{ self.top_news.0.date|date:"d.m.Y" }}
-                            </div>
-                            <div class="for_block_news_title">
-                                <a href="{% pageurl self.top_news.0 %}">
-                                    {{ self.top_news.0.title }}
-                                </a>
-                            </div>
-                            <div class="for_block_news_text">
-                                {{ self.top_news.0.short|linebreaksbr }}
-                            </div>
-                        </div>
-                        <div class="pad"></div>
-                    </div>
-                </div>
-                {% endif %}
-                <div class="for_block_news_cont_bot">
-                    <div class="row">
-                        {% if self.top_news.1 %}
-                        <div class="col-xs-6">
-                            <div class="for_block_news_small">
-                                <div class="for_block_news_small_left">
-                                    <a href="{% pageurl self.top_news.1 %}">
-                                        {% image self.top_news.1.image fill-270x146-c100  %}
-                                    </a>
-                                </div>
-                                <div class="for_block_news_small_right">
-                                    <div class="for_block_news_small_date">
-                                        {{ self.top_news.1.date|date:"d.m.Y" }}
-                                    </div>
-                                    <div class="for_block_news_small_text">
-                                        {{ self.top_news.1.short|linebreaksbr }}
-                                    </div>
-                                </div>
-                                <div class="pad"></div>
-                            </div>
-                        </div>
-                        {% endif %}
-                        {% if self.top_news.2 %}
-                        <div class="col-xs-6">
-                            <div class="for_block_news_small">
-                                <div class="for_block_news_small_left">
-                                    <a href="{% pageurl self.top_news.2 %}">
-                                        {% image self.top_news.2.image fill-270x146-c100  %}
-                                    </a>
-                                </div>
-                                <div class="for_block_news_small_right">
-                                    <div class="for_block_news_small_date">
-                                        {{ self.top_news.2.date|date:"d.m.Y" }}
-                                    </div>
-                                    <div class="for_block_news_small_text">
-                                        {{ self.top_news.2.short|linebreaksbr }}
-                                    </div>
-                                </div>
-                                <div class="pad"></div>
-                            </div>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="for_block_video">
-            <div class="for_block_title for_block_title_video">
-                <div class="for_block_title_top">
-                    <a href="#">
-                        Відео
-                    </a>
-                </div>
-                <div class="for_block_title_bot">
-                    <div class="for_block_title_bot_in"></div>
-                </div>
-            </div>
-            <div class="for_block_video_cont">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <div class="for_block_video_item">
-                            <div class="for_block_video_view">
-                                <a href="#">
-                                    <img src="{% static 'images/for_play.png' %}" class="for_play" alt="image">
-                                    <span class="for_video_shadow"></span>
-                                    <img src="{% static 'images/for_block_video_1.jpg' %}" class="for_video_1"
-                                         alt="image">
-                                </a>
-                            </div>
-                            <div class="for_block_video_date">
-                                20.12.2013
-                            </div>
-                            <div class="for_block_video_text">
-                                Віктор Галасюк на дебатах<br>
-                                "Яка економічна стратегія<br>
-                                потрібна Україні?"
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="for_block_video_item">
-                            <div class="for_block_video_view">
-                                <a href="#">
-                                    <img src="{% static 'images/for_play.png' %}" class="for_play" alt="image">
-                                    <span class="for_video_shadow"></span>
-                                    <img src="{% static 'images/for_block_video_1.jpg' %}" class="for_video_1"
-                                         alt="image">
-                                </a>
-                            </div>
-                            <div class="for_block_video_date">
-                                20.12.2013
-                            </div>
-                            <div class="for_block_video_text">
-                                Віктор Галасюк на дебатах<br>
-                                "Яка економічна стратегія<br>
-                                потрібна Україні?"
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="for_block_video_item">
-                            <div class="for_block_video_view">
-                                <a href="#">
-                                    <img src="{% static 'images/for_play.png' %}" class="for_play" alt="image">
-                                    <span class="for_video_shadow"></span>
-                                    <img src="{% static 'images/for_block_video_1.jpg' %}" class="for_video_1"
-                                         alt="image">
-                                </a>
-                            </div>
-                            <div class="for_block_video_date">
-                                20.12.2013
-                            </div>
-                            <div class="for_block_video_text">
-                                Віктор Галасюк на дебатах<br>
-                                "Яка економічна стратегія<br>
-                                потрібна Україні?"
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="for_block_video_item">
-                            <div class="for_block_video_view">
-                                <a href="#">
-                                    <img src="{% static 'images/for_play.png' %}" class="for_play" alt="image">
-                                    <span class="for_video_shadow"></span>
-                                    <img src="{% static 'images/for_block_video_1.jpg' %}" class="for_video_1"
-                                         alt="image">
-                                </a>
-                            </div>
-                            <div class="for_block_video_date">
-                                20.12.2013
-                            </div>
-                            <div class="for_block_video_text">
-                                Віктор Галасюк на дебатах<br>
-                                "Яка економічна стратегія<br>
-                                потрібна Україні?"
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="for_block_banners">
-            <div class="for_block_title">
-                <div class="for_block_title_bot">
-                    <div class="for_block_title_bot_in"></div>
-                </div>
-            </div>
-            <div class="for_block_banners_cont">
-{#                {{ self.advert_placements.all|length }}#}
-                {% for advert_placement in self.advert_placements.all %}
-                    <div class="col-xs-6">
-                        <div class="for_block_banner_item">
-                            {{ advert_placement }}
-                            <a href="{{ advert_placement }}">
-{#                                <img src="{% image advert_placement.image %}" alt="banner">#}
-                            </a>
-                        </div>
-                    </div>
-                {% endfor %}
-
-{#                <div class="col-xs-6">#}
-{#                    <div class="for_block_banner_item">#}
-{#                        <a href="#">#}
-{#                            <img src="{% static 'images/for_banner_1.jpg' %}" alt="banner">#}
-{#                        </a>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="col-xs-6">#}
-{#                    <div class="for_block_banner_item">#}
-{#                        <a href="#">#}
-{#                            <img src="{% static 'images/for_banner_2.jpg' %}" alt="banner">#}
-{#                        </a>#}
-{#                    </div>#}
-{#                </div>#}
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="for_about">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                <div class="for_about_title">
-                    Київський міжнародний
-                    <br>економічний форум
-                    <br>
-                    <span>2015</span>
+            <div class="for_block_news">
+                <div class="for_block_title">
+                    <div class="for_block_title_top">
+                        <a href="#">
+                            Новини
+                        </a>
+                    </div>
+                    <div class="for_block_title_bot">
+                        <div class="for_block_title_bot_in"></div>
+                    </div>
                 </div>
-{#                <div class="for_block_program">#}
-{#                    <div class="for_block_title for_block_title_program">#}
-{#                        <div class="for_block_title_top">#}
-{#                            <a href="#">#}
-{#                                Програма#}
-{#                            </a>#}
-{#                        </div>#}
-{#                        <div class="for_block_title_bot">#}
-{#                            <div class="for_block_title_bot_in for_block_title_bot_back"></div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="for_block_program_date">#}
-{#                        2 жовтня 2015#}
-{#                        <br>Україна, Київ, НСК «Олімпійський»#}
-{#                    </div>#}
-{#                    <div class="for_block_program_cont">#}
-{#                        <div class="for_block_program_item">#}
-{#                            <div class="for_block_program_time">#}
-{#                                09:30 - 10:15#}
-{#                            </div>#}
-{#                            <div class="for_block_program_event">#}
-{#                                <div class="for_block_program_event_title">#}
-{#                                    Пленарне засідання#}
-{#                                </div>#}
-{#                                <div class="for_block_program_event_link">#}
-{#                                    <a href="#">#}
-{#                                        “Україна сьогодні: відвертий професійний погляд”#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="pad"></div>#}
-{#                        </div>#}
-{#                        <div class="for_block_program_item">#}
-{#                            <div class="for_block_program_time">#}
-{#                                10:30 - 12:00#}
-{#                            </div>#}
-{#                            <div class="for_block_program_event">#}
-{#                                <div class="for_block_program_event_title">#}
-{#                                    Панельні дискусії#}
-{#                                </div>#}
-{#                                <div class="for_block_program_event_link">#}
-{#                                    <a href="#">#}
-{#                                        Високі технології: Україна в хай-тек перегонах#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                                <div class="for_block_program_event_link">#}
-{#                                    <a href="#">#}
-{#                                        Фінансування проектів розвитку#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                                <div class="for_block_program_event_link">#}
-{#                                    <a href="#">#}
-{#                                        Освітня революція для бізнесу#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="pad"></div>#}
-{#                        </div>#}
-{#                        <div class="for_block_program_item">#}
-{#                            <div class="for_block_program_time">#}
-{#                                12:30 - 14:00#}
-{#                            </div>#}
-{#                            <div class="for_block_program_event">#}
-{#                                <div class="for_block_program_event_title">#}
-{#                                    Панельні дискусії#}
-{#                                </div>#}
-{#                                <div class="for_block_program_event_link">#}
-{#                                    <a href="#">#}
-{#                                        Точки зростання – виграшна стратегія у глобальній конкуренції#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                                <div class="for_block_program_event_link">#}
-{#                                    <a href="#">#}
-{#                                        Сільське господарство: добувна чи переробна галузь?#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                                <div class="for_block_program_event_link">#}
-{#                                    <a href="#">#}
-{#                                        Модель енергетичної незалежностi#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="pad"></div>#}
-{#                        </div>#}
-{#                        <div class="for_block_program_item">#}
-{#                            <div class="for_block_program_time">#}
-{#                                15:30 - 17:00#}
-{#                            </div>#}
-{#                            <div class="for_block_program_event">#}
-{#                                <div class="for_block_program_event_title">#}
-{#                                    Пленарне засідання#}
-{#                                </div>#}
-{#                                <div class="for_block_program_event_link">#}
-{#                                    <a href="#">#}
-{#                                        “Партнерство бізнесу та влади. Перезавантаження”#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="pad"></div>#}
-{#                        </div>#}
-{#                        <div class="for_block_program_item">#}
-{#                            <div class="for_block_program_time">#}
-{#                                19:30 - 21:00#}
-{#                            </div>#}
-{#                            <div class="for_block_program_event">#}
-{#                                <div class="for_block_program_event_title">#}
-{#                                    Прийом (коктейль) від імені організаторів#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="pad"></div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="for_block_speakers">#}
-{#                    <div class="for_block_title">#}
-{#                        <div class="for_block_title_top">#}
-{#                            <a href="#">#}
-{#                                Спікери#}
-{#                            </a>#}
-{#                        </div>#}
-{#                        <div class="for_block_title_bot">#}
-{#                            <div class="for_block_title_bot_in for_block_title_bot_back"></div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="for_block_sp_cont">#}
-{#                        <div class="row">#}
-{#                            <div class="col-xs-3">#}
-{#                                <div class="for_block_sp_item">#}
-{#                                    <a href="#">#}
-{#                                                    <span class="for_block_sp_photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
-{#                                                             alt="photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_2.jpg' %}" alt="photo">#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_name">#}
-{#                                                        Seok Pil Kim#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_about">#}
-{#                                                        Директор з маркетингу та керівник<br>#}
-{#                                                        відділу глобальних B2B Center, Samsung<br>#}
-{#                                                        Electronics#}
-{#                                                    </span>#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="col-xs-3">#}
-{#                                <div class="for_block_sp_item">#}
-{#                                    <a href="#">#}
-{#                                                    <span class="for_block_sp_photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
-{#                                                             alt="photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_2.jpg' %}" alt="photo">#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_name">#}
-{#                                                        Martin Winterkorn#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_about">#}
-{#                                                        Голова ради директорів Volkswagen AG#}
-{#                                                    </span>#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="col-xs-3">#}
-{#                                <div class="for_block_sp_item">#}
-{#                                    <a href="#">#}
-{#                                                    <span class="for_block_sp_photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
-{#                                                             alt="photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_3.jpg' %}" alt="photo">#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_name">#}
-{#                                                        Martin Matrone#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_about">#}
-{#                                                        Директор з розвитку#}
-{#                                                    </span>#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="col-xs-3">#}
-{#                                <div class="for_block_sp_item">#}
-{#                                    <a href="#">#}
-{#                                                    <span class="for_block_sp_photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
-{#                                                             alt="photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_4.jpg' %}" alt="photo">#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_name">#}
-{#                                                        Steve Flaulkin#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_about">#}
-{#                                                        Директор зі стратегії, Cloudera#}
-{#                                                    </span>#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="col-xs-3">#}
-{#                                <div class="for_block_sp_item">#}
-{#                                    <a href="#">#}
-{#                                                    <span class="for_block_sp_photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
-{#                                                             alt="photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_5.jpg' %}" alt="photo">#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_name">#}
-{#                                                        Mikko hypponen#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_about">#}
-{#                                                        Директор з маркетингу та керівник<br>#}
-{#                                                        відділу глобальних B2B Center, Samsung<br>#}
-{#                                                        Electronics#}
-{#                                                    </span>#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="col-xs-3">#}
-{#                                <div class="for_block_sp_item">#}
-{#                                    <a href="#">#}
-{#                                                    <span class="for_block_sp_photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
-{#                                                             alt="photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_6.jpg' %}" alt="photo">#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_name">#}
-{#                                                        Martin Winterkorn#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_about">#}
-{#                                                        Голова ради директорів Volkswagen AG#}
-{#                                                    </span>#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="col-xs-3">#}
-{#                                <div class="for_block_sp_item">#}
-{#                                    <a href="#">#}
-{#                                                    <span class="for_block_sp_photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
-{#                                                             alt="photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_7.jpg' %}" alt="photo">#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_name">#}
-{#                                                        Mark Shuttleworth#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_about">#}
-{#                                                        Директор з розвитку#}
-{#                                                    </span>#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="col-xs-3">#}
-{#                                <div class="for_block_sp_item">#}
-{#                                    <a href="#">#}
-{#                                                    <span class="for_block_sp_photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
-{#                                                             alt="photo">#}
-{#                                                        <img src="{% static 'images/for_speaker_8.jpg' %}" alt="photo">#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_name">#}
-{#                                                        Steve Flaulkin#}
-{#                                                    </span>#}
-{#                                                    <span class="for_block_sp_about">#}
-{#                                                        Директор зі стратегії, Cloudera#}
-{#                                                    </span>#}
-{#                                    </a>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="for_block_all">#}
-{#                        <a href="#">#}
-{#                            повний список спікерів#}
-{#                        </a>#}
-{#                    </div>#}
-{#                </div>#}
+                <div class="for_block_news_cont">
+                    {% if self.top_news.0 %}
+                        <div class="cox-xs-12">
+                            <div class="for_block_news_cont_top">
+                                <div class="for_block_news_left">
+                                    <a href="{% pageurl self.top_news.0 %}">
+                                        {% image self.top_news.0.image fill-569x314-c100 %}
+                                    </a>
+                                </div>
+                                <div class="for_block_news_right">
+                                    <div class="for_block_news_date">
+                                        {{ self.top_news.0.date|date:"d.m.Y" }}
+                                    </div>
+                                    <div class="for_block_news_title">
+                                        <a href="{% pageurl self.top_news.0 %}">
+                                            {{ self.top_news.0.title }}
+                                        </a>
+                                    </div>
+                                    <div class="for_block_news_text">
+                                        {{ self.top_news.0.short|linebreaksbr }}
+                                    </div>
+                                </div>
+                                <div class="pad"></div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="for_block_news_cont_bot">
+                        <div class="row">
+                            {% if self.top_news.1 %}
+                                <div class="col-xs-6">
+                                    <div class="for_block_news_small">
+                                        <div class="for_block_news_small_left">
+                                            <a href="{% pageurl self.top_news.1 %}">
+                                                {% image self.top_news.1.image fill-270x146-c100 %}
+                                            </a>
+                                        </div>
+                                        <div class="for_block_news_small_right">
+                                            <div class="for_block_news_small_date">
+                                                {{ self.top_news.1.date|date:"d.m.Y" }}
+                                            </div>
+                                            <div class="for_block_news_small_text">
+                                                {{ self.top_news.1.short|linebreaksbr }}
+                                            </div>
+                                        </div>
+                                        <div class="pad"></div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if self.top_news.2 %}
+                                <div class="col-xs-6">
+                                    <div class="for_block_news_small">
+                                        <div class="for_block_news_small_left">
+                                            <a href="{% pageurl self.top_news.2 %}">
+                                                {% image self.top_news.2.image fill-270x146-c100 %}
+                                            </a>
+                                        </div>
+                                        <div class="for_block_news_small_right">
+                                            <div class="for_block_news_small_date">
+                                                {{ self.top_news.2.date|date:"d.m.Y" }}
+                                            </div>
+                                            <div class="for_block_news_small_text">
+                                                {{ self.top_news.2.short|linebreaksbr }}
+                                            </div>
+                                        </div>
+                                        <div class="pad"></div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="for_block_video">
+                <div class="for_block_title for_block_title_video">
+                    <div class="for_block_title_top">
+                        <a href="#">
+                            Відео
+                        </a>
+                    </div>
+                    <div class="for_block_title_bot">
+                        <div class="for_block_title_bot_in"></div>
+                    </div>
+                </div>
+                <div class="for_block_video_cont">
+                    <div class="row">
+                        {% for video in self.videos.all %}
+                            <div class="col-xs-3">
+                                <div class="for_block_video_item">
+                                    <div class="for_block_video_view">
+                                        <a href="{{ video.link }}">
+                                            <img src="{% static 'images/for_play.png' %}" class="for_play" alt="image">
+                                            <span class="for_video_shadow"></span>
+                                            {% image video.preview fill-569x314-c100 %}
+{#                                           <img src="{% static 'images/for_block_video_1.jpg' %}" class="for_video_1" alt="image">#}
+                                        </a>
+                                    </div>
+                                    <div class="for_block_video_date">
+{#                                        {{ video.date }}#}
+                                    </div>
+                                    <div class="for_block_video_text">
+                                        {{ video.description }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="for_block_banners">
+                <div class="for_block_title">
+                    <div class="for_block_title_bot">
+                        <div class="for_block_title_bot_in"></div>
+                    </div>
+                </div>
+                <div class="for_block_banners_cont">
+                    {% for advert_placement in self.advert_placements.all %}
+                        <div class="col-xs-6">
+                            <div class="for_block_banner_item">
+                                <a href="{{ advert_placement.advert.url }}">
+                                    {% image advert_placement.advert.image max-570x100 %}
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {#                <div class="col-xs-6">#}
+                    {#                    <div class="for_block_banner_item">#}
+                    {#                        <a href="#">#}
+                    {#                            <img src="{% static 'images/for_banner_1.jpg' %}" alt="banner">#}
+                    {#                        </a>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+                    {#                <div class="col-xs-6">#}
+                    {#                    <div class="for_block_banner_item">#}
+                    {#                        <a href="#">#}
+                    {#                            <img src="{% static 'images/for_banner_2.jpg' %}" alt="banner">#}
+                    {#                        </a>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="for_about">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="for_about_title">
+                        Київський міжнародний
+                        <br>економічний форум
+                        <br>
+                        <span>2015</span>
+                    </div>
+                    {#                <div class="for_block_program">#}
+                    {#                    <div class="for_block_title for_block_title_program">#}
+                    {#                        <div class="for_block_title_top">#}
+                    {#                            <a href="#">#}
+                    {#                                Програма#}
+                    {#                            </a>#}
+                    {#                        </div>#}
+                    {#                        <div class="for_block_title_bot">#}
+                    {#                            <div class="for_block_title_bot_in for_block_title_bot_back"></div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                    <div class="for_block_program_date">#}
+                    {#                        2 жовтня 2015#}
+                    {#                        <br>Україна, Київ, НСК «Олімпійський»#}
+                    {#                    </div>#}
+                    {#                    <div class="for_block_program_cont">#}
+                    {#                        <div class="for_block_program_item">#}
+                    {#                            <div class="for_block_program_time">#}
+                    {#                                09:30 - 10:15#}
+                    {#                            </div>#}
+                    {#                            <div class="for_block_program_event">#}
+                    {#                                <div class="for_block_program_event_title">#}
+                    {#                                    Пленарне засідання#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        “Україна сьогодні: відвертий професійний погляд”#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="pad"></div>#}
+                    {#                        </div>#}
+                    {#                        <div class="for_block_program_item">#}
+                    {#                            <div class="for_block_program_time">#}
+                    {#                                10:30 - 12:00#}
+                    {#                            </div>#}
+                    {#                            <div class="for_block_program_event">#}
+                    {#                                <div class="for_block_program_event_title">#}
+                    {#                                    Панельні дискусії#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        Високі технології: Україна в хай-тек перегонах#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        Фінансування проектів розвитку#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        Освітня революція для бізнесу#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="pad"></div>#}
+                    {#                        </div>#}
+                    {#                        <div class="for_block_program_item">#}
+                    {#                            <div class="for_block_program_time">#}
+                    {#                                12:30 - 14:00#}
+                    {#                            </div>#}
+                    {#                            <div class="for_block_program_event">#}
+                    {#                                <div class="for_block_program_event_title">#}
+                    {#                                    Панельні дискусії#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        Точки зростання – виграшна стратегія у глобальній конкуренції#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        Сільське господарство: добувна чи переробна галузь?#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        Модель енергетичної незалежностi#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="pad"></div>#}
+                    {#                        </div>#}
+                    {#                        <div class="for_block_program_item">#}
+                    {#                            <div class="for_block_program_time">#}
+                    {#                                15:30 - 17:00#}
+                    {#                            </div>#}
+                    {#                            <div class="for_block_program_event">#}
+                    {#                                <div class="for_block_program_event_title">#}
+                    {#                                    Пленарне засідання#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        “Партнерство бізнесу та влади. Перезавантаження”#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="pad"></div>#}
+                    {#                        </div>#}
+                    {#                        <div class="for_block_program_item">#}
+                    {#                            <div class="for_block_program_time">#}
+                    {#                                19:30 - 21:00#}
+                    {#                            </div>#}
+                    {#                            <div class="for_block_program_event">#}
+                    {#                                <div class="for_block_program_event_title">#}
+                    {#                                    Прийом (коктейль) від імені організаторів#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="pad"></div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+                    {#                <div class="for_block_speakers">#}
+                    {#                    <div class="for_block_title">#}
+                    {#                        <div class="for_block_title_top">#}
+                    {#                            <a href="#">#}
+                    {#                                Спікери#}
+                    {#                            </a>#}
+                    {#                        </div>#}
+                    {#                        <div class="for_block_title_bot">#}
+                    {#                            <div class="for_block_title_bot_in for_block_title_bot_back"></div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                    <div class="for_block_sp_cont">#}
+                    {#                        <div class="row">#}
+                    {#                            <div class="col-xs-3">#}
+                    {#                                <div class="for_block_sp_item">#}
+                    {#                                    <a href="#">#}
+                    {#                                                    <span class="for_block_sp_photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
+                    {#                                                             alt="photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_2.jpg' %}" alt="photo">#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_name">#}
+                    {#                                                        Seok Pil Kim#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_about">#}
+                    {#                                                        Директор з маркетингу та керівник<br>#}
+                    {#                                                        відділу глобальних B2B Center, Samsung<br>#}
+                    {#                                                        Electronics#}
+                    {#                                                    </span>#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="col-xs-3">#}
+                    {#                                <div class="for_block_sp_item">#}
+                    {#                                    <a href="#">#}
+                    {#                                                    <span class="for_block_sp_photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
+                    {#                                                             alt="photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_2.jpg' %}" alt="photo">#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_name">#}
+                    {#                                                        Martin Winterkorn#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_about">#}
+                    {#                                                        Голова ради директорів Volkswagen AG#}
+                    {#                                                    </span>#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="col-xs-3">#}
+                    {#                                <div class="for_block_sp_item">#}
+                    {#                                    <a href="#">#}
+                    {#                                                    <span class="for_block_sp_photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
+                    {#                                                             alt="photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_3.jpg' %}" alt="photo">#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_name">#}
+                    {#                                                        Martin Matrone#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_about">#}
+                    {#                                                        Директор з розвитку#}
+                    {#                                                    </span>#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="col-xs-3">#}
+                    {#                                <div class="for_block_sp_item">#}
+                    {#                                    <a href="#">#}
+                    {#                                                    <span class="for_block_sp_photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
+                    {#                                                             alt="photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_4.jpg' %}" alt="photo">#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_name">#}
+                    {#                                                        Steve Flaulkin#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_about">#}
+                    {#                                                        Директор зі стратегії, Cloudera#}
+                    {#                                                    </span>#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="col-xs-3">#}
+                    {#                                <div class="for_block_sp_item">#}
+                    {#                                    <a href="#">#}
+                    {#                                                    <span class="for_block_sp_photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
+                    {#                                                             alt="photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_5.jpg' %}" alt="photo">#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_name">#}
+                    {#                                                        Mikko hypponen#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_about">#}
+                    {#                                                        Директор з маркетингу та керівник<br>#}
+                    {#                                                        відділу глобальних B2B Center, Samsung<br>#}
+                    {#                                                        Electronics#}
+                    {#                                                    </span>#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="col-xs-3">#}
+                    {#                                <div class="for_block_sp_item">#}
+                    {#                                    <a href="#">#}
+                    {#                                                    <span class="for_block_sp_photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
+                    {#                                                             alt="photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_6.jpg' %}" alt="photo">#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_name">#}
+                    {#                                                        Martin Winterkorn#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_about">#}
+                    {#                                                        Голова ради директорів Volkswagen AG#}
+                    {#                                                    </span>#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="col-xs-3">#}
+                    {#                                <div class="for_block_sp_item">#}
+                    {#                                    <a href="#">#}
+                    {#                                                    <span class="for_block_sp_photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
+                    {#                                                             alt="photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_7.jpg' %}" alt="photo">#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_name">#}
+                    {#                                                        Mark Shuttleworth#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_about">#}
+                    {#                                                        Директор з розвитку#}
+                    {#                                                    </span>#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="col-xs-3">#}
+                    {#                                <div class="for_block_sp_item">#}
+                    {#                                    <a href="#">#}
+                    {#                                                    <span class="for_block_sp_photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_1_hover.jpg' %}"#}
+                    {#                                                             alt="photo">#}
+                    {#                                                        <img src="{% static 'images/for_speaker_8.jpg' %}" alt="photo">#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_name">#}
+                    {#                                                        Steve Flaulkin#}
+                    {#                                                    </span>#}
+                    {#                                                    <span class="for_block_sp_about">#}
+                    {#                                                        Директор зі стратегії, Cloudera#}
+                    {#                                                    </span>#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                    {#                    <div class="for_block_all">#}
+                    {#                        <a href="#">#}
+                    {#                            повний список спікерів#}
+                    {#                        </a>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
