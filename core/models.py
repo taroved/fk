@@ -311,11 +311,14 @@ class ForumIndexPage(Page):
 
 class ForumPageSpeaker(Orderable):
     forum_page = ParentalKey('core.ForumPage', related_name='speakers')
-    # speaker_page = ParentalKey('core.SpeakerPage', related_name='+')
+    speaker_page = models.ForeignKey('wagtailcore.Page',
+                                     null=True, blank=True,
+                                     on_delete=models.SET_NULL,
+                                     related_name='+')
 
-
-class ForumPageSpeakers(Page):
-    pass
+    panels = [
+        PageChooserPanel('speaker_page', page_type='core.SpeakerPage')
+    ]
 
 
 class ForumPage(RoutablePageMixin, Page):
