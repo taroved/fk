@@ -323,6 +323,7 @@ class ForumPageSpeaker(Orderable):
 
 class ForumPage(RoutablePageMixin, Page):
     subpage_urls = (
+        url(r'^$', 'forum', name='forum'),
         url(r'^location/$', 'location', name='location'),
         url(r'^timetable/$', 'timetable', name='timetable'),
         url(r'^speakers/$', 'speakers', name='speakers'),
@@ -352,6 +353,9 @@ class ForumPage(RoutablePageMixin, Page):
     def forum_index(self):
         # Find closest ancestor which is an event index
         return self.get_ancestors().type(ForumIndexPage).last()
+
+    def forum(self, request):
+        return render_to_response('core/forum_page.html', {'self': self, 'request': request})
 
     def speakers(self, request):
         return render_to_response('core/forum_speakers_page.html', {'self': self, 'request': request})
