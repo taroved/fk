@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
 {% load static core_tags %}
+{% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
+
 
     <div class="row">
         <div class="col-xs-12">
@@ -155,138 +157,164 @@
                 </div>
                 <div class="for_block_sp_cont">
                     <div class="row">
-                        <div class="col-xs-3">
-                            <div class="for_block_sp_item">
-                                <a href="#">
-                                                <span class="for_block_sp_photo">
-                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">
-                                                    <img src="/static/images/for_speaker_2.jpg" alt="photo">
-                                                </span>
-                                                <span class="for_block_sp_name">
-                                                    Seok Pil Kim
-                                                </span>
-                                                <span class="for_block_sp_about">
-                                                    Директор з маркетингу та керівник<br>
-                                                    відділу глобальних B2B Center, Samsung<br>
-                                                    Electronics
-                                                </span>
-                                </a>
+
+                        {% for speaker in self.speakers.all|slice:":12" %}
+
+                            {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                                </div>
+                                <div class="row">
+                            {% endif %}
+
+                            <div class="col-xs-3">
+                                <div class="for_block_sp_item">
+                                    <a href="#">
+                                        <span class="for_block_sp_photo">
+                                            {% image speaker.speaker_page.photo fill-270x300 %}
+                                        </span>
+                                        <span class="for_block_sp_name">
+                                            {{ speaker.speaker_page.title }}
+                                        </span>
+                                        <span class="for_block_sp_about">
+                                            {{ speaker.speaker_page.position }}
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_sp_item">
-                                <a href="#">
-                                                <span class="for_block_sp_photo">
-                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">
-                                                    <img src="/static/images/for_speaker_2.jpg" alt="photo">
-                                                </span>
-                                                <span class="for_block_sp_name">
-                                                    Martin Winterkorn
-                                                </span>
-                                                <span class="for_block_sp_about">
-                                                    Голова ради директорів Volkswagen AG
-                                                </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_sp_item">
-                                <a href="#">
-                                                <span class="for_block_sp_photo">
-                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">
-                                                    <img src="/static/images/for_speaker_3.jpg" alt="photo">
-                                                </span>
-                                                <span class="for_block_sp_name">
-                                                    Martin Matrone
-                                                </span>
-                                                <span class="for_block_sp_about">
-                                                    Директор з розвитку
-                                                </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_sp_item">
-                                <a href="#">
-                                                <span class="for_block_sp_photo">
-                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">
-                                                    <img src="/static/images/for_speaker_4.jpg" alt="photo">
-                                                </span>
-                                                <span class="for_block_sp_name">
-                                                    Steve Flaulkin
-                                                </span>
-                                                <span class="for_block_sp_about">
-                                                    Директор зі стратегії, Cloudera
-                                                </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_sp_item">
-                                <a href="#">
-                                                <span class="for_block_sp_photo">
-                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">
-                                                    <img src="/static/images/for_speaker_5.jpg" alt="photo">
-                                                </span>
-                                                <span class="for_block_sp_name">
-                                                    Mikko hypponen
-                                                </span>
-                                                <span class="for_block_sp_about">
-                                                    Директор з маркетингу та керівник<br>
-                                                    відділу глобальних B2B Center, Samsung<br>
-                                                    Electronics
-                                                </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_sp_item">
-                                <a href="#">
-                                                <span class="for_block_sp_photo">
-                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">
-                                                    <img src="/static/images/for_speaker_6.jpg" alt="photo">
-                                                </span>
-                                                <span class="for_block_sp_name">
-                                                    Martin Winterkorn
-                                                </span>
-                                                <span class="for_block_sp_about">
-                                                    Голова ради директорів Volkswagen AG
-                                                </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_sp_item">
-                                <a href="#">
-                                                <span class="for_block_sp_photo">
-                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">
-                                                    <img src="/static/images/for_speaker_7.jpg" alt="photo">
-                                                </span>
-                                                <span class="for_block_sp_name">
-                                                    Mark Shuttleworth
-                                                </span>
-                                                <span class="for_block_sp_about">
-                                                    Директор з розвитку
-                                                </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_sp_item">
-                                <a href="#">
-                                                <span class="for_block_sp_photo">
-                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">
-                                                    <img src="/static/images/for_speaker_8.jpg" alt="photo">
-                                                </span>
-                                                <span class="for_block_sp_name">
-                                                    Steve Flaulkin
-                                                </span>
-                                                <span class="for_block_sp_about">
-                                                    Директор зі стратегії, Cloudera
-                                                </span>
-                                </a>
-                            </div>
-                        </div>
+                        {% endfor %}
+
+
+{#                        <div class="col-xs-3">#}
+{#                            <div class="for_block_sp_item">#}
+{#                                <a href="#">#}
+{#                                                <span class="for_block_sp_photo">#}
+{#                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">#}
+{#                                                    <img src="/static/images/for_speaker_2.jpg" alt="photo">#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_name">#}
+{#                                                    Seok Pil Kim#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_about">#}
+{#                                                    Директор з маркетингу та керівник<br>#}
+{#                                                    відділу глобальних B2B Center, Samsung<br>#}
+{#                                                    Electronics#}
+{#                                                </span>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="col-xs-3">#}
+{#                            <div class="for_block_sp_item">#}
+{#                                <a href="#">#}
+{#                                                <span class="for_block_sp_photo">#}
+{#                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">#}
+{#                                                    <img src="/static/images/for_speaker_2.jpg" alt="photo">#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_name">#}
+{#                                                    Martin Winterkorn#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_about">#}
+{#                                                    Голова ради директорів Volkswagen AG#}
+{#                                                </span>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="col-xs-3">#}
+{#                            <div class="for_block_sp_item">#}
+{#                                <a href="#">#}
+{#                                                <span class="for_block_sp_photo">#}
+{#                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">#}
+{#                                                    <img src="/static/images/for_speaker_3.jpg" alt="photo">#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_name">#}
+{#                                                    Martin Matrone#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_about">#}
+{#                                                    Директор з розвитку#}
+{#                                                </span>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="col-xs-3">#}
+{#                            <div class="for_block_sp_item">#}
+{#                                <a href="#">#}
+{#                                                <span class="for_block_sp_photo">#}
+{#                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">#}
+{#                                                    <img src="/static/images/for_speaker_4.jpg" alt="photo">#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_name">#}
+{#                                                    Steve Flaulkin#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_about">#}
+{#                                                    Директор зі стратегії, Cloudera#}
+{#                                                </span>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="col-xs-3">#}
+{#                            <div class="for_block_sp_item">#}
+{#                                <a href="#">#}
+{#                                                <span class="for_block_sp_photo">#}
+{#                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">#}
+{#                                                    <img src="/static/images/for_speaker_5.jpg" alt="photo">#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_name">#}
+{#                                                    Mikko hypponen#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_about">#}
+{#                                                    Директор з маркетингу та керівник<br>#}
+{#                                                    відділу глобальних B2B Center, Samsung<br>#}
+{#                                                    Electronics#}
+{#                                                </span>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="col-xs-3">#}
+{#                            <div class="for_block_sp_item">#}
+{#                                <a href="#">#}
+{#                                                <span class="for_block_sp_photo">#}
+{#                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">#}
+{#                                                    <img src="/static/images/for_speaker_6.jpg" alt="photo">#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_name">#}
+{#                                                    Martin Winterkorn#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_about">#}
+{#                                                    Голова ради директорів Volkswagen AG#}
+{#                                                </span>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="col-xs-3">#}
+{#                            <div class="for_block_sp_item">#}
+{#                                <a href="#">#}
+{#                                                <span class="for_block_sp_photo">#}
+{#                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">#}
+{#                                                    <img src="/static/images/for_speaker_7.jpg" alt="photo">#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_name">#}
+{#                                                    Mark Shuttleworth#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_about">#}
+{#                                                    Директор з розвитку#}
+{#                                                </span>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="col-xs-3">#}
+{#                            <div class="for_block_sp_item">#}
+{#                                <a href="#">#}
+{#                                                <span class="for_block_sp_photo">#}
+{#                                                    <img src="/static/images/for_speaker_1_hover.jpg" alt="photo">#}
+{#                                                    <img src="/static/images/for_speaker_8.jpg" alt="photo">#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_name">#}
+{#                                                    Steve Flaulkin#}
+{#                                                </span>#}
+{#                                                <span class="for_block_sp_about">#}
+{#                                                    Директор зі стратегії, Cloudera#}
+{#                                                </span>#}
+{#                                </a>#}
+{#                            </div>#}
+{#                        </div>#}
                     </div>
                 </div>
                 <div class="for_block_all">

@@ -327,7 +327,7 @@ class ForumIndexPage(Page):
 
 class ForumPageSpeaker(Orderable):
     forum_page = ParentalKey('core.ForumPage', related_name='speakers')
-    speaker_page = models.ForeignKey('wagtailcore.Page',
+    speaker_page = models.ForeignKey('core.SpeakerPage',
                                      null=True, blank=True,
                                      on_delete=models.SET_NULL,
                                      related_name='+')
