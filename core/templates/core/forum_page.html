@@ -2,6 +2,7 @@
 
 {% load static core_tags %}
 {% load wagtailcore_tags %}
+{% load wagtailroutablepage_tags %}
 {% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
@@ -187,7 +188,7 @@
                     </div>
                 </div>
                 <div class="for_block_all">
-                    <a href="#">
+                    <a href="{% routablepageurl self "speakers" %}">
                         повний список спікерів
                     </a>
                 </div>

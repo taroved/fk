@@ -45,7 +45,8 @@ INSTALLED_APPS = (
     'overextends',
     'core',
 
-   'wagtail.wagtailcore',
+    'wagtail.wagtailcore',
+    'wagtail.contrib.wagtailroutablepage',
     'wagtail.wagtailadmin',
     'wagtail.wagtaildocs',
     'wagtail.wagtailsnippets',

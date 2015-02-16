@@ -155,26 +155,17 @@ class VideoPage(Page):
 
 class MaterialsPage(RoutablePageMixin, Page):
     subpage_urls = (
-        url(r'^$', 'materials', name='materials'),
-        url(r'^videos/$', 'videos_view', name='videos_view'),
-        url(r'^albums/$', 'albums_view', name='albums_view'),
-        url(r'^documents/$', 'documents_view', name='documents_view'),
+        url(r'^$', 'materials_view', name='materials'),
+        url(r'^videos/$', 'videos_view', name='videos'),
+        url(r'^albums/$', 'albums_view', name='albums'),
+        url(r'^documents/$', 'documents_view', name='documents'),
     )
 
-    def albums(self):
-        albums = PhotoAlbumPage.objects.live().all()
-        return albums
+    albums = lambda(self): PhotoAlbumPage.objects.live().all()
+    documents = lambda(self): DocumentPage.objects.live().all()
+    videos = lambda(self): VideoPage.objects.live().all()
 
-    def documents(self):
-        documents = DocumentPage.objects.live().all()
-        return documents
-
-    def videos(self):
-        videos = VideoPage.objects.live().all()
-        return videos
-
-
-    def materials(self, request):
+    def materials_view(self, request):
         return render_to_response("core/materials_page.html", {'self': self, 'request': request})
 
     def albums_view(self, request):
@@ -191,6 +182,25 @@ class MaterialsPage(RoutablePageMixin, Page):
 
 # class NewsPageTag(TaggedItemBase):
 # content_object = ParentalKey('core.NewsPage', related_name='tagged_items')
+class NewsPageVideo(Orderable):
+    page = ParentalKey('core.NewsPage', related_name='videos')
+    video = models.ForeignKey('core.VideoPage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+
+    panels = [PageChooserPanel('video', page_type=VideoPage)]
+
+
+class NewsPagePhotoAlbum(Orderable):
+    page = ParentalKey('core.NewsPage', related_name='albums')
+    album = models.ForeignKey('core.PhotoAlbumPage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+
+    panels = [PageChooserPanel('album', page_type=PhotoAlbumPage)]
+
+
+class NewsPageDocument(Orderable):
+    page = ParentalKey('core.NewsPage', related_name='documents')
+    doc = models.ForeignKey('core.DocumentPage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+
+    panels = [PageChooserPanel('doc', page_type=DocumentPage)]
 
 
 class NewsPage(Page):
@@ -205,15 +215,19 @@ class NewsPage(Page):
         # Find closest ancestor which is a index
         return self.get_ancestors().type(NewsIndexPage).last()
 
-    subpage_types = ['core.NewsPage']
 
-    content_panels = [
-        FieldPanel('title', classname="full title"),
-        ImageChooserPanel('image'),
-        FieldPanel("date"),
-        FieldPanel("short"),
-        FieldPanel("body", classname="full"),
-    ]
+NewsPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    ImageChooserPanel('image'),
+    FieldPanel("date"),
+    FieldPanel("short"),
+    FieldPanel("body", classname="full"),
+    MultiFieldPanel([
+        InlinePanel(NewsPage, 'videos', label='Videos'),
+        InlinePanel(NewsPage, 'albums', label='Albums'),
+        InlinePanel(NewsPage, 'documents', label='Documents'),
+    ], heading="Materials", classname="collapsible collapsed")
+]
 
 
 class NewsIndexPage(Page):
@@ -278,19 +292,6 @@ class PartnerListPage(Page):
         return Partner.objects.all()
 
 
-# class PartnerPage(Page):
-# logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
-# description = models.TextField()
-# link = models.URLField()
-#
-# content_panels = [
-# FieldPanel('title', classname="full title"),
-#         ImageChooserPanel('logo'),
-#         FieldPanel('link', classname="full link"),
-#         FieldPanel('description', classname="full description"),
-#     ]
-
-
 class OrganizerPage(Page):
     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     link = models.URLField(blank=True, null=True)
@@ -311,7 +312,7 @@ class ForumIndexPage(Page):
         forums = ForumPage.objects.live().descendant_of(self)
         # Filter events list to get ones that are either
         # running now or start in the future
-        forums = forums.filter(date_from__gte=date.today())
+        forums = forums.filter(date_from__lte=date.today())
         # Order by date
         forums = forums.order_by('date_from')
         return forums
@@ -330,12 +331,53 @@ class ForumPageSpeaker(Orderable):
                                      on_delete=models.SET_NULL,
                                      related_name='+')
 
-    panels = [
-        PageChooserPanel('speaker_page', page_type='core.SpeakerPage')
-    ]
+    panels = [PageChooserPanel('speaker_page', page_type='core.SpeakerPage')]
 
     def __unicode__(self):
         return "%s -> %s (%s)" % (self.forum_page.title, self.speaker_page.title, self.speaker_page.url)
+
+
+class ForumPageVideo(Orderable):
+    page = ParentalKey('core.ForumPage', related_name='videos')
+    video = models.ForeignKey(VideoPage,
+                              null=True, blank=True,
+                              on_delete=models.SET_NULL,
+                              related_name='+')
+
+    panels = [PageChooserPanel('video', page_type=VideoPage)]
+
+    def __unicode__(self):
+        return "%s -> %s" % (self.page.title, self.video.title)
+
+
+class ForumPagePhotoAlbum(Orderable):
+    page = ParentalKey('core.ForumPage', related_name='albums')
+    album = models.ForeignKey(PhotoAlbumPage,
+                              null=True, blank=True,
+                              on_delete=models.SET_NULL,
+                              related_name='+')
+
+    panels = [PageChooserPanel('album', page_type=PhotoAlbumPage)]
+
+    def __unicode__(self):
+        return "%s -> %s" % (self.page.title, self.album.title)
+
+
+class ForumPageDocument(Orderable):
+    page = ParentalKey('core.ForumPage', related_name='documents')
+    doc = models.ForeignKey(DocumentPage,
+                            null=True, blank=True,
+                            on_delete=models.SET_NULL,
+                            related_name='+')
+
+    panels = [PageChooserPanel('doc', page_type=DocumentPage)]
+
+    def __unicode__(self):
+        return "%s -> %s" % (self.page.title, self.doc.title)
+
+
+def guess_speaker_lastname(speaker):
+    return speaker.title.split()[-1]
 
 
 class ForumPage(RoutablePageMixin, Page):
@@ -345,6 +387,7 @@ class ForumPage(RoutablePageMixin, Page):
         url(r'^packages/$', 'packages_view', name='packages'),
         url(r'^timetable/$', 'timetable_view', name='timetable'),
         url(r'^speakers/$', 'speakers_view', name='speakers'),
+        url(r'^speakers/(?P<letter>\w?)/$', 'speakers_view', name='speakers'),
         url(r'^registration/$', 'registration_view', name='registration'),
     )
 
@@ -353,7 +396,6 @@ class ForumPage(RoutablePageMixin, Page):
     date_to = models.DateField("End date", null=True, blank=True, help_text="Not required if event is on a single day")
     description = RichTextField(null=True)
     signup_link = models.URLField(blank=True)
-    has_report = models.BooleanField(default=False)
     # location
     location_logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True,
                                       on_delete=models.SET_NULL, related_name='+',
@@ -365,17 +407,37 @@ class ForumPage(RoutablePageMixin, Page):
     location_zip_code = models.CharField(max_length=20, null=True, blank=True, verbose_name="zip_code")
     location_map_code = models.CharField(max_length=255, blank=True, default='', verbose_name="map_code")
     # end location
+    # report
+    has_report = models.BooleanField(default=False)
+    report_text = RichTextField(null=True, blank=True)
+    # end report
 
     @property
     def forum_index(self):
         # Find closest ancestor which is an event index
         return self.get_ancestors().type(ForumIndexPage).last()
 
+    @property
+    def speakers_letters(self):
+        letters = sorted(set(guess_speaker_lastname(speaker.speaker_page)[0].upper()
+                             for speaker in self.speakers.all()))
+        return letters
+
     def forum_view(self, request):
         return render_to_response('core/forum_page.html', {'self': self, 'request': request})
 
-    def speakers_view(self, request):
-        return render_to_response('core/forum_speakers_page.html', {'self': self, 'request': request})
+    def speakers_view(self, request, letter=None):
+        if not letter:
+            speakers = self.speakers.all()
+        else:
+            speakers = [speaker for speaker in self.speakers.all()
+                        if guess_speaker_lastname(speaker.speaker_page)[0].upper() == letter]
+
+        return render_to_response('core/forum_speakers_page.html', {
+            'self': self,
+            'request': request,
+            'speakers': speakers
+        })
 
     def location_view(self, request):
         return render_to_response('core/forum_location_page.html', {'self': self, 'request': request})
@@ -406,7 +468,16 @@ ForumPage.content_panels = [
         FieldPanel('date_from'),
         FieldPanel('date_to'),
     ], heading="Dates"),
-    FieldPanel('has_report'),
+    MultiFieldPanel([
+        FieldPanel('has_report'),
+        FieldPanel('report_text'),
+    ]),
+
+    MultiFieldPanel([
+        InlinePanel(ForumPage, 'videos', label='Videos'),
+        InlinePanel(ForumPage, 'albums', label='Albums'),
+        InlinePanel(ForumPage, 'documents', label='Documents'),
+    ], heading="Materials", classname="collapsible collapsed"),
 
     MultiFieldPanel([
         FieldPanel('location_name'),

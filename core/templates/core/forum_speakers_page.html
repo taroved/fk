@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% load static core_tags %}
+{% load wagtailcore_tags %}
+{% load wagtailroutablepage_tags %}
+{% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -23,169 +26,58 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <div class="for_speakers_abc">
-                <ul>
-                    <li>
-                        <a href="#">
-                            А
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Б
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            В
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Г
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            ґ
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Д
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Е
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Є
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Ж
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            З
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            І
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Ї
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Й
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            К
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Л
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            М
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Н
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            О
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            П
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Р
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            С
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Т
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            У
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Ф
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Х
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Ц
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Ч
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Ш
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Щ
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Ю
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Я
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Всі
-                        </a>
-                    </li>
-                </ul>
+            <div class="for_speakers">
+                <div class="for_speakers_abc">
+                    <ul>
+                        {% for letter in self.speakers_letters %}
+                            <li>
+                                <a href="{% routablepageurl self "speakers" letter=letter %}">
+                                    {{ letter }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        <li>
+                            <a href="{% routablepageurl self "speakers" %}">
+                                Всі
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="for_block_sp_cont_sp">
+
+                    <div class="row">
+
+                        {% for speaker in speakers %}
+
+                            {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                                </div>
+                                <div class="row">
+                            {% endif %}
+
+                            <div class="col-xs-3">
+                                <div class="for_block_sp_item">
+                                    <a href="{% pageurl speaker.speaker_page %}">
+                                        <span class="for_block_sp_photo">
+                                            {% image speaker.speaker_page.photo height-300 as photo %}
+                                            <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
+                                                 class="grayscale grayscale-fade" />
+                                        </span>
+                                        <span class="for_block_sp_name">
+                                            {{ speaker.speaker_page.title }}
+                                        </span>
+                                        <span class="for_block_sp_about">
+                                            {{ speaker.speaker_page.position }}
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
