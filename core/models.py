@@ -9,13 +9,14 @@ from django.utils.html import strip_tags
 from modelcluster.fields import ParentalKey
 from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
-from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel, PageChooserPanel
+from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel, PageChooserPanel, FieldRowPanel
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
+from core.edit_handlers import InlineTestPanel
 
 
 class AccreditationPage(Page):
@@ -376,6 +377,45 @@ class ForumPageDocument(Orderable):
         return "%s -> %s" % (self.page.title, self.doc.title)
 
 
+class TimetableDayItem(models.Model):
+    day = models.ForeignKey('core.TimetableDayItem', null=True, blank=True, on_delete=models.SET_NULL,
+                            related_name='timetable')
+    # day = ParentalKey('core.ForumPageTimetableDay', related_name='timetable')
+    title = models.CharField(max_length=255, blank=True, default='')
+    time_from = models.TimeField("Start time", null=True, blank=True)
+    time_to = models.TimeField("End time", null=True, blank=True)
+    location = models.CharField(max_length=255, blank=True, default='')
+    description = RichTextField(blank=True)
+
+    search_fields = Page.search_fields + (
+        index.SearchField('description'),
+    )
+
+    panels = [
+        FieldPanel('title', classname="full"),
+        FieldPanel('time_from', classname='col3'),
+        FieldPanel('time_to', classname='col3'),
+        FieldPanel('location'),
+        FieldPanel('description'),
+    ]
+
+
+class ForumPageTimetableDay(Orderable):
+    page = ParentalKey('core.ForumPage', related_name='timetable_days')
+    title = models.CharField(max_length=255, blank=True, default='')
+
+    def __unicode__(self):
+        print self
+        return "%s Timetable" % self.page.title
+
+
+ForumPageTimetableDay.panels = [
+    FieldPanel('title'),
+    # FieldPanel('timetable'),
+    # InlinePanel(ForumPageTimetableDay, 'timetable', panels=TimetableDayItem.panels)
+]
+
+
 def guess_speaker_lastname(speaker):
     return speaker.title.split()[-1]
 
@@ -465,13 +505,15 @@ ForumPage.content_panels = [
         FieldPanel('signup_link'),
     ], heading="Main"),
     MultiFieldPanel([
-        FieldPanel('date_from'),
-        FieldPanel('date_to'),
+        FieldRowPanel([
+            FieldPanel('date_from', classname='col6'),
+            FieldPanel('date_to', classname='col6'),
+        ])
     ], heading="Dates"),
     MultiFieldPanel([
         FieldPanel('has_report'),
         FieldPanel('report_text'),
-    ]),
+    ], heading='Report'),
 
     MultiFieldPanel([
         InlinePanel(ForumPage, 'videos', label='Videos'),
@@ -488,6 +530,11 @@ ForumPage.content_panels = [
         FieldPanel('location_zip_code'),
         FieldPanel('location_map_code'),
     ], heading="Location", classname="collapsible collapsed"),
+
+    # MultiFieldPanel([
+    # InlinePanel(ForumPage, 'timetable_days', label="Day"),
+    InlineTestPanel(ForumPage, 'timetable_days', label="Day"),
+    # ], heading="Timetable", classname="collapsible collapsed"),
 
     MultiFieldPanel([
         InlinePanel(ForumPage, 'speakers', label="Speakers"),
@@ -519,7 +566,7 @@ class SpeakerPage(Page):
     content_panels = [
         FieldPanel('title', classname="full title"),
         ImageChooserPanel('photo'),
-        FieldPanel('position'),
+        FieldPanel('position', classname="full"),
         FieldPanel('about', classname="full"),
     ]
 
