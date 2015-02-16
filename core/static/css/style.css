@@ -342,7 +342,7 @@ ul {
 /********** BODY **********/
 
 .for_body .rich-text {
-    font-family: "PFBeauSansPro-Light",Arial,sans-serif;
+    font-family: "PFBeauSansPro-Light", Arial, sans-serif;
     font-size: 19px;
     line-height: 23px;
     color: #061F33;
@@ -697,18 +697,18 @@ ul {
 }
 
 /*.for_block_sp_photo img {*/
-    /*position: absolute;*/
-    /*left: 0;*/
-    /*top: 0;*/
-    /*width: 100%;*/
+/*position: absolute;*/
+/*left: 0;*/
+/*top: 0;*/
+/*width: 100%;*/
 /*}*/
 
 /*.for_block_sp_photo img:last-child {*/
-    /*opacity: 1;*/
-    /*-webkit-transition: opacity 300ms ease-out;*/
-    /*-moz-transition: opacity 300ms ease-out;*/
-    /*-o-transition: opacity 300ms ease-out;*/
-    /*transition: opacity 300ms ease-out;*/
+/*opacity: 1;*/
+/*-webkit-transition: opacity 300ms ease-out;*/
+/*-moz-transition: opacity 300ms ease-out;*/
+/*-o-transition: opacity 300ms ease-out;*/
+/*transition: opacity 300ms ease-out;*/
 /*}*/
 
 .for_block_sp_item {
@@ -720,7 +720,7 @@ ul {
 }
 
 /*.for_block_sp_item a:hover .for_block_sp_photo img:last-child {*/
-    /*opacity: 0;*/
+/*opacity: 0;*/
 /*}*/
 
 .for_block_sp_name {
@@ -1254,6 +1254,11 @@ ul {
 
 .for_block_org_logo {
     float: left;
+}
+
+.for_block_org_logo img {
+    width: 100px;
+    height: auto;
 }
 
 .for_block_org_right {
