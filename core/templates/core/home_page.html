@@ -16,7 +16,7 @@
         <div class="for_block_news">
             <div class="for_block_title">
                 <div class="for_block_title_top">
-                    <a href="#">
+                    <a href="/news/">
                         Новини
                     </a>
                 </div>
@@ -65,7 +65,7 @@
                                             {{ self.top_news.1.date|date:"d.m.Y" }}
                                         </div>
                                         <div class="for_block_news_small_text">
-                                            {{ self.top_news.1.short|linebreaksbr }}
+                                            {{ self.top_news.1.title|linebreaksbr }}
                                         </div>
                                     </div>
                                     <div class="pad"></div>
@@ -85,7 +85,7 @@
                                             {{ self.top_news.2.date|date:"d.m.Y" }}
                                         </div>
                                         <div class="for_block_news_small_text">
-                                            {{ self.top_news.2.short|linebreaksbr }}
+                                            {{ self.top_news.2.title|linebreaksbr }}
                                         </div>
                                     </div>
                                     <div class="pad"></div>
