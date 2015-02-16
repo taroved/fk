@@ -391,34 +391,37 @@ class ForumPage(RoutablePageMixin, Page):
 
 
     search_fields = Page.search_fields + (
+        index.SearchField('title_long'),
         index.SearchField('description'),
     )
 
 
 ForumPage.content_panels = [
     MultiFieldPanel([
-                        FieldPanel('title', classname="full title"),
-                        FieldPanel('title_long', classname="full title"),
-                        FieldPanel('description', classname="full"),
-                        FieldPanel('signup_link'),
-                    ], heading="Main"),
+        FieldPanel('title', classname="full title"),
+        FieldPanel('title_long', classname="full title"),
+        FieldPanel('description', classname="full"),
+        FieldPanel('signup_link'),
+    ], heading="Main"),
     MultiFieldPanel([
-                        FieldPanel('date_from'),
-                        FieldPanel('date_to'),
-                    ], heading="Dates"),
+        FieldPanel('date_from'),
+        FieldPanel('date_to'),
+    ], heading="Dates"),
     FieldPanel('has_report'),
 
     MultiFieldPanel([
-                        FieldPanel('location_name'),
-                        ImageChooserPanel('location_logo'),
-                        FieldPanel('location_country'),
-                        FieldPanel('location_city'),
-                        FieldPanel('location_street'),
-                        FieldPanel('location_zip_code'),
-                        FieldPanel('location_map_code'),
-                    ], heading="Location", classname="collapsible collapsed"),
+        FieldPanel('location_name'),
+        ImageChooserPanel('location_logo'),
+        FieldPanel('location_country'),
+        FieldPanel('location_city'),
+        FieldPanel('location_street'),
+        FieldPanel('location_zip_code'),
+        FieldPanel('location_map_code'),
+    ], heading="Location", classname="collapsible collapsed"),
 
-    InlinePanel(ForumPage, 'speakers', label="Speakers"),
+    MultiFieldPanel([
+        InlinePanel(ForumPage, 'speakers', label="Speakers"),
+    ], heading="Speakers", classname="collapsible collapsed")
 ]
 
 
