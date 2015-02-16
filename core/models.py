@@ -2,12 +2,10 @@
 from datetime import date
 
 from django.conf.urls import url
-from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models
 from django.shortcuts import render_to_response, redirect
 from django.utils.html import strip_tags
-from django.utils.text import slugify
 from modelcluster.fields import ParentalKey
 from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
@@ -336,6 +334,9 @@ class ForumPageSpeaker(Orderable):
         PageChooserPanel('speaker_page', page_type='core.SpeakerPage')
     ]
 
+    def __unicode__(self):
+        return "%s -> %s (%s)" % (self.forum_page.title, self.speaker_page.title, self.speaker_page.url)
+
 
 class ForumPage(RoutablePageMixin, Page):
     subpage_urls = (
@@ -447,6 +448,9 @@ class SpeakerPage(Page):
     position = models.CharField(max_length=255, blank=True, default='')
     about = RichTextField(blank=True, default='')
 
+    # def url(self):
+    #     return self.url_path
+
     content_panels = [
         FieldPanel('title', classname="full title"),
         ImageChooserPanel('photo'),
@@ -456,6 +460,7 @@ class SpeakerPage(Page):
 
 
 class AllSpeakersIndexPage(Page):
+
     def speakers(self):
         speakers = SpeakerPage.objects.live().descendant_of(self)
         return speakers
@@ -505,6 +510,7 @@ class PressTopPage(Page):
 
 
 class PressTopListPage(Page):
+
     def items(self):
         items = PressTopPage.objects.all()
         return items

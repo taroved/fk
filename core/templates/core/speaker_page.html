@@ -1,49 +1,43 @@
 {% extends "base.html" %}
 
 {% load static core_tags %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content_title %}
+<div class="for_block_title_sp">
+    <div class="for_block_title_top">
+        <a href="#">
+            {{ self.title }}
+        </a>
+    </div>
+    <div class="for_block_title_bot">
+        <div class="for_block_title_bot_in"></div>
+    </div>
+</div>
+{% endblock %}
 
 {% block content %}
 
     <div class="row">
         <div class="col-xs-12">
             <div class="for_block_speaker">
-                <div class="for_block_title_sp">
-                    <div class="for_block_title_top">
-                        <a href="#">
-                            Seok Pil Kim
-                        </a>
-                    </div>
-                    <div class="for_block_title_bot">
-                        <div class="for_block_title_bot_in"></div>
-                    </div>
-                </div>
+
                 <div class="for_block_speaker_cont">
                     <div class="for_block_speaker_img">
-                        <img src="images/for_speaker.jpg" alt="image">
+                        {% image self.photo fill-270x300 %}
                     </div>
                     <div class="for_block_speaker_right">
                         <div class="for_block_speaker_name">
-                            Seok Pil Kim
+                            {{ self.title }}
                         </div>
                         <div class="for_block_speaker_title">
-                            Директор з маркетингу та керівник відділу глобальних B2B Center, Samsung Electronics
+                            {{ self.position }}
                         </div>
                         <div class="for_block_speaker_text">
-                            Markus Aeugle has worked in the fields of eBusiness and eGovernment since 1996. As the
-                            Director of<br>
-                            ]init['s Applications & Platforms unit, he is accountable for international projects
-                            encompassing<br>
-                            complex specialist processes and portal servers for both government and business clients.
-                            His<br>
-                            particular interest lies in mobile applications. One of the most successful examples of such
-                            a mobile<br>
-                            solution is the "Zoll und Reise" ("Customs and Travel") app, developed for the Federal
-                            Ministry of<br>
-                            Finance. Within a few days of its launch, the app reached 3rd place in the iTunes store,
-                            making it one of<br>
-                            the most successful German government apps to date.
+                            {{ self.about|richtext }}
                         </div>
                     </div>
                     <div class="pad"></div>
