@@ -1364,6 +1364,13 @@ footer a:hover {
 .for_top_right_foot {
   float: right;
 }
+.for_top_right_foot a:hover {
+  text-decoration: none;
+}
+.for_top_right_foot img {
+  width: 39px;
+  height: 39px;
+}
 .for__bot_search {
   margin-left: 270px;
 }
