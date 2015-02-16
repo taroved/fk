@@ -169,7 +169,9 @@
                                 <div class="for_block_sp_item">
                                     <a href="#">
                                         <span class="for_block_sp_photo">
-                                            {% image speaker.speaker_page.photo fill-270x300 %}
+                                            {% image speaker.speaker_page.photo height-300 as photo %}
+                                            <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
+                                                 class="grayscale grayscale-fade" />
                                         </span>
                                         <span class="for_block_sp_name">
                                             {{ speaker.speaker_page.title }}
