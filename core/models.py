@@ -340,12 +340,12 @@ class ForumPageSpeaker(Orderable):
 
 class ForumPage(RoutablePageMixin, Page):
     subpage_urls = (
-        url(r'^$', 'forum', name='forum'),
-        url(r'^location/$', 'location', name='location'),
-        url(r'^packages/$', 'packages', name='packages'),
-        url(r'^timetable/$', 'timetable', name='timetable'),
-        url(r'^speakers/$', 'speakers_view', name='speakers_view'),
-        url(r'^registration/$', 'registration', name='registration'),
+        url(r'^$', 'forum_view', name='forum'),
+        url(r'^location/$', 'location_view', name='location'),
+        url(r'^packages/$', 'packages_view', name='packages'),
+        url(r'^timetable/$', 'timetable_view', name='timetable'),
+        url(r'^speakers/$', 'speakers_view', name='speakers'),
+        url(r'^registration/$', 'registration_view', name='registration'),
     )
 
     title_long = models.CharField(max_length=100, blank=True, default='')
@@ -366,30 +366,28 @@ class ForumPage(RoutablePageMixin, Page):
     location_map_code = models.CharField(max_length=255, blank=True, default='', verbose_name="map_code")
     # end location
 
-
     @property
     def forum_index(self):
         # Find closest ancestor which is an event index
         return self.get_ancestors().type(ForumIndexPage).last()
 
-    def forum(self, request):
+    def forum_view(self, request):
         return render_to_response('core/forum_page.html', {'self': self, 'request': request})
 
     def speakers_view(self, request):
         return render_to_response('core/forum_speakers_page.html', {'self': self, 'request': request})
 
-    def location(self, request):
+    def location_view(self, request):
         return render_to_response('core/forum_location_page.html', {'self': self, 'request': request})
 
-    def packages(self, request):
+    def packages_view(self, request):
         return render_to_response('core/forum_packages_page.html', {'self': self, 'request': request})
 
-    def timetable(self, request):
+    def timetable_view(self, request):
         return render_to_response('core/forum_timetable_page.html', {'self': self, 'request': request})
 
-    def registration(self, request):
+    def registration_view(self, request):
         return redirect(self.signup_link)
-
 
     search_fields = Page.search_fields + (
         index.SearchField('title_long'),
@@ -443,13 +441,9 @@ class ForumTimetableItem(models.Model):
 
 
 class SpeakerPage(Page):
-    # full_name = models.CharField(max_length=100, blank=True, default='')
     photo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     position = models.CharField(max_length=255, blank=True, default='')
     about = RichTextField(blank=True, default='')
-
-    # def url(self):
-    #     return self.url_path
 
     content_panels = [
         FieldPanel('title', classname="full title"),
