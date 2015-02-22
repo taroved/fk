@@ -173,7 +173,7 @@
                                         <span class="for_block_sp_photo">
                                             {% image speaker.speaker_page.photo height-300 as photo %}
                                             <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
-                                                 class="grayscale grayscale-fade" />
+                                                 class="grayscale grayscale-fade"/>
                                         </span>
                                         <span class="for_block_sp_name">
                                             {{ speaker.speaker_page.title }}
@@ -185,7 +185,7 @@
                                 </div>
                             </div>
                         {% endfor %}
-                    </div>
+                        </div>
                 </div>
                 <div class="for_block_all">
                     <a href="{% routablepageurl self "speakers" %}">
@@ -211,89 +211,60 @@
                 </div>
                 <div class="for_block_video_cont for_block_video_cont_arch">
                     <div class="row">
-                        <div class="col-xs-3">
-                            <div class="for_block_video_item">
-                                <div class="for_block_video_view">
-                                    <a href="#">
-                                        <img src="/static/images/for_play.png" class="for_play" alt="image">
-                                        <span class="for_video_shadow"></span>
-                                        <img src="/static/images/for_block_video_1.jpg" class="for_video_1" alt="image">
-                                    </a>
+
+                        {% for material in self.videos.all %}
+
+                            {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
                                 </div>
-                                <div class="for_block_video_date">
-                                    20.12.2013
-                                </div>
-                                <div class="for_block_video_text">
-                                    Віктор Галасюк на дебатах<br>
-                                    "Яка економічна стратегія<br>
-                                    потрібна Україні?"
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_video_item">
-                                <div class="for_block_video_view">
-                                    <a href="#">
-                                        <img src="/static/images/for_play.png" class="for_play" alt="image">
-                                        <span class="for_video_shadow"></span>
-                                        <img src="/static/images/for_block_video_1.jpg" class="for_video_1" alt="image">
-                                    </a>
-                                </div>
-                                <div class="for_block_video_date">
-                                    20.12.2013
-                                </div>
-                                <div class="for_block_video_text">
-                                    Віктор Галасюк на дебатах<br>
-                                    "Яка економічна стратегія<br>
-                                    потрібна Україні?"
+                                <div class="row">
+                            {% endif %}
+
+                            <div class="col-xs-3">
+                                <div class="for_block_video_item">
+                                    <div class="for_block_video_view">
+                                        <a class="fancybox-media" href="{{ material.video.link }}">
+                                            <img src="{% static 'images/for_play.png' %}" class="for_play" alt="image">
+                                            <span class="for_video_shadow"></span>
+                                            {% image material.video.preview fill-569x314-c100 %}
+                                        </a>
+                                    </div>
+                                    <div class="for_block_video_date">
+                                        {{ material.video.latest_revision_created_at|date:"d.m.Y" }}
+                                    </div>
+                                    <div class="for_block_video_text">
+                                        {{ material.video.description }}
+                                    </div>
                                 </div>
                             </div>
+                        {% endfor %}
+
+                        {#                        <div class="col-xs-3">#}
+                        {#                            <div class="for_block_video_item">#}
+                        {#                                <div class="for_block_video_view">#}
+                        {#                                    <a href="#">#}
+                        {#                                        <img src="/static/images/for_play.png" class="for_play" alt="image">#}
+                        {#                                        <span class="for_video_shadow"></span>#}
+                        {#                                        <img src="/static/images/for_block_video_1.jpg" class="for_video_1" alt="image">#}
+                        {#                                    </a>#}
+                        {#                                </div>#}
+                        {#                                <div class="for_block_video_date">#}
+                        {#                                    20.12.2013#}
+                        {#                                </div>#}
+                        {#                                <div class="for_block_video_text">#}
+                        {#                                    Віктор Галасюк на дебатах<br>#}
+                        {#                                    "Яка економічна стратегія<br>#}
+                        {#                                    потрібна Україні?"#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+
                         </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_video_item">
-                                <div class="for_block_video_view">
-                                    <a href="#">
-                                        <img src="/static/images/for_play.png" class="for_play" alt="image">
-                                        <span class="for_video_shadow"></span>
-                                        <img src="/static/images/for_block_video_1.jpg" class="for_video_1" alt="image">
-                                    </a>
-                                </div>
-                                <div class="for_block_video_date">
-                                    20.12.2013
-                                </div>
-                                <div class="for_block_video_text">
-                                    Віктор Галасюк на дебатах<br>
-                                    "Яка економічна стратегія<br>
-                                    потрібна Україні?"
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="for_block_video_item">
-                                <div class="for_block_video_view">
-                                    <a href="#">
-                                        <img src="/static/images/for_play.png" class="for_play" alt="image">
-                                        <span class="for_video_shadow"></span>
-                                        <img src="/static/images/for_block_video_1.jpg" class="for_video_1" alt="image">
-                                    </a>
-                                </div>
-                                <div class="for_block_video_date">
-                                    20.12.2013
-                                </div>
-                                <div class="for_block_video_text">
-                                    Віктор Галасюк на дебатах<br>
-                                    "Яка економічна стратегія<br>
-                                    потрібна Україні?"
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="for_block_all">
-                    <a href="#">
-                        всі відео
-                    </a>
-                </div>
+{#                <div class="for_block_all">#}
+{#                    <a href="#">#}
+{#                        всі відео#}
+{#                    </a>#}
+{#                </div>#}
             </div>
         </div>
     </div>
