@@ -133,32 +133,6 @@ class Migration(migrations.Migration):
             bases=(wagtail.contrib.wagtailroutablepage.models.RoutablePageMixin, 'wagtailcore.page'),
         ),
         migrations.CreateModel(
-            name='ForumPageDocument',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('sort_order', models.IntegerField(null=True, editable=False, blank=True)),
-                ('doc', models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='core.DocumentPage', null=True)),
-                ('page', modelcluster.fields.ParentalKey(related_name='documents', to='core.ForumPage')),
-            ],
-            options={
-                'ordering': ['sort_order'],
-                'abstract': False,
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='ForumPagePhotoAlbum',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('sort_order', models.IntegerField(null=True, editable=False, blank=True)),
-            ],
-            options={
-                'ordering': ['sort_order'],
-                'abstract': False,
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
             name='ForumPageSpeaker',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -178,19 +152,6 @@ class Migration(migrations.Migration):
                 ('sort_order', models.IntegerField(null=True, editable=False, blank=True)),
                 ('title', models.CharField(default=b'', max_length=255, blank=True)),
                 ('page', modelcluster.fields.ParentalKey(related_name='timetable_days', to='core.ForumPage')),
-            ],
-            options={
-                'ordering': ['sort_order'],
-                'abstract': False,
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='ForumPageVideo',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('sort_order', models.IntegerField(null=True, editable=False, blank=True)),
-                ('page', modelcluster.fields.ParentalKey(related_name='videos', to='core.ForumPage')),
             ],
             options={
                 'ordering': ['sort_order'],
@@ -515,27 +476,9 @@ class Migration(migrations.Migration):
             preserve_default=True,
         ),
         migrations.AddField(
-            model_name='forumpagevideo',
-            name='video',
-            field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='core.VideoPage', null=True),
-            preserve_default=True,
-        ),
-        migrations.AddField(
             model_name='forumpagespeaker',
             name='speaker_page',
             field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='core.SpeakerPage', null=True),
             preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='forumpagephotoalbum',
-            name='album',
-            field=models.ForeignKey(related_name='+', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='core.PhotoAlbumPage', null=True),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='forumpagephotoalbum',
-            name='page',
-            field=modelcluster.fields.ParentalKey(related_name='albums', to='core.ForumPage'),
-            preserve_default=True,
-        ),
+        )
     ]
