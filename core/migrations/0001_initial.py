@@ -146,20 +146,6 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='ForumPageTimetableDay',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('sort_order', models.IntegerField(null=True, editable=False, blank=True)),
-                ('title', models.CharField(default=b'', max_length=255, blank=True)),
-                ('page', modelcluster.fields.ParentalKey(related_name='timetable_days', to='core.ForumPage')),
-            ],
-            options={
-                'ordering': ['sort_order'],
-                'abstract': False,
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
             name='ForumTimetableItem',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
