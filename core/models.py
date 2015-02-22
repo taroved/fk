@@ -16,11 +16,17 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
+from core.edit_handlers import InlineTestPanel, TranslatableTabbedInterface, register_translatable_interface
+
+
+MODELS_LANGUAGES = ('ru', 'en')
 
 
 class AccreditationPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     body = RichTextField(blank=True, null=True)
     body_ru = RichTextField(blank=True, null=True)
@@ -75,8 +81,10 @@ class SliderItem(models.Model):
 @register_snippet
 class Partner(models.Model):
     title = models.CharField(max_length=255, help_text=_("The title as you'd like it to be seen by the public"))
-    title_ru = models.CharField(max_length=255, blank=True, null=True, help_text=_("The title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     link = models.URLField(null=True, blank=True)
@@ -97,8 +105,10 @@ class Partner(models.Model):
 
 
 class PhotoAlbumPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
     link = models.URLField(default='')
 
     preview = models.ForeignKey(
@@ -109,8 +119,8 @@ class PhotoAlbumPage(Page):
         related_name='+'
     )
     description = models.TextField(blank=True, null=True, default='')
-    description_ru = models.TextField(blank=True, null=True, default='')
-    description_en = models.TextField(blank=True, null=True, default='')
+    description_ru = models.TextField(blank=True, null=True, default='', verbose_name='description')
+    description_en = models.TextField(blank=True, null=True, default='', verbose_name='description')
 
     content_panels = [
         FieldPanel('title', classname="title full"),
@@ -121,6 +131,10 @@ class PhotoAlbumPage(Page):
 
 
 class DocumentPage(Page):
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
     doc = models.ForeignKey(
         'wagtaildocs.Document',
         null=True,
@@ -148,6 +162,11 @@ class DocumentPage(Page):
 
 
 class VideoPage(Page):
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+
     link = models.URLField(default='')
     code = models.TextField(default='')
     preview = models.ForeignKey(
@@ -158,8 +177,8 @@ class VideoPage(Page):
         related_name='+'
     )
     description = models.TextField(blank=True, null=True, default='')
-    description_ru = models.TextField(blank=True, null=True, default='')
-    description_en = models.TextField(blank=True, null=True, default='')
+    description_ru = models.TextField(blank=True, null=True, default='', verbose_name='description')
+    description_en = models.TextField(blank=True, null=True, default='', verbose_name='description')
 
     content_panels = [
         FieldPanel('title', classname="title full"),
@@ -171,12 +190,18 @@ class VideoPage(Page):
 
 
 class MaterialsPage(RoutablePageMixin, Page):
+
     subpage_urls = (
         url(r'^$', 'materials_view', name='materials'),
         url(r'^videos/$', 'videos_view', name='videos'),
         url(r'^albums/$', 'albums_view', name='albums'),
         url(r'^documents/$', 'documents_view', name='documents'),
     )
+
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     albums = lambda(self): PhotoAlbumPage.objects.live().all()
     documents = lambda(self): DocumentPage.objects.live().all()
@@ -221,19 +246,21 @@ class NewsPageDocument(Orderable):
 
 
 class NewsPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     date = models.DateField("date")
 
     short = models.TextField()
-    short_ru = models.TextField(blank=True, null=True)
-    short_en = models.TextField(blank=True, null=True)
+    short_ru = models.TextField(blank=True, null=True, verbose_name='short')
+    short_en = models.TextField(blank=True, null=True, verbose_name='short')
 
     body = RichTextField()
-    body_ru = RichTextField(blank=True, null=True)
-    body_en = RichTextField(blank=True, null=True)
+    body_ru = RichTextField(blank=True, null=True, verbose_name='body')
+    body_en = RichTextField(blank=True, null=True, verbose_name='body')
     # tags = ClusterTaggableManager(through=NewsPageTag, blank=True)
 
     @property
@@ -257,8 +284,10 @@ NewsPage.content_panels = [
 
 
 class NewsIndexPage(Page):
-    # title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    # title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     @property
     def news(self):
@@ -296,8 +325,10 @@ class NewsIndexPage(Page):
 
 
 class OrgPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     @property
     def organizers(self):
@@ -307,18 +338,24 @@ class OrgPage(Page):
 
 
 class ParticipationPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
 
 class RadaPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
 
 class PartnerListPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     @property
     def partners(self):
@@ -326,15 +363,17 @@ class PartnerListPage(Page):
 
 
 class OrganizerPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     link = models.URLField(blank=True, null=True)
 
     description = models.TextField(blank=True, null=True)
-    description_ru = models.TextField(blank=True, null=True)
-    description_en = models.TextField(blank=True, null=True)
+    description_ru = models.TextField(blank=True, null=True, verbose_name='description')
+    description_en = models.TextField(blank=True, null=True, verbose_name='description')
 
     content_panels = [
         FieldPanel('title', classname="full title"),
@@ -345,8 +384,10 @@ class OrganizerPage(Page):
 
 
 class ForumIndexPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     @property
     def forums(self):
@@ -472,19 +513,21 @@ class ForumPage(RoutablePageMixin, Page):
         url(r'^registration/$', 'registration_view', name='registration'),
     )
 
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     title_long = models.CharField(max_length=100, blank=True, default='')
-    title_long_ru = models.CharField(max_length=100, blank=True, default='')
-    title_long_en = models.CharField(max_length=100, blank=True, default='')
+    title_long_ru = models.CharField(max_length=100, blank=True, default='', verbose_name='title_long')
+    title_long_en = models.CharField(max_length=100, blank=True, default='', verbose_name='title_long')
 
     date_from = models.DateField("Start date")
     date_to = models.DateField("End date", null=True, blank=True, help_text="Not required if event is on a single day")
 
     description = RichTextField(null=True, blank=True)
-    description_ru = RichTextField(null=True, blank=True)
-    description_en = RichTextField(null=True, blank=True)
+    description_ru = RichTextField(null=True, blank=True, verbose_name='description')
+    description_en = RichTextField(null=True, blank=True, verbose_name='description')
 
     signup_link = models.URLField(blank=True)
     # location
@@ -513,8 +556,8 @@ class ForumPage(RoutablePageMixin, Page):
     # report
     # has_report = models.BooleanField(default=False)
     report_text = RichTextField(null=True, blank=True)
-    report_text_ru = RichTextField(null=True, blank=True)
-    report_text_en = RichTextField(null=True, blank=True)
+    report_text_ru = RichTextField(null=True, blank=True, verbose_name='report_text')
+    report_text_en = RichTextField(null=True, blank=True, verbose_name='report_text')
     # end report
 
     @property
@@ -576,7 +619,6 @@ ForumPage.content_panels = [
         ])
     ], heading="Dates"),
     MultiFieldPanel([
-        FieldPanel('has_report'),
         FieldPanel('report_text'),
     ], heading='Report'),
 
@@ -608,12 +650,14 @@ ForumPage.content_panels = [
 
 
 class ForumTimetablePage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     comment = RichTextField(blank=True, null=True)
-    comment_ru = RichTextField(blank=True, null=True)
-    comment_en = RichTextField(blank=True, null=True)
+    comment_ru = RichTextField(blank=True, null=True, verbose_name='comment')
+    comment_en = RichTextField(blank=True, null=True, verbose_name='comment')
 
 
 class ForumTimetableItem(models.Model):
@@ -625,12 +669,12 @@ class ForumTimetableItem(models.Model):
     time_to = models.DateTimeField("End time", null=True, blank=True)
 
     location = models.CharField(max_length=255, blank=True, default='')
-    location_ru = models.CharField(max_length=255, blank=True, default='')
-    location_en = models.CharField(max_length=255, blank=True, default='')
+    location_ru = models.CharField(max_length=255, blank=True, default='', verbose_name='location')
+    location_en = models.CharField(max_length=255, blank=True, default='', verbose_name='location')
 
     description = RichTextField(blank=True, null=True)
-    description_ru = RichTextField(blank=True, null=True)
-    description_en = RichTextField(blank=True, null=True)
+    description_ru = RichTextField(blank=True, null=True, verbose_name='description')
+    description_en = RichTextField(blank=True, null=True, verbose_name='description')
 
     search_fields = Page.search_fields + (
         index.SearchField('description'),
@@ -638,18 +682,20 @@ class ForumTimetableItem(models.Model):
 
 
 class SpeakerPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     photo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 
     position = models.CharField(max_length=255, blank=True, null=True, default='')
-    position_ru = models.CharField(max_length=255, blank=True, null=True, default='')
-    position_en = models.CharField(max_length=255, blank=True, null=True, default='')
+    position_ru = models.CharField(max_length=255, blank=True, null=True, default='', verbose_name='position')
+    position_en = models.CharField(max_length=255, blank=True, null=True, default='', verbose_name='position')
 
     about = RichTextField(blank=True, null=True, default='')
-    about_ru = RichTextField(blank=True, null=True, default='')
-    about_en = RichTextField(blank=True, null=True, default='')
+    about_ru = RichTextField(blank=True, null=True, default='', verbose_name='about')
+    about_en = RichTextField(blank=True, null=True, default='', verbose_name='about')
 
     content_panels = [
         FieldPanel('title', classname="full title"),
@@ -661,8 +707,10 @@ class SpeakerPage(Page):
 
 class AllSpeakersIndexPage(Page):
 
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     def speakers(self):
         speakers = SpeakerPage.objects.live().descendant_of(self)
@@ -672,12 +720,14 @@ class AllSpeakersIndexPage(Page):
 
 
 class ContentPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     body = RichTextField(blank=True, null=True)
-    body_ru = RichTextField(blank=True, null=True)
-    body_en = RichTextField(blank=True, null=True)
+    body_ru = RichTextField(blank=True, null=True, verbose_name='body')
+    body_en = RichTextField(blank=True, null=True, verbose_name='body')
 
     content_panels = [
         FieldPanel('title', classname="full title"),
@@ -701,8 +751,10 @@ class ContactsPageItem(Orderable):
 
 
 class ContactsPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
 
 ContactsPage.content_panels = [
@@ -712,18 +764,20 @@ ContactsPage.content_panels = [
 
 
 class PressTopPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     date = models.DateField()
 
     description = models.TextField(blank=True, null=True)
-    description_ru = models.TextField(blank=True, null=True)
-    description_en = models.TextField(blank=True, null=True)
+    description_ru = models.TextField(blank=True, null=True, verbose_name='description')
+    description_en = models.TextField(blank=True, null=True, verbose_name='description')
 
     content = RichTextField(blank=True, null=True, default='')
-    content_ru = RichTextField(blank=True, null=True, default='')
-    content_en = RichTextField(blank=True, null=True, default='')
+    content_ru = RichTextField(blank=True, null=True, default='', verbose_name='content')
+    content_en = RichTextField(blank=True, null=True, default='', verbose_name='content')
 
     content_panels = [
         FieldPanel('title', classname="full title"),
@@ -734,11 +788,13 @@ class PressTopPage(Page):
 
 
 class PressTopListPage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     def items(self):
-        items = PressTopPage.objects.all()
+        items = PressTopPage.objects.live().all()
         return items
 
     content_panels = [
@@ -775,8 +831,10 @@ class HomePageMaterialVideo(Orderable):
 
 
 class HomePage(Page):
-    title_ru = models.CharField(max_length=255, blank=True, null=True,  help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, help_text=_("The page title as you'd like it to be seen by the public"))
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     forum_page = models.ForeignKey('core.ForumPage', null=True, blank=True,
                                    on_delete=models.SET_NULL, related_name='+')
@@ -795,3 +853,5 @@ HomePage.content_panels = Page.content_panels + [
     InlinePanel(HomePage, 'material_videos', label="Videos"),
     InlinePanel(HomePage, 'advert_placements', label="Adverts"),
 ]
+
+register_translatable_interface(HomePage, fields=('title',), languages=MODELS_LANGUAGES)

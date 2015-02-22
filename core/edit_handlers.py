@@ -1,7 +1,52 @@
+from itertools import product, chain
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
-from wagtail.wagtailadmin.edit_handlers import EditHandler, extract_panel_definitions_from_model_class, MultiFieldPanel
+from wagtail.wagtailadmin.edit_handlers import EditHandler, extract_panel_definitions_from_model_class, MultiFieldPanel, \
+    BaseCompositeEditHandler, get_form_for_model, ObjectList, FieldPanel
 from django import forms
+from wagtail.wagtailadmin.views.pages import PAGE_EDIT_HANDLERS
+
+
+class TranslatableBaseTabbedInterface(BaseCompositeEditHandler):
+    template = "wagtailadmin/edit_handlers/tabbed_interface.html"
+
+    @classmethod
+    def get_form_class(cls, model):
+        if cls._form_class is None:
+            cls._form_class = get_form_for_model(
+                model,
+                formsets=cls.required_formsets(), widgets=cls.widget_overrides())
+        return cls._form_class
+
+
+def TranslatableTabbedInterface(children):
+    # children = [ObjectList(model.content_panels, heading='Content')] + \
+    #            [ObjectList(getattr(model, lang+'_panels'), heading=lang) for lang in languages] + \
+    #            [ObjectList(model.promote_panels, heading='Promote'),
+    #             ObjectList(model.settings_panels, heading='Settings', classname="settings")]
+    return type(str('_TranslatableTabbedInterface'), (TranslatableBaseTabbedInterface,),
+                {'children': children})
+
+
+def register_translatable_interface(model_class, fields, languages):
+    # we should clone content_panels for every language but use only `fields`
+    def find_panel(field):
+        return next(panel for panel in model_class.content_panels if panel.field_name == field)
+
+    def copy_panel(panel, lang):
+        return FieldPanel("%s_%s" % (panel.field_name, lang), panel.classname)
+
+    def lang_tab(lang):
+        return ObjectList([copy_panel(find_panel(field), lang) for field in fields], lang)
+
+    lang_tabs = map(lang_tab, languages)
+
+    PAGE_EDIT_HANDLERS[model_class] = TranslatableTabbedInterface(
+        [ObjectList(model_class.content_panels, heading='Content')] +
+        lang_tabs +
+        [ObjectList(model_class.promote_panels, heading='Promote'),
+        ObjectList(model_class.settings_panels, heading='Settings', classname="settings")]
+    )
 
 
 class BaseInlineTestPanel(EditHandler):
