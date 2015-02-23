@@ -118,7 +118,7 @@ ul {
   color: #c3c3c3;
   margin: 0 5px;
 }
-.for_lang > ul > li:first-child:after {
+.for_lang > ul > li.active:after {
   color: #fff;
 }
 .for_lang > ul > li:last-child:after {
@@ -129,7 +129,7 @@ ul {
   float: left;
   font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
 }
-.for_lang > ul > li:first-child > a {
+.for_lang > ul > li.active > a {
   color: #fff;
   font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
   font-weight: bold;

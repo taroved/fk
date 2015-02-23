@@ -1,4 +1,4 @@
-{% load compress static wagtailuserbar wagtailcore_tags core_tags %}
+{% load compress static wagtailuserbar wagtailcore_tags core_tags i18n %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -86,25 +86,26 @@
                                         <input class="for_form_sub" type="submit" value="">
                                     </form>
                                 </div>
-                                {#                                <div class="for_lang">#}
-                                {#                                    <ul>#}
-                                {#                                        <li>#}
-                                {#                                            <a href="#">#}
-                                {#                                                Укр#}
-                                {#                                            </a>#}
-                                {#                                        </li>#}
-                                {#                                        <li>#}
-                                {#                                            <a href="#">#}
-                                {#                                                Рус#}
-                                {#                                            </a>#}
-                                {#                                        </li>#}
-                                {#                                        <li>#}
-                                {#                                            <a href="#">#}
-                                {#                                                Eng#}
-                                {#                                            </a>#}
-                                {#                                        </li>#}
-                                {#                                    </ul>#}
-                                {#                                </div>#}
+                                <div class="for_lang">
+                                    {% get_current_language as LANGUAGE_CODE %}
+                                    <ul>
+                                        <li {% if LANGUAGE_CODE == 'uk' %} class="active" {% endif %}>
+                                            {% language "uk" %}
+                                                <a href="{% pageurl self %}">Укр</a>
+                                            {% endlanguage %}
+                                        </li>
+                                        <li {% if LANGUAGE_CODE == 'ru' %} class="active" {% endif %}>
+                                            {% language "ru" %}
+                                                <a href="{% pageurl self %}">Рус</a>
+                                            {% endlanguage %}
+                                        </li>
+                                        <li {% if LANGUAGE_CODE == 'en' %} class="active" {% endif %}>
+                                            {% language "en" %}
+                                                <a href="{% pageurl self %}">Eng</a>
+                                            {% endlanguage %}
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="for_top_menu">
                                 <ul>
