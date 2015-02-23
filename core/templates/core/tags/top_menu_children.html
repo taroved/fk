@@ -6,7 +6,7 @@
             {% if parent_is_routable %}
                 <a href="{% routablepageurl parent child.route_name %}">{{ child.title }}</a>
             {% else %}
-                <a href="{% pageurl child %}">{{ child.title }}</a>
+                <a href="{% pageurl child %}">{% trans_field child 'title' %}</a>
             {% endif %}
         </li>
     {% endfor %}

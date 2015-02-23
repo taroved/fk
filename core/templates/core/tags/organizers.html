@@ -1,8 +1,9 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
+{% load i18n %}
 <div class="for_block_organization">
     <div class="for_block_org_title">
-        Організатори форуму
+        {% trans "Organizers" %}
     </div>
     <div class="for_block_org_links">
         {% for organizer in organizers %}

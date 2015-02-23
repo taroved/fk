@@ -119,6 +119,10 @@ LANGUAGES = (
     ('en', gettext('English')),
 )
 
+LOCALE_PATHS = (
+    join(PROJECT_ROOT, 'locale'),
+)
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 

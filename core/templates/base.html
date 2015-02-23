@@ -264,8 +264,8 @@
                             </a>
                         </div>
                         <div class="for_search for__bot_search">
-                            <form>
-                                <input class="for_form_text" type="text">
+                            <form action="{% url 'wagtailsearch_search' %}" method="get">
+                                <input class="for_form_text" type="text" name="q" >
                                 <input class="for_form_sub" type="submit" value="">
                             </form>
                         </div>
@@ -273,7 +273,7 @@
                     </div>
                     <div class="for_top_right_foot">
                             <span class="for_add">
-                                Приєднуйтесь до нас:
+                                {% trans "Join Us:" %}
                             </span>
                         <a href="https://www.flickr.com/photos/129599628@N03/">
                             <img src="{% static 'images/flickr.png' %}" alt="flickr">
@@ -289,7 +289,7 @@
                 </div>
                 <div class="for_bot_foot">
                     <div class="for_contacts">
-                        <span>Контактна  інформація</span>
+                        <span>{% trans "Contact Info" %}</span>
                         <br>Тел.: <a href="tel:+380444963036">+38 (044) 496-30-36</a>
                         <br><a href="mailto:info@forumkyiv.org">info@forumkyiv.org</a>
                     </div>

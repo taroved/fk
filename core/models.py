@@ -253,9 +253,9 @@ class MaterialsPage(RoutablePageMixin, BrowsableMixin, Page):
 
     def construct_menu(self):
         menu = [
-            {'route_name': 'videos', 'title': 'videos'},
-            {'route_name': 'albums', 'title': 'albums'},
-            {'route_name': 'documents', 'title': 'documents'},
+            {'route_name': 'videos', 'title': _('videos')},
+            {'route_name': 'albums', 'title': _('albums')},
+            {'route_name': 'documents', 'title': _('documents')},
         ]
         return menu
 
@@ -667,11 +667,11 @@ class ForumPage(RoutablePageMixin, BrowsableMixin, Page):
 
     def construct_menu(self):
         menu = [
-            {'route_name': 'location', 'title': 'location'},
-            {'route_name': 'packages', 'title': 'packages'},
-            {'route_name': 'timetable', 'title': 'timetable'},
-            {'route_name': 'speakers', 'title': 'speakers'},
-            {'route_name': 'registration', 'title': 'registration'},
+            {'route_name': 'location', 'title': _('location')},
+            {'route_name': 'packages', 'title': _('packages')},
+            {'route_name': 'timetable', 'title': _('timetable')},
+            {'route_name': 'speakers', 'title': _('speakers')},
+            {'route_name': 'registration', 'title': _('registration')},
         ]
         return menu
 

@@ -4,15 +4,15 @@
 <div class="for_top_menu">
     <ul>
         <li>
-            <a href="{% pageurl site_root %}">{{ site_root.title }}</a>
+            <a href="{% pageurl site_root %}">{% trans_field site_root 'title' %}</a>
         </li>
 
         {% for menuitem in menuitems %}
             <li class="{% if menuitem.show_dropdown %}dropdown{% endif %}{% if menuitem.active %} active{% endif %}">
                 {% if menuitem.specific.is_browsable %}
-                    <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
+                    <a href="{% pageurl menuitem %}">{% trans_field menuitem 'title' %}</a>
                 {% else %}
-                    <a href="#">{{ menuitem.title }}</a>
+                    <a href="#">{% trans_field menuitem 'title' %}</a>
                 {% endif %}
                 {% if menuitem.show_dropdown %}
                     {% top_menu_children parent=menuitem %}

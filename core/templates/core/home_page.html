@@ -4,6 +4,7 @@
 {% load core_tags %}
 {% load wagtailimages_tags %}
 {% load static %}
+{% load i18n %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -18,7 +19,7 @@
             <div class="for_block_title">
                 <div class="for_block_title_top">
                     <a href="/news/">
-                        Новини
+                        {% trans "News" %}
                     </a>
                 </div>
                 <div class="for_block_title_bot">
@@ -101,7 +102,7 @@
             <div class="for_block_title for_block_title_video">
                 <div class="for_block_title_top">
                     <a href="#">
-                        Відео
+                        {% trans "Video" %}
                     </a>
                 </div>
                 <div class="for_block_title_bot">
@@ -170,7 +171,7 @@
                 <div class="for_block_title for_block_title_program">
                     <div class="for_block_title_top">
                         <a href="#">
-                            Програма
+                            {% trans "Timetable" %}
                         </a>
                     </div>
                     <div class="for_block_title_bot">
@@ -289,7 +290,7 @@
                 <div class="for_block_title">
                     <div class="for_block_title_top">
                         <a href="#">
-                            Спікери
+                            {% trans "Speakers" %}
                         </a>
                     </div>
                     <div class="for_block_title_bot">
