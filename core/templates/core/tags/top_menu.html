@@ -8,11 +8,11 @@
         </li>
 
         {% for menuitem in menuitems %}
-            <li class="{% if menuitem.show_dropdown %}dropdown{% endif %}{% if menuitem.active %} active{% endif %}">
+            <li>
                 {% if menuitem.specific.is_browsable %}
                     <a href="{% pageurl menuitem %}">{% trans_field menuitem 'title' %}</a>
                 {% else %}
-                    <a href="#">{% trans_field menuitem 'title' %}</a>
+                    <span>{% trans_field menuitem 'title' %}</span>
                 {% endif %}
                 {% if menuitem.show_dropdown %}
                     {% top_menu_children parent=menuitem %}
