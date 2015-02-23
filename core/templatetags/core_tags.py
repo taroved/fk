@@ -8,7 +8,7 @@ import six
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
 from wagtail.contrib.wagtailroutablepage.templatetags.wagtailroutablepage_tags import routablepageurl
 from wagtail.wagtailcore.models import Page
-from core.models import SliderItem, Partner, OrganizerPage
+from core.models import SliderItem, Partner, OrganizerPage, NewsIndexPage
 
 register = template.Library()
 
@@ -110,8 +110,6 @@ def has_menu_children(page):
 
 
 # Retrieves the top menu items - the immediate children of the parent page
-# The has_menu_children method is necessary because the bootstrap menu requires
-# a dropdown class to be applied to a parent
 @register.inclusion_tag('core/tags/top_menu.html', takes_context=True)
 def top_menu(context, parent=None, calling_page=None):
     request = context['request']
@@ -146,3 +144,27 @@ def top_menu_children(context, parent):
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
+
+
+# Retrieves the bottom menu items - the immediate children of the parent page
+@register.inclusion_tag('core/tags/bottom_menu.html', takes_context=True)
+def bottom_menu(context, parent=None, calling_page=None):
+    request = context['request']
+    if not parent:
+        parent = context['request'].site.root_page
+    menuitems = parent.get_children().live().in_menu().not_type(NewsIndexPage)
+    for menuitem in menuitems:
+        menuitem.show_dropdown = has_menu_children(menuitem)
+        menuitem.active = (False if calling_page is None
+                           else calling_page.url.startswith(menuitem.url))
+    return {
+        'calling_page': calling_page,
+        'menuitems': menuitems,
+        # required by the pageurl tag that we want to use within this template
+        'request': request,
+    }
+
+
+@register.inclusion_tag('core/tags/bottom_menu_children.html', takes_context=True)
+def bottom_menu_children(context, parent):
+    return top_menu_children(context, parent)

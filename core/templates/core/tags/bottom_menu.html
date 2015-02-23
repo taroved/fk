@@ -1,0 +1,27 @@
+{% load core_tags wagtailcore_tags %}
+{% get_site_root as site_root %}
+
+
+<div class="for_footer_list">
+    <div class="row">
+        {% for menuitem in menuitems %}
+            <div class="col-xs-2">
+                <div class="for_footer_item">
+                    <ul>
+                        <li>
+                            {% if menuitem.specific.is_browsable %}
+                                <a href="{% pageurl menuitem %}">{% trans_field menuitem 'title' %}</a>
+                            {% else %}
+                                {% trans_field menuitem 'title' %}
+                            {% endif %}
+                        </li>
+                        {% if menuitem.show_dropdown %}
+                            {% bottom_menu_children parent=menuitem %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="pad"></div>
+</div>
