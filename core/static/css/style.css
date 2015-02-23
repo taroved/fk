@@ -267,6 +267,10 @@ ul {
 }
 /********** BODY **********/
 .for_body .rich-text {
+    font-family: "PFBeauSansPro-Light", Arial, sans-serif;
+}
+
+.for_body .rich-text {
   font-family: "PFBeauSansPro-Light", Arial, sans-serif;
   font-size: 19px;
   line-height: 23px;
@@ -689,6 +693,7 @@ ul {
   font-size: 13px;
   color: #0098cf;
   margin-bottom: 40px;
+  text-align: left;
 }
 .for_pathway a {
   color: #0098cf;
@@ -1431,4 +1436,16 @@ footer a:hover {
 }
 img.full-width {
   width: 100%;
+}
+
+.template-contacts-page .for_body {
+    text-align: center;
+}
+.template-contacts-page .for_body h1,
+.template-contacts-page .for_body h2,
+.template-contacts-page .for_body h3,
+.template-contacts-page .for_body h4,
+.template-contacts-page .for_body h5,
+.template-contacts-page .for_body h6 {
+    color: #0098cf;
 }

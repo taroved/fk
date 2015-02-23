@@ -878,93 +878,24 @@ class ContentPage(Page, BrowsableMixin):
 register_translatable_interface(ContentPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
 
 
-class ContactsPageItem(Orderable):
-    page = ParentalKey('core.ContactsPage', related_name='items')
-
-    title = models.CharField(max_length=100, blank=True, null=True)
-    title_ru = models.CharField(max_length=100, blank=True, null=True)
-    title_en = models.CharField(max_length=100, blank=True, null=True)
-
-    info = models.TextField(blank=True, null=True)
-    info_ru = models.TextField(blank=True, null=True)
-    info_en = models.TextField(blank=True, null=True)
-
-    def __unicode__(self):
-        return self.title
-
-
 class ContactsPage(Page, BrowsableMixin):
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
 
+    body = RichTextField(blank=True, null=True)
+    body_ru = RichTextField(blank=True, null=True)
+    body_en = RichTextField(blank=True, null=True)
 
-ContactsPage.content_panels = [
-    FieldPanel('title', classname="full title"),
-    InlinePanel(ContactsPage, 'items', label="Contacts")
-    # TranslatableInlinePanel(ContactsPage, 'items',
-    #                         panels=[
-    #                             FieldPanel('title', classname="title full"),
-    #                             FieldPanel('info', classname="full"),
-    #                         ],
-    #                         panels_ru=[
-    #                             FieldPanel('title_ru', classname="title full"),
-    #                             FieldPanel('info_ru', classname="full"),
-    #                         ],
-    #                         panels_en=[
-    #                             FieldPanel('title_en', classname="title full"),
-    #                             FieldPanel('info_en', classname="full"),
-    #                         ],
-    #                         label="Contacts"),
-]
-ContactsPage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        FieldPanel('body', classname="full"),
+    ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
-register_translatable_interface(ContactsPage, fields=('title', ), languages=MODELS_LANGUAGES)
+register_translatable_interface(ContactsPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
 
-# title:Контакти
-# items-TOTAL_FORMS:3
-# items-INITIAL_FORMS:3
-# items-MIN_NUM_FORMS:0
-# items-MAX_NUM_FORMS:1000
-# items-0-title:Оргкомітет
-# items-0-title_ru:Оргкомитет
-# items-0-title_en:
-# items-0-info:+38 (044) 496-30-36
-# info@forumkyiv.org
-# items-0-info_ru:
-# items-0-info_en:
-# items-0-id:1
-# items-0-ORDER:1
-# items-0-DELETE:
-# items-1-title:З питаннь партнерства
-# items-1-title_ru:
-# items-1-title_en:
-# items-1-info:+38 (067) 236-50-30
-# org@forumkyiv.org
-# items-1-info_ru:
-# items-1-info_en:
-# items-1-id:3
-# items-1-ORDER:2
-# items-1-DELETE:
-# items-2-title:Контакти для преси
-# items-2-title_ru:
-# items-2-title_en:
-# items-2-info:+38 (050) 334-82-30
-# press@forumkyiv.org
-# items-2-info_ru:
-# items-2-info_en:
-# items-2-id:4
-# items-2-ORDER:3
-# items-2-DELETE:
-# title_ru:
-# title_en:
-# slug:contacts
-# seo_title:
-# show_in_menus:on
-# search_description:
-# go_live_at:
-# expire_at:
 
 
 class PressTopPage(Page, BrowsableMixin):
