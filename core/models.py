@@ -309,6 +309,10 @@ class NewsPage(Page, BrowsableMixin):
         # Find closest ancestor which is a index
         return self.get_ancestors().type(NewsIndexPage).last()
 
+    search_fields = [
+
+    ]
+
 
 NewsPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -532,7 +536,12 @@ class TimetableDayItem(models.Model):
     location = models.CharField(max_length=255, blank=True, default='')
     description = RichTextField(blank=True)
 
-    search_fields = Page.search_fields + (
+    search_fields = (
+        index.SearchField('title'),
+        index.SearchField('title_ru'),
+        index.SearchField('title_en'),
+        index.SearchField('description'),
+        index.SearchField('description'),
         index.SearchField('description'),
     )
 
@@ -676,8 +685,15 @@ class ForumPage(RoutablePageMixin, BrowsableMixin, Page):
         return menu
 
     search_fields = Page.search_fields + (
-        index.SearchField('title_long'),
-        index.SearchField('description'),
+        index.SearchField('title_ru', partial_match=True, boost=2),
+        index.SearchField('title_en', partial_match=True, boost=2),
+        index.SearchField('title_long', partial_match=True, boost=2),
+        index.SearchField('title_long', partial_match=True, boost=2),
+        index.SearchField('title_long_ru', partial_match=True, boost=2),
+        index.SearchField('title_long_en', partial_match=True, boost=2),
+        index.SearchField('description', partial_match=True),
+        index.SearchField('description_ru', partial_match=True),
+        index.SearchField('description_en', partial_match=True),
     )
 
 
@@ -809,10 +825,6 @@ class ForumTimetableItem(models.Model):
     description_ru = RichTextField(blank=True, null=True, verbose_name='description')
     description_en = RichTextField(blank=True, null=True, verbose_name='description')
 
-    search_fields = Page.search_fields + (
-        index.SearchField('description'),
-    )
-
 
 class SpeakerPage(Page, BrowsableMixin):
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
@@ -836,6 +848,14 @@ class SpeakerPage(Page, BrowsableMixin):
         FieldPanel('position', classname="full"),
         FieldPanel('about', classname="full"),
     ]
+
+    search_fields = Page.search_fields + (
+        index.SearchField('title_ru', partial_match=True, boost=2),
+        index.SearchField('title_en', partial_match=True, boost=2),
+        index.SearchField('about', partial_match=True),
+        index.SearchField('about_ru', partial_match=True),
+        index.SearchField('about_en', partial_match=True),
+    )
 
 register_translatable_interface(SpeakerPage, fields=('title', 'position', 'about'), languages=MODELS_LANGUAGES)
 
@@ -874,6 +894,15 @@ class ContentPage(Page, BrowsableMixin):
         FieldPanel('body', classname="full"),
     ]
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+    search_fields = [
+        index.SearchField('title'),
+        index.SearchField('title_ru'),
+        index.SearchField('title_en'),
+        index.SearchField('body', partial_match=True),
+        index.SearchField('body_ru', partial_match=True),
+        index.SearchField('body_en', partial_match=True),
+    ]
 
 register_translatable_interface(ContentPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
 
