@@ -31,13 +31,14 @@
                     </div>
                     <div class="for_block_speaker_right">
                         <div class="for_block_speaker_name">
-                            {{ self.title }}
+                            {% trans_field self 'title' %}
                         </div>
                         <div class="for_block_speaker_title">
-                            {{ self.position }}
+                            {% trans_field self 'position' %}
                         </div>
                         <div class="for_block_speaker_text">
-                            {{ self.about|richtext }}
+{#                            {{ self.about|richtext }}#}
+                            {% trans_field self 'about' %}
                         </div>
                     </div>
                     <div class="pad"></div>

@@ -46,7 +46,7 @@
                                     {{ video.latest_revision_created_at|date:"d.m.Y" }}
                                 </div>
                                 <div class="for_block_video_text">
-                                    {{ video.description }}
+                                    {% trans_field video 'description' %}
                                 </div>
                             </div>
                         </div>

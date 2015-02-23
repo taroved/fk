@@ -1,6 +1,11 @@
 # coding=utf-8
 from datetime import date
 from django import template
+from django.template import Node, Variable
+from django.template.base import render_value_in_context
+from django.utils import translation
+import six
+from wagtail.wagtailcore.models import Page
 from core.models import SliderItem, Partner, OrganizerPage
 
 register = template.Library()
@@ -40,6 +45,57 @@ def copyright_years(start_year=2015):
     return year_interval
 
 
+@register.simple_tag
+def trans_field(instance, field):
+    lang_code = translation.get_language()
+    trans_field_name = '%s_%s' % (field, lang_code)
+    specific = instance.specific if isinstance(instance, Page) else instance
+    if hasattr(specific, trans_field_name):
+        value = getattr(specific, trans_field_name)
+    else:
+        value = getattr(specific, field)
+
+    return value or getattr(specific, field)
+#
+#
+# class TransFieldNode(Node):
+#     def __init__(self, filter_expression, asvar=None):
+#         self.asvar = asvar
+#         self.filter_expression = filter_expression
+#         if isinstance(self.filter_expression.var, six.string_types):
+#             self.filter_expression.var = Variable("'%s'" %
+#                                                   self.filter_expression.var)
+#
+#     def render(self, context):
+#         output = self.filter_expression.resolve(context)
+#         value = render_value_in_context(output, context)
+#         if self.asvar:
+#             context[self.asvar] = value
+#             return ''
+#         else:
+#             return value
+
+#
+# @register.tag
+# def trans_field(parser, token):
+#
+#     args = token.contents.split()
+#     if len(args) != 3 or args[1] != 'as':
+#         pass
+#     return TransFieldNode(args[0])
+#
+#     lang_code = translation.get_language()
+#     trans_field_name = '%s_%s' % (field, lang_code)
+#     specific = instance.specific if isinstance(instance, Page) else instance
+#     if hasattr(specific, trans_field_name):
+#         value = getattr(specific, trans_field_name)
+#     else:
+#         value = getattr(specific, field)
+#
+#     return value if value is not None else ''
+
+
+
 @register.assignment_tag(takes_context=True)
 def get_site_root(context):
     # NB this returns a core.Page, not the implementation-specific model used
@@ -64,3 +120,5 @@ def top_menu(context, parent, calling_page=None):
         # required by the pageurl tag that we want to use within this template
         'request': request,
     }
+
+

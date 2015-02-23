@@ -9,14 +9,18 @@ from django.utils.html import strip_tags
 from modelcluster.fields import ParentalKey
 from django.utils.translation import ugettext_lazy as _
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
-from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel, PageChooserPanel, FieldRowPanel
+from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel, PageChooserPanel, FieldRowPanel, \
+    ObjectList
+from wagtail.wagtailadmin.views.pages import PAGE_EDIT_HANDLERS
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page, Orderable
+from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
-from core.edit_handlers import InlineTestPanel, TranslatableTabbedInterface, register_translatable_interface
+from core.edit_handlers import InlineTestPanel, TranslatableTabbedInterface, register_translatable_interface, \
+    TranslatableInlinePanel
 
 
 MODELS_LANGUAGES = ('ru', 'en')
@@ -36,6 +40,8 @@ class AccreditationPage(Page):
         FieldPanel('title', classname="title full"),
         FieldPanel('body', classname="full"),
     ]
+
+register_translatable_interface(AccreditationPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
 
 
 @register_snippet
@@ -129,6 +135,8 @@ class PhotoAlbumPage(Page):
         FieldPanel('description', classname="full"),
     ]
 
+register_translatable_interface(PhotoAlbumPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
+
 
 class DocumentPage(Page):
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
@@ -154,11 +162,13 @@ class DocumentPage(Page):
     description_en = models.TextField(blank=True, null=True, default='')
 
     content_panels = [
-        # FieldPanel('title', classname="title full"),
-        # DocumentChooserPanel('doc'),
+        FieldPanel('title', classname="title full"),
+        DocumentChooserPanel('doc'),
         ImageChooserPanel('preview'),
         FieldPanel('description', classname="full")
     ]
+
+register_translatable_interface(DocumentPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
 class VideoPage(Page):
@@ -187,6 +197,8 @@ class VideoPage(Page):
         ImageChooserPanel('preview'),
         FieldPanel('description', classname="full")
     ]
+
+register_translatable_interface(VideoPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
 class MaterialsPage(RoutablePageMixin, Page):
@@ -222,8 +234,9 @@ class MaterialsPage(RoutablePageMixin, Page):
     subpage_types = ['core.PhotoAlbumPage', 'core.DocumentPage', 'core.VideoPage']
 
 
-# class NewsPageTag(TaggedItemBase):
-# content_object = ParentalKey('core.NewsPage', related_name='tagged_items')
+register_translatable_interface(MaterialsPage, fields=('title', ), languages=MODELS_LANGUAGES)
+
+
 class NewsPageVideo(Orderable):
     page = ParentalKey('core.NewsPage', related_name='videos')
     video = models.ForeignKey('core.VideoPage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
@@ -282,6 +295,8 @@ NewsPage.content_panels = [
     ], heading="Materials", classname="collapsible collapsed")
 ]
 
+register_translatable_interface(NewsPage, fields=('title', 'short', 'body'), languages=MODELS_LANGUAGES)
+
 
 class NewsIndexPage(Page):
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
@@ -323,6 +338,8 @@ class NewsIndexPage(Page):
         FieldPanel('title', classname="full title"),
     ]
 
+register_translatable_interface(NewsIndexPage, fields=('title',), languages=MODELS_LANGUAGES)
+
 
 class OrgPage(Page):
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
@@ -336,6 +353,8 @@ class OrgPage(Page):
 
     subpage_types = ['core.OrganizerPage']
 
+register_translatable_interface(OrgPage, fields=('title',), languages=MODELS_LANGUAGES)
+
 
 class ParticipationPage(Page):
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
@@ -343,12 +362,16 @@ class ParticipationPage(Page):
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
 
+register_translatable_interface(ParticipationPage, fields=('title',), languages=MODELS_LANGUAGES)
+
 
 class RadaPage(Page):
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
+
+register_translatable_interface(RadaPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
 class PartnerListPage(Page):
@@ -360,6 +383,8 @@ class PartnerListPage(Page):
     @property
     def partners(self):
         return Partner.objects.all()
+
+register_translatable_interface(PartnerListPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
 class OrganizerPage(Page):
@@ -381,6 +406,8 @@ class OrganizerPage(Page):
         FieldPanel('link', classname="full link"),
         FieldPanel('description', classname="full description"),
     ]
+
+register_translatable_interface(OrganizerPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
 class ForumIndexPage(Page):
@@ -405,6 +432,8 @@ class ForumIndexPage(Page):
     content_panels = [
         FieldPanel('title', classname="full title"),
     ]
+
+register_translatable_interface(ForumIndexPage, fields=('title', ), languages=MODELS_LANGUAGES)
 
 
 class ForumPageSpeaker(Orderable):
@@ -618,9 +647,8 @@ ForumPage.content_panels = [
             FieldPanel('date_to', classname='col6'),
         ])
     ], heading="Dates"),
-    MultiFieldPanel([
-        FieldPanel('report_text'),
-    ], heading='Report'),
+
+    FieldPanel('report_text', classname="full"),
 
     MultiFieldPanel([
         InlinePanel(ForumPage, 'videos', label='Videos'),
@@ -648,6 +676,55 @@ ForumPage.content_panels = [
     ], heading="Speakers", classname="collapsible collapsed")
 ]
 
+ForumPage.ru_panels = [
+    MultiFieldPanel([
+        FieldPanel('title_ru', classname="full title"),
+        FieldPanel('title_long_ru', classname="full title"),
+        FieldPanel('description_ru', classname="full"),
+    ], heading="Main"),
+
+    FieldPanel('report_text_ru', classname="full"),
+
+    MultiFieldPanel([
+        FieldPanel('location_name_ru'),
+        FieldPanel('location_country_ru'),
+        FieldPanel('location_city_ru'),
+        FieldPanel('location_street_ru'),
+    ], heading="Location", classname="collapsible collapsed"),
+]
+
+ForumPage.en_panels = [
+    MultiFieldPanel([
+        FieldPanel('title_en', classname="full title"),
+        FieldPanel('title_long_en', classname="full title"),
+        FieldPanel('description_en', classname="full"),
+    ], heading="Main"),
+
+    FieldPanel('report_text_en', classname="full"),
+
+    MultiFieldPanel([
+        FieldPanel('location_name_en'),
+        FieldPanel('location_country_en'),
+        FieldPanel('location_city_en'),
+        FieldPanel('location_street_en'),
+    ], heading="Location", classname="collapsible collapsed"),
+]
+
+
+PAGE_EDIT_HANDLERS[ForumPage] = TranslatableTabbedInterface([
+    ObjectList(ForumPage.content_panels, heading='Content'),
+    ObjectList(ForumPage.ru_panels, heading='RU'),
+    ObjectList(ForumPage.en_panels, heading='EN'),
+    ObjectList(ForumPage.promote_panels, heading='Promote'),
+    ObjectList(ForumPage.settings_panels, heading='Settings', classname="settings")
+])
+
+# register_translatable_interface(ForumPage,
+#                                 fields=('title', 'title_long', 'description',
+#                                         'location_name', 'location_city', 'location_street', 'location_country',
+#                                         'report_text'),
+#                                 languages=MODELS_LANGUAGES)
+
 
 class ForumTimetablePage(Page):
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
@@ -658,6 +735,13 @@ class ForumTimetablePage(Page):
     comment = RichTextField(blank=True, null=True)
     comment_ru = RichTextField(blank=True, null=True, verbose_name='comment')
     comment_en = RichTextField(blank=True, null=True, verbose_name='comment')
+
+    content_panels = [
+        FieldPanel('title', classname='title full'),
+        FieldPanel('comment', classname='full'),
+    ]
+
+register_translatable_interface(ForumTimetablePage, fields=('title', 'comment'), languages=MODELS_LANGUAGES)
 
 
 class ForumTimetableItem(models.Model):
@@ -704,6 +788,8 @@ class SpeakerPage(Page):
         FieldPanel('about', classname="full"),
     ]
 
+register_translatable_interface(SpeakerPage, fields=('title', 'position', 'about'), languages=MODELS_LANGUAGES)
+
 
 class AllSpeakersIndexPage(Page):
 
@@ -717,6 +803,8 @@ class AllSpeakersIndexPage(Page):
         return speakers
 
     subpage_types = ['core.SpeakerPage']
+
+register_translatable_interface(AllSpeakersIndexPage, fields=('title', ), languages=MODELS_LANGUAGES)
 
 
 class ContentPage(Page):
@@ -734,6 +822,8 @@ class ContentPage(Page):
         FieldPanel('body', classname="full"),
     ]
 
+register_translatable_interface(ContentPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
+
 
 class ContactsPageItem(Orderable):
     page = ParentalKey('core.ContactsPage', related_name='items')
@@ -750,6 +840,7 @@ class ContactsPageItem(Orderable):
         return self.title
 
 
+
 class ContactsPage(Page):
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
@@ -759,8 +850,68 @@ class ContactsPage(Page):
 
 ContactsPage.content_panels = [
     FieldPanel('title', classname="full title"),
-    InlinePanel(ContactsPage, 'items', label="Contacts"),
+    InlinePanel(ContactsPage, 'items', label="Contacts")
+    # TranslatableInlinePanel(ContactsPage, 'items',
+    #                         panels=[
+    #                             FieldPanel('title', classname="title full"),
+    #                             FieldPanel('info', classname="full"),
+    #                         ],
+    #                         panels_ru=[
+    #                             FieldPanel('title_ru', classname="title full"),
+    #                             FieldPanel('info_ru', classname="full"),
+    #                         ],
+    #                         panels_en=[
+    #                             FieldPanel('title_en', classname="title full"),
+    #                             FieldPanel('info_en', classname="full"),
+    #                         ],
+    #                         label="Contacts"),
 ]
+
+register_translatable_interface(ContactsPage, fields=('title', ), languages=MODELS_LANGUAGES)
+
+# title:Контакти
+# items-TOTAL_FORMS:3
+# items-INITIAL_FORMS:3
+# items-MIN_NUM_FORMS:0
+# items-MAX_NUM_FORMS:1000
+# items-0-title:Оргкомітет
+# items-0-title_ru:Оргкомитет
+# items-0-title_en:
+# items-0-info:+38 (044) 496-30-36
+# info@forumkyiv.org
+# items-0-info_ru:
+# items-0-info_en:
+# items-0-id:1
+# items-0-ORDER:1
+# items-0-DELETE:
+# items-1-title:З питаннь партнерства
+# items-1-title_ru:
+# items-1-title_en:
+# items-1-info:+38 (067) 236-50-30
+# org@forumkyiv.org
+# items-1-info_ru:
+# items-1-info_en:
+# items-1-id:3
+# items-1-ORDER:2
+# items-1-DELETE:
+# items-2-title:Контакти для преси
+# items-2-title_ru:
+# items-2-title_en:
+# items-2-info:+38 (050) 334-82-30
+# press@forumkyiv.org
+# items-2-info_ru:
+# items-2-info_en:
+# items-2-id:4
+# items-2-ORDER:3
+# items-2-DELETE:
+# title_ru:
+# title_en:
+# slug:contacts
+# seo_title:
+# show_in_menus:on
+# search_description:
+# go_live_at:
+# expire_at:
 
 
 class PressTopPage(Page):
@@ -782,9 +933,11 @@ class PressTopPage(Page):
     content_panels = [
         FieldPanel('title', classname="full title"),
         FieldPanel('date', classname="date"),
-        FieldPanel('description', classname="full description"),
-        FieldPanel('content', classname="full content"),
+        FieldPanel('description', classname="full"),
+        FieldPanel('content', classname="full"),
     ]
+
+register_translatable_interface(PressTopPage, fields=('title', 'description', 'content'), languages=MODELS_LANGUAGES)
 
 
 class PressTopListPage(Page):
@@ -802,6 +955,8 @@ class PressTopListPage(Page):
     ]
 
     subpage_types = ['core.PressTopPage']
+
+register_translatable_interface(PressTopListPage, fields=('title', ), languages=MODELS_LANGUAGES)
 
 
 class HomePageAdvertPlacement(Orderable, models.Model):

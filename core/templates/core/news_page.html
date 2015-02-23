@@ -16,6 +16,7 @@
         {% image self.image width-400 style="float: left; margin-right: 30px;margin-bottom: 30px;" %}
     {% endif %}
 
-    {{ self.body|richtext }}
+{#    {{ self.body|richtext }}#}
+    {% trans_field self.body %}
 
 {% endblock %}

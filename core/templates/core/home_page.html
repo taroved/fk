@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load wagtailcore_tags %}
+{% load core_tags %}
 {% load wagtailimages_tags %}
 {% load static %}
 
@@ -123,7 +124,7 @@
                                     {{ material.video.latest_revision_created_at|date:"d.m.Y" }}
                                 </div>
                                 <div class="for_block_video_text">
-                                    {{ material.video.description }}
+                                    {% trans_field material.video 'description' %}
                                 </div>
                             </div>
                         </div>
@@ -158,16 +159,8 @@
         <div class="row">
             <div class="col-xs-12 col-xs-12 col-md-6 col-md-offset-3">
                 <div class="for_about_title">
-                    {{ self.forum_page.title_long }}
+                    {% trans_field self.forum_page 'title_long' %}
                 </div>
-
-
-                <div class="for_block_program_date">
-                    {#                    {{ self.forum_page.date_from }}#}
-                    8 Жовтня
-                    <br>{{ self.forum_page.location_country }}, {{ self.forum_page.location_city }}, {{ self.forum_page.location_name }}
-                </div>
-
             </div>
         </div>
     <div class="row">
@@ -184,9 +177,14 @@
                         <div class="for_block_title_bot_in for_block_title_bot_back"></div>
                     </div>
                 </div>
+{#                <div class="for_block_program_date">#}
+{#                    2 жовтня 2015#}
+{#                    <br>Україна, Київ, НСК «Олімпійський»#}
+{#                </div>#}
                 <div class="for_block_program_date">
-                    2 жовтня 2015
-                    <br>Україна, Київ, НСК «Олімпійський»
+                    {#                    {{ self.forum_page.date_from }}#}
+                    8 Жовтня
+                    <br>{% trans_field self.forum_page 'location_country' %}, {% trans_field self.forum_page 'location_city' %}, {% trans_field self.forum_page 'location_name' %}
                 </div>
                 <div class="for_block_program_cont">
                     <div class="for_block_program_item">
@@ -301,10 +299,6 @@
                 <div class="for_block_sp_cont">
                     <div class="row">
 
-
-
-
-
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
                                     <a href="/speakers/viktor-galasiuk/">
@@ -321,9 +315,7 @@
                                     </a>
                                 </div>
                             </div>
-
-
-
+                        
 
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">

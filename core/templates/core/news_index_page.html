@@ -20,7 +20,7 @@
                     </div>
                     <div class="for_block_news_title">
                         <a href="{% pageurl self.news.0 %}">
-                            {{ self.news.0.title }}
+                            {% trans_field self.news.0 'title' %}
                         </a>
                     </div>
                     <div class="for_block_news_text">
@@ -45,7 +45,7 @@
                                 {{ news_item.date|date:"d.m.Y" }}
                             </div>
                             <div class="for_block_news_small_text">
-                                {{ news_item.title|linebreaksbr }}
+                                {% trans_field news_item 'title' %}
                             </div>
                         </div>
                         <div class="pad"></div>
@@ -64,10 +64,10 @@
                     {{ news_item.date|date:"d.m.Y" }}
                 </div>
                 <div class="for_news_item_title">
-                    {{ news_item.title }}
+                    {% trans_field news_item 'title' %}
                 </div>
                 <div class="for_news_item_text">
-                    {{ news_item.short }}
+                    {% trans_field news_item 'short' %}
                     <a href="{% pageurl news_item %}">докладніше</a>
                 </div>
             </div>

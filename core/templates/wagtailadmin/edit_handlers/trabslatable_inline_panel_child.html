@@ -1,0 +1,33 @@
+{#{% overextends "wagtailadmin/edit_handlers/inline_panel_child.html" %}#}
+{% load i18n %}
+<li id="inline_child_{{ child.uk.form.prefix }}">
+
+    <ul class="controls">
+        {% if can_order %}
+            <li class="icon text-replace white icon-order-up inline-child-move-up" id="{{ child.form.prefix }}-move-up">{% trans "Move up" %}</li>
+            <li class="icon text-replace white icon-order-down inline-child-move-down" id="{{ child.form.prefix }}-move-down">{% trans "Move down" %}</li>
+        {% endif %}
+        <li class="icon text-replace white icon-bin" id="{{ child.form.DELETE.id_for_label }}-button">{% trans "Delete" %}</li>
+    </ul>
+
+
+    <ul class="tab-nav merged">
+        <li class="active"><a href="#content-{{ child.uk.form.prefix }}-1" class="active">CONTENT</a></li>
+        <li><a href="#content-{{ child.ru.form.prefix }}-2" class="active">RU</a></li>
+        <li><a href="#content-{{ child.ru.form.prefix }}-3" class="active">EN</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+        <section id="content-{{ child.uk.form.prefix }}-1" class="active">
+            {{ child.uk.render_form_content }}
+        </section>
+        <section id="content-{{ child.ru.form.prefix }}-2">
+            {{ child.ru.render_form_content }}
+        </section>
+        <section id="content-{{ child.en.form.prefix }}-3">
+            {{ child.en.render_form_content }}
+        </section>
+    </div>
+
+</li>

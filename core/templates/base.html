@@ -21,7 +21,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>
-        {% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}
+        {% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{% trans_field self 'title' %}{% endif %}{% endblock %}
                 {% block title_suffix %}{% endblock %}</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}"/>
@@ -206,11 +206,11 @@
                     <div class="for_pathway">
                         {% for page in self.get_ancestors %}
                             {% if page.is_root == False %}
-                                <a href="{% pageurl page %}">{{ page.title }}</a> >
+                                <a href="{% pageurl page %}">{% trans_field page 'title' %}</a> >
                             {% endif %}
                         {% endfor %}
 
-                        <a href="{{ self.url }}">{{ self.title }}</a>
+                        <a href="{{ self.url }}">{% trans_field self 'title' %}</a>
                     </div>
                 </div>
             {% endif %}
@@ -222,7 +222,7 @@
                         <div class="for_block_title">
                             <div class="for_block_title_top">
                                 <a href="{{ self.url }}">
-                                    {{ self.title }}
+                                    {% trans_field self 'title' %}
                                 </a>
                             </div>
                             <div class="for_block_title_bot">

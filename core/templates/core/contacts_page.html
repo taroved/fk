@@ -10,8 +10,9 @@
     <div style="text-align: center">
         {% for item in self.items.all %}
 
-            <h4 style="color: #0098cf">{{ item.title }}:</h4>
+            <h4 style="color: #0098cf">{% trans_field item 'title' %}:</h4>
             <p>{{ item.info | linebreaksbr }}</p>
+{#            <p>{% trans_field item 'info' | linebreaksbr %}</p>#}
             <br/>
 
         {% endfor %}
