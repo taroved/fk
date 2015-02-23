@@ -5,6 +5,8 @@ from django.template import Node, Variable
 from django.template.base import render_value_in_context
 from django.utils import translation
 import six
+from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
+from wagtail.contrib.wagtailroutablepage.templatetags.wagtailroutablepage_tags import routablepageurl
 from wagtail.wagtailcore.models import Page
 from core.models import SliderItem, Partner, OrganizerPage
 
@@ -103,12 +105,19 @@ def get_site_root(context):
     return context['request'].site.root_page
 
 
+def has_menu_children(page):
+    return issubclass(page.specific_class, RoutablePageMixin) or page.get_children().live().in_menu().exists()
+
+
 # Retrieves the top menu items - the immediate children of the parent page
 # The has_menu_children method is necessary because the bootstrap menu requires
 # a dropdown class to be applied to a parent
 @register.inclusion_tag('core/tags/top_menu.html', takes_context=True)
-def top_menu(context, parent, calling_page=None):
+def top_menu(context, parent=None, calling_page=None):
     request = context['request']
+    # menuitems = parent.get_children().live().in_menu()
+    if not parent:
+        parent = context['request'].site.root_page
     menuitems = parent.get_children().live().in_menu()
     for menuitem in menuitems:
         menuitem.show_dropdown = has_menu_children(menuitem)
@@ -122,3 +131,18 @@ def top_menu(context, parent, calling_page=None):
     }
 
 
+@register.inclusion_tag('core/tags/top_menu_children.html', takes_context=True)
+def top_menu_children(context, parent):
+    is_routable = issubclass(parent.specific_class, RoutablePageMixin)
+    if is_routable:
+        menuitems_children = parent.specific.construct_menu()
+    else:
+        menuitems_children = parent.get_children()
+        menuitems_children = menuitems_children.live().in_menu()
+    return {
+        'parent': parent if not is_routable else parent.specific,
+        'parent_is_routable': is_routable,
+        'menuitems_children': menuitems_children,
+        # required by the pageurl tag that we want to use within this template
+        'request': context['request'],
+    }

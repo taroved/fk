@@ -1,0 +1,13 @@
+{% load core_tags wagtailcore_tags wagtailroutablepage_tags %}
+
+<ul>
+    {% for child in menuitems_children %}
+        <li>
+            {% if parent_is_routable %}
+                <a href="{% routablepageurl parent child.route_name %}">{{ child.title }}</a>
+            {% else %}
+                <a href="{% pageurl child %}">{{ child.title }}</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
