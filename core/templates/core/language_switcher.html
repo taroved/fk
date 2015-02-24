@@ -8,11 +8,11 @@
                 <a href="{{ self.url }}">Укр</a>
             {% endlanguage %}
         </li>
-        <li {% if LANGUAGE_CODE == 'ru' %} class="active" {% endif %}>
-            {% language "ru" %}
-                <a href="{{ self.url }}">Рус</a>
-            {% endlanguage %}
-        </li>
+{#        <li {% if LANGUAGE_CODE == 'ru' %} class="active" {% endif %}>#}
+{#            {% language "ru" %}#}
+{#                <a href="{{ self.url }}">Рус</a>#}
+{#            {% endlanguage %}#}
+{#        </li>#}
         <li {% if LANGUAGE_CODE == 'en' %} class="active" {% endif %}>
             {% language "en" %}
                 <a href="{{ self.url }}">Eng</a>

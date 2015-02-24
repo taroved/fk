@@ -153,7 +153,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     <div class="for_about">
     <div class="container">
@@ -164,148 +163,152 @@
                 </div>
             </div>
         </div>
-    <div class="row">
+        <div class="row">
 
-        <div class="col-md-12">
-            <div class="for_block_program">
-                <div class="for_block_title for_block_title_program">
-                    <div class="for_block_title_top">
-                        <a href="#">
-                            {% trans "Timetable" %}
-                        </a>
+
+            <div class="col-md-12">
+
+                <div class="for_block_program">
+                    <div class="for_block_title for_block_title_program">
+                        <div class="for_block_title_top">
+                            <a href="#">
+                                {% trans "Timetable" %}
+                            </a>
+                        </div>
+                        <div class="for_block_title_bot">
+                            <div class="for_block_title_bot_in for_block_title_bot_back"></div>
+                        </div>
                     </div>
-                    <div class="for_block_title_bot">
-                        <div class="for_block_title_bot_in for_block_title_bot_back"></div>
-                    </div>
-                </div>
-{#                <div class="for_block_program_date">#}
-{#                    2 жовтня 2015#}
-{#                    <br>Україна, Київ, НСК «Олімпійський»#}
-{#                </div>#}
-                <div class="for_block_program_date">
+                    {#                <div class="for_block_program_date">#}
+                    {#                    2 жовтня 2015#}
+                    {#                    <br>Україна, Київ, НСК «Олімпійський»#}
+                    {#                </div>#}
+                    {% include "core/hardcode_time_table.html" %}
+                    {#                    <div class="for_block_program_date">#}
                     {#                    {{ self.forum_page.date_from }}#}
-                    8 Жовтня
-                    <br>{% trans_field self.forum_page 'location_country' %}, {% trans_field self.forum_page 'location_city' %}, {% trans_field self.forum_page 'location_name' %}
+                    {#                        8 Жовтня#}
+                    {#                        <br>{% trans_field self.forum_page 'location_country' %}, {% trans_field self.forum_page 'location_city' %}, {% trans_field self.forum_page 'location_name' %}#}
+                    {#                    </div>#}
+                    {#                    <div class="for_block_program_cont">#}
+                    {#                        <div class="for_block_program_item">#}
+                    {#                            <div class="for_block_program_time">#}
+                    {#                                09:30 - 10:15#}
+                    {#                            </div>#}
+                    {#                            <div class="for_block_program_event">#}
+                    {#                                <div class="for_block_program_event_title">#}
+                    {#                                    Пленарне засідання#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        “Україна сьогодні: відвертий професійний погляд”#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="pad"></div>#}
+                    {#                        </div>#}
+                    {#                        <div class="for_block_program_item">#}
+                    {#                            <div class="for_block_program_time">#}
+                    {#                                10:30 - 12:00#}
+                    {#                            </div>#}
+                    {#                            <div class="for_block_program_event">#}
+                    {#                                <div class="for_block_program_event_title">#}
+                    {#                                    Панельні дискусії#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        Високі технології: Україна в хай-тек перегонах#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        Фінансування проектів розвитку#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        Освітня революція для бізнесу#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="pad"></div>#}
+                    {#                        </div>#}
+                    {#                        <div class="for_block_program_item">#}
+                    {#                            <div class="for_block_program_time">#}
+                    {#                                12:30 - 14:00#}
+                    {#                            </div>#}
+                    {#                            <div class="for_block_program_event">#}
+                    {#                                <div class="for_block_program_event_title">#}
+                    {#                                    Панельні дискусії#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        Точки зростання – виграшна стратегія у глобальній конкуренції#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        Сільське господарство: добувна чи переробна галузь?#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        Модель енергетичної незалежностi#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="pad"></div>#}
+                    {#                        </div>#}
+                    {#                        <div class="for_block_program_item">#}
+                    {#                            <div class="for_block_program_time">#}
+                    {#                                15:30 - 17:00#}
+                    {#                            </div>#}
+                    {#                            <div class="for_block_program_event">#}
+                    {#                                <div class="for_block_program_event_title">#}
+                    {#                                    Пленарне засідання#}
+                    {#                                </div>#}
+                    {#                                <div class="for_block_program_event_link">#}
+                    {#                                    <a href="#">#}
+                    {#                                        “Партнерство бізнесу та влади. Перезавантаження”#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="pad"></div>#}
+                    {#                        </div>#}
+                    {#                        <div class="for_block_program_item">#}
+                    {#                            <div class="for_block_program_time">#}
+                    {#                                19:30 - 21:00#}
+                    {#                            </div>#}
+                    {#                            <div class="for_block_program_event">#}
+                    {#                                <div class="for_block_program_event_title">#}
+                    {#                                    Прийом (коктейль) від імені організаторів#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="pad"></div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
                 </div>
-                <div class="for_block_program_cont">
-                    <div class="for_block_program_item">
-                        <div class="for_block_program_time">
-                            09:30 - 10:15
-                        </div>
-                        <div class="for_block_program_event">
-                            <div class="for_block_program_event_title">
-                                Пленарне засідання
-                            </div>
-                            <div class="for_block_program_event_link">
-                                <a href="#">
-                                    “Україна сьогодні: відвертий професійний погляд”
-                                </a>
-                            </div>
-                        </div>
-                        <div class="pad"></div>
-                    </div>
-                    <div class="for_block_program_item">
-                        <div class="for_block_program_time">
-                            10:30 - 12:00
-                        </div>
-                        <div class="for_block_program_event">
-                            <div class="for_block_program_event_title">
-                                Панельні дискусії
-                            </div>
-                            <div class="for_block_program_event_link">
-                                <a href="#">
-                                    Високі технології: Україна в хай-тек перегонах
-                                </a>
-                            </div>
-                            <div class="for_block_program_event_link">
-                                <a href="#">
-                                    Фінансування проектів розвитку
-                                </a>
-                            </div>
-                            <div class="for_block_program_event_link">
-                                <a href="#">
-                                    Освітня революція для бізнесу
-                                </a>
-                            </div>
-                        </div>
-                        <div class="pad"></div>
-                    </div>
-                    <div class="for_block_program_item">
-                        <div class="for_block_program_time">
-                            12:30 - 14:00
-                        </div>
-                        <div class="for_block_program_event">
-                            <div class="for_block_program_event_title">
-                                Панельні дискусії
-                            </div>
-                            <div class="for_block_program_event_link">
-                                <a href="#">
-                                    Точки зростання – виграшна стратегія у глобальній конкуренції
-                                </a>
-                            </div>
-                            <div class="for_block_program_event_link">
-                                <a href="#">
-                                    Сільське господарство: добувна чи переробна галузь?
-                                </a>
-                            </div>
-                            <div class="for_block_program_event_link">
-                                <a href="#">
-                                    Модель енергетичної незалежностi
-                                </a>
-                            </div>
-                        </div>
-                        <div class="pad"></div>
-                    </div>
-                    <div class="for_block_program_item">
-                        <div class="for_block_program_time">
-                            15:30 - 17:00
-                        </div>
-                        <div class="for_block_program_event">
-                            <div class="for_block_program_event_title">
-                                Пленарне засідання
-                            </div>
-                            <div class="for_block_program_event_link">
-                                <a href="#">
-                                    “Партнерство бізнесу та влади. Перезавантаження”
-                                </a>
-                            </div>
-                        </div>
-                        <div class="pad"></div>
-                    </div>
-                    <div class="for_block_program_item">
-                        <div class="for_block_program_time">
-                            19:30 - 21:00
-                        </div>
-                        <div class="for_block_program_event">
-                            <div class="for_block_program_event_title">
-                                Прийом (коктейль) від імені організаторів
-                            </div>
-                        </div>
-                        <div class="pad"></div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="for_block_speakers_arch">
-                <div class="for_block_title">
-                    <div class="for_block_title_top">
-                        <a href="#">
-                            {% trans "Speakers" %}
-                        </a>
+                <div class="for_block_speakers_arch">
+                    <div class="for_block_title">
+                        <div class="for_block_title_top">
+                            <a href="#">
+                                {% trans "Speakers" %}
+                            </a>
+                        </div>
+                        <div class="for_block_title_bot">
+                            <div class="for_block_title_bot_in"></div>
+                        </div>
                     </div>
-                    <div class="for_block_title_bot">
-                        <div class="for_block_title_bot_in"></div>
-                    </div>
-                </div>
-                <div class="for_block_sp_cont">
-                    <div class="row">
+                    <div class="for_block_sp_cont">
+                        <div class="row">
 
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
                                     <a href="/speakers/viktor-galasiuk/">
                                         <span class="for_block_sp_photo">
 
-                                            <img src="/media/images/1405525778.focus-none.height-300.jpeg" width="270" height="300" alt="" class="grayscale grayscale-fade">
+                                            <img src="/media/images/1405525778.focus-none.height-300.jpeg" width="270"
+                                                 height="300" alt="" class="grayscale grayscale-fade">
                                         </span>
                                         <span class="for_block_sp_name">
                                             Віктор Галасюк
@@ -316,14 +319,15 @@
                                     </a>
                                 </div>
                             </div>
-                        
+
 
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
                                     <a href="/speakers/andrii-kirilenko/">
                                         <span class="for_block_sp_photo">
 
-                                            <img src="/media/images/1412170688.focus-none.height-300.jpeg" width="270" height="300" alt="" class="grayscale grayscale-fade">
+                                            <img src="/media/images/1412170688.focus-none.height-300.jpeg" width="270"
+                                                 height="300" alt="" class="grayscale grayscale-fade">
                                         </span>
                                         <span class="for_block_sp_name">
                                             Андрій Кириленко
@@ -336,14 +340,13 @@
                             </div>
 
 
-
-
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
                                     <a href="/speakers/chua-teong-ban/">
                                         <span class="for_block_sp_photo">
 
-                                            <img src="/media/images/1405087192.focus-none.height-300.jpeg" width="270" height="300" alt="" class="grayscale grayscale-fade">
+                                            <img src="/media/images/1405087192.focus-none.height-300.jpeg" width="270"
+                                                 height="300" alt="" class="grayscale grayscale-fade">
                                         </span>
                                         <span class="for_block_sp_name">
                                             Чуа Теонг Бан
@@ -356,14 +359,13 @@
                             </div>
 
 
-
-
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
                                     <a href="/speakers/viktor-krivenko/">
                                         <span class="for_block_sp_photo">
 
-                                            <img src="/media/images/1405415028.focus-none.height-300.jpeg" width="270" height="300" alt="" class="grayscale grayscale-fade">
+                                            <img src="/media/images/1405415028.focus-none.height-300.jpeg" width="270"
+                                                 height="300" alt="" class="grayscale grayscale-fade">
                                         </span>
                                         <span class="for_block_sp_name">
                                             Віктор Кривенко
@@ -376,9 +378,8 @@
                             </div>
 
 
-
-                                </div>
-                                <div class="row">
+                        </div>
+                        <div class="row">
 
 
                             <div class="col-xs-3">
@@ -386,7 +387,8 @@
                                     <a href="/speakers/oleg-boiarin/">
                                         <span class="for_block_sp_photo">
 
-                                            <img src="/media/images/1410203754.focus-none.height-300.jpeg" width="270" height="300" alt="" class="grayscale grayscale-fade">
+                                            <img src="/media/images/1410203754.focus-none.height-300.jpeg" width="270"
+                                                 height="300" alt="" class="grayscale grayscale-fade">
                                         </span>
                                         <span class="for_block_sp_name">
                                             Олег Боярин
@@ -399,14 +401,13 @@
                             </div>
 
 
-
-
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
                                     <a href="/speakers/viktor-ivanchik/">
                                         <span class="for_block_sp_photo">
 
-                                            <img src="/media/images/1412021074.focus-none.height-300.png" width="270" height="300" alt="" class="grayscale grayscale-fade">
+                                            <img src="/media/images/1412021074.focus-none.height-300.png" width="270"
+                                                 height="300" alt="" class="grayscale grayscale-fade">
                                         </span>
                                         <span class="for_block_sp_name">
                                             Віктор Іванчик
@@ -419,14 +420,13 @@
                             </div>
 
 
-
-
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
                                     <a href="/speakers/tetiana-nanaieva/">
                                         <span class="for_block_sp_photo">
 
-                                            <img src="/media/images/1412157063.focus-none.height-300.jpeg" width="270" height="300" alt="" class="grayscale grayscale-fade">
+                                            <img src="/media/images/1412157063.focus-none.height-300.jpeg" width="270"
+                                                 height="300" alt="" class="grayscale grayscale-fade">
                                         </span>
                                         <span class="for_block_sp_name">
                                             Тетяна Нанаєва
@@ -439,14 +439,13 @@
                             </div>
 
 
-
-
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
                                     <a href="/speakers/gerkhard-pfaifer/">
                                         <span class="for_block_sp_photo">
 
-                                            <img src="/media/images/1405087006.focus-none.height-300.jpeg" width="270" height="300" alt="" class="grayscale grayscale-fade">
+                                            <img src="/media/images/1405087006.focus-none.height-300.jpeg" width="270"
+                                                 height="300" alt="" class="grayscale grayscale-fade">
                                         </span>
                                         <span class="for_block_sp_name">
                                             Герхард Пфайфер
@@ -459,17 +458,15 @@
                             </div>
 
 
-
-                                </div>
-                                <div class="row">
-
-
+                        </div>
+                        <div class="row">
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
                                     <a href="/speakers/valerii-fishchuk/">
                                         <span class="for_block_sp_photo">
 
-                                            <img src="/media/images/1411575034.focus-none.height-300.jpeg" width="270" height="300" alt="" class="grayscale grayscale-fade">
+                                            <img src="/media/images/1411575034.focus-none.height-300.jpeg" width="270"
+                                                 height="300" alt="" class="grayscale grayscale-fade">
                                         </span>
                                         <span class="for_block_sp_name">
                                             Валерій Фіщук
@@ -482,14 +479,13 @@
                             </div>
 
 
-
-
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
                                     <a href="/speakers/bernard-keisi/">
                                         <span class="for_block_sp_photo">
 
-                                            <img src="/media/images/1405263875.focus-none.height-300.jpeg" width="270" height="300" alt="" class="grayscale grayscale-fade">
+                                            <img src="/media/images/1405263875.focus-none.height-300.jpeg" width="270"
+                                                 height="300" alt="" class="grayscale grayscale-fade">
                                         </span>
                                         <span class="for_block_sp_name">
                                             Бернард Кейсі
@@ -502,14 +498,13 @@
                             </div>
 
 
-
-
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
                                     <a href="/speakers/erik-rainert/">
                                         <span class="for_block_sp_photo">
 
-                                            <img src="/media/images/1405087041.focus-none.height-300.jpeg" width="270" height="300" alt="" class="grayscale grayscale-fade">
+                                            <img src="/media/images/1405087041.focus-none.height-300.jpeg" width="270"
+                                                 height="300" alt="" class="grayscale grayscale-fade">
                                         </span>
                                         <span class="for_block_sp_name">
                                             Ерік Райнерт
@@ -522,14 +517,13 @@
                             </div>
 
 
-
-
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
                                     <a href="/speakers/lidiia-shinkaruk/">
                                         <span class="for_block_sp_photo">
 
-                                            <img src="/media/images/1410878363.focus-none.height-300.jpeg" width="270" height="300" alt="" class="grayscale grayscale-fade">
+                                            <img src="/media/images/1410878363.focus-none.height-300.jpeg" width="270"
+                                                 height="300" alt="" class="grayscale grayscale-fade">
                                         </span>
                                         <span class="for_block_sp_name">
                                             Лідія Шинкарук
@@ -541,12 +535,12 @@
                                 </div>
                             </div>
 
+                        </div>
                     </div>
                 </div>
+
             </div>
 
         </div>
-
-    </div>
     </div>
 {% endblock %}

@@ -118,7 +118,7 @@ ul {
   color: #c3c3c3;
   margin: 0 5px;
 }
-.for_lang > ul > li.active:after {
+.for_lang > ul > li:first-child:after {
   color: #fff;
 }
 .for_lang > ul > li:last-child:after {
@@ -129,7 +129,7 @@ ul {
   float: left;
   font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
 }
-.for_lang > ul > li.active > a {
+.for_lang > ul > li:first-child > a {
   color: #fff;
   font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
   font-weight: bold;
@@ -266,10 +266,6 @@ ul {
   opacity: 0.9;
 }
 /********** BODY **********/
-.for_body .rich-text {
-    font-family: "PFBeauSansPro-Light", Arial, sans-serif;
-}
-
 .for_body .rich-text {
   font-family: "PFBeauSansPro-Light", Arial, sans-serif;
   font-size: 19px;
@@ -693,7 +689,6 @@ ul {
   font-size: 13px;
   color: #0098cf;
   margin-bottom: 40px;
-  text-align: left;
 }
 .for_pathway a {
   color: #0098cf;
@@ -1279,9 +1274,6 @@ ul {
   padding: 0;
   vertical-align: top;
 }
-.for_block_prog_cont table tr td:nth-child(-n+2) {
-  width: 200px;
-}
 .for_block_prog_cont table tr:first-child td > div {
   text-align: center !important;
 }
@@ -1436,16 +1428,4 @@ footer a:hover {
 }
 img.full-width {
   width: 100%;
-}
-
-.template-contacts-page .for_body {
-    text-align: center;
-}
-.template-contacts-page .for_body h1,
-.template-contacts-page .for_body h2,
-.template-contacts-page .for_body h3,
-.template-contacts-page .for_body h4,
-.template-contacts-page .for_body h5,
-.template-contacts-page .for_body h6 {
-    color: #0098cf;
 }
