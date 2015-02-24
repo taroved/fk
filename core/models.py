@@ -410,11 +410,41 @@ class ParticipationPage(Page, BrowsableMixin):
 register_translatable_interface(ParticipationPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
+class RadaMember(Page):
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+
+    photo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+
+    position = models.CharField(max_length=255, blank=True, null=True, default='')
+    position_ru = models.CharField(max_length=255, blank=True, null=True, default='', verbose_name='position')
+    position_en = models.CharField(max_length=255, blank=True, null=True, default='', verbose_name='position')
+
+    about = RichTextField(blank=True, null=True, default='')
+    about_ru = RichTextField(blank=True, null=True, default='', verbose_name='about')
+    about_en = RichTextField(blank=True, null=True, default='', verbose_name='about')
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        ImageChooserPanel('photo'),
+        FieldPanel('position', classname="full"),
+        FieldPanel('about', classname="full"),
+    ]
+
+
 class RadaPage(Page, BrowsableMixin):
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
+
+    @property
+    def members(self):
+        return RadaMember.objects.all()
+
+    subpage_types = ['core.RadaMember']
 
 register_translatable_interface(RadaPage, fields=('title',), languages=MODELS_LANGUAGES)
 

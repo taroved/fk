@@ -1,87 +1,50 @@
 {% extends "base.html" %}
 
 {% load static core_tags %}
+{% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
 
-<div class="row">
-    <div class="col-xs-12">
-        <div class="for_block_rada">
-            <div class="for_block_rada_cont">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <div class="for_block_sp_item">
-                            <a href="#">
-                                            <span class="for_block_sp_photo">
-                                                <img src="images/for_speaker_1_hover.jpg" alt="photo">
-                                                <img src="images/for_speaker_2.jpg" alt="photo">
-                                            </span>
-                                            <span class="for_block_sp_name">
-                                                Seok Pil Kim
-                                            </span>
-                                            <span class="for_block_sp_about">
-                                                Директор з маркетингу та керівник<br>
-                                                відділу глобальних B2B Center, Samsung<br>
-                                                Electronics
-                                            </span>
-                            </a>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="for_block_rada">
+                <div class="for_block_rada_cont">
+                    <div class="row">
+
+
+                        {% for member in self.members %}
+
+                            {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                                </div>
+                                <div class="row">
+                            {% endif %}
+
+                            <div class="col-xs-3">
+                                <div class="for_block_sp_item">
+{#                                    <a href="{% pageurl member.speaker_page %}">#}
+                                        <span class="for_block_sp_photo">
+                                            {% image member.photo height-300 as photo %}
+                                            <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}" class="grayscale grayscale-fade"/>
+                                        </span>
+                                        <span class="for_block_sp_name">
+                                            {% trans_field member 'title' %}
+                                        </span>
+                                        <span class="for_block_sp_about">
+                                            {% trans_field member 'position' %}
+                                        </span>
+{#                                    </a>#}
+                                </div>
+                            </div>
+                        {% endfor %}
+
+
                         </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="for_block_sp_item">
-                            <a href="#">
-                                            <span class="for_block_sp_photo">
-                                                <img src="images/for_speaker_2_hover.jpg" alt="photo">
-                                                <img src="images/for_speaker_2.jpg" alt="photo">
-                                            </span>
-                                            <span class="for_block_sp_name">
-                                                Martin Winterkorn
-                                            </span>
-                                            <span class="for_block_sp_about">
-                                                Голова ради директорів Volkswagen AG
-                                            </span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="for_block_sp_item">
-                            <a href="#">
-                                            <span class="for_block_sp_photo">
-                                                <img src="images/for_speaker_3_hover.jpg" alt="photo">
-                                                <img src="images/for_speaker_3.jpg" alt="photo">
-                                            </span>
-                                            <span class="for_block_sp_name">
-                                                Martin Matrone
-                                            </span>
-                                            <span class="for_block_sp_about">
-                                                Директор з розвитку
-                                            </span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xs-3">
-                        <div class="for_block_sp_item">
-                            <a href="#">
-                                            <span class="for_block_sp_photo">
-                                                <img src="images/for_speaker_4_hover.jpg" alt="photo">
-                                                <img src="images/for_speaker_4.jpg" alt="photo">
-                                            </span>
-                                            <span class="for_block_sp_name">
-                                                Steve Flaulkin
-                                            </span>
-                                            <span class="for_block_sp_about">
-                                                Директор зі стратегії, Cloudera
-                                            </span>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
 {% endblock %}
