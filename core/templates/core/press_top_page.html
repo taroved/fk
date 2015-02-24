@@ -7,7 +7,6 @@
 
 {% block content %}
 
-{#    {{ self.content | richtext }}#}
-    {% trans_field self.content %}
+    {% trans_field self 'content' %}
 
 {% endblock %}
