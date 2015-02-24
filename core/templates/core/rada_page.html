@@ -14,7 +14,7 @@
                     <div class="row">
 
 
-                        {% for member in self.members %}
+                        {% for member in self.members.all %}
 
                             {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
                                 </div>

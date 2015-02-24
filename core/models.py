@@ -410,7 +410,34 @@ class ParticipationPage(Page, BrowsableMixin):
 register_translatable_interface(ParticipationPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
-class RadaMember(Page):
+# class RadaMember(Page):
+#     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+#                                 help_text=_("The page title as you'd like it to be seen by the public"))
+#     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+#                                 help_text=_("The page title as you'd like it to be seen by the public"))
+#
+#     photo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+#
+#     position = models.CharField(max_length=255, blank=True, null=True, default='')
+#     position_ru = models.CharField(max_length=255, blank=True, null=True, default='', verbose_name='position')
+#     position_en = models.CharField(max_length=255, blank=True, null=True, default='', verbose_name='position')
+#
+#     about = RichTextField(blank=True, null=True, default='')
+#     about_ru = RichTextField(blank=True, null=True, default='', verbose_name='about')
+#     about_en = RichTextField(blank=True, null=True, default='', verbose_name='about')
+#
+#     content_panels = [
+#         FieldPanel('title', classname="full title"),
+#         ImageChooserPanel('photo'),
+#         FieldPanel('position', classname="full"),
+#         FieldPanel('about', classname="full"),
+#     ]
+
+
+class RadaPageMember(Orderable):
+    page = ParentalKey('core.RadaPage', related_name='members')
+    title = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                             help_text=_("The page title as you'd like it to be seen by the public"))
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
@@ -426,11 +453,23 @@ class RadaMember(Page):
     about_ru = RichTextField(blank=True, null=True, default='', verbose_name='about')
     about_en = RichTextField(blank=True, null=True, default='', verbose_name='about')
 
-    content_panels = [
-        FieldPanel('title', classname="full title"),
-        ImageChooserPanel('photo'),
-        FieldPanel('position', classname="full"),
-        FieldPanel('about', classname="full"),
+    panels = [
+        MultiFieldPanel([
+            FieldPanel('title'),
+            ImageChooserPanel('photo'),
+            FieldPanel('position'),
+            FieldPanel('about'),
+        ], heading='UK', classname='uk'),
+        MultiFieldPanel([
+            FieldPanel('title_ru'),
+            FieldPanel('position_ru'),
+            FieldPanel('about_ru'),
+        ], heading='RU', classname='ru'),
+        MultiFieldPanel([
+            FieldPanel('title_en'),
+            FieldPanel('position_en'),
+            FieldPanel('about_en'),
+        ], heading='EN', classname='en'),
     ]
 
 
@@ -440,11 +479,12 @@ class RadaPage(Page, BrowsableMixin):
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
 
-    @property
-    def members(self):
-        return RadaMember.objects.all()
 
-    subpage_types = ['core.RadaMember']
+RadaPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    InlinePanel(RadaPage, 'members', label='Members'),
+]
+RadaPage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 register_translatable_interface(RadaPage, fields=('title',), languages=MODELS_LANGUAGES)
 
