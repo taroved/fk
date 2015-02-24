@@ -9,8 +9,7 @@ from django.utils.html import strip_tags
 from modelcluster.fields import ParentalKey
 from django.utils.translation import ugettext_lazy as _, ugettext_lazy
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
-from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel, PageChooserPanel, \
-    FieldRowPanel, \
+from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel, PageChooserPanel, FieldRowPanel, \
     ObjectList
 from wagtail.wagtailadmin.views.pages import PAGE_EDIT_HANDLERS
 from wagtail.wagtailcore.fields import RichTextField
@@ -28,16 +27,17 @@ MODELS_LANGUAGES = ('ru', 'en')
 
 BROWSABLE_PAGE_PROMOTE_PANELS = [
     MultiFieldPanel([
-                        FieldPanel('slug'),
-                        FieldPanel('seo_title'),
-                        FieldPanel('show_in_menus'),
-                        FieldPanel('is_browsable'),
-                        FieldPanel('search_description'),
-                    ], ugettext_lazy('Common page configuration'))
+        FieldPanel('slug'),
+        FieldPanel('seo_title'),
+        FieldPanel('show_in_menus'),
+        FieldPanel('is_browsable'),
+        FieldPanel('search_description'),
+    ], ugettext_lazy('Common page configuration'))
 ]
 
 
 class BrowsableMixin(models.Model):
+
     is_browsable = models.BooleanField(default=True, help_text=_("Whether a browsable link to this page will "
                                                                  "appear in automatically generated menus"))
 
@@ -60,7 +60,6 @@ class AccreditationPage(Page, BrowsableMixin):
         FieldPanel('body', classname="full"),
     ]
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
-
 
 register_translatable_interface(AccreditationPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
 
@@ -156,7 +155,6 @@ class PhotoAlbumPage(Page, BrowsableMixin):
         FieldPanel('description', classname="full"),
     ]
 
-
 register_translatable_interface(PhotoAlbumPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
@@ -190,7 +188,6 @@ class DocumentPage(Page, BrowsableMixin):
         FieldPanel('description', classname="full")
     ]
 
-
 register_translatable_interface(DocumentPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
@@ -221,11 +218,11 @@ class VideoPage(Page, BrowsableMixin):
         FieldPanel('description', classname="full")
     ]
 
-
 register_translatable_interface(VideoPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
 class MaterialsPage(RoutablePageMixin, BrowsableMixin, Page):
+
     subpage_urls = (
         url(r'^$', 'main_view', name='main'),
         url(r'^videos/$', 'videos_view', name='videos'),
@@ -238,9 +235,9 @@ class MaterialsPage(RoutablePageMixin, BrowsableMixin, Page):
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
 
-    albums = lambda (self): PhotoAlbumPage.objects.live().all()
-    documents = lambda (self): DocumentPage.objects.live().all()
-    videos = lambda (self): VideoPage.objects.live().all()
+    albums = lambda(self): PhotoAlbumPage.objects.live().all()
+    documents = lambda(self): DocumentPage.objects.live().all()
+    videos = lambda(self): VideoPage.objects.live().all()
 
     def main_view(self, request):
         return render_to_response("core/materials_page.html", {'self': self, 'request': request})
@@ -312,6 +309,10 @@ class NewsPage(Page, BrowsableMixin):
         # Find closest ancestor which is a index
         return self.get_ancestors().type(NewsIndexPage).last()
 
+    search_fields = [
+
+    ]
+
 
 NewsPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -320,10 +321,10 @@ NewsPage.content_panels = [
     FieldPanel("short"),
     FieldPanel("body", classname="full"),
     MultiFieldPanel([
-                        InlinePanel(NewsPage, 'videos', label='Videos'),
-                        InlinePanel(NewsPage, 'albums', label='Albums'),
-                        InlinePanel(NewsPage, 'documents', label='Documents'),
-                    ], heading="Materials", classname="collapsible collapsed")
+        InlinePanel(NewsPage, 'videos', label='Videos'),
+        InlinePanel(NewsPage, 'albums', label='Albums'),
+        InlinePanel(NewsPage, 'documents', label='Documents'),
+    ], heading="Materials", classname="collapsible collapsed")
 ]
 
 register_translatable_interface(NewsPage, fields=('title', 'short', 'body'), languages=MODELS_LANGUAGES)
@@ -370,7 +371,6 @@ class NewsIndexPage(Page, BrowsableMixin):
     ]
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
-
 register_translatable_interface(NewsIndexPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
@@ -388,7 +388,6 @@ class OrgPage(Page, BrowsableMixin):
 
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
-
 register_translatable_interface(OrgPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
@@ -397,7 +396,6 @@ class ParticipationPage(Page, BrowsableMixin):
                                 help_text=_("The page title as you'd like it to be seen by the public"))
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
-
 
 register_translatable_interface(ParticipationPage, fields=('title',), languages=MODELS_LANGUAGES)
 
@@ -453,7 +451,6 @@ class PartnerListPage(Page, BrowsableMixin):
 
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
-
 register_translatable_interface(PartnerListPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
@@ -476,7 +473,6 @@ class OrganizerPage(Page, BrowsableMixin):
         FieldPanel('link', classname="full link"),
         FieldPanel('description', classname="full description"),
     ]
-
 
 register_translatable_interface(OrganizerPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
@@ -504,7 +500,6 @@ class ForumIndexPage(Page, BrowsableMixin):
         FieldPanel('title', classname="full title"),
     ]
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
-
 
 register_translatable_interface(ForumIndexPage, fields=('title', ), languages=MODELS_LANGUAGES)
 
@@ -571,7 +566,12 @@ class TimetableDayItem(models.Model):
     location = models.CharField(max_length=255, blank=True, default='')
     description = RichTextField(blank=True)
 
-    search_fields = Page.search_fields + (
+    search_fields = (
+        index.SearchField('title'),
+        index.SearchField('title_ru'),
+        index.SearchField('title_en'),
+        index.SearchField('description'),
+        index.SearchField('description'),
         index.SearchField('description'),
     )
 
@@ -715,42 +715,49 @@ class ForumPage(RoutablePageMixin, BrowsableMixin, Page):
         return menu
 
     search_fields = Page.search_fields + (
-        index.SearchField('title_long'),
-        index.SearchField('description'),
+        index.SearchField('title_ru', partial_match=True, boost=2),
+        index.SearchField('title_en', partial_match=True, boost=2),
+        index.SearchField('title_long', partial_match=True, boost=2),
+        index.SearchField('title_long', partial_match=True, boost=2),
+        index.SearchField('title_long_ru', partial_match=True, boost=2),
+        index.SearchField('title_long_en', partial_match=True, boost=2),
+        index.SearchField('description', partial_match=True),
+        index.SearchField('description_ru', partial_match=True),
+        index.SearchField('description_en', partial_match=True),
     )
 
 
 ForumPage.content_panels = [
     MultiFieldPanel([
-                        FieldPanel('title', classname="full title"),
-                        FieldPanel('title_long', classname="full title"),
-                        FieldPanel('description', classname="full"),
-                        FieldPanel('signup_link'),
-                    ], heading="Main"),
+        FieldPanel('title', classname="full title"),
+        FieldPanel('title_long', classname="full title"),
+        FieldPanel('description', classname="full"),
+        FieldPanel('signup_link'),
+    ], heading="Main"),
     MultiFieldPanel([
-                        FieldRowPanel([
-                            FieldPanel('date_from', classname='col6'),
-                            FieldPanel('date_to', classname='col6'),
-                        ])
-                    ], heading="Dates"),
+        FieldRowPanel([
+            FieldPanel('date_from', classname='col6'),
+            FieldPanel('date_to', classname='col6'),
+        ])
+    ], heading="Dates"),
 
     FieldPanel('report_text', classname="full"),
 
     MultiFieldPanel([
-                        InlinePanel(ForumPage, 'videos', label='Videos'),
-                        InlinePanel(ForumPage, 'albums', label='Albums'),
-                        InlinePanel(ForumPage, 'documents', label='Documents'),
-                    ], heading="Materials", classname="collapsible collapsed"),
+        InlinePanel(ForumPage, 'videos', label='Videos'),
+        InlinePanel(ForumPage, 'albums', label='Albums'),
+        InlinePanel(ForumPage, 'documents', label='Documents'),
+    ], heading="Materials", classname="collapsible collapsed"),
 
     MultiFieldPanel([
-                        FieldPanel('location_name'),
-                        ImageChooserPanel('location_logo'),
-                        FieldPanel('location_country'),
-                        FieldPanel('location_city'),
-                        FieldPanel('location_street'),
-                        FieldPanel('location_zip_code'),
-                        FieldPanel('location_map_code'),
-                    ], heading="Location", classname="collapsible collapsed"),
+        FieldPanel('location_name'),
+        ImageChooserPanel('location_logo'),
+        FieldPanel('location_country'),
+        FieldPanel('location_city'),
+        FieldPanel('location_street'),
+        FieldPanel('location_zip_code'),
+        FieldPanel('location_map_code'),
+    ], heading="Location", classname="collapsible collapsed"),
 
     # MultiFieldPanel([
     # InlinePanel(ForumPage, 'timetable_days', label="Day"),
@@ -758,45 +765,46 @@ ForumPage.content_panels = [
     # ], heading="Timetable", classname="collapsible collapsed"),
 
     MultiFieldPanel([
-                        InlinePanel(ForumPage, 'speakers', label="Speakers"),
-                    ], heading="Speakers", classname="collapsible collapsed")
+        InlinePanel(ForumPage, 'speakers', label="Speakers"),
+    ], heading="Speakers", classname="collapsible collapsed")
 ]
 
 ForumPage.ru_panels = [
     MultiFieldPanel([
-                        FieldPanel('title_ru', classname="full title"),
-                        FieldPanel('title_long_ru', classname="full title"),
-                        FieldPanel('description_ru', classname="full"),
-                    ], heading="Main"),
+        FieldPanel('title_ru', classname="full title"),
+        FieldPanel('title_long_ru', classname="full title"),
+        FieldPanel('description_ru', classname="full"),
+    ], heading="Main"),
 
     FieldPanel('report_text_ru', classname="full"),
 
     MultiFieldPanel([
-                        FieldPanel('location_name_ru'),
-                        FieldPanel('location_country_ru'),
-                        FieldPanel('location_city_ru'),
-                        FieldPanel('location_street_ru'),
-                    ], heading="Location", classname="collapsible collapsed"),
+        FieldPanel('location_name_ru'),
+        FieldPanel('location_country_ru'),
+        FieldPanel('location_city_ru'),
+        FieldPanel('location_street_ru'),
+    ], heading="Location", classname="collapsible collapsed"),
 ]
 
 ForumPage.en_panels = [
     MultiFieldPanel([
-                        FieldPanel('title_en', classname="full title"),
-                        FieldPanel('title_long_en', classname="full title"),
-                        FieldPanel('description_en', classname="full"),
-                    ], heading="Main"),
+        FieldPanel('title_en', classname="full title"),
+        FieldPanel('title_long_en', classname="full title"),
+        FieldPanel('description_en', classname="full"),
+    ], heading="Main"),
 
     FieldPanel('report_text_en', classname="full"),
 
     MultiFieldPanel([
-                        FieldPanel('location_name_en'),
-                        FieldPanel('location_country_en'),
-                        FieldPanel('location_city_en'),
-                        FieldPanel('location_street_en'),
-                    ], heading="Location", classname="collapsible collapsed"),
+        FieldPanel('location_name_en'),
+        FieldPanel('location_country_en'),
+        FieldPanel('location_city_en'),
+        FieldPanel('location_street_en'),
+    ], heading="Location", classname="collapsible collapsed"),
 ]
 
 ForumPage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
 
 PAGE_EDIT_HANDLERS[ForumPage] = TranslatableTabbedInterface([
     ObjectList(ForumPage.content_panels, heading='Content'),
@@ -807,7 +815,7 @@ PAGE_EDIT_HANDLERS[ForumPage] = TranslatableTabbedInterface([
 ])
 
 # register_translatable_interface(ForumPage,
-# fields=('title', 'title_long', 'description',
+#                                 fields=('title', 'title_long', 'description',
 #                                         'location_name', 'location_city', 'location_street', 'location_country',
 #                                         'report_text'),
 #                                 languages=MODELS_LANGUAGES)
@@ -828,7 +836,6 @@ class ForumTimetablePage(Page, BrowsableMixin):
         FieldPanel('comment', classname='full'),
     ]
 
-
 register_translatable_interface(ForumTimetablePage, fields=('title', 'comment'), languages=MODELS_LANGUAGES)
 
 
@@ -847,10 +854,6 @@ class ForumTimetableItem(models.Model):
     description = RichTextField(blank=True, null=True)
     description_ru = RichTextField(blank=True, null=True, verbose_name='description')
     description_en = RichTextField(blank=True, null=True, verbose_name='description')
-
-    search_fields = Page.search_fields + (
-        index.SearchField('description'),
-    )
 
 
 class SpeakerPage(Page, BrowsableMixin):
@@ -876,11 +879,19 @@ class SpeakerPage(Page, BrowsableMixin):
         FieldPanel('about', classname="full"),
     ]
 
+    search_fields = Page.search_fields + (
+        index.SearchField('title_ru', partial_match=True, boost=2),
+        index.SearchField('title_en', partial_match=True, boost=2),
+        index.SearchField('about', partial_match=True),
+        index.SearchField('about_ru', partial_match=True),
+        index.SearchField('about_en', partial_match=True),
+    )
 
 register_translatable_interface(SpeakerPage, fields=('title', 'position', 'about'), languages=MODELS_LANGUAGES)
 
 
 class AllSpeakersIndexPage(Page, BrowsableMixin):
+
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
@@ -914,6 +925,14 @@ class ContentPage(Page, BrowsableMixin):
     ]
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
+    search_fields = [
+        index.SearchField('title'),
+        index.SearchField('title_ru'),
+        index.SearchField('title_en'),
+        index.SearchField('body', partial_match=True),
+        index.SearchField('body_ru', partial_match=True),
+        index.SearchField('body_en', partial_match=True),
+    ]
 
 register_translatable_interface(ContentPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
 
@@ -934,8 +953,8 @@ class ContactsPage(Page, BrowsableMixin):
     ]
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
-
 register_translatable_interface(ContactsPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
+
 
 
 class PressTopPage(Page, BrowsableMixin):
@@ -961,7 +980,6 @@ class PressTopPage(Page, BrowsableMixin):
         FieldPanel('content', classname="full"),
     ]
 
-
 register_translatable_interface(PressTopPage, fields=('title', 'description', 'content'), languages=MODELS_LANGUAGES)
 
 
@@ -981,7 +999,6 @@ class PressTopListPage(Page, BrowsableMixin):
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
     subpage_types = ['core.PressTopPage']
-
 
 register_translatable_interface(PressTopListPage, fields=('title', ), languages=MODELS_LANGUAGES)
 

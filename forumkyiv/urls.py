@@ -15,11 +15,11 @@ from wagtail.wagtailcore import urls as wagtail_urls
 urlpatterns = patterns('',
     url(r'^django-admin/', include(admin.site.urls)),
     url(r'^admin/', include(wagtailadmin_urls)),
-    url(r'^search/', include(wagtailsearch_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 )
 
 urlpatterns += i18n_patterns('',
+    url(r'^search/', include(wagtailsearch_urls)),
     url(r'', include(wagtail_urls))
 )
 

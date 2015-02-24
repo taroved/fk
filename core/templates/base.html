@@ -91,17 +91,17 @@
                                     <ul>
                                         <li {% if LANGUAGE_CODE == 'uk' %} class="active" {% endif %}>
                                             {% language "uk" %}
-                                                <a href="{% pageurl self %}">Укр</a>
+                                                <a href="{{ self.url }}">Укр</a>
                                             {% endlanguage %}
                                         </li>
                                         <li {% if LANGUAGE_CODE == 'ru' %} class="active" {% endif %}>
                                             {% language "ru" %}
-                                                <a href="{% pageurl self %}">Рус</a>
+                                                <a href="{{ self.url }}">Рус</a>
                                             {% endlanguage %}
                                         </li>
                                         <li {% if LANGUAGE_CODE == 'en' %} class="active" {% endif %}>
                                             {% language "en" %}
-                                                <a href="{% pageurl self %}">Eng</a>
+                                                <a href="{{ self.url }}">Eng</a>
                                             {% endlanguage %}
                                         </li>
                                     </ul>
