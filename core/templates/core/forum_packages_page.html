@@ -2,6 +2,7 @@
 
 {% load static core_tags %}
 {% load wagtailcore_tags %}
+{% load i18n %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -22,73 +23,229 @@
 
 {% block content %}
 
+    {% get_current_language as LANGUAGE_CODE %}
+
     <div class="for_block_pack">
-        <div class="for_block_pack_cont">
-            <div class="for_block_pack_cont_title">
-                <div class="row">
-                    <div class="col-xs-4"></div>
-                    <div class="col-xs-4">
-                        Пакет “Бізнес”
-                    </div>
-                    <div class="col-xs-4">
-                        Пакет “Платинум”
+
+        {% if LANGUAGE_CODE == 'uk' %}
+            <div class="for_block_pack_cont">
+                <div class="for_block_pack_cont_title">
+                    <div class="row">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4">
+                            Пакет “Бізнес”
+                        </div>
+                        <div class="col-xs-4">
+                            Пакет “Платинум”
+                        </div>
                     </div>
                 </div>
-            </div>
-            <table>
-                <tr>
-                    <td>
-                        Формат участi
-                    </td>
-                    <td>
-                        Участь у діловій програмі<br>
-                        Форуму та бiзнес-ланч
-                    </td>
-                    <td>
-                        Участь у діловій програмі Форуму,<br>
-                        вечірній банкет-прийом та неформальне<br>
-                        спілкування з визначними спікерами,<br>
-                        бізнесменами, експертами ринку
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Вартість квитка в період<br/>
-                        з 15 березня по 31 травня 2015 року
-                    </td>
-                    <td>
-                        UAH 2000
-                    </td>
-                    <td>
-                        UAH 8000
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Вартість квитка в період<br/>
-                        з 1 травня по 31 серпня
-                    </td>
-                    <td>
-                        UAH 3000
-                    </td>
-                    <td>
-                        UAH 10000
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Вартість квитка в період<br>
-                        з 1 вересня по 7 жовтня
-                    </td>
-                    <td>
-                        UAH 5000
-                    </td>
-                    <td>
-                        UAH 12000
-                    </td>
-                </tr>
-            </table>
+                <table>
+                    <tr>
+                        <td>
+                            Формат участi
+                        </td>
+                        <td>
+                            Участь у діловій програмі<br>
+                            Форуму та бiзнес-ланч
+                        </td>
+                        <td>
+                            Участь у діловій програмі Форуму,<br>
+                            вечірній банкет-прийом та неформальне<br>
+                            спілкування з визначними спікерами,<br>
+                            бізнесменами, експертами ринку
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Вартість квитка в період<br/>
+                            з 15 березня по 31 травня 2015 року
+                        </td>
+                        <td>
+                            UAH 2000
+                        </td>
+                        <td>
+                            UAH 8000
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Вартість квитка в період<br/>
+                            з 1 травня по 31 серпня
+                        </td>
+                        <td>
+                            UAH 2500
+                        </td>
+                        <td>
+                            UAH 10000
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Вартість квитка в період<br>
+                            з 1 вересня по 7 жовтня
+                        </td>
+                        <td>
+                            UAH 3000
+                        </td>
+                        <td>
+                            UAH 12000
+                        </td>
+                    </tr>
+                </table>
 
-        </div>
+            </div>
+        {% endif %}
+
+        {% language "uk" %}
+        {% endlanguage %}
+
+        {% if LANGUAGE_CODE == 'ru' %}
+            <div class="for_block_pack_cont">
+                <div class="for_block_pack_cont_title">
+                    <div class="row">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4">
+                            Пакет “Бізнес”
+                        </div>
+                        <div class="col-xs-4">
+                            Пакет “Платинум”
+                        </div>
+                    </div>
+                </div>
+                <table>
+                    <tr>
+                        <td>
+                            Формат участi
+                        </td>
+                        <td>
+                            Участь у діловій програмі<br>
+                            Форуму та бiзнес-ланч
+                        </td>
+                        <td>
+                            Участь у діловій програмі Форуму,<br>
+                            вечірній банкет-прийом та неформальне<br>
+                            спілкування з визначними спікерами,<br>
+                            бізнесменами, експертами ринку
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Вартість квитка в період<br/>
+                            з 15 березня по 31 травня 2015 року
+                        </td>
+                        <td>
+                            UAH 2000
+                        </td>
+                        <td>
+                            UAH 8000
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Вартість квитка в період<br/>
+                            з 1 травня по 31 серпня
+                        </td>
+                        <td>
+                            UAH 2500
+                        </td>
+                        <td>
+                            UAH 10000
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Вартість квитка в період<br>
+                            з 1 вересня по 7 жовтня
+                        </td>
+                        <td>
+                            UAH 3000
+                        </td>
+                        <td>
+                            UAH 12000
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        {% endif %}
+
+        {% language "ru" %}
+        {% endlanguage %}
+
+        {% if LANGUAGE_CODE == 'en' %}
+            <div class="for_block_pack_cont">
+                <div class="for_block_pack_cont_title">
+                    <div class="row">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4">
+                            Пакет “Бізнес”
+                        </div>
+                        <div class="col-xs-4">
+                            Пакет “Платинум”
+                        </div>
+                    </div>
+                </div>
+                <table>
+                    <tr>
+                        <td>
+                            Формат участi
+                        </td>
+                        <td>
+                            Участь у діловій програмі<br>
+                            Форуму та бiзнес-ланч
+                        </td>
+                        <td>
+                            Участь у діловій програмі Форуму,<br>
+                            вечірній банкет-прийом та неформальне<br>
+                            спілкування з визначними спікерами,<br>
+                            бізнесменами, експертами ринку
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Вартість квитка в період<br/>
+                            з 15 березня по 31 травня 2015 року
+                        </td>
+                        <td>
+                            UAH 2000
+                        </td>
+                        <td>
+                            UAH 8000
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Вартість квитка в період<br/>
+                            з 1 травня по 31 серпня
+                        </td>
+                        <td>
+                            UAH 2500
+                        </td>
+                        <td>
+                            UAH 10000
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Вартість квитка в період<br>
+                            з 1 вересня по 7 жовтня
+                        </td>
+                        <td>
+                            UAH 3000
+                        </td>
+                        <td>
+                            UAH 12000
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        {% endif %}
+
+        {% language "en" %}
+        {% endlanguage %}
+
+
     </div>
 {% endblock %}
