@@ -928,6 +928,7 @@ class SpeakerPage(Page, BrowsableMixin):
         FieldPanel('position', classname="full"),
         FieldPanel('about', classname="full"),
     ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
     search_fields = Page.search_fields + (
         index.SearchField('title_ru', partial_match=True, boost=2),
