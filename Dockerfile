@@ -2,6 +2,7 @@ FROM ubuntu:14.04
 
 COPY core/ /forumkyiv.org/core
 COPY forumkyiv/ /forumkyiv.org/forumkyiv
+COPY locale/ /forumkyiv.org/locale
 COPY static/ /forumkyiv.org/static
 COPY media/ /forumkyiv.org/media
 COPY manage.py /forumkyiv.org/manage.py
