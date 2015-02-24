@@ -1,4 +1,4 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags core_tags %}
 <div class="for_slider">
     <div class="container">
         <div class="row">
@@ -6,22 +6,12 @@
                 <div id="for_top_slider" class="owl-carousel owl-theme">
                     {% for item in items %}
                     <div class="item">
-                        {{ item.text|richtext }}
-{#                        <div class="for_slide_block_1">#}
-{#                            2 жовтня 2015. Україна, Київ, готель Hilton Kyiv#}
-{#                        </div>#}
-{#                        <div class="for_slide_block_2">#}
-{#                            Україна:#}
-{#                            <br>з третього світу в перший#}
-{#                        </div>#}
-{#                        <div class="for_slide_block_3">#}
-{#                            Реальні інструменти економічного розвитку:#}
-{#                            <br>пріоритетні галузі та “точки зростання”#}
-{#                        </div>#}
+{#                        {{ item.text|richtext }}#}
+                        {%  trans_field item 'text' %}
                         {% if item.button_link %}
                             <div class="for_slide_block_4">
                                 <a href="{{ item.button_link }}">
-                                    {{ item.button_text }}
+                                    {%  trans_field item 'button_text' %}
                                 </a>
                             </div>
                         {% endif %}

@@ -83,21 +83,31 @@ class Advert(models.Model):
 @register_snippet
 class SliderItem(models.Model):
     text = RichTextField(null=True, blank=True)
-    text_ru = RichTextField(null=True, blank=True)
-    text_en = RichTextField(null=True, blank=True)
+    text_ru = RichTextField(null=True, blank=True, verbose_name='text')
+    text_en = RichTextField(null=True, blank=True, verbose_name='text')
 
     button_text = models.CharField(max_length=50, null=True, blank=True)
-    button_text_ru = models.CharField(max_length=50, null=True, blank=True)
-    button_text_en = models.CharField(max_length=50, null=True, blank=True)
+    button_text_ru = models.CharField(max_length=50, null=True, blank=True, verbose_name='button text')
+    button_text_en = models.CharField(max_length=50, null=True, blank=True, verbose_name='button text')
 
     button_link = models.URLField(null=True, blank=True)
 
     panels = [
-        FieldPanel('text', classname="full"),
         MultiFieldPanel([
+            FieldPanel('text', classname="full"),
             FieldPanel('button_text'),
             FieldPanel('button_link'),
-        ])
+        ], heading='UK'),
+
+        MultiFieldPanel([
+            FieldPanel('text_ru', classname="full"),
+            FieldPanel('button_text_ru'),
+        ], heading='RU'),
+
+        MultiFieldPanel([
+            FieldPanel('text_en', classname="full"),
+            FieldPanel('button_text_en'),
+        ], heading='EN'),
     ]
 
     def __unicode__(self):

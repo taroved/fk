@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-23 23:29+0200\n"
+"POT-Creation-Date: 2015-02-24 02:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,54 +29,54 @@ msgid ""
 "menus"
 msgstr ""
 
-#: core/models.py:50 core/models.py:52 core/models.py:111 core/models.py:113
-#: core/models.py:135 core/models.py:137 core/models.py:163 core/models.py:165
-#: core/models.py:196 core/models.py:198 core/models.py:234 core/models.py:236
-#: core/models.py:291 core/models.py:293 core/models.py:331 core/models.py:333
-#: core/models.py:375 core/models.py:377 core/models.py:392 core/models.py:394
-#: core/models.py:401 core/models.py:403 core/models.py:410 core/models.py:412
-#: core/models.py:425 core/models.py:427 core/models.py:448 core/models.py:450
-#: core/models.py:580 core/models.py:582 core/models.py:780 core/models.py:782
-#: core/models.py:819 core/models.py:821 core/models.py:846 core/models.py:848
-#: core/models.py:864 core/models.py:866 core/models.py:898 core/models.py:900
-#: core/models.py:972 core/models.py:974 core/models.py:998
-#: core/models.py:1000 core/models.py:1044 core/models.py:1046
+#: core/models.py:50 core/models.py:52 core/models.py:121 core/models.py:123
+#: core/models.py:145 core/models.py:147 core/models.py:173 core/models.py:175
+#: core/models.py:206 core/models.py:208 core/models.py:244 core/models.py:246
+#: core/models.py:301 core/models.py:303 core/models.py:345 core/models.py:347
+#: core/models.py:389 core/models.py:391 core/models.py:406 core/models.py:408
+#: core/models.py:415 core/models.py:417 core/models.py:424 core/models.py:426
+#: core/models.py:439 core/models.py:441 core/models.py:462 core/models.py:464
+#: core/models.py:599 core/models.py:601 core/models.py:806 core/models.py:808
+#: core/models.py:841 core/models.py:843 core/models.py:876 core/models.py:878
+#: core/models.py:894 core/models.py:896 core/models.py:922 core/models.py:924
+#: core/models.py:942 core/models.py:944 core/models.py:968 core/models.py:970
+#: core/models.py:1014 core/models.py:1016
 msgid "The page title as you'd like it to be seen by the public"
 msgstr ""
 
-#: core/models.py:109
+#: core/models.py:119
 msgid "The title as you'd like it to be seen by the public"
 msgstr ""
 
-#: core/models.py:256
+#: core/models.py:266
 msgid "videos"
 msgstr "Відео"
 
-#: core/models.py:257
+#: core/models.py:267
 msgid "albums"
 msgstr "Фото"
 
-#: core/models.py:258
+#: core/models.py:268
 msgid "documents"
 msgstr "Документи"
 
-#: core/models.py:670
+#: core/models.py:689
 msgid "location"
 msgstr "Місце проведення"
 
-#: core/models.py:671
+#: core/models.py:690
 msgid "packages"
 msgstr "Пакети учасників"
 
-#: core/models.py:672
+#: core/models.py:691
 msgid "timetable"
 msgstr "Програма"
 
-#: core/models.py:673
+#: core/models.py:692
 msgid "speakers"
 msgstr "Спікери"
 
-#: core/models.py:674
+#: core/models.py:693
 msgid "registration"
 msgstr "Реєстрація"
 
@@ -103,6 +103,10 @@ msgstr "Програма"
 #: core/templates/core/home_page.html:293
 msgid "Speakers"
 msgstr "Спікери"
+
+#: core/templates/core/search_results.html:57
+msgid "nothing found"
+msgstr "Нічого не знайдено"
 
 #: core/templates/core/tags/organizers.html:6
 msgid "Organizers"
