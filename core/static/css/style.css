@@ -202,7 +202,7 @@ ul {
   top: 24px;
   background: rgba(16, 22, 54, 0.1);
   padding: 4px 12px;
-  min-width: 170px;
+  min-width: 190px;
 }
 .for_top_menu > ul > li:hover > ul {
   display: block;
@@ -658,7 +658,7 @@ ul {
 #for_bot_slider .owl-item {
   text-align: center;
   width: auto !important;
-  margin: 0 30px;
+  margin: 0 25px;
 }
 #for_bot_slider .owl-controls {
   margin: 0;
