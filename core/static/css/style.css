@@ -163,6 +163,9 @@ ul {
 .for_top_menu span {
   cursor: default;
 }
+.for_top_menu span:hover {
+  border-bottom: 1px solid #FFF;
+}
 .for_top_menu > ul {
   font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
   font-size: 17px;
