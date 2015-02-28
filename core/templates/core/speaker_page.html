@@ -10,7 +10,7 @@
 <div class="for_block_title_sp">
     <div class="for_block_title_top">
         <a href="#">
-            {{ self.title }}
+            {% trans_field self 'title' %}
         </a>
     </div>
     <div class="for_block_title_bot">
@@ -30,9 +30,9 @@
                         {% image self.photo fill-270x300 %}
                     </div>
                     <div class="for_block_speaker_right">
-                        <div class="for_block_speaker_name">
-                            {% trans_field self 'title' %}
-                        </div>
+{#                        <div class="for_block_speaker_name">#}
+{#                            {% trans_field self 'title' %}#}
+{#                        </div>#}
                         <div class="for_block_speaker_title">
                             {% trans_field self 'position' %}
                         </div>
