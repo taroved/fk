@@ -41,7 +41,7 @@
                                         </a>
                                     </div>
                                     <div class="for_block_video_date">
-                                        {{ album.latest_revision_created_at|date:"d.m.Y" }}
+                                        {{ album.date|date:"d.m.Y" }}
                                     </div>
                                     <div class="for_block_video_text">
                                         {% trans_field album 'title' %}

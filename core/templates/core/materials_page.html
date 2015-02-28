@@ -38,7 +38,7 @@
                                         </a>
                                     </div>
                                     <div class="for_block_video_date">
-                                        {{ video.latest_revision_created_at|date:"d.m.Y" }}
+                                        {{ video.date|date:"d.m.Y" }}
                                     </div>
                                     <div class="for_block_video_text">
 {#                                        {% trans_field video.description %}#}
@@ -85,7 +85,7 @@
                                         </a>
                                     </div>
                                     <div class="for_block_video_date">
-                                        {{ album.latest_revision_created_at|date:"d.m.Y" }}
+                                        {{ album.date|date:"d.m.Y" }}
                                     </div>
                                     <div class="for_block_video_text">
                                         {% trans_field album 'title' %}
@@ -130,7 +130,7 @@
                             </div>
                             <div class="for_block_doc_right">
                                 <div class="for_block_doc_date">
-                                    {{ document.latest_revision_created_at|date:"d.m.Y" }}
+                                    {{ document.date|date:"d.m.Y" }}
                                 </div>
                                 <div class="for_block_doc_text">
                                     {{ document.description }}

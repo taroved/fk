@@ -147,6 +147,8 @@ class PhotoAlbumPage(Page, BrowsableMixin):
                                 help_text=_("The page title as you'd like it to be seen by the public"))
     link = models.URLField(default='')
 
+    date = models.DateField("date")
+
     preview = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -160,6 +162,7 @@ class PhotoAlbumPage(Page, BrowsableMixin):
 
     content_panels = [
         FieldPanel('title', classname="title full"),
+        FieldPanel('date', classname="date"),
         FieldPanel('link', classname="link full"),
         ImageChooserPanel('preview'),
         FieldPanel('description', classname="full"),
@@ -173,6 +176,9 @@ class DocumentPage(Page, BrowsableMixin):
                                 help_text=_("The page title as you'd like it to be seen by the public"))
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
+
+    date = models.DateField("date")
+
     doc = models.ForeignKey(
         'wagtaildocs.Document',
         null=True,
@@ -193,6 +199,7 @@ class DocumentPage(Page, BrowsableMixin):
 
     content_panels = [
         FieldPanel('title', classname="title full"),
+        FieldPanel('date', classname="date"),
         DocumentChooserPanel('doc'),
         ImageChooserPanel('preview'),
         FieldPanel('description', classname="full")
@@ -206,6 +213,8 @@ class VideoPage(Page, BrowsableMixin):
                                 help_text=_("The page title as you'd like it to be seen by the public"))
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
+
+    date = models.DateField("date")
 
     link = models.URLField(default='')
     code = models.TextField(default='')
@@ -222,6 +231,7 @@ class VideoPage(Page, BrowsableMixin):
 
     content_panels = [
         FieldPanel('title', classname="title full"),
+        FieldPanel('date', classname="date"),
         FieldPanel('link', classname="full"),
         FieldPanel('code', classname="full"),
         ImageChooserPanel('preview'),
