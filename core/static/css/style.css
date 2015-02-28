@@ -278,6 +278,12 @@ ul {
   line-height: 23px;
   color: #061F33;
 }
+.for_body .container ul {
+  padding-left: 30px;
+}
+.for_body .container ul li {
+  list-style: disc;
+}
 .for_block_title {
   min-width: 230px;
   margin: 0 auto 45px;
