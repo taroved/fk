@@ -1230,14 +1230,16 @@ ul {
   line-height: 24px;
   color: #062033;
 }
-.for_speakers_abc {
+.for_body .container .for_speakers_abc {
   width: 1030px;
   margin: 0 auto 46px;
 }
-.for_speakers_abc ul {
+.for_body .container .for_speakers_abc ul {
+  padding: 0;
   overflow: hidden;
 }
-.for_speakers_abc ul li {
+.for_body .container .for_speakers_abc ul li {
+  list-style: none;
   font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
   float: left;
   text-transform: uppercase;
