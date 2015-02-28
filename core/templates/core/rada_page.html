@@ -23,10 +23,12 @@
 
                             <div class="col-xs-3">
                                 <div class="for_block_sp_item">
-{#                                    <a href="{% pageurl member.speaker_page %}">#}
+                                    <a style="cursor: default;" href="#">
+                                        {#                                    <a href="{% pageurl member.speaker_page %}">#}
                                         <span class="for_block_sp_photo">
                                             {% image member.photo height-300 as photo %}
-                                            <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}" class="grayscale grayscale-fade"/>
+                                            <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
+                                                 class="grayscale grayscale-fade"/>
                                         </span>
                                         <span class="for_block_sp_name">
                                             {% trans_field member 'title' %}
@@ -34,7 +36,7 @@
                                         <span class="for_block_sp_about">
                                             {% trans_field member 'position' %}
                                         </span>
-{#                                    </a>#}
+                                    </a>
                                 </div>
                             </div>
                         {% endfor %}
