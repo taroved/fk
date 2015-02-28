@@ -1,6 +1,7 @@
 # Киевский международный экономический форум #
 * Production: -
-* Test: http://demo.forumkyiv.org
+* Test: 128.199.44.157:8002
+* Flickr: https://flickr.com/photos/129599628@N03/
 
 #Layouts:
 
