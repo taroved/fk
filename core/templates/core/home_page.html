@@ -3,6 +3,7 @@
 {% load wagtailcore_tags %}
 {% load core_tags %}
 {% load wagtailimages_tags %}
+{% load wagtailroutablepage_tags %}
 {% load static %}
 {% load i18n %}
 
@@ -299,244 +300,44 @@
                             <div class="for_block_title_bot_in"></div>
                         </div>
                     </div>
+
                     <div class="for_block_sp_cont">
                         <div class="row">
 
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="/speakers/viktor-galasiuk/">
-                                        <span class="for_block_sp_photo">
+                            {% for speaker in self.forum_page.speakers.all|slice:":12" %}
 
-                                            <img src="/media/images/1405525778.focus-none.height-300.jpeg" width="270"
-                                                 height="300" alt="" class="grayscale grayscale-fade">
+                                {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                                    </div>
+                                    <div class="row">
+                                {% endif %}
+
+                                <div class="col-xs-3">
+                                    <div class="for_block_sp_item">
+                                        <a href="{% pageurl speaker.speaker_page %}">
+                                        <span class="for_block_sp_photo">
+                                            {% image speaker.speaker_page.photo height-300 as photo %}
+                                            <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
+                                                 class="grayscale grayscale-fade"/>
                                         </span>
                                         <span class="for_block_sp_name">
-                                            Віктор Галасюк
+                                            {% trans_field speaker.speaker_page 'title' %}
                                         </span>
                                         <span class="for_block_sp_about">
-                                            Президент Асоціації «Інноваційний розвиток України»
+                                            {% trans_field speaker.speaker_page 'position' %}
                                         </span>
-                                    </a>
+                                        </a>
+                                    </div>
                                 </div>
+                            {% endfor %}
                             </div>
-
-
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="/speakers/andrii-kirilenko/">
-                                        <span class="for_block_sp_photo">
-
-                                            <img src="/media/images/1412170688.focus-none.height-300.jpeg" width="270"
-                                                 height="300" alt="" class="grayscale grayscale-fade">
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            Андрій Кириленко
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            Професор фінансової практики Міжнародної бізнес-школи при Массачусетському технологічному інституті в Кембриджі, США
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="/speakers/chua-teong-ban/">
-                                        <span class="for_block_sp_photo">
-
-                                            <img src="/media/images/1405087192.focus-none.height-300.jpeg" width="270"
-                                                 height="300" alt="" class="grayscale grayscale-fade">
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            Чуа Теонг Бан
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            Надзвичайний та уповноважений Посол Малайзії в Україні
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="/speakers/viktor-krivenko/">
-                                        <span class="for_block_sp_photo">
-
-                                            <img src="/media/images/1405415028.focus-none.height-300.jpeg" width="270"
-                                                 height="300" alt="" class="grayscale grayscale-fade">
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            Віктор Кривенко
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            Радник міністра фінансів України
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="row">
-
-
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="/speakers/oleg-boiarin/">
-                                        <span class="for_block_sp_photo">
-
-                                            <img src="/media/images/1410203754.focus-none.height-300.jpeg" width="270"
-                                                 height="300" alt="" class="grayscale grayscale-fade">
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            Олег Боярин
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            Голова Федерації роботодавців автомобільної галузі України, голова Президії Федерації
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="/speakers/viktor-ivanchik/">
-                                        <span class="for_block_sp_photo">
-
-                                            <img src="/media/images/1412021074.focus-none.height-300.png" width="270"
-                                                 height="300" alt="" class="grayscale grayscale-fade">
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            Віктор Іванчик
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            Засновник та Генеральний директор агропромхолдингу «Астарта-Київ»
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="/speakers/tetiana-nanaieva/">
-                                        <span class="for_block_sp_photo">
-
-                                            <img src="/media/images/1412157063.focus-none.height-300.jpeg" width="270"
-                                                 height="300" alt="" class="grayscale grayscale-fade">
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            Тетяна Нанаєва
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            Директор Intel з корпоративних справ та зв’язків з урядовими установами в Україні та СНД
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="/speakers/gerkhard-pfaifer/">
-                                        <span class="for_block_sp_photo">
-
-                                            <img src="/media/images/1405087006.focus-none.height-300.jpeg" width="270"
-                                                 height="300" alt="" class="grayscale grayscale-fade">
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            Герхард Пфайфер
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            Президент Bosch Group у країнах СНД
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="/speakers/valerii-fishchuk/">
-                                        <span class="for_block_sp_photo">
-
-                                            <img src="/media/images/1411575034.focus-none.height-300.jpeg" width="270"
-                                                 height="300" alt="" class="grayscale grayscale-fade">
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            Валерій Фіщук
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            Регіональний менеджер із взаємодії з державним сектором представництва Cisco в Україні
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="/speakers/bernard-keisi/">
-                                        <span class="for_block_sp_photo">
-
-                                            <img src="/media/images/1405263875.focus-none.height-300.jpeg" width="270"
-                                                 height="300" alt="" class="grayscale grayscale-fade">
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            Бернард Кейсі
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            Президент Американської торгівельної палати в Україні (AmCham)
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="/speakers/erik-rainert/">
-                                        <span class="for_block_sp_photo">
-
-                                            <img src="/media/images/1405087041.focus-none.height-300.jpeg" width="270"
-                                                 height="300" alt="" class="grayscale grayscale-fade">
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            Ерік Райнерт
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            Професор стратегій розвитку у Талліннському технічному університеті
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="/speakers/lidiia-shinkaruk/">
-                                        <span class="for_block_sp_photo">
-
-                                            <img src="/media/images/1410878363.focus-none.height-300.jpeg" width="270"
-                                                 height="300" alt="" class="grayscale grayscale-fade">
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            Лідія Шинкарук
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            Доктор економічних наук, член-кореспондент НАН України
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
+
+                    <div class="for_block_all">
+                        <a href="{% routablepageurl self.forum_page "speakers" %}">
+                            повний список спікерів
+                        </a>
+                    </div>
+
                 </div>
 
             </div>

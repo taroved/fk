@@ -586,7 +586,7 @@ ul {
   min-height: 390px;
 }
 .col-xs-3:nth-child(-n+4) > .for_block_sp_item {
-  margin-bottom: 75px;
+  margin-bottom: 20px;
 }
 /*.for_block_sp_item a:hover .for_block_sp_photo img:last-child {*/
 /*opacity: 0;*/
