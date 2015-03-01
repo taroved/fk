@@ -1276,6 +1276,9 @@ ul {
 .for_block_prog {
   margin-bottom: 95px;
 }
+.for_block_prog_cont ul {
+  list-style: none;
+}
 .for_block_prog_cont table {
   width: 100%;
   font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
@@ -1287,6 +1290,7 @@ ul {
 .for_block_prog_cont table tr td {
   padding: 28px 0;
   vertical-align: middle;
+  max-width: 650px;
 }
 .for_block_prog_cont table tr:first-child td {
   padding: 0;

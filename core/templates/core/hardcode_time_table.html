@@ -12,9 +12,8 @@
 
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-
-            {% if LANGUAGE_CODE == 'uk' %}
-                <div class="for_block_prog_cont">
+            <div class="for_block_prog_cont">
+                {% if LANGUAGE_CODE == 'uk' %}
                     <table>
                         <tbody>
                         <tr>
@@ -24,11 +23,6 @@
                                     <img src="{% static 'images/for_time.png' %}" alt="image">
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div>#}
-                            {#                            <img src="{% static 'images/for_location.png' %}" alt="image">#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     <img src="{% static 'images/for_message.png' %}" alt="image">
@@ -41,8 +35,6 @@
                                     08:00 - 09:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Бізнес-сніданок із спікерами КМЕФ 2015*
@@ -55,8 +47,6 @@
                                     08:00 - 09:15
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Реєстрація
@@ -72,22 +62,17 @@
                                     09:15 - 10:15
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div class="for_hover_1">#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div class="for_ul_1">
                                     <ul>
-                                        <li class="for_table_title">“Україна сьогодні: відвертий професійний погляд”</li>
+                                        <li class="for_table_title">“Україна сьогодні: відвертий професійний погляд”
+                                        </li>
                                         <li>
                                             <a href="#">Відео-інтро “Україна. Точка відліку”</a>
                                         </li>
                                         <li>
-                                            <a href="#">Провідний світовий досвід розбудови потужної економіки країни</a>
+                                            <a href="#">Провідний світовий досвід розбудови потужної економіки
+                                                країни</a>
                                         </li>
                                         <li>
                                             <a href="#">Бачення економічного розвитку від Адміністрації Президента</a>
@@ -102,8 +87,6 @@
                                     10:15 - 11:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Кава-брейк
@@ -119,19 +102,6 @@
                                     11:00 - 12:30
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div class="for_hover_2">#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 1#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Стамбул#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 2#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div class="for_ul_2">
                                     <ul>
@@ -154,8 +124,6 @@
                                     12:30 - 13:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Кава-брейк
@@ -171,19 +139,6 @@
                                     13:00 - 14:30
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div class="for_hover_3">#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 1#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Стамбул#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 2#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div class="for_ul_3">
                                     <ul>
@@ -206,8 +161,6 @@
                                     14:30 - 16:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Бізнес-ланч
@@ -223,16 +176,6 @@
                                     16:00 - 17:30
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div class="for_hover_4">#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 1#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 2#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div class="for_ul_4">
                                     <ul>
@@ -240,7 +183,8 @@
                                             <a href="#">Енергетична незалежність України</a>
                                         </li>
                                         <li>
-                                            <a href="#">«Точки зростання» - виграшна стратегія в умовах глобальної конкуренції</a>
+                                            <a href="#">«Точки зростання» - виграшна стратегія в умовах глобальної
+                                                конкуренції</a>
                                         </li>
                                         <li>
                                             <a href="#">Партнерство бізнесу та влади</a>
@@ -255,13 +199,6 @@
                                     18:00 - 20:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Фуршет
@@ -274,13 +211,6 @@
                                     19:00 - 22:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Банкет-прийом від імені організаторів**
@@ -294,11 +224,9 @@
                         **Для власників пакету «Платинум»<br/>
                         В програмі можливі зміни
                     </div>
-                </div>
-            {% endif %}
+                {% endif %}
 
-            {% if LANGUAGE_CODE == 'ru' %}
-                <div class="for_block_prog_cont">
+                {% if LANGUAGE_CODE == 'ru' %}
                     <table>
                         <tbody>
                         <tr>
@@ -308,11 +236,6 @@
                                     <img src="{% static 'images/for_time.png' %}" alt="image">
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div>#}
-                            {#                            <img src="{% static 'images/for_location.png' %}" alt="image">#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     <img src="{% static 'images/for_message.png' %}" alt="image">
@@ -325,8 +248,6 @@
                                     08:00 - 09:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Бізнес-сніданок із спікерами КМЕФ 2015*
@@ -339,8 +260,6 @@
                                     08:00 - 09:15
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Реєстрація
@@ -356,22 +275,17 @@
                                     09:15 - 10:15
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div class="for_hover_1">#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div class="for_ul_1">
                                     <ul>
-                                        <li class="for_table_title">“Україна сьогодні: відвертий професійний погляд”</li>
+                                        <li class="for_table_title">“Україна сьогодні: відвертий професійний погляд”
+                                        </li>
                                         <li>
                                             <a href="#">Відео-інтро “Україна. Точка відліку”</a>
                                         </li>
                                         <li>
-                                            <a href="#">Провідний світовий досвід розбудови потужної економіки країни</a>
+                                            <a href="#">Провідний світовий досвід розбудови потужної економіки
+                                                країни</a>
                                         </li>
                                         <li>
                                             <a href="#">Бачення економічного розвитку від Адміністрації Президента</a>
@@ -386,8 +300,6 @@
                                     10:15 - 11:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Кава-брейк
@@ -403,19 +315,6 @@
                                     11:00 - 12:30
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div class="for_hover_2">#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 1#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Стамбул#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 2#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div class="for_ul_2">
                                     <ul>
@@ -437,9 +336,6 @@
                                 <div>
                                     12:30 - 13:00
                                 </div>
-                            </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Кава-брейк
@@ -455,19 +351,6 @@
                                     13:00 - 14:30
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div class="for_hover_3">#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 1#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Стамбул#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 2#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div class="for_ul_3">
                                     <ul>
@@ -490,8 +373,6 @@
                                     14:30 - 16:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Бізнес-ланч
@@ -507,16 +388,6 @@
                                     16:00 - 17:30
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div class="for_hover_4">#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 1#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 2#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div class="for_ul_4">
                                     <ul>
@@ -524,7 +395,8 @@
                                             <a href="#">Енергетична незалежність України</a>
                                         </li>
                                         <li>
-                                            <a href="#">«Точки зростання» - виграшна стратегія в умовах глобальної конкуренції</a>
+                                            <a href="#">«Точки зростання» - виграшна стратегія в умовах глобальної
+                                                конкуренції</a>
                                         </li>
                                         <li>
                                             <a href="#">Партнерство бізнесу та влади</a>
@@ -539,13 +411,6 @@
                                     18:00 - 20:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Фуршет
@@ -558,13 +423,6 @@
                                     19:00 - 22:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Банкет-прийом від імені організаторів**
@@ -578,11 +436,9 @@
                         **Для власників пакету «Платинум»<br/>
                         В програмі можливі зміни
                     </div>
-                </div>
-            {% endif %}
+                {% endif %}
 
-            {% if LANGUAGE_CODE == 'en' %}
-                <div class="for_block_prog_cont">
+                {% if LANGUAGE_CODE == 'en' %}
                     <table>
                         <tbody>
                         <tr>
@@ -592,11 +448,6 @@
                                     <img src="{% static 'images/for_time.png' %}" alt="image">
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div>#}
-                            {#                            <img src="{% static 'images/for_location.png' %}" alt="image">#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     <img src="{% static 'images/for_message.png' %}" alt="image">
@@ -609,8 +460,6 @@
                                     08:00 - 09:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Participation in Business Breakfast with KIEF 2015 speakers*
@@ -623,8 +472,6 @@
                                     08:00 - 09:15
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Registration
@@ -640,22 +487,17 @@
                                     09:15 - 10:15
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div class="for_hover_1">#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div class="for_ul_1">
                                     <ul>
                                         <li class="for_table_title">Ukraine. Starting point (video)</li>
                                         <li>
-                                            <a href="#">Best International Practices in Building Strong National Economy</a>
+                                            <a href="#">Best International Practices in Building Strong National
+                                                Economy</a>
                                         </li>
                                         <li>
-                                            <a href="#">Vision of Economic Development from the Presidential Administration an the Government of Ukraine</a>
+                                            <a href="#">Vision of Economic Development from the Presidential
+                                                Administration an the Government of Ukraine</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -667,8 +509,6 @@
                                     10:15 - 11:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Coffee break
@@ -684,19 +524,6 @@
                                     11:00 - 12:30
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div class="for_hover_2">#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 1#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Стамбул#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 2#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div class="for_ul_2">
                                     <ul>
@@ -719,8 +546,6 @@
                                     12:30 - 13:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Coffee break
@@ -736,19 +561,6 @@
                                     13:00 - 14:30
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div class="for_hover_3">#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 1#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Стамбул#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 2#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div class="for_ul_3">
                                     <ul>
@@ -771,8 +583,6 @@
                                     14:30 - 16:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Бізнес-ланч
@@ -788,16 +598,6 @@
                                     16:00 - 17:30
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div class="for_hover_4">#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 1#}
-                            {#                                                </span>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас 2#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div class="for_ul_4">
                                     <ul>
@@ -820,13 +620,6 @@
                                     18:00 - 20:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Buffet
@@ -839,13 +632,6 @@
                                     19:00 - 22:00
                                 </div>
                             </td>
-                            {#                    <td>#}
-                            {#                        <div>#}
-                            {#                                                <span>#}
-                            {#                                                    зал Даллас#}
-                            {#                                                </span>#}
-                            {#                        </div>#}
-                            {#                    </td>#}
                             <td>
                                 <div>
                                     Gala Dinner sponsored by the Organizers**
@@ -858,112 +644,10 @@
                         * Special invitation needed<br/>
                         ** For owners Platinum Package only <br/>
                     </div>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
+
         </div>
     </div>
 
 </div>
-
-{#<div class="for_block_program_date">#}
-{#                    {{ self.forum_page.date_from }}#}
-{#    8 Жовтня#}
-{#    <br>{% trans_field self.forum_page 'location_country' %}, {% trans_field self.forum_page 'location_city' %}, {% trans_field self.forum_page 'location_name' %}#}
-{#</div>#}
-{#<div class="for_block_program_cont">#}
-{#    <div class="for_block_program_item">#}
-{#        <div class="for_block_program_time">#}
-{#            09:30 - 10:15#}
-{#        </div>#}
-{#        <div class="for_block_program_event">#}
-{#            <div class="for_block_program_event_title">#}
-{#                Пленарне засідання#}
-{#            </div>#}
-{#            <div class="for_block_program_event_link">#}
-{#                <a href="#">#}
-{#                    “Україна сьогодні: відвертий професійний погляд”#}
-{#                </a>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="pad"></div>#}
-{#    </div>#}
-{#    <div class="for_block_program_item">#}
-{#        <div class="for_block_program_time">#}
-{#            10:30 - 12:00#}
-{#        </div>#}
-{#        <div class="for_block_program_event">#}
-{#            <div class="for_block_program_event_title">#}
-{#                Панельні дискусії#}
-{#            </div>#}
-{#            <div class="for_block_program_event_link">#}
-{#                <a href="#">#}
-{#                    Високі технології: Україна в хай-тек перегонах#}
-{#                </a>#}
-{#            </div>#}
-{#            <div class="for_block_program_event_link">#}
-{#                <a href="#">#}
-{#                    Фінансування проектів розвитку#}
-{#                </a>#}
-{#            </div>#}
-{#            <div class="for_block_program_event_link">#}
-{#                <a href="#">#}
-{#                    Освітня революція для бізнесу#}
-{#                </a>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="pad"></div>#}
-{#    </div>#}
-{#    <div class="for_block_program_item">#}
-{#        <div class="for_block_program_time">#}
-{#            12:30 - 14:00#}
-{#        </div>#}
-{#        <div class="for_block_program_event">#}
-{#            <div class="for_block_program_event_title">#}
-{#                Панельні дискусії#}
-{#            </div>#}
-{#            <div class="for_block_program_event_link">#}
-{#                <a href="#">#}
-{#                    Точки зростання – виграшна стратегія у глобальній конкуренції#}
-{#                </a>#}
-{#            </div>#}
-{#            <div class="for_block_program_event_link">#}
-{#                <a href="#">#}
-{#                    Сільське господарство: добувна чи переробна галузь?#}
-{#                </a>#}
-{#            </div>#}
-{#            <div class="for_block_program_event_link">#}
-{#                <a href="#">#}
-{#                    Модель енергетичної незалежностi#}
-{#                </a>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="pad"></div>#}
-{#    </div>#}
-{#    <div class="for_block_program_item">#}
-{#        <div class="for_block_program_time">#}
-{#            15:30 - 17:00#}
-{#        </div>#}
-{#        <div class="for_block_program_event">#}
-{#            <div class="for_block_program_event_title">#}
-{#                Пленарне засідання#}
-{#            </div>#}
-{#            <div class="for_block_program_event_link">#}
-{#                <a href="#">#}
-{#                    “Партнерство бізнесу та влади. Перезавантаження”#}
-{#                </a>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="pad"></div>#}
-{#    </div>#}
-{#    <div class="for_block_program_item">#}
-{#        <div class="for_block_program_time">#}
-{#            19:30 - 21:00#}
-{#        </div>#}
-{#        <div class="for_block_program_event">#}
-{#            <div class="for_block_program_event_title">#}
-{#                Прийом (коктейль) від імені організаторів#}
-{#            </div>#}
-{#        </div>#}
-{#        <div class="pad"></div>#}
-{#    </div>#}
-{#</div>#}
