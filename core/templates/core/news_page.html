@@ -28,16 +28,16 @@
             <div class="row">
                 <div class="col-xs-12">
                     <span>{% trans "share" %}:</span>
-                    <a href="#">
+                    <a target="_share" href="https://www.facebook.com/sharer/sharer.php?u={{ self.full_url }}">
                         <img src="{% static "images/for_repost_1.jpg" %}" alt="link">
                     </a>
-                    <a href="#">
+                    <a target="_share" href="https://twitter.com/home?status={{ self.full_url }}">
                         <img src="{% static "images/for_repost_2.jpg" %}" alt="link">
                     </a>
-                    <a href="#">
+                    <a target="_share" href="https://plus.google.com/share?url={{ self.full_url }}">
                         <img src="{% static "images/for_repost_3.jpg" %}" alt="link">
                     </a>
-                    <a href="#">
+                    <a target="_share" href="https://www.linkedin.com/shareArticle?mini=true&url={{ self.full_url }}">
                         <img src="{% static "images/for_repost_4.jpg" %}" alt="link">
                     </a>
                 </div>
