@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
-{% load static core_tags %}
+{% load static %}
+{% load core_tags %}
 {% load wagtailcore_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-
-    {% trans_field self 'content' %}
-
+    <div class="container">
+        {% trans_field self 'content' %}
+    </div>
 {% endblock %}

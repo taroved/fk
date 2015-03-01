@@ -64,6 +64,20 @@
   font-style: normal;
 }
 
+@font-face {
+    font-family: 'PFBeauSansPro-ThinItalic';
+    src: url('/static/fonts/PFBeauSansPro-ThinItalic.eot');
+    src: url('/static/fonts/PFBeauSansPro-ThinItalic.eot?#iefix') format('embedded-opentype'),
+    url('/static/fonts/PFBeauSansPro-ThinItalic.woff') format('woff'),
+    url('/static/fonts/PFBeauSansPro-ThinItalic.ttf') format('truetype'),
+    url('/static/fonts/PFBeauSansPro-ThinItalic.svg#pf_beausans_probold') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@default-font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+@default-font-family-bold: 'PFBeauSansPro-Bold', Arial, sans-serif;
+
 #for_wrapper {
   min-height: 100%;
   min-width: 1230px;
@@ -104,6 +118,7 @@ ul {
 }
 
 /********** HEADER **********/
+
 
 .for_header {
   background: #0098cf url("/static/images/for_header.jpg") top center no-repeat;
@@ -175,12 +190,12 @@ ul {
 .for_lang > ul > li > a {
   color: #c3c3c3;
   float: left;
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
 }
 
 .for_lang > ul > li.active > a {
   color: #fff;
-  font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
+  font-family: @default-font-family-bold;
   font-weight: bold;
 }
 
@@ -201,7 +216,7 @@ ul {
   height: 20px;
   background: rgba(255, 255, 255, 0.7);
   color: #fff;
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
 }
 
 .for_form_sub {
@@ -223,7 +238,7 @@ ul {
 }
 
 .for_top_menu > ul {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 17px;
   height: 24px;
   line-height: normal;
@@ -307,21 +322,21 @@ ul {
 }
 
 .for_slide_block_1 {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 22px;
   line-height: 22px;
   margin-bottom: 10px;
 }
 
 .for_slide_block_2 {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 62px;
   line-height: 62px;
   margin-bottom: 12px;
 }
 
 .for_slide_block_3 {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 29px;
   line-height: 29px;
   margin-bottom: 14px;
@@ -348,23 +363,23 @@ ul {
 }
 
 /********** BODY **********/
-
 .for_body {
-  .rich-text {
-    font-family: "PFBeauSansPro-Light", Arial, sans-serif;
-    font-size: 19px;
-    line-height: 23px;
-    color: #061F33;
+
+  font-family: "PFBeauSansPro-Light", Arial, sans-serif;
+  font-size: 19px;
+  line-height: 23px;
+//  color: #061F33;
+
+//  .rich-text {
+//    font-size: 19px;
+//    line-height: 23px;
+//    color: #061F33;
+//  }
+
+  ul, ol {
+    list-style: disc inside;
   }
 
-  .container {
-    ul {
-      padding-left: 30px;
-      li {
-        list-style: disc;
-      }
-    }
-  }
 }
 
 .for_block_title {
@@ -378,7 +393,7 @@ ul {
 }
 
 .for_block_title_top a {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   color: #0098cf;
   -webkit-transition: color 100ms ease-out;
   -moz-transition: color 100ms ease-out;
@@ -437,7 +452,7 @@ ul {
 }
 
 .for_block_news_date {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   line-height: 19px;
   color: #989ca2;
@@ -445,7 +460,7 @@ ul {
 }
 
 .for_block_news_title {
-  font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
+  font-family: @default-font-family-bold;
   font-size: 30px;
   line-height: 36px;
   text-transform: uppercase;
@@ -457,7 +472,7 @@ ul {
 }
 
 .for_block_news_text {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   line-height: 23px;
   color: #072033;
@@ -514,7 +529,7 @@ ul {
 }
 
 .for_block_news_small_date {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 15px;
   line-height: 15px;
   color: #989ca2;
@@ -589,7 +604,7 @@ ul {
 }
 
 .for_block_video_date {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 14px;
   line-height: 14px;
   color: #989ca2;
@@ -597,7 +612,7 @@ ul {
 }
 
 .for_block_video_text {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   line-height: 23px;
   color: #061f33;
@@ -634,7 +649,7 @@ ul {
 }
 
 .for_about_title {
-  font-family: 'PFBeauSansPro-SemiBold', Arial, sans-serif;
+  font-family: @default-font-family-bold;
   text-align: center;
   font-size: 41px;
   line-height: 48px;
@@ -655,7 +670,7 @@ ul {
 }
 
 .for_block_program_date {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   line-height: 22px;
   color: #072033;
@@ -668,7 +683,7 @@ ul {
 }
 
 .for_block_program_item {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   line-height: 19px;
   margin-bottom: 30px;
@@ -701,7 +716,7 @@ ul {
 
 .for_block_sp_item a {
   display: block;
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   text-align: center;
 }
 
@@ -764,7 +779,7 @@ ul {
 }
 
 .for_block_all {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   text-align: center;
 }
@@ -786,7 +801,7 @@ ul {
 }
 
 .for_block_org_title {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 17px;
   line-height: 17px;
   color: #6a737b;
@@ -813,7 +828,7 @@ ul {
 
 .for_block_part_title {
   text-align: center;
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 17px;
   line-height: 17px;
   color: #6a737b;
@@ -861,7 +876,7 @@ ul {
 }
 
 .for_pathway {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 13px;
   color: #0098cf;
   margin-bottom: 40px;
@@ -884,7 +899,7 @@ ul {
 }
 
 .for_block_prev_cont {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   text-align: center;
   font-size: 19px;
   line-height: 21px;
@@ -994,7 +1009,7 @@ ul {
 }
 
 .for_block_doc_right {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
 }
 
 .for_block_doc_date {
@@ -1065,7 +1080,7 @@ ul {
 }
 
 .for_news_item_date {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 15px;
   line-height: 15px;
   color: #989ca2;
@@ -1073,7 +1088,7 @@ ul {
 }
 
 .for_news_item_title {
-  font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
+  font-family: @default-font-family-bold;
   font-size: 19px;
   line-height: 19px;
   color: #061f33;
@@ -1081,7 +1096,7 @@ ul {
 }
 
 .for_news_item_text {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   line-height: 23px;
   color: #061f33;
@@ -1101,7 +1116,7 @@ ul {
 }
 
 .for_block_ab_top {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   line-height: 22px;
   color: #979ca1;
@@ -1117,7 +1132,7 @@ ul {
 }
 
 .for_block_ab_list_title {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   line-height: 19px;
   color: #0098cf;
@@ -1125,7 +1140,7 @@ ul {
 }
 
 .for_block_ab_list_in ul li {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   line-height: 19px;
   color: #072033;
@@ -1147,7 +1162,7 @@ ul {
 }
 
 .for_block_ac_cont_title {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   line-height: 22px;
   color: #061f33;
@@ -1161,7 +1176,7 @@ ul {
 }
 
 .for_ac_form_item {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
 }
 
 .for_ac_form_item_title {
@@ -1192,7 +1207,7 @@ ul {
 }
 
 .for_ac_form_go input {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   border: none;
   font-size: 19px;
   line-height: 19px;
@@ -1217,7 +1232,7 @@ ul {
 }
 
 .for_block_bus_cont p {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   color: #979ca1;
   line-height: 22px;
@@ -1242,7 +1257,7 @@ ul {
 }
 
 .for_repost span {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   color: #061f33;
   margin-right: 12px;
@@ -1282,7 +1297,7 @@ ul {
 
 .for_block_org_right {
   margin-left: 300px;
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
 }
 
@@ -1327,7 +1342,7 @@ ul {
 }
 
 .for_block_pan_right p {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   color: #061f33;
   line-height: 23px;
@@ -1376,7 +1391,7 @@ ul {
 
 .for_pan_speaker_right {
   margin-left: 130px;
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   padding-top: 10px;
 }
@@ -1413,7 +1428,7 @@ ul {
 }
 
 .for_block_pack_cont_title {
-  font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
+  font-family: @default-font-family-bold;
   color: #0098cf;
   font-size: 18px;
   line-height: 18px;
@@ -1424,7 +1439,7 @@ ul {
 .for_block_pack_cont table {
   display: block;
   width: 100%;
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   line-height: 19px;
   margin-bottom: 32px;
@@ -1464,7 +1479,7 @@ ul {
 }
 
 .for_block_pack_sale {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
   line-height: 22px;
   color: #989ca2;
@@ -1489,7 +1504,7 @@ ul {
 
 .for_block_speaker_right {
   margin-left: 300px;
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 19px;
 }
 
@@ -1521,7 +1536,7 @@ ul {
       overflow: hidden;
       li {
         list-style: none;
-        font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+        font-family: @default-font-family;
         float: left;
         text-transform: uppercase;
         font-size: 20px;
@@ -1567,7 +1582,7 @@ ul {
 
 .for_block_prog_cont table {
   width: 100%;
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   margin-bottom: 26px;
 }
 
@@ -1629,7 +1644,7 @@ ul {
 }
 
 .for_table_title {
-  font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
+  font-family: @default-font-family-bold;
 }
 
 .for_table_title:hover {
@@ -1642,22 +1657,21 @@ ul {
 
 .for_block_prog_cont table ul li a {
   color: #061f33;
-  padding-left: 17px;
-  background: url("../images/for_circle.png") left center no-repeat;
+//  padding-left: 17px;
+//  background: url("../images/for_circle.png") left center no-repeat;
 }
 
 .for_block_prog_cont table ul li a:hover {
   color: #0098cf;
   text-decoration: underline;
-  background: url("../images/for_circle_hover.png") left center no-repeat;
+//  background: url("../images/for_circle_hover.png") left center no-repeat;
 }
 
 .for_block_prog_bot {
   font-size: 16px;
   color: #989ca2;
-  margin-left: 400px;
+//  margin-left: 400px;
   font-family: 'PFBeauSansPro-ThinItalic';
-
 }
 
 /********** FOOTER **********/
@@ -1709,7 +1723,7 @@ footer {
 }
 
 .for_add {
-  font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
+  font-family: @default-font-family-bold;
   font-size: 17px;
   color: #fff;
   margin-right: 10px;
@@ -1733,14 +1747,14 @@ footer {
 
 .for_contacts {
   float: left;
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 17px;
   line-height: 20px;
   color: #fff;
 }
 
 .for_contacts span {
-  font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
+  font-family: @default-font-family-bold;
 }
 
 .for_footer_list {
@@ -1752,13 +1766,13 @@ footer {
 }
 
 .for_footer_item {
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 17px;
   color: #fff;
 }
 
 .for_footer_item ul li:first-child {
-  font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
+  font-family: @default-font-family-bold;
 }
 
 .for_footer_item ul li a {
@@ -1771,11 +1785,22 @@ footer {
 
 .for_copyright {
   text-align: right;
-  font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
+  font-family: @default-font-family;
   font-size: 13px;
   color: #fff;
 }
 
 img.full-width {
   width: 100%;
+}
+
+.template-contacts-page {
+  h1, h2, h3, h4, h5, h6 {
+    color: #0098CF;
+  }
+}
+
+
+.error {
+  color: #A94442;
 }

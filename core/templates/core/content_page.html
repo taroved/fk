@@ -7,7 +7,8 @@
 
 {% block content %}
 
-{#    {{ self.body | richtext }}#}
-    {% trans_field self 'body' %}
+    <div class="container">
+        {% trans_field self 'body' %}
+    </div>
 
 {% endblock %}

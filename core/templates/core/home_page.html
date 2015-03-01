@@ -15,305 +15,308 @@
 
 
 {% block content %}
-    <div class="row">
-        <div class="for_block_news">
-            <div class="for_block_title">
-                <div class="for_block_title_top">
-                    <a href="/news/">
-                        {% trans "News" %}
-                    </a>
+
+    <div class="container">
+        <div class="row">
+            <div class="for_block_news">
+                <div class="for_block_title">
+                    <div class="for_block_title_top">
+                        <a href="/news/">
+                            {% trans "News" %}
+                        </a>
+                    </div>
+                    <div class="for_block_title_bot">
+                        <div class="for_block_title_bot_in"></div>
+                    </div>
                 </div>
-                <div class="for_block_title_bot">
-                    <div class="for_block_title_bot_in"></div>
-                </div>
-            </div>
-            <div class="for_block_news_cont">
-                {% if self.top_news.0 %}
-                    <div class="cox-xs-12">
-                        <div class="for_block_news_cont_top">
-                            <div class="for_block_news_left">
-                                <a href="{% pageurl self.top_news.0 %}">
-                                    {% image self.top_news.0.image fill-569x314-c100 %}
-                                </a>
-                            </div>
-                            <div class="for_block_news_right">
-                                <div class="for_block_news_date">
-                                    {{ self.top_news.0.date|date:"d.m.Y" }}
-                                </div>
-                                <div class="for_block_news_title">
+                <div class="for_block_news_cont">
+                    {% if self.top_news.0 %}
+                        <div class="cox-xs-12">
+                            <div class="for_block_news_cont_top">
+                                <div class="for_block_news_left">
                                     <a href="{% pageurl self.top_news.0 %}">
-                                        {{ self.top_news.0.title }}
+                                        {% image self.top_news.0.image fill-569x314-c100 %}
                                     </a>
                                 </div>
-                                <div class="for_block_news_text">
-                                    {{ self.top_news.0.short|linebreaksbr }}
+                                <div class="for_block_news_right">
+                                    <div class="for_block_news_date">
+                                        {{ self.top_news.0.date|date:"d.m.Y" }}
+                                    </div>
+                                    <div class="for_block_news_title">
+                                        <a href="{% pageurl self.top_news.0 %}">
+                                            {{ self.top_news.0.title }}
+                                        </a>
+                                    </div>
+                                    <div class="for_block_news_text">
+                                        {{ self.top_news.0.short|linebreaksbr }}
+                                    </div>
                                 </div>
+                                <div class="pad"></div>
                             </div>
-                            <div class="pad"></div>
+                        </div>
+                    {% endif %}
+                    <div class="for_block_news_cont_bot">
+                        <div class="row">
+                            {% if self.top_news.1 %}
+                                <div class="col-xs-6">
+                                    <div class="for_block_news_small">
+                                        <div class="for_block_news_small_left">
+                                            <a href="{% pageurl self.top_news.1 %}">
+                                                {% image self.top_news.1.image fill-270x146-c100 %}
+                                            </a>
+                                        </div>
+                                        <div class="for_block_news_small_right">
+                                            <div class="for_block_news_small_date">
+                                                {{ self.top_news.1.date|date:"d.m.Y" }}
+                                            </div>
+                                            <div class="for_block_news_small_text">
+                                                {{ self.top_news.1.title|linebreaksbr }}
+                                            </div>
+                                        </div>
+                                        <div class="pad"></div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if self.top_news.2 %}
+                                <div class="col-xs-6">
+                                    <div class="for_block_news_small">
+                                        <div class="for_block_news_small_left">
+                                            <a href="{% pageurl self.top_news.2 %}">
+                                                {% image self.top_news.2.image fill-270x146-c100 %}
+                                            </a>
+                                        </div>
+                                        <div class="for_block_news_small_right">
+                                            <div class="for_block_news_small_date">
+                                                {{ self.top_news.2.date|date:"d.m.Y" }}
+                                            </div>
+                                            <div class="for_block_news_small_text">
+                                                {{ self.top_news.2.title|linebreaksbr }}
+                                            </div>
+                                        </div>
+                                        <div class="pad"></div>
+                                    </div>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
-                {% endif %}
-                <div class="for_block_news_cont_bot">
+                </div>
+            </div>
+            <div class="for_block_video">
+                <div class="for_block_title for_block_title_video">
+                    <div class="for_block_title_top">
+                        <a href="#">
+                            {% trans "Video" %}
+                        </a>
+                    </div>
+                    <div class="for_block_title_bot">
+                        <div class="for_block_title_bot_in"></div>
+                    </div>
+                </div>
+                <div class="for_block_video_cont">
                     <div class="row">
-                        {% if self.top_news.1 %}
-                            <div class="col-xs-6">
-                                <div class="for_block_news_small">
-                                    <div class="for_block_news_small_left">
-                                        <a href="{% pageurl self.top_news.1 %}">
-                                            {% image self.top_news.1.image fill-270x146-c100 %}
+                        {% for material in self.material_videos.all %}
+                            <div class="col-xs-3">
+                                <div class="for_block_video_item">
+                                    <div class="for_block_video_view">
+                                        <a class="fancybox-media" href="{{ material.video.link }}">
+                                            <img src="{% static 'images/for_play.png' %}" class="for_play" alt="image">
+                                            <span class="for_video_shadow"></span>
+                                            {% image material.video.preview fill-569x314-c100 %}
                                         </a>
                                     </div>
-                                    <div class="for_block_news_small_right">
-                                        <div class="for_block_news_small_date">
-                                            {{ self.top_news.1.date|date:"d.m.Y" }}
-                                        </div>
-                                        <div class="for_block_news_small_text">
-                                            {{ self.top_news.1.title|linebreaksbr }}
-                                        </div>
+                                    <div class="for_block_video_date">
+                                        {{ material.video.date|date:"d.m.Y" }}
                                     </div>
-                                    <div class="pad"></div>
+                                    <div class="for_block_video_text">
+                                        {% trans_field material.video 'description' %}
+                                    </div>
                                 </div>
                             </div>
-                        {% endif %}
-                        {% if self.top_news.2 %}
-                            <div class="col-xs-6">
-                                <div class="for_block_news_small">
-                                    <div class="for_block_news_small_left">
-                                        <a href="{% pageurl self.top_news.2 %}">
-                                            {% image self.top_news.2.image fill-270x146-c100 %}
-                                        </a>
-                                    </div>
-                                    <div class="for_block_news_small_right">
-                                        <div class="for_block_news_small_date">
-                                            {{ self.top_news.2.date|date:"d.m.Y" }}
-                                        </div>
-                                        <div class="for_block_news_small_text">
-                                            {{ self.top_news.2.title|linebreaksbr }}
-                                        </div>
-                                    </div>
-                                    <div class="pad"></div>
-                                </div>
-                            </div>
-                        {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="for_block_video">
-            <div class="for_block_title for_block_title_video">
-                <div class="for_block_title_top">
-                    <a href="#">
-                        {% trans "Video" %}
-                    </a>
+            <div class="for_block_banners">
+                <div class="for_block_title">
+                    <div class="for_block_title_bot">
+                        <div class="for_block_title_bot_in"></div>
+                    </div>
                 </div>
-                <div class="for_block_title_bot">
-                    <div class="for_block_title_bot_in"></div>
-                </div>
-            </div>
-            <div class="for_block_video_cont">
-                <div class="row">
-                    {% for material in self.material_videos.all %}
-                        <div class="col-xs-3">
-                            <div class="for_block_video_item">
-                                <div class="for_block_video_view">
-                                    <a class="fancybox-media" href="{{ material.video.link }}">
-                                        <img src="{% static 'images/for_play.png' %}" class="for_play" alt="image">
-                                        <span class="for_video_shadow"></span>
-                                        {% image material.video.preview fill-569x314-c100 %}
-                                    </a>
-                                </div>
-                                <div class="for_block_video_date">
-                                    {{ material.video.date|date:"d.m.Y" }}
-                                </div>
-                                <div class="for_block_video_text">
-                                    {% trans_field material.video 'description' %}
-                                </div>
+                <div class="for_block_banners_cont">
+                    {% for advert_placement in self.advert_placements.all %}
+                        <div class="col-xs-6">
+                            <div class="for_block_banner_item">
+                                <a href="{{ advert_placement.advert.url }}">
+                                    {% image advert_placement.advert.image max-570x100 %}
+                                </a>
                             </div>
                         </div>
                     {% endfor %}
-                </div>
-            </div>
-        </div>
-        <div class="for_block_banners">
-            <div class="for_block_title">
-                <div class="for_block_title_bot">
-                    <div class="for_block_title_bot_in"></div>
-                </div>
-            </div>
-            <div class="for_block_banners_cont">
-                {% for advert_placement in self.advert_placements.all %}
-                    <div class="col-xs-6">
-                        <div class="for_block_banner_item">
-                            <a href="{{ advert_placement.advert.url }}">
-                                {% image advert_placement.advert.image max-570x100 %}
-                            </a>
-                        </div>
-                    </div>
-                {% endfor %}
 
+                </div>
             </div>
         </div>
     </div>
 
     <div class="for_about">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-xs-12 col-md-6 col-md-offset-3">
-                <div class="for_about_title">
-                    {% trans_field self.forum_page 'title_long' %}
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-xs-12 col-md-6 col-md-offset-3">
+                    <div class="for_about_title">
+                        {% trans_field self.forum_page 'title_long' %}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
+            <div class="row">
 
 
-            <div class="col-md-12">
+                <div class="col-md-12">
 
-                <div class="for_block_program">
-                    <div class="for_block_title for_block_title_program">
-                        <div class="for_block_title_top">
-                            <a href="#">
-                                {% trans "Timetable" %}
-                            </a>
+                    <div class="for_block_program">
+                        <div class="for_block_title for_block_title_program">
+                            <div class="for_block_title_top">
+                                <a href="#">
+                                    {% trans "Timetable" %}
+                                </a>
+                            </div>
+                            <div class="for_block_title_bot">
+                                <div class="for_block_title_bot_in for_block_title_bot_back"></div>
+                            </div>
                         </div>
-                        <div class="for_block_title_bot">
-                            <div class="for_block_title_bot_in for_block_title_bot_back"></div>
-                        </div>
-                    </div>
-                    {#                <div class="for_block_program_date">#}
-                    {#                    2 жовтня 2015#}
-                    {#                    <br>Україна, Київ, НСК «Олімпійський»#}
-                    {#                </div>#}
-                    {% include "core/hardcode_time_table.html" %}
-                    {#                    <div class="for_block_program_date">#}
-                    {#                    {{ self.forum_page.date_from }}#}
-                    {#                        8 Жовтня#}
-                    {#                        <br>{% trans_field self.forum_page 'location_country' %}, {% trans_field self.forum_page 'location_city' %}, {% trans_field self.forum_page 'location_name' %}#}
-                    {#                    </div>#}
-                    {#                    <div class="for_block_program_cont">#}
-                    {#                        <div class="for_block_program_item">#}
-                    {#                            <div class="for_block_program_time">#}
-                    {#                                09:30 - 10:15#}
-                    {#                            </div>#}
-                    {#                            <div class="for_block_program_event">#}
-                    {#                                <div class="for_block_program_event_title">#}
-                    {#                                    Пленарне засідання#}
-                    {#                                </div>#}
-                    {#                                <div class="for_block_program_event_link">#}
-                    {#                                    <a href="#">#}
-                    {#                                        “Україна сьогодні: відвертий професійний погляд”#}
-                    {#                                    </a>#}
-                    {#                                </div>#}
-                    {#                            </div>#}
-                    {#                            <div class="pad"></div>#}
-                    {#                        </div>#}
-                    {#                        <div class="for_block_program_item">#}
-                    {#                            <div class="for_block_program_time">#}
-                    {#                                10:30 - 12:00#}
-                    {#                            </div>#}
-                    {#                            <div class="for_block_program_event">#}
-                    {#                                <div class="for_block_program_event_title">#}
-                    {#                                    Панельні дискусії#}
-                    {#                                </div>#}
-                    {#                                <div class="for_block_program_event_link">#}
-                    {#                                    <a href="#">#}
-                    {#                                        Високі технології: Україна в хай-тек перегонах#}
-                    {#                                    </a>#}
-                    {#                                </div>#}
-                    {#                                <div class="for_block_program_event_link">#}
-                    {#                                    <a href="#">#}
-                    {#                                        Фінансування проектів розвитку#}
-                    {#                                    </a>#}
-                    {#                                </div>#}
-                    {#                                <div class="for_block_program_event_link">#}
-                    {#                                    <a href="#">#}
-                    {#                                        Освітня революція для бізнесу#}
-                    {#                                    </a>#}
-                    {#                                </div>#}
-                    {#                            </div>#}
-                    {#                            <div class="pad"></div>#}
-                    {#                        </div>#}
-                    {#                        <div class="for_block_program_item">#}
-                    {#                            <div class="for_block_program_time">#}
-                    {#                                12:30 - 14:00#}
-                    {#                            </div>#}
-                    {#                            <div class="for_block_program_event">#}
-                    {#                                <div class="for_block_program_event_title">#}
-                    {#                                    Панельні дискусії#}
-                    {#                                </div>#}
-                    {#                                <div class="for_block_program_event_link">#}
-                    {#                                    <a href="#">#}
-                    {#                                        Точки зростання – виграшна стратегія у глобальній конкуренції#}
-                    {#                                    </a>#}
-                    {#                                </div>#}
-                    {#                                <div class="for_block_program_event_link">#}
-                    {#                                    <a href="#">#}
-                    {#                                        Сільське господарство: добувна чи переробна галузь?#}
-                    {#                                    </a>#}
-                    {#                                </div>#}
-                    {#                                <div class="for_block_program_event_link">#}
-                    {#                                    <a href="#">#}
-                    {#                                        Модель енергетичної незалежностi#}
-                    {#                                    </a>#}
-                    {#                                </div>#}
-                    {#                            </div>#}
-                    {#                            <div class="pad"></div>#}
-                    {#                        </div>#}
-                    {#                        <div class="for_block_program_item">#}
-                    {#                            <div class="for_block_program_time">#}
-                    {#                                15:30 - 17:00#}
-                    {#                            </div>#}
-                    {#                            <div class="for_block_program_event">#}
-                    {#                                <div class="for_block_program_event_title">#}
-                    {#                                    Пленарне засідання#}
-                    {#                                </div>#}
-                    {#                                <div class="for_block_program_event_link">#}
-                    {#                                    <a href="#">#}
-                    {#                                        “Партнерство бізнесу та влади. Перезавантаження”#}
-                    {#                                    </a>#}
-                    {#                                </div>#}
-                    {#                            </div>#}
-                    {#                            <div class="pad"></div>#}
-                    {#                        </div>#}
-                    {#                        <div class="for_block_program_item">#}
-                    {#                            <div class="for_block_program_time">#}
-                    {#                                19:30 - 21:00#}
-                    {#                            </div>#}
-                    {#                            <div class="for_block_program_event">#}
-                    {#                                <div class="for_block_program_event_title">#}
-                    {#                                    Прийом (коктейль) від імені організаторів#}
-                    {#                                </div>#}
-                    {#                            </div>#}
-                    {#                            <div class="pad"></div>#}
-                    {#                        </div>#}
-                    {#                    </div>#}
-                </div>
-
-                <div class="for_block_speakers_arch">
-                    <div class="for_block_title">
-                        <div class="for_block_title_top">
-                            <a href="#">
-                                {% trans "Speakers" %}
-                            </a>
-                        </div>
-                        <div class="for_block_title_bot">
-                            <div class="for_block_title_bot_in"></div>
-                        </div>
+                        {#                <div class="for_block_program_date">#}
+                        {#                    2 жовтня 2015#}
+                        {#                    <br>Україна, Київ, НСК «Олімпійський»#}
+                        {#                </div>#}
+                        {% include "core/hardcode_time_table.html" %}
+                        {#                    <div class="for_block_program_date">#}
+                        {#                    {{ self.forum_page.date_from }}#}
+                        {#                        8 Жовтня#}
+                        {#                        <br>{% trans_field self.forum_page 'location_country' %}, {% trans_field self.forum_page 'location_city' %}, {% trans_field self.forum_page 'location_name' %}#}
+                        {#                    </div>#}
+                        {#                    <div class="for_block_program_cont">#}
+                        {#                        <div class="for_block_program_item">#}
+                        {#                            <div class="for_block_program_time">#}
+                        {#                                09:30 - 10:15#}
+                        {#                            </div>#}
+                        {#                            <div class="for_block_program_event">#}
+                        {#                                <div class="for_block_program_event_title">#}
+                        {#                                    Пленарне засідання#}
+                        {#                                </div>#}
+                        {#                                <div class="for_block_program_event_link">#}
+                        {#                                    <a href="#">#}
+                        {#                                        “Україна сьогодні: відвертий професійний погляд”#}
+                        {#                                    </a>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                            <div class="pad"></div>#}
+                        {#                        </div>#}
+                        {#                        <div class="for_block_program_item">#}
+                        {#                            <div class="for_block_program_time">#}
+                        {#                                10:30 - 12:00#}
+                        {#                            </div>#}
+                        {#                            <div class="for_block_program_event">#}
+                        {#                                <div class="for_block_program_event_title">#}
+                        {#                                    Панельні дискусії#}
+                        {#                                </div>#}
+                        {#                                <div class="for_block_program_event_link">#}
+                        {#                                    <a href="#">#}
+                        {#                                        Високі технології: Україна в хай-тек перегонах#}
+                        {#                                    </a>#}
+                        {#                                </div>#}
+                        {#                                <div class="for_block_program_event_link">#}
+                        {#                                    <a href="#">#}
+                        {#                                        Фінансування проектів розвитку#}
+                        {#                                    </a>#}
+                        {#                                </div>#}
+                        {#                                <div class="for_block_program_event_link">#}
+                        {#                                    <a href="#">#}
+                        {#                                        Освітня революція для бізнесу#}
+                        {#                                    </a>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                            <div class="pad"></div>#}
+                        {#                        </div>#}
+                        {#                        <div class="for_block_program_item">#}
+                        {#                            <div class="for_block_program_time">#}
+                        {#                                12:30 - 14:00#}
+                        {#                            </div>#}
+                        {#                            <div class="for_block_program_event">#}
+                        {#                                <div class="for_block_program_event_title">#}
+                        {#                                    Панельні дискусії#}
+                        {#                                </div>#}
+                        {#                                <div class="for_block_program_event_link">#}
+                        {#                                    <a href="#">#}
+                        {#                                        Точки зростання – виграшна стратегія у глобальній конкуренції#}
+                        {#                                    </a>#}
+                        {#                                </div>#}
+                        {#                                <div class="for_block_program_event_link">#}
+                        {#                                    <a href="#">#}
+                        {#                                        Сільське господарство: добувна чи переробна галузь?#}
+                        {#                                    </a>#}
+                        {#                                </div>#}
+                        {#                                <div class="for_block_program_event_link">#}
+                        {#                                    <a href="#">#}
+                        {#                                        Модель енергетичної незалежностi#}
+                        {#                                    </a>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                            <div class="pad"></div>#}
+                        {#                        </div>#}
+                        {#                        <div class="for_block_program_item">#}
+                        {#                            <div class="for_block_program_time">#}
+                        {#                                15:30 - 17:00#}
+                        {#                            </div>#}
+                        {#                            <div class="for_block_program_event">#}
+                        {#                                <div class="for_block_program_event_title">#}
+                        {#                                    Пленарне засідання#}
+                        {#                                </div>#}
+                        {#                                <div class="for_block_program_event_link">#}
+                        {#                                    <a href="#">#}
+                        {#                                        “Партнерство бізнесу та влади. Перезавантаження”#}
+                        {#                                    </a>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                            <div class="pad"></div>#}
+                        {#                        </div>#}
+                        {#                        <div class="for_block_program_item">#}
+                        {#                            <div class="for_block_program_time">#}
+                        {#                                19:30 - 21:00#}
+                        {#                            </div>#}
+                        {#                            <div class="for_block_program_event">#}
+                        {#                                <div class="for_block_program_event_title">#}
+                        {#                                    Прийом (коктейль) від імені організаторів#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                            <div class="pad"></div>#}
+                        {#                        </div>#}
+                        {#                    </div>#}
                     </div>
 
-                    <div class="for_block_sp_cont">
-                        <div class="row">
+                    <div class="for_block_speakers_arch">
+                        <div class="for_block_title">
+                            <div class="for_block_title_top">
+                                <a href="#">
+                                    {% trans "Speakers" %}
+                                </a>
+                            </div>
+                            <div class="for_block_title_bot">
+                                <div class="for_block_title_bot_in"></div>
+                            </div>
+                        </div>
 
-                            {% for speaker in self.forum_page.speakers.all|slice:":12" %}
+                        <div class="for_block_sp_cont">
+                            <div class="row">
 
-                                {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
-                                    </div>
-                                    <div class="row">
-                                {% endif %}
+                                {% for speaker in self.forum_page.speakers.all|slice:":12" %}
 
-                                <div class="col-xs-3">
-                                    <div class="for_block_sp_item">
-                                        <a href="{% pageurl speaker.speaker_page %}">
+                                    {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                                        </div>
+                                        <div class="row">
+                                    {% endif %}
+
+                                    <div class="col-xs-3">
+                                        <div class="for_block_sp_item">
+                                            <a href="{% pageurl speaker.speaker_page %}">
                                         <span class="for_block_sp_photo">
                                             {% image speaker.speaker_page.photo height-300 as photo %}
                                             <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
@@ -325,23 +328,25 @@
                                         <span class="for_block_sp_about">
                                             {% trans_field speaker.speaker_page 'position' %}
                                         </span>
-                                        </a>
+                                            </a>
+                                        </div>
                                     </div>
+                                {% endfor %}
                                 </div>
-                            {% endfor %}
-                            </div>
-                    </div>
+                        </div>
 
-                    <div class="for_block_all">
-                        <a href="{% routablepageurl self.forum_page "speakers" %}">
-                            повний список спікерів
-                        </a>
+                        <div class="for_block_all">
+                            <a href="{% routablepageurl self.forum_page "speakers" %}">
+                                повний список спікерів
+                            </a>
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
-
         </div>
     </div>
+
 {% endblock %}

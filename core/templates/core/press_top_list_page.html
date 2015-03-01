@@ -1,27 +1,33 @@
 {% extends "base.html" %}
 
-{% load static core_tags %}
+{% load static %}
+{% load core_tags %}
 {% load wagtailcore_tags %}
+{% load i18n %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
 
-    <div class="for_news_list">
-        {% for item in self.items %}
-            <div class="for_news_item">
-                <div class="for_news_item_date">
-                    {{ item.date|date:"d.m.Y" }}
+    <div class="container">
+
+        <div class="for_news_list">
+            {% for item in self.items %}
+                <div class="for_news_item">
+                    <div class="for_news_item_date">
+                        {{ item.date|date:"d.m.Y" }}
+                    </div>
+                    <div class="for_news_item_title">
+                        {% trans_field item 'title' %}
+                    </div>
+                    <div class="for_news_item_text">
+                        {% trans_field item 'description' %}
+                        <a href="{% pageurl item %}">{% trans "read more" %}</a>
+                    </div>
                 </div>
-                <div class="for_news_item_title">
-                    {% trans_field item 'title' %}
-                </div>
-                <div class="for_news_item_text">
-                    {% trans_field item 'description' %}
-                    <a href="{% pageurl item %}">докладніше</a>
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
+
     </div>
 
 {% endblock %}

@@ -8,15 +8,19 @@
 
 {% block content %}
 
-    <div class="for_block_news_small_date">
-        {{ self.date|date:"d.m.Y" }}
+    <div class="container">
+
+        <div class="for_block_news_small_date">
+            {{ self.date|date:"d.m.Y" }}
+        </div>
+
+        {% if self.image %}
+            {% image self.image width-400 style="float: left; margin-right: 30px;margin-bottom: 30px;" %}
+        {% endif %}
+
+        {#    {{ self.body|richtext }}#}
+        {% trans_field self 'body' %}
+
     </div>
-
-    {% if self.image %}
-        {% image self.image width-400 style="float: left; margin-right: 30px;margin-bottom: 30px;" %}
-    {% endif %}
-
-{#    {{ self.body|richtext }}#}
-    {% trans_field self 'body' %}
 
 {% endblock %}

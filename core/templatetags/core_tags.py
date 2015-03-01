@@ -97,6 +97,12 @@ def trans_field(instance, field):
 #     return value if value is not None else ''
 
 
+def has_translation(page, lang):
+    if lang == 'uk':
+        return True
+    specific = page.specific
+    return bool(getattr(specific, 'title_'+lang).strip())
+
 
 @register.assignment_tag(takes_context=True)
 def get_site_root(context):

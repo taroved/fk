@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-24 02:13+0200\n"
+"POT-Creation-Date: 2015-03-01 05:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,90 +19,143 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: core/models.py:35
+#: core/models.py:38
 msgid "Common page configuration"
 msgstr ""
 
-#: core/models.py:41
+#: core/models.py:43
 msgid ""
 "Whether a browsable link to this page will appear in automatically generated "
 "menus"
 msgstr ""
 
-#: core/models.py:50 core/models.py:52 core/models.py:121 core/models.py:123
-#: core/models.py:145 core/models.py:147 core/models.py:173 core/models.py:175
-#: core/models.py:206 core/models.py:208 core/models.py:244 core/models.py:246
-#: core/models.py:301 core/models.py:303 core/models.py:345 core/models.py:347
-#: core/models.py:389 core/models.py:391 core/models.py:406 core/models.py:408
-#: core/models.py:415 core/models.py:417 core/models.py:424 core/models.py:426
-#: core/models.py:439 core/models.py:441 core/models.py:462 core/models.py:464
-#: core/models.py:599 core/models.py:601 core/models.py:806 core/models.py:808
-#: core/models.py:841 core/models.py:843 core/models.py:876 core/models.py:878
-#: core/models.py:894 core/models.py:896 core/models.py:922 core/models.py:924
-#: core/models.py:942 core/models.py:944 core/models.py:968 core/models.py:970
-#: core/models.py:1014 core/models.py:1016
+#: core/models.py:56 core/models.py:58 core/models.py:154 core/models.py:156
+#: core/models.py:178 core/models.py:180 core/models.py:223 core/models.py:225
+#: core/models.py:262 core/models.py:264 core/models.py:304 core/models.py:306
+#: core/models.py:362 core/models.py:364 core/models.py:404 core/models.py:406
+#: core/models.py:449 core/models.py:451 core/models.py:467 core/models.py:469
+#: core/models.py:478 core/models.py:480 core/models.py:482 core/models.py:516
+#: core/models.py:518 core/models.py:532 core/models.py:534 core/models.py:548
+#: core/models.py:550 core/models.py:573 core/models.py:575 core/models.py:711
+#: core/models.py:713 core/models.py:917 core/models.py:919 core/models.py:954
+#: core/models.py:956 core/models.py:990 core/models.py:992
+#: core/models.py:1008 core/models.py:1010 core/models.py:1037
+#: core/models.py:1039 core/models.py:1057 core/models.py:1059
+#: core/models.py:1085 core/models.py:1087 core/models.py:1132
+#: core/models.py:1134
 msgid "The page title as you'd like it to be seen by the public"
 msgstr ""
 
-#: core/models.py:119
+# accreditation_page.html
+#: core/models.py:86
+msgid "name"
+msgstr "ФИО"
+
+#: core/models.py:87
+msgid "position"
+msgstr "Должность"
+
+#: core/models.py:88
+msgid "publisher"
+msgstr "Издание"
+
+#: core/models.py:89
+msgid "publisher_link"
+msgstr "Веб-адрес издания"
+
+#: core/models.py:90
+msgid "mobile_phone"
+msgstr "Мобильный телефон"
+
+#: core/models.py:91
+msgid "work_phone"
+msgstr "Рабочий телефон"
+
+#: core/models.py:92
+msgid "email"
+msgstr "E-mail"
+
+#: core/models.py:93
+msgid "publication_form_date"
+msgstr "Когда и в каком виде планируете публикацию про форум?"
+
+#: core/models.py:94
+msgid "need_additional_help"
+msgstr "Нужна ли доп. информация про форум или помощь в организации интервью?"
+
+#: core/models.py:152
 msgid "The title as you'd like it to be seen by the public"
 msgstr ""
 
-#: core/models.py:266
+#: core/models.py:326
 msgid "videos"
 msgstr "Видео"
 
-#: core/models.py:267
+#: core/models.py:327
 msgid "albums"
 msgstr "Фото"
 
-#: core/models.py:268
+#: core/models.py:328 core/templates/core/materials_documents_page.html:21
 msgid "documents"
 msgstr "Документы"
 
-#: core/models.py:689
+#: core/models.py:801
 msgid "location"
 msgstr "Место проведения"
 
-#: core/models.py:690
+#: core/models.py:802
 msgid "packages"
 msgstr "Пакеты участников"
 
-#: core/models.py:691
-msgid "timetable"
+#: core/models.py:803
+msgid "program"
 msgstr "Программа"
 
-#: core/models.py:692
+#: core/models.py:804
 msgid "speakers"
 msgstr "Спикеры"
 
-#: core/models.py:693
+#: core/models.py:805
 msgid "registration"
 msgstr "Регистрация"
 
-#: core/templates/base.html:276
+#: core/templates/base.html:165
 msgid "Join Us:"
 msgstr "Присоединяйтесь к нам:"
 
-#: core/templates/base.html:292
+#: core/templates/base.html:181
 msgid "Contact Info"
 msgstr "Контактная информация"
 
-#: core/templates/core/home_page.html:22
+#: core/templates/core/accreditation_page.html:129
+msgid "submit"
+msgstr "Отправить"
+
+#: core/templates/core/home_page.html:25
 msgid "News"
 msgstr "Новости"
 
-#: core/templates/core/home_page.html:105
+#: core/templates/core/home_page.html:108
 msgid "Video"
 msgstr "Видео"
 
-#: core/templates/core/home_page.html:174
+#: core/templates/core/home_page.html:179
 msgid "Timetable"
 msgstr "Программа"
 
-#: core/templates/core/home_page.html:293
+#: core/templates/core/home_page.html:299
 msgid "Speakers"
 msgstr "Спикеры"
+
+#: core/templates/core/materials_documents_page.html:51
+#: core/templates/core/materials_page.html:147
+msgid "download"
+msgstr "Загрузить"
+
+#: core/templates/core/news_index_page.html:71
+#: core/templates/core/press_top_list_page.html:25
+msgid "read more"
+msgstr "читать полностью"
 
 #: core/templates/core/search_results.html:57
 msgid "nothing found"
@@ -130,14 +183,17 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
+#: core/templates/wagtailadmin/edit_handlers/inline_panel_child.html:42
 #: core/templates/wagtailadmin/edit_handlers/trabslatable_inline_panel_child.html:7
 msgid "Move up"
 msgstr ""
 
+#: core/templates/wagtailadmin/edit_handlers/inline_panel_child.html:43
 #: core/templates/wagtailadmin/edit_handlers/trabslatable_inline_panel_child.html:8
 msgid "Move down"
 msgstr ""
 
+#: core/templates/wagtailadmin/edit_handlers/inline_panel_child.html:45
 #: core/templates/wagtailadmin/edit_handlers/trabslatable_inline_panel_child.html:10
 msgid "Delete"
 msgstr ""
@@ -161,10 +217,6 @@ msgstr ""
 
 #: forumkyiv/settings/base.py:117
 msgid "Ukrainian"
-msgstr ""
-
-#: forumkyiv/settings/base.py:118
-msgid "Russian"
 msgstr ""
 
 #: forumkyiv/settings/base.py:119

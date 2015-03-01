@@ -7,12 +7,14 @@
 
 {% block content %}
 
-    <div class="row">
-        {% for partner in self.partners %}
-            <a href="{{ partner.link }}">
-                {% image partner.logo height-100 %}
-            </a>
-        {% endfor %}
+    <div class="container">
+        <div class="row">
+            {% for partner in self.partners %}
+                <a href="{{ partner.link }}">
+                    {% image partner.logo height-100 %}
+                </a>
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}

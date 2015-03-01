@@ -7,24 +7,25 @@
 
 {% block content %}
 
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="for_block_rada">
-                <div class="for_block_rada_cont">
-                    <div class="row">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="for_block_rada">
+                    <div class="for_block_rada_cont">
+                        <div class="row">
 
 
-                        {% for member in self.members.all %}
+                            {% for member in self.members.all %}
 
-                            {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
-                                </div>
-                                <div class="row">
-                            {% endif %}
+                                {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                                    </div>
+                                    <div class="row">
+                                {% endif %}
 
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a style="cursor: default;" href="#">
-                                        {#                                    <a href="{% pageurl member.speaker_page %}">#}
+                                <div class="col-xs-3">
+                                    <div class="for_block_sp_item">
+                                        <a style="cursor: default;" href="#">
+                                            {#                                    <a href="{% pageurl member.speaker_page %}">#}
                                         <span class="for_block_sp_photo">
                                             {% image member.photo height-300 as photo %}
                                             <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
@@ -36,17 +37,18 @@
                                         <span class="for_block_sp_about">
                                             {% trans_field member 'position' %}
                                         </span>
-                                    </a>
+                                        </a>
+                                    </div>
                                 </div>
+                            {% endfor %}
+
+
                             </div>
-                        {% endfor %}
-
-
-                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 
 {% endblock %}

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+{% load static core_tags wagtailcore_tags wagtailimages_tags i18n %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-
+<div class="container">
     <div class="for_block_news_cont">
         <div class="cox-xs-12">
             <div class="for_block_news_cont_top">
@@ -68,11 +68,12 @@
                 </div>
                 <div class="for_news_item_text">
                     {% trans_field news_item 'short' %}
-                    <a href="{% pageurl news_item %}">докладніше</a>
+                    <a href="{% pageurl news_item %}">{% trans "read more" %}</a>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
+</div>
 
 {% endblock %}

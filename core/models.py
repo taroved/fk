@@ -17,6 +17,7 @@ from wagtail.wagtailadmin.views.pages import PAGE_EDIT_HANDLERS
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
+from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -46,24 +47,54 @@ class BrowsableMixin(models.Model):
         abstract = True
 
 
-class AccreditationPage(Page, BrowsableMixin):
+class AccreditationPageFormField(AbstractFormField):
+    page = ParentalKey('AccreditationPage', related_name='form_fields')
+
+
+class AccreditationPage(AbstractEmailForm, BrowsableMixin):
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
 
     body = RichTextField(blank=True, null=True)
-    body_ru = RichTextField(blank=True, null=True)
-    body_en = RichTextField(blank=True, null=True)
+    body_ru = RichTextField(blank=True, null=True, verbose_name='body')
+    body_en = RichTextField(blank=True, null=True, verbose_name='body')
 
-    content_panels = [
-        FieldPanel('title', classname="title full"),
-        FieldPanel('body', classname="full"),
-    ]
-    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+    thank_you_text = RichTextField(blank=True, null=True)
+    thank_you_text_ru = RichTextField(blank=True, null=True, verbose_name='thank you text')
+    thank_you_text_en = RichTextField(blank=True, null=True, verbose_name='thank you text')
 
+AccreditationPage.content_panels = [
+    FieldPanel('title', classname="title full"),
+    FieldPanel('body', classname="full"),
+    FieldPanel('thank_you_text', classname="full"),
+    MultiFieldPanel([
+        FieldPanel('to_address', classname="full"),
+        FieldPanel('from_address', classname="full"),
+        FieldPanel('subject', classname="full"),
+    ], "Email"),
+    MultiFieldPanel([
+        InlinePanel(AccreditationPage, 'form_fields', label="Form fields"),
+    ], heading='Form fields', classname="collapsible collapsed")
+]
 
-register_translatable_interface(AccreditationPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
+AccreditationPage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+# just id's for django makemessages translations
+_accreditation_page_translations = [
+    _("name"),
+    _("position"),
+    _("publisher"),
+    _("publisher_link"),
+    _("mobile_phone"),
+    _("work_phone"),
+    _("email"),
+    _("publication_form_date"),
+    _("need_additional_help"),
+]
+
+register_translatable_interface(AccreditationPage, fields=('title', 'body', 'thank_you_text'), languages=MODELS_LANGUAGES)
 
 
 @register_snippet
@@ -96,20 +127,20 @@ class SliderItem(models.Model):
 
     panels = [
         MultiFieldPanel([
-                            FieldPanel('text', classname="full"),
-                            FieldPanel('button_text'),
-                            FieldPanel('button_link'),
-                        ], heading='UK'),
+            FieldPanel('text', classname="full"),
+            FieldPanel('button_text'),
+            FieldPanel('button_link'),
+        ], heading='UK'),
 
         MultiFieldPanel([
-                            FieldPanel('text_ru', classname="full"),
-                            FieldPanel('button_text_ru'),
-                        ], heading='RU'),
+            FieldPanel('text_ru', classname="full"),
+            FieldPanel('button_text_ru'),
+        ], heading='RU'),
 
         MultiFieldPanel([
-                            FieldPanel('text_en', classname="full"),
-                            FieldPanel('button_text_en'),
-                        ], heading='EN'),
+            FieldPanel('text_en', classname="full"),
+            FieldPanel('button_text_en'),
+        ], heading='EN'),
     ]
 
     def __unicode__(self):
@@ -128,14 +159,26 @@ class Partner(models.Model):
     link = models.URLField(null=True, blank=True)
 
     description = models.TextField(null=True, blank=True)
-    description_ru = models.TextField(null=True, blank=True)
-    description_en = models.TextField(null=True, blank=True)
+    description_ru = models.TextField(null=True, blank=True, verbose_name='description')
+    description_en = models.TextField(null=True, blank=True, verbose_name='description')
 
     panels = [
-        FieldPanel('title', classname="full title"),
-        ImageChooserPanel('logo'),
-        FieldPanel('link', classname="full link"),
-        FieldPanel('description', classname="full description"),
+        MultiFieldPanel([
+            FieldPanel('title', classname="title full"),
+            ImageChooserPanel('logo'),
+            FieldPanel('link', classname="full link"),
+            FieldPanel('description', classname="full description"),
+        ], heading='UK'),
+
+        MultiFieldPanel([
+            FieldPanel('title_ru', classname="title full"),
+            FieldPanel('description_ru', classname="full description"),
+        ], heading='RU'),
+
+        MultiFieldPanel([
+            FieldPanel('title_en', classname="title full"),
+            FieldPanel('description_en', classname="full description"),
+        ], heading='EN'),
     ]
 
     def __unicode__(self):
@@ -151,14 +194,16 @@ class PhotoAlbumPage(Page, BrowsableMixin):
 
     date = models.DateField("date")
 
+    @property
     def preview_url(self):
-        match = re.search("sets/(?P<id>[0-9]+)", self.link)
-        if match:
-            id = match.group("id")
-        else:
+        match = re.search("sets/(?P<id>\d+)", self.link)
+        if not match:
             return ''
 
-        preview_url = 'http://flickrit.com/slideshowholder.php?height=100&size=big&setId=' + id + '&counter=true&thumbnails=2&transition=0&layoutType=responsive&sort=0&theme=1'
+        album_id = match.group("id")
+        preview_url = 'http://flickrit.com/slideshowholder.php?height=100&size=big&setId={0}' \
+                      '&counter=true&thumbnails=2&transition=0&layoutType=responsive&sort=0&theme=1' \
+            .format(album_id)
         return preview_url
 
     preview = models.ForeignKey(
@@ -179,6 +224,7 @@ class PhotoAlbumPage(Page, BrowsableMixin):
         ImageChooserPanel('preview'),
         FieldPanel('description', classname="full"),
     ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 
 register_translatable_interface(PhotoAlbumPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
@@ -217,6 +263,7 @@ class DocumentPage(Page, BrowsableMixin):
         ImageChooserPanel('preview'),
         FieldPanel('description', classname="full")
     ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 
 register_translatable_interface(DocumentPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
@@ -251,6 +298,7 @@ class VideoPage(Page, BrowsableMixin):
         ImageChooserPanel('preview'),
         FieldPanel('description', classname="full")
     ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 
 register_translatable_interface(VideoPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
@@ -294,6 +342,7 @@ class MaterialsPage(RoutablePageMixin, BrowsableMixin, Page):
         return menu
 
     subpage_types = ['core.PhotoAlbumPage', 'core.DocumentPage', 'core.VideoPage']
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 
 register_translatable_interface(MaterialsPage, fields=('title', ), languages=MODELS_LANGUAGES)
@@ -343,9 +392,7 @@ class NewsPage(Page, BrowsableMixin):
         # Find closest ancestor which is a index
         return self.get_ancestors().type(NewsIndexPage).last()
 
-    search_fields = [
-
-    ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 
 NewsPage.content_panels = [
@@ -355,10 +402,10 @@ NewsPage.content_panels = [
     FieldPanel("short"),
     FieldPanel("body", classname="full"),
     MultiFieldPanel([
-                        InlinePanel(NewsPage, 'videos', label='Videos'),
-                        InlinePanel(NewsPage, 'albums', label='Albums'),
-                        InlinePanel(NewsPage, 'documents', label='Documents'),
-                    ], heading="Materials", classname="collapsible collapsed")
+        InlinePanel(NewsPage, 'videos', label='Videos'),
+        InlinePanel(NewsPage, 'albums', label='Albums'),
+        InlinePanel(NewsPage, 'documents', label='Documents'),
+    ], heading="Materials", classname="collapsible collapsed")
 ]
 
 register_translatable_interface(NewsPage, fields=('title', 'short', 'body'), languages=MODELS_LANGUAGES)
@@ -527,6 +574,7 @@ class OrganizerPage(Page, BrowsableMixin):
         FieldPanel('link', classname="full link"),
         FieldPanel('description', classname="full description"),
     ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 
 register_translatable_interface(OrganizerPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
@@ -665,7 +713,7 @@ class ForumPage(RoutablePageMixin, BrowsableMixin, Page):
         url(r'^$', 'main_view', name='main'),
         url(r'^location/$', 'location_view', name='location'),
         url(r'^packages/$', 'packages_view', name='packages'),
-        url(r'^timetable/$', 'timetable_view', name='timetable'),
+        url(r'^program/$', 'program_view', name='program'),
         url(r'^speakers/$', 'speakers_view', name='speakers'),
         url(r'^speakers/(?P<letter>\w?)/$', 'speakers_view', name='speakers'),
         url(r'^registration/$', 'registration_view', name='registration'),
@@ -754,8 +802,8 @@ class ForumPage(RoutablePageMixin, BrowsableMixin, Page):
     def packages_view(self, request):
         return render_to_response('core/forum_packages_page.html', {'self': self, 'request': request})
 
-    def timetable_view(self, request):
-        return render_to_response('core/forum_timetable_page.html', {'self': self, 'request': request})
+    def program_view(self, request):
+        return render_to_response('core/forum_program_page.html', {'self': self, 'request': request})
 
     def registration_view(self, request):
         return redirect(self.signup_link)
@@ -764,7 +812,7 @@ class ForumPage(RoutablePageMixin, BrowsableMixin, Page):
         menu = [
             {'route_name': 'location', 'title': _('location')},
             {'route_name': 'packages', 'title': _('packages')},
-            {'route_name': 'timetable', 'title': _('timetable')},
+            {'route_name': 'program', 'title': _('program')},
             {'route_name': 'speakers', 'title': _('speakers')},
             {'route_name': 'registration', 'title': _('registration')},
         ]
@@ -785,35 +833,35 @@ class ForumPage(RoutablePageMixin, BrowsableMixin, Page):
 
 ForumPage.content_panels = [
     MultiFieldPanel([
-                        FieldPanel('title', classname="full title"),
-                        FieldPanel('title_long', classname="full title"),
-                        FieldPanel('description', classname="full"),
-                        FieldPanel('signup_link'),
-                    ], heading="Main"),
+        FieldPanel('title', classname="full title"),
+        FieldPanel('title_long', classname="full title"),
+        FieldPanel('description', classname="full"),
+        FieldPanel('signup_link'),
+    ], heading="Main"),
     MultiFieldPanel([
-                        FieldRowPanel([
-                            FieldPanel('date_from', classname='col6'),
-                            FieldPanel('date_to', classname='col6'),
-                        ])
-                    ], heading="Dates"),
+        FieldRowPanel([
+            FieldPanel('date_from', classname='col6'),
+            FieldPanel('date_to', classname='col6'),
+        ])
+    ], heading="Dates"),
 
     FieldPanel('report_text', classname="full"),
 
     MultiFieldPanel([
-                        InlinePanel(ForumPage, 'videos', label='Videos'),
-                        InlinePanel(ForumPage, 'albums', label='Albums'),
-                        InlinePanel(ForumPage, 'documents', label='Documents'),
-                    ], heading="Materials", classname="collapsible collapsed"),
+        InlinePanel(ForumPage, 'videos', label='Videos'),
+        InlinePanel(ForumPage, 'albums', label='Albums'),
+        InlinePanel(ForumPage, 'documents', label='Documents'),
+    ], heading="Materials", classname="collapsible collapsed"),
 
     MultiFieldPanel([
-                        FieldPanel('location_name'),
-                        ImageChooserPanel('location_logo'),
-                        FieldPanel('location_country'),
-                        FieldPanel('location_city'),
-                        FieldPanel('location_street'),
-                        FieldPanel('location_zip_code'),
-                        FieldPanel('location_map_code'),
-                    ], heading="Location", classname="collapsible collapsed"),
+        FieldPanel('location_name'),
+        ImageChooserPanel('location_logo'),
+        FieldPanel('location_country'),
+        FieldPanel('location_city'),
+        FieldPanel('location_street'),
+        FieldPanel('location_zip_code'),
+        FieldPanel('location_map_code'),
+    ], heading="Location", classname="collapsible collapsed"),
 
     # MultiFieldPanel([
     # InlinePanel(ForumPage, 'timetable_days', label="Day"),
@@ -821,42 +869,42 @@ ForumPage.content_panels = [
     # ], heading="Timetable", classname="collapsible collapsed"),
 
     MultiFieldPanel([
-                        InlinePanel(ForumPage, 'speakers', label="Speakers"),
-                    ], heading="Speakers", classname="collapsible collapsed")
+        InlinePanel(ForumPage, 'speakers', label="Speakers"),
+    ], heading="Speakers", classname="collapsible collapsed")
 ]
 
 ForumPage.ru_panels = [
     MultiFieldPanel([
-                        FieldPanel('title_ru', classname="full title"),
-                        FieldPanel('title_long_ru', classname="full title"),
-                        FieldPanel('description_ru', classname="full"),
-                    ], heading="Main"),
+        FieldPanel('title_ru', classname="full title"),
+        FieldPanel('title_long_ru', classname="full title"),
+        FieldPanel('description_ru', classname="full"),
+    ], heading="Main"),
 
     FieldPanel('report_text_ru', classname="full"),
 
     MultiFieldPanel([
-                        FieldPanel('location_name_ru'),
-                        FieldPanel('location_country_ru'),
-                        FieldPanel('location_city_ru'),
-                        FieldPanel('location_street_ru'),
-                    ], heading="Location", classname="collapsible collapsed"),
+        FieldPanel('location_name_ru'),
+        FieldPanel('location_country_ru'),
+        FieldPanel('location_city_ru'),
+        FieldPanel('location_street_ru'),
+    ], heading="Location", classname="collapsible collapsed"),
 ]
 
 ForumPage.en_panels = [
     MultiFieldPanel([
-                        FieldPanel('title_en', classname="full title"),
-                        FieldPanel('title_long_en', classname="full title"),
-                        FieldPanel('description_en', classname="full"),
-                    ], heading="Main"),
+        FieldPanel('title_en', classname="full title"),
+        FieldPanel('title_long_en', classname="full title"),
+        FieldPanel('description_en', classname="full"),
+    ], heading="Main"),
 
     FieldPanel('report_text_en', classname="full"),
 
     MultiFieldPanel([
-                        FieldPanel('location_name_en'),
-                        FieldPanel('location_country_en'),
-                        FieldPanel('location_city_en'),
-                        FieldPanel('location_street_en'),
-                    ], heading="Location", classname="collapsible collapsed"),
+        FieldPanel('location_name_en'),
+        FieldPanel('location_country_en'),
+        FieldPanel('location_city_en'),
+        FieldPanel('location_street_en'),
+    ], heading="Location", classname="collapsible collapsed"),
 ]
 
 ForumPage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
@@ -871,8 +919,8 @@ PAGE_EDIT_HANDLERS[ForumPage] = TranslatableTabbedInterface([
 
 # register_translatable_interface(ForumPage,
 # fields=('title', 'title_long', 'description',
-#                                         'location_name', 'location_city', 'location_street', 'location_country',
-#                                         'report_text'),
+# 'location_name', 'location_city', 'location_street', 'location_country',
+# 'report_text'),
 #                                 languages=MODELS_LANGUAGES)
 
 
@@ -890,6 +938,7 @@ class ForumTimetablePage(Page, BrowsableMixin):
         FieldPanel('title', classname='title full'),
         FieldPanel('comment', classname='full'),
     ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 
 register_translatable_interface(ForumTimetablePage, fields=('title', 'comment'), languages=MODELS_LANGUAGES)
@@ -1037,6 +1086,7 @@ class PressTopPage(Page, BrowsableMixin):
         FieldPanel('description', classname="full"),
         FieldPanel('content', classname="full"),
     ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 
 register_translatable_interface(PressTopPage, fields=('title', 'description', 'content'), languages=MODELS_LANGUAGES)

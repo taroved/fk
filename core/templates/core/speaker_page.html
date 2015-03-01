@@ -7,44 +7,44 @@
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content_title %}
-<div class="for_block_title_sp">
-    <div class="for_block_title_top">
-        <a href="#">
-            {% trans_field self 'title' %}
-        </a>
+    <div class="for_block_title_sp">
+        <div class="for_block_title_top">
+            <a href="#">
+                {% trans_field self 'title' %}
+            </a>
+        </div>
+        <div class="for_block_title_bot">
+            <div class="for_block_title_bot_in"></div>
+        </div>
     </div>
-    <div class="for_block_title_bot">
-        <div class="for_block_title_bot_in"></div>
-    </div>
-</div>
 {% endblock %}
 
 {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="for_block_speaker">
 
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="for_block_speaker">
-
-                <div class="for_block_speaker_cont">
-                    <div class="for_block_speaker_img">
-                        {% image self.photo fill-270x300 %}
-                    </div>
-                    <div class="for_block_speaker_right">
-{#                        <div class="for_block_speaker_name">#}
-{#                            {% trans_field self 'title' %}#}
-{#                        </div>#}
-                        <div class="for_block_speaker_title">
-                            {% trans_field self 'position' %}
+                    <div class="for_block_speaker_cont">
+                        <div class="for_block_speaker_img">
+                            {% image self.photo fill-270x300 %}
                         </div>
-                        <div class="for_block_speaker_text">
-{#                            {{ self.about|richtext }}#}
-                            {% trans_field self 'about' %}
+                        <div class="for_block_speaker_right">
+{#                            <div class="for_block_speaker_name">#}
+{#                                {% trans_field self 'title' %}#}
+{#                            </div>#}
+                            <div class="for_block_speaker_title">
+                                {% trans_field self 'position' %}
+                            </div>
+                            <div class="for_block_speaker_text">
+                                {#                            {{ self.about|richtext }}#}
+                                {% trans_field self 'about' %}
+                            </div>
                         </div>
+                        <div class="pad"></div>
                     </div>
-                    <div class="pad"></div>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}

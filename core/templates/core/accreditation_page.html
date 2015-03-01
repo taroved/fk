@@ -2,11 +2,12 @@
 
 {% load static core_tags %}
 {% load wagtailcore_tags %}
+{% load i18n %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-
+<div class="container">
     <div class="row">
         <div class="col-xs-12">
             <div class="for_block_ac">
@@ -14,84 +15,118 @@
                     <div class="for_block_ac_cont_title">
                         {% trans_field self 'body' %}
                     </div>
+{#                    <form action="{% pageurl self %}" method="POST">#}
+{#                        {% csrf_token %}#}
+{#                        {{ form.as_p }}#}
+{#                        <input type="submit">#}
+{#                    </form>#}
+
                     <div class="for_block_ac_form">
-                        <form>
+                        <form action="{% pageurl self %}" method="POST">
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="col-xs-6">
                                     <div class="for_ac_form_item">
-                                        <div class="for_ac_form_item_title">
-                                            ПІБ
+                                        <div class="for_ac_form_item_title {% if form.name.errors %}error{% endif %}">
+                                            {% trans form.name.label %}
+                                            {% if form.name.errors %}
+                                                ({% for error in form.name.errors %}{{ error|escape }}{% endfor %})
+                                            {% endif %}
                                         </div>
-                                        <input type="text">
+                                        {{ form.name }}
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="for_ac_form_item">
-                                        <div class="for_ac_form_item_title">
-                                            Посада
+                                        <div class="for_ac_form_item_title {% if form.position.errors %}error{% endif %}">
+                                            {% trans form.position.label %}
+                                            {% if form.position.errors %}
+                                                ({% for error in form.position.errors %}{{ error|escape }}{% endfor %})
+                                            {% endif %}
                                         </div>
-                                        <input type="text">
+                                        {{ form.position }}
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="for_ac_form_item">
-                                        <div class="for_ac_form_item_title">
-                                            Видання
+                                        <div class="for_ac_form_item_title {% if form.publisher.errors %}error{% endif %}">
+                                            {% trans form.publisher.label %}
+                                            {% if form.publisher.errors %}
+                                                ({% for error in form.publisher.errors %}{{ error|escape }}{% endfor %})
+                                            {% endif %}
                                         </div>
-                                        <input type="text">
+                                        {{ form.publisher}}
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="for_ac_form_item">
-                                        <div class="for_ac_form_item_title">
-                                            Веб-адреса видання
+                                        <div class="for_ac_form_item_title {% if form.publisher_link.errors %}error{% endif %}">
+                                            {% trans form.publisher_link.label %}
+                                            {% if form.publisher_link.errors %}
+                                                ({% for error in form.publisher_link.errors %}{{ error|escape }}{% endfor %})
+                                            {% endif %}
                                         </div>
-                                        <input type="text">
+                                        {{ form.publisher_link }}
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="for_ac_form_item">
-                                        <div class="for_ac_form_item_title">
-                                            Мобільний телефон
+                                        <div class="for_ac_form_item_title {% if form.mobile_phone.errors %}error{% endif %}">
+                                            {% trans form.mobile_phone.label %}
+                                            {% if form.mobile_phone.errors %}
+                                                ({% for error in form.mobile_phone.errors %}{{ error|escape }}{% endfor %})
+                                            {% endif %}
                                         </div>
-                                        <input type="text">
+                                        {{ form.mobile_phone }}
                                     </div>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="for_ac_form_item">
-                                        <div class="for_ac_form_item_title">
-                                            Робочий телефон
+                                        <div class="for_ac_form_item_title {% if form.work_phone.errors %}error{% endif %}">
+                                            {% trans form.work_phone.label %}
+                                            {% if form.work_phone.errors %}
+                                                ({% for error in form.work_phone.errors %}{{ error|escape }}{% endfor %})
+                                            {% endif %}
                                         </div>
-                                        <input type="text">
+                                        {{ form.work_phone }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
                                     <div class="for_ac_form_item">
-                                        <div class="for_ac_form_item_title">
-                                            E-mail
+                                        <div class="for_ac_form_item_title {% if form.email.errors %}error{% endif %}">
+                                            {% trans form.email.label %}
+                                            {% if form.email.errors %}
+                                                ({% for error in form.email.errors %}{{ error|escape }}{% endfor %})
+                                            {% endif %}
                                         </div>
-                                        <input type="text">
+                                        {{ form.email }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
                                     <div class="for_ac_form_item">
-                                        <div class="for_ac_form_item_title">
-                                            Коли і в якому вигляді плануєте публікацію про форум?
+                                        <div class="for_ac_form_item_title {% if form.publication_form_date.errors %}error{% endif %}">
+                                            {% trans form.publication_form_date.label %}
+                                            {% if form.publication_form_date.errors %}
+                                                ({% for error in form.publication_form_date.errors %}{{ error|escape }}{% endfor %})
+                                            {% endif %}
                                         </div>
-                                        <input type="text">
+                                        {{ form.publication_form_date }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
                                     <div class="for_ac_form_item">
-                                        <div class="for_ac_form_item_title">
-                                            Чи необхідна доп. інформація про форум або допомога в організації інтерв'ю?
+                                        <div class="for_ac_form_item_title {% if form.need_additional_help.errors %}error{% endif %}">
+                                            {% trans form.need_additional_help.label %}
+                                            {% if form.need_additional_help.errors %}
+                                                ({% for error in form.need_additional_help.errors %}{{ error|escape }}{% endfor %})
+                                            {% endif %}
                                         </div>
-                                        <input type="text">
+                                        {{ form.need_additional_help }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
                                     <div class="for_ac_form_go">
-                                        <input type="submit" value="Відправити">
+                                        <input type="submit" value="{% trans "submit" %}">
                                     </div>
                                 </div>
                             </div>
@@ -101,5 +136,6 @@
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}

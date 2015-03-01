@@ -40,6 +40,13 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'PFBeauSansPro-ThinItalic';
+  src: url('/static/fonts/PFBeauSansPro-ThinItalic.eot');
+  src: url('/static/fonts/PFBeauSansPro-ThinItalic.eot?#iefix') format('embedded-opentype'), url('/static/fonts/PFBeauSansPro-ThinItalic.woff') format('woff'), url('/static/fonts/PFBeauSansPro-ThinItalic.ttf') format('truetype'), url('/static/fonts/PFBeauSansPro-ThinItalic.svg#pf_beausans_probold') format('svg');
+  font-weight: normal;
+  font-style: italic;
+}
 #for_wrapper {
   min-height: 100%;
   min-width: 1230px;
@@ -272,17 +279,14 @@ ul {
   opacity: 0.9;
 }
 /********** BODY **********/
-.for_body .rich-text {
+.for_body {
   font-family: "PFBeauSansPro-Light", Arial, sans-serif;
   font-size: 19px;
   line-height: 23px;
-  color: #061F33;
 }
-.for_body .container ul {
-  padding-left: 30px;
-}
-.for_body .container ul li {
-  list-style: disc;
+.for_body ul,
+.for_body ol {
+  list-style: disc inside;
 }
 .for_block_title {
   min-width: 230px;
@@ -510,7 +514,7 @@ ul {
   margin-bottom: 40px;
 }
 .for_about_title {
-  font-family: 'PFBeauSansPro-SemiBold', Arial, sans-serif;
+  font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
   text-align: center;
   font-size: 41px;
   line-height: 48px;
@@ -1332,18 +1336,14 @@ ul {
 }
 .for_block_prog_cont table ul li a {
   color: #061f33;
-  padding-left: 17px;
-  background: url("../images/for_circle.png") left center no-repeat;
 }
 .for_block_prog_cont table ul li a:hover {
   color: #0098cf;
   text-decoration: underline;
-  background: url("../images/for_circle_hover.png") left center no-repeat;
 }
 .for_block_prog_bot {
   font-size: 16px;
   color: #989ca2;
-  margin-left: 400px;
   font-family: 'PFBeauSansPro-ThinItalic';
 }
 /********** FOOTER **********/
@@ -1442,4 +1442,15 @@ footer a:hover {
 }
 img.full-width {
   width: 100%;
+}
+.template-contacts-page h1,
+.template-contacts-page h2,
+.template-contacts-page h3,
+.template-contacts-page h4,
+.template-contacts-page h5,
+.template-contacts-page h6 {
+  color: #0098CF;
+}
+.error {
+  color: #A94442;
 }
