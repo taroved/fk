@@ -1,0 +1,56 @@
+{% load i18n %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load core_tags %}
+
+<div class="for_block_news_cont">
+    <div class="cox-xs-12">
+        <div class="for_block_news_cont_top">
+            <div class="for_block_news_left">
+                <a href="{% pageurl news.0 %}">
+                    {% image news.0.image fill-569x314 %}
+                </a>
+            </div>
+            <div class="for_block_news_right">
+                <div class="for_block_news_date">
+                    {{ news.0.date|date:"d.m.Y" }}
+                </div>
+                <div class="for_block_news_title">
+                    <a href="{% pageurl news.0 %}">
+                        {% trans_field news.0 'title' %}
+                    </a>
+                </div>
+                <div class="for_block_news_text">
+                    {{ news.0.short|linebreaksbr }}
+                </div>
+            </div>
+            <div class="pad"></div>
+        </div>
+    </div>
+    <div class="for_block_news_cont_bot">
+        <div class="row">
+            {% for news_item in news|slice:"1:5" %}
+                <div class="col-xs-6">
+                    <div class="for_block_news_small for_block_news_small_news">
+                        <div class="for_block_news_small_left">
+                            <a href="{% pageurl news_item %}">
+                                {% image news_item.image fill-270x146 class="grayscale grayscale-fade" %}
+                            </a>
+                        </div>
+                        <div class="for_block_news_small_right">
+                            <div class="for_block_news_small_date">
+                                {{ news_item.date|date:"d.m.Y" }}
+                            </div>
+                            <div class="for_block_news_small_text">
+                                <a href="{% pageurl news_item %}">
+                                    {% trans_field news_item 'title' %}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="pad"></div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

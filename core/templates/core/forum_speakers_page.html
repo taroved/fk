@@ -2,8 +2,8 @@
 
 {% load static core_tags %}
 {% load wagtailcore_tags %}
-{% load wagtailroutablepage_tags %}
 {% load wagtailimages_tags %}
+{% load i18n %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -12,7 +12,7 @@
     <div class="for_block_title">
         <div class="for_block_title_top">
             <a href="{{ self.url }}">
-                СПІКЕРИ
+                {% trans "speakers" %}
             </a>
         </div>
         <div class="for_block_title_bot">
@@ -29,16 +29,21 @@
             <div class="for_speakers">
                 <div class="for_speakers_abc">
                     <ul>
-                        {% for letter in self.speakers_letters %}
+                        {% for letter in self.all_lang_letters %}
                             <li>
-                                <a href="{% routablepageurl self "speakers" letter=letter %}">
-                                    {{ letter }}
-                                </a>
+                                {% if letter in self.speakers_letters %}
+                                    <a href="{% pageurl self %}"> {# letter=letter #}
+                                        {{ letter }}
+                                    </a>
+                                {% else %}
+                                    <span>{{ letter }}</span>
+                                {% endif %}
+
                             </li>
                         {% endfor %}
                         <li>
-                            <a href="{% routablepageurl self "speakers" %}">
-                                Всі
+                            <a href="{% pageurl self %}">
+                                {% trans "all letters" %}
                             </a>
                         </li>
                     </ul>
@@ -46,36 +51,7 @@
 
                 <div class="for_block_sp_cont_sp">
 
-                    <div class="row">
-
-                        {% for speaker in speakers %}
-
-                            {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
-                                </div>
-                                <div class="row">
-                            {% endif %}
-
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a href="{% pageurl speaker.speaker_page %}">
-                                        <span class="for_block_sp_photo">
-                                            {% image speaker.speaker_page.photo height-300 as photo %}
-                                            <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
-                                                 class="grayscale grayscale-fade" />
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            {% trans_field speaker.speaker_page 'title' %}
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            {% trans_field speaker.speaker_page 'position' %}
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-
-                        {% endfor %}
-
-                    </div>
+                    {% include "core/speakers_list.html" with speakers=speakers %}
 
                 </div>
             </div>

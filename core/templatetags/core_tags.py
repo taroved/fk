@@ -52,14 +52,20 @@ def trans_field(instance, field):
     lang_code = translation.get_language()
     trans_field_name = '%s_%s' % (field, lang_code)
     specific = instance.specific if isinstance(instance, Page) else instance
+
+    # if has_ru or has_en field is set to false immediately return empty string
+    # but always use title it's not title
+    if field != 'title' and hasattr(specific, 'has_'+lang_code) and not getattr(specific, 'has_'+lang_code, False):
+        return ''
+
     if hasattr(specific, trans_field_name):
         value = getattr(specific, trans_field_name)
     else:
         value = getattr(specific, field)
 
-    return value or getattr(specific, field)
-#
-#
+    return value or ''
+
+
 # class TransFieldNode(Node):
 #     def __init__(self, filter_expression, asvar=None):
 #         self.asvar = asvar

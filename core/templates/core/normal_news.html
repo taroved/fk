@@ -1,0 +1,25 @@
+{% load i18n %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load core_tags %}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="for_news_list">
+            {% for news_item in news %}
+                <div class="for_news_item">
+                    <div class="for_news_item_date">
+                        {{ news_item.date|date:"d.m.Y" }}
+                    </div>
+                    <div class="for_news_item_title">
+                        {% trans_field news_item 'title' %}
+                    </div>
+                    <div class="for_news_item_text">
+                        {% trans_field news_item 'short' %}
+                        <a href="{% pageurl news_item %}">{% trans "read more" %}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

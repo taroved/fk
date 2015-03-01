@@ -12,7 +12,7 @@
     <div class="container">
 
         <div class="for_news_list">
-            {% for item in self.items %}
+            {% for item in press_releases %}
                 <div class="for_news_item">
                     <div class="for_news_item_date">
                         {{ item.date|date:"d.m.Y" }}
@@ -27,6 +27,8 @@
                 </div>
             {% endfor %}
         </div>
+
+        {% include "core/pagination.html" with items=press_releases %}
 
     </div>
 

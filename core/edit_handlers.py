@@ -2,7 +2,8 @@ from itertools import product, chain
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from wagtail.wagtailadmin.edit_handlers import EditHandler, extract_panel_definitions_from_model_class, MultiFieldPanel, \
-    BaseCompositeEditHandler, get_form_for_model, ObjectList, FieldPanel, BaseMultiFieldPanel
+    BaseCompositeEditHandler, get_form_for_model, ObjectList, FieldPanel, BaseMultiFieldPanel, BaseChooserPanel, \
+    BasePageChooserPanel
 from django import forms
 from wagtail.wagtailadmin.views.pages import PAGE_EDIT_HANDLERS
 
@@ -37,7 +38,7 @@ def register_translatable_interface(model_class, fields, languages):
         return FieldPanel("%s_%s" % (panel.field_name, lang), panel.classname)
 
     def lang_tab(lang):
-        return ObjectList([copy_panel(find_panel(field), lang) for field in fields], lang)
+        return ObjectList([FieldPanel('has_'+lang)] + [copy_panel(find_panel(field), lang) for field in fields], lang)
 
     lang_tabs = map(lang_tab, languages)
 
@@ -256,4 +257,29 @@ def TranslatableInlinePanel(base_model, relation_name, panels=None, panels_ru=No
         'panels_en': panels_en,
         'heading': label,
         'help_text': help_text,  # TODO: can we pick this out of the foreign key definition as an alternative? (with a bit of help from the inlineformset object, as we do for label/heading)
+    })
+
+
+class BasePageParentedChooserPanel(BasePageChooserPanel):
+
+    def render_js(self):
+        page = self.get_chosen_item()
+        parent = page.get_parent() if page else None
+        if not parent and self.parent_cls:
+            parent = self.parent_cls.objects.all().live().first()
+        content_type = self.__class__.target_content_type()
+
+        return mark_safe("createPageChooser(fixPrefix('%s'), '%s.%s', %s);" % (
+            self.bound_field.id_for_label,
+            content_type.app_label,
+            content_type.model,
+            (parent.id if parent else 'null'),
+        ))
+
+
+def PageParentedChooserPanel(field_name, page_type=None, parent_cls=None):
+    return type(str('_PageChooserPanel'), (BasePageParentedChooserPanel,), {
+        'field_name': field_name,
+        'page_type': page_type,
+        'parent_cls': parent_cls
     })

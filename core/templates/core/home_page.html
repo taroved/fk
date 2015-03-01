@@ -175,7 +175,7 @@
                         <div class="for_block_title for_block_title_program">
                             <div class="for_block_title_top">
                                 <a href="#">
-                                    {% trans "Timetable" %}
+                                    {% trans "program" %}
                                 </a>
                             </div>
                             <div class="for_block_title_bot">
@@ -190,7 +190,7 @@
                     <div class="for_block_speakers_arch">
                         <div class="for_block_title">
                             <div class="for_block_title_top">
-                                <a href="{% routablepageurl self.forum_page "speakers" %}">
+                                <a href="{% pageurl self.forum_page.speakers_page %}">
                                     {% trans "Speakers" %}
                                 </a>
                             </div>
@@ -200,39 +200,12 @@
                         </div>
 
                         <div class="for_block_sp_cont">
-                            <div class="row">
-
-                                {% for speaker in self.forum_page.speakers.all|slice:":12" %}
-
-                                    {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
-                                        </div>
-                                        <div class="row">
-                                    {% endif %}
-
-                                    <div class="col-xs-3">
-                                        <div class="for_block_sp_item">
-                                            <a href="{% pageurl speaker.speaker_page %}">
-                                        <span class="for_block_sp_photo">
-                                            {% image speaker.speaker_page.photo height-300 as photo %}
-                                            <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
-                                                 class="grayscale grayscale-fade"/>
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            {% trans_field speaker.speaker_page 'title' %}
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            {% trans_field speaker.speaker_page 'position' %}
-                                        </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                                </div>
+                            {% include "core/speakers_list.html" with speakers=self.forum_page.speakers_page.specific.speakers.all|slice:":12" %}
                         </div>
 
                         <div class="for_block_all">
-                            <a href="{% routablepageurl self.forum_page "speakers" %}">
-                                повний список спікерів
+                            <a href="{% pageurl self.forum_page.speakers_page %}">
+                                {% trans "all speakers" %}
                             </a>
                         </div>
 

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static core_tags wagtailimages_tags %}
+{% load static core_tags wagtailimages_tags i18n %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -9,7 +9,7 @@
     <div class="for_block_title">
         <div class="for_block_title_top">
             <a href="{{ self.url }}">
-                МІСЦЕ ПРОВЕДЕННЯ
+                {% trans "location" %}
             </a>
         </div>
         <div class="for_block_title_bot">
@@ -25,17 +25,20 @@
             <div class="col-xs-12 text-center">
                 {% image self.location_logo max-150x150 class=".img-responsive" %}
                 <p>
-                    {% trans_field self 'location_name' %} <br/>
-                    {% trans_field self 'location_street' %} <br/>
-                    {% trans_field self 'location_city' %}, {{ self.location_zip_code }} <br/>
-                    {% trans_field self 'location_country' %}
+                    {% trans_field self 'name' %} <br/>
+                    {% trans_field self 'street' %} <br/>
+                    {% trans_field self 'city' %}, {{ self.location_zip_code }} <br/>
+                    {% trans_field self 'country' %}
                 </p>
             </div>
         </div>
+    </div>
 
-        <div class="row">
-            <iframe src="{{ self.location_map_code }}" width="100%" height="480"></iframe>
+    <div class="row">
+        <div class="col-xs-12">
+            <iframe src="{{ self.map_code }}" width="100%" height="480"></iframe>
         </div>
     </div>
+
 
 {% endblock %}

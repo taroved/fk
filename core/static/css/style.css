@@ -1257,6 +1257,9 @@ ul {
   text-transform: capitalize;
   margin: 0 0 0 38px;
 }
+.for_speakers_abc ul li span {
+  color: #979ca1;
+}
 .for_speakers_abc ul li a {
   color: #072033;
 }

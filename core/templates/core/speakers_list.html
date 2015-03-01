@@ -1,0 +1,31 @@
+{% load core_tags %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+<div class="row">
+
+{% for speaker in speakers %}
+
+{% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+</div><div class="row">
+{% endif %}
+
+    <div class="col-xs-3">
+        <div class="for_block_sp_item">
+            <a href="{% pageurl speaker.speaker_page %}">
+                <span class="for_block_sp_photo">
+                    {% image speaker.speaker_page.photo height-300 as photo %}
+                    <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
+                         class="grayscale grayscale-fade"/>
+                </span>
+                <span class="for_block_sp_name">
+                    {% trans_field speaker.speaker_page 'title' %}
+                </span>
+                <span class="for_block_sp_about">
+                    {% trans_field speaker.speaker_page 'position' %}
+                </span>
+            </a>
+        </div>
+    </div>
+
+{% endfor %}
+</div>
