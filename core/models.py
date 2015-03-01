@@ -149,7 +149,7 @@ class SliderItem(models.Model):
             FieldPanel('text', classname="full"),
             FieldPanel('button_text'),
             FieldPanel('button_link'),
-        ], heading='UK'),
+        ], heading='Default'),
 
         MultiFieldPanel([
             FieldPanel('text_ru', classname="full"),
@@ -187,7 +187,7 @@ class Partner(models.Model):
             ImageChooserPanel('logo'),
             FieldPanel('link', classname="full link"),
             FieldPanel('description', classname="full description"),
-        ], heading='UK'),
+        ], heading='Default'),
 
         MultiFieldPanel([
             FieldPanel('title_ru', classname="title full"),
@@ -501,7 +501,7 @@ class RadaPageMember(Orderable):
             ImageChooserPanel('photo'),
             FieldPanel('position'),
             FieldPanel('about'),
-        ], heading='UK', classname='uk'),
+        ], heading='Default', classname='uk'),
         MultiFieldPanel([
             FieldPanel('title_ru'),
             FieldPanel('position_ru'),
@@ -747,8 +747,8 @@ class ForumPage(RoutablePageMixin, BrowsableMixin, TranslatablePage):
     report_text_en = RichTextField(null=True, blank=True, verbose_name='report_text')
     # end report
 
-    def is_navigable(self):
-        return True
+    def save(self, *args, **kwargs):
+        super(ForumPage, self).save(*args, **kwargs)
 
     @property
     def forum_index(self):
