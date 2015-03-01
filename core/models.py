@@ -1,5 +1,6 @@
 # coding=utf-8
 from datetime import date
+import string
 import re
 
 from django.conf.urls import url
@@ -203,7 +204,7 @@ class PhotoAlbumPage(Page, BrowsableMixin):
         album_id = match.group("id")
         preview_url = 'http://flickrit.com/slideshowholder.php?height=100&size=big&setId={0}' \
                       '&counter=true&thumbnails=2&transition=0&layoutType=responsive&sort=0&theme=1' \
-            .format(album_id)
+                      .format(album_id)
         return preview_url
 
     preview = models.ForeignKey(
@@ -707,6 +708,15 @@ ForumPageTimetableDay.panels = [
 def guess_speaker_lastname(speaker):
     return speaker.title.split()[-1]
 
+multilang_alphabet_index = {letter: index for index, letter in enumerate(
+                           [u'А', u'Б', u'В', u'Г', u'Ґ', u'Д', u'Е', u'Ё', u'Є', u'Ж', u'З', u'И', u'І', u'Ї', u'Й',
+                            u'К', u'Л', u'М', u'Н', u'О', u'П', u'Р', u'С', u'Т', u'У', u'Ф', u'Х', u'Ц', u'Ч', u'Ш',
+                            u'Щ', u'Ъ', u'Ы', u'Ь', u'Э', u'Ю', u'Я'] + list(string.ascii_uppercase))}
+
+
+def multilang_alphabet_key(letter):
+    return multilang_alphabet_index.get(letter, ord(letter))
+
 
 class ForumPage(RoutablePageMixin, BrowsableMixin, Page):
     subpage_urls = (
@@ -777,7 +787,7 @@ class ForumPage(RoutablePageMixin, BrowsableMixin, Page):
     @property
     def speakers_letters(self):
         letters = sorted(set(guess_speaker_lastname(speaker.speaker_page)[0].upper()
-                             for speaker in self.speakers.all()))
+                             for speaker in self.speakers.all()), key=multilang_alphabet_key)
         return letters
 
     def main_view(self, request):

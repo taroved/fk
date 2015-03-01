@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static core_tags %}
+{% load static i18n %}
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 
@@ -18,9 +19,30 @@
             {% image self.image width-400 style="float: left; margin-right: 30px;margin-bottom: 30px;" %}
         {% endif %}
 
-        {#    {{ self.body|richtext }}#}
         {% trans_field self 'body' %}
 
+    </div>
+
+    <div class="for_repost">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <span>{% trans "share" %}:</span>
+                    <a href="#">
+                        <img src="{% static "images/for_repost_1.jpg" %}" alt="link">
+                    </a>
+                    <a href="#">
+                        <img src="{% static "images/for_repost_2.jpg" %}" alt="link">
+                    </a>
+                    <a href="#">
+                        <img src="{% static "images/for_repost_3.jpg" %}" alt="link">
+                    </a>
+                    <a href="#">
+                        <img src="{% static "images/for_repost_4.jpg" %}" alt="link">
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}
