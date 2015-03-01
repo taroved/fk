@@ -47,6 +47,7 @@ INSTALLED_APPS = (
 
     'wagtail.wagtailcore',
     'wagtail.contrib.wagtailroutablepage',
+    "wagtail.contrib.wagtailsitemaps",
     'wagtail.wagtailadmin',
     'wagtail.wagtaildocs',
     'wagtail.wagtailsnippets',
@@ -56,7 +57,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailembeds',
     'wagtail.wagtailsearch',
     'wagtail.wagtailredirects',
-    'wagtail.wagtailforms'
+    'wagtail.wagtailforms',
 )
 
 MIDDLEWARE_CLASSES = (

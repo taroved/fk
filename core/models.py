@@ -48,6 +48,24 @@ class BrowsableMixin(models.Model):
         abstract = True
 
 
+class TranslatablePage(Page):
+    is_abstract = True
+
+    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+                                help_text=_("The page title as you'd like it to be seen by the public"))
+
+    def has_language(self, lang=None):
+        if lang is None or lang == 'uk':
+            return True
+        lang_title = getattr(self.specific, 'title_'+lang, '').strip()
+        return bool(lang_title)
+
+    class Meta:
+        abstract = True
+
+
 class AccreditationPageFormField(AbstractFormField):
     page = ParentalKey('AccreditationPage', related_name='form_fields')
 
@@ -186,13 +204,9 @@ class Partner(models.Model):
         return "%s (%s)" % (self.title, self.link)
 
 
-class PhotoAlbumPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    link = models.URLField(default='')
+class PhotoAlbumPage(TranslatablePage, BrowsableMixin):
 
+    link = models.URLField(default='')
     date = models.DateField("date")
 
     @property
@@ -231,11 +245,7 @@ class PhotoAlbumPage(Page, BrowsableMixin):
 register_translatable_interface(PhotoAlbumPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
-class DocumentPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class DocumentPage(TranslatablePage, BrowsableMixin):
 
     date = models.DateField("date")
 
@@ -270,11 +280,7 @@ class DocumentPage(Page, BrowsableMixin):
 register_translatable_interface(DocumentPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
-class VideoPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class VideoPage(TranslatablePage, BrowsableMixin):
 
     date = models.DateField("date")
 
@@ -370,11 +376,7 @@ class NewsPageDocument(Orderable):
     panels = [PageChooserPanel('doc', page_type=DocumentPage)]
 
 
-class NewsPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class NewsPage(TranslatablePage, BrowsableMixin):
 
     image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     date = models.DateField("date")
@@ -412,11 +414,7 @@ NewsPage.content_panels = [
 register_translatable_interface(NewsPage, fields=('title', 'short', 'body'), languages=MODELS_LANGUAGES)
 
 
-class NewsIndexPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class NewsIndexPage(TranslatablePage, BrowsableMixin):
 
     @property
     def news(self):
@@ -457,11 +455,7 @@ class NewsIndexPage(Page, BrowsableMixin):
 register_translatable_interface(NewsIndexPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
-class OrgPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class OrgPage(TranslatablePage, BrowsableMixin):
 
     @property
     def organizers(self):
@@ -475,11 +469,8 @@ class OrgPage(Page, BrowsableMixin):
 register_translatable_interface(OrgPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
-class ParticipationPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class ParticipationPage(TranslatablePage, BrowsableMixin):
+    pass
 
 
 register_translatable_interface(ParticipationPage, fields=('title',), languages=MODELS_LANGUAGES)
@@ -506,29 +497,26 @@ class RadaPageMember(Orderable):
 
     panels = [
         MultiFieldPanel([
-                            FieldPanel('title'),
-                            ImageChooserPanel('photo'),
-                            FieldPanel('position'),
-                            FieldPanel('about'),
-                        ], heading='UK', classname='uk'),
+            FieldPanel('title'),
+            ImageChooserPanel('photo'),
+            FieldPanel('position'),
+            FieldPanel('about'),
+        ], heading='UK', classname='uk'),
         MultiFieldPanel([
-                            FieldPanel('title_ru'),
-                            FieldPanel('position_ru'),
-                            FieldPanel('about_ru'),
-                        ], heading='RU', classname='ru'),
+            FieldPanel('title_ru'),
+            FieldPanel('position_ru'),
+            FieldPanel('about_ru'),
+        ], heading='RU', classname='ru'),
         MultiFieldPanel([
-                            FieldPanel('title_en'),
-                            FieldPanel('position_en'),
-                            FieldPanel('about_en'),
-                        ], heading='EN', classname='en'),
+            FieldPanel('title_en'),
+            FieldPanel('position_en'),
+            FieldPanel('about_en'),
+        ], heading='EN', classname='en'),
     ]
 
 
-class RadaPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class RadaPage(TranslatablePage, BrowsableMixin):
+    pass
 
 
 RadaPage.content_panels = [
@@ -540,11 +528,7 @@ RadaPage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 register_translatable_interface(RadaPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
-class PartnerListPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class PartnerListPage(TranslatablePage, BrowsableMixin):
 
     @property
     def partners(self):
@@ -556,11 +540,7 @@ class PartnerListPage(Page, BrowsableMixin):
 register_translatable_interface(PartnerListPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
-class OrganizerPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class OrganizerPage(TranslatablePage, BrowsableMixin):
 
     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     link = models.URLField(blank=True, null=True)
@@ -581,11 +561,7 @@ class OrganizerPage(Page, BrowsableMixin):
 register_translatable_interface(OrganizerPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
-class ForumIndexPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class ForumIndexPage(TranslatablePage, BrowsableMixin):
 
     @property
     def forums(self):
@@ -718,7 +694,7 @@ def multilang_alphabet_key(letter):
     return multilang_alphabet_index.get(letter, ord(letter))
 
 
-class ForumPage(RoutablePageMixin, BrowsableMixin, Page):
+class ForumPage(RoutablePageMixin, BrowsableMixin, TranslatablePage):
     subpage_urls = (
         url(r'^$', 'main_view', name='main'),
         url(r'^location/$', 'location_view', name='location'),
@@ -728,11 +704,6 @@ class ForumPage(RoutablePageMixin, BrowsableMixin, Page):
         url(r'^speakers/(?P<letter>\w?)/$', 'speakers_view', name='speakers'),
         url(r'^registration/$', 'registration_view', name='registration'),
     )
-
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
 
     title_long = models.CharField(max_length=100, blank=True, default='')
     title_long_ru = models.CharField(max_length=100, blank=True, default='', verbose_name='title_long')
@@ -934,11 +905,7 @@ PAGE_EDIT_HANDLERS[ForumPage] = TranslatableTabbedInterface([
 #                                 languages=MODELS_LANGUAGES)
 
 
-class ForumTimetablePage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class ForumTimetablePage(TranslatablePage, BrowsableMixin):
 
     comment = RichTextField(blank=True, null=True)
     comment_ru = RichTextField(blank=True, null=True, verbose_name='comment')
@@ -971,11 +938,7 @@ class ForumTimetableItem(models.Model):
     description_en = RichTextField(blank=True, null=True, verbose_name='description')
 
 
-class SpeakerPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class SpeakerPage(TranslatablePage, BrowsableMixin):
 
     photo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 
@@ -1007,11 +970,7 @@ class SpeakerPage(Page, BrowsableMixin):
 register_translatable_interface(SpeakerPage, fields=('title', 'position', 'about'), languages=MODELS_LANGUAGES)
 
 
-class AllSpeakersIndexPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class AllSpeakersIndexPage(TranslatablePage, BrowsableMixin):
 
     def speakers(self):
         speakers = SpeakerPage.objects.live().descendant_of(self)
@@ -1025,11 +984,7 @@ class AllSpeakersIndexPage(Page, BrowsableMixin):
 register_translatable_interface(AllSpeakersIndexPage, fields=('title', ), languages=MODELS_LANGUAGES)
 
 
-class ContentPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class ContentPage(TranslatablePage, BrowsableMixin):
 
     body = RichTextField(blank=True, null=True)
     body_ru = RichTextField(blank=True, null=True, verbose_name='body')
@@ -1054,11 +1009,7 @@ class ContentPage(Page, BrowsableMixin):
 register_translatable_interface(ContentPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
 
 
-class ContactsPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class ContactsPage(TranslatablePage, BrowsableMixin):
 
     body = RichTextField(blank=True, null=True)
     body_ru = RichTextField(blank=True, null=True)
@@ -1074,11 +1025,7 @@ class ContactsPage(Page, BrowsableMixin):
 register_translatable_interface(ContactsPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
 
 
-class PressTopPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class PressTopPage(TranslatablePage, BrowsableMixin):
 
     date = models.DateField()
 
@@ -1102,11 +1049,7 @@ class PressTopPage(Page, BrowsableMixin):
 register_translatable_interface(PressTopPage, fields=('title', 'description', 'content'), languages=MODELS_LANGUAGES)
 
 
-class PressTopListPage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class PressTopListPage(TranslatablePage, BrowsableMixin):
 
     def items(self):
         items = PressTopPage.objects.live().all()
@@ -1123,11 +1066,12 @@ class PressTopListPage(Page, BrowsableMixin):
 register_translatable_interface(PressTopListPage, fields=('title', ), languages=MODELS_LANGUAGES)
 
 
-class HomePageAdvertPlacement(Orderable, models.Model):
-    page = ParentalKey('core.HomePage', related_name='advert_placements')
+class BaseHomePageAdvertPlacement(Orderable, models.Model):
+
     advert = models.ForeignKey('core.Advert', related_name='+')
 
     class Meta:
+        abstract = True
         verbose_name = "Advert Placement"
         verbose_name_plural = "Advert Placements"
 
@@ -1140,6 +1084,18 @@ class HomePageAdvertPlacement(Orderable, models.Model):
     ]
 
 
+class HomePageAdvertPlacement(BaseHomePageAdvertPlacement):
+    page = ParentalKey('core.HomePage', related_name='advert_placements')
+
+
+class HomePageAdvertPlacementRU(BaseHomePageAdvertPlacement):
+    page = ParentalKey('core.HomePage', related_name='advert_placements_ru')
+
+
+class HomePageAdvertPlacementEN(BaseHomePageAdvertPlacement):
+    page = ParentalKey('core.HomePage', related_name='advert_placements_en')
+
+
 class HomePageMaterialVideo(Orderable):
     page = ParentalKey('core.HomePage', related_name='material_videos')
     video = models.ForeignKey('core.VideoPage', related_name='+')
@@ -1149,11 +1105,7 @@ class HomePageMaterialVideo(Orderable):
     ]
 
 
-class HomePage(Page, BrowsableMixin):
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class HomePage(TranslatablePage, BrowsableMixin):
 
     forum_page = models.ForeignKey('core.ForumPage', null=True, blank=True,
                                    on_delete=models.SET_NULL, related_name='+')
@@ -1173,6 +1125,24 @@ HomePage.content_panels = Page.content_panels + [
     InlinePanel(HomePage, 'advert_placements', label="Adverts"),
 ]
 
+HomePage.ru_panels = [
+    FieldPanel('title_ru', classname='full title'),
+    InlinePanel(HomePage, 'advert_placements_ru', label="Adverts"),
+]
+
+HomePage.en_panels = [
+    FieldPanel('title_en', classname='full title'),
+    InlinePanel(HomePage, 'advert_placements_en', label="Adverts"),
+]
+
 HomePage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
-register_translatable_interface(HomePage, fields=('title',), languages=MODELS_LANGUAGES)
+
+PAGE_EDIT_HANDLERS[HomePage] = TranslatableTabbedInterface([
+    ObjectList(HomePage.content_panels, heading='Content'),
+    ObjectList(HomePage.ru_panels, heading='RU'),
+    ObjectList(HomePage.en_panels, heading='EN'),
+    ObjectList(HomePage.promote_panels, heading='Promote'),
+    ObjectList(HomePage.settings_panels, heading='Settings', classname="settings")
+])
+# register_translatable_interface(HomePage, fields=('title',), languages=MODELS_LANGUAGES)

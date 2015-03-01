@@ -7,6 +7,8 @@
 {% load static %}
 {% load i18n %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content_title %}
@@ -143,16 +145,13 @@
                     </div>
                 </div>
                 <div class="for_block_banners_cont">
-                    {% for advert_placement in self.advert_placements.all %}
-                        <div class="col-xs-6">
-                            <div class="for_block_banner_item">
-                                <a href="{{ advert_placement.advert.url }}">
-                                    {% image advert_placement.advert.image max-570x100 %}
-                                </a>
-                            </div>
-                        </div>
-                    {% endfor %}
-
+                    {% if LANGUAGE_CODE == 'ru' %}
+                        {% include "core/advert.html" with advert_placements=self.advert_placements_ru %}
+                    {% elif LANGUAGE_CODE == 'en' %}
+                        {% include "core/advert.html" with advert_placements=self.advert_placements_en %}
+                    {% else %}
+                        {% include "core/advert.html" with advert_placements=self.advert_placements %}
+                    {% endif %}
                 </div>
             </div>
         </div>
