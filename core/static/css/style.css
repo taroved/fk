@@ -1241,11 +1241,12 @@ ul {
 .for_body .container .for_speakers_abc ul {
   padding: 0;
   overflow: hidden;
+  text-align: center;
 }
 .for_body .container .for_speakers_abc ul li {
   list-style: none;
   font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
-  float: left;
+  display: inline-block;
   text-transform: uppercase;
   font-size: 20px;
   line-height: 20px;
