@@ -244,6 +244,8 @@ class PhotoAlbumPage(TranslatablePage, BrowsableMixin):
     description_ru = models.TextField(blank=True, null=True, default='', verbose_name='description')
     description_en = models.TextField(blank=True, null=True, default='', verbose_name='description')
 
+    parent_page_types = ['core.MaterialsAlbumsPage']
+
     content_panels = [
         FieldPanel('title', classname="title full"),
         FieldPanel('date', classname="date"),
@@ -279,6 +281,8 @@ class DocumentPage(TranslatablePage, BrowsableMixin):
     description_ru = models.TextField(blank=True, null=True, default='')
     description_en = models.TextField(blank=True, null=True, default='')
 
+    parent_page_types = ['core.MaterialsDocumentsPage']
+
     content_panels = [
         FieldPanel('title', classname="title full"),
         FieldPanel('date', classname="date"),
@@ -309,6 +313,8 @@ class VideoPage(TranslatablePage, BrowsableMixin):
     description_ru = models.TextField(blank=True, null=True, default='', verbose_name='description')
     description_en = models.TextField(blank=True, null=True, default='', verbose_name='description')
 
+    parent_page_types = ['core.MaterialsVideoPage']
+
     content_panels = [
         FieldPanel('title', classname="title full"),
         FieldPanel('date', classname="date"),
@@ -323,21 +329,22 @@ class VideoPage(TranslatablePage, BrowsableMixin):
 register_translatable_interface(VideoPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
-class MaterialsPage(RoutablePageMixin, BrowsableMixin, Page):
-    subpage_urls = (
-        url(r'^$', 'main_view', name='main'),
-        url(r'^videos/$', 'videos_view', name='videos'),
-        url(r'^albums/$', 'albums_view', name='albums'),
-        url(r'^documents/$', 'documents_view', name='documents'),
-    )
+# class MaterialsPage(RoutablePageMixin, BrowsableMixin, Page):
+class MaterialsPage(TranslatablePage, BrowsableMixin):
+    # subpage_urls = (
+    #     url(r'^$', 'main_view', name='main'),
+    #     url(r'^videos/$', 'videos_view', name='videos'),
+    #     url(r'^albums/$', 'albums_view', name='albums'),
+    #     url(r'^documents/$', 'documents_view', name='documents'),
+    # )
 
-    has_ru = models.BooleanField(default=False, help_text=_("Is RU translation enabled for this Page"))
-    has_en = models.BooleanField(default=False, help_text=_("Is EN translation enabled for this Page"))
-
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+    # has_ru = models.BooleanField(default=False, help_text=_("Is RU translation enabled for this Page"))
+    # has_en = models.BooleanField(default=False, help_text=_("Is EN translation enabled for this Page"))
+    #
+    # title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+    #                             help_text=_("The page title as you'd like it to be seen by the public"))
+    # title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
+    #                             help_text=_("The page title as you'd like it to be seen by the public"))
 
     def albums(self):
         return PhotoAlbumPage.objects.live().filter(**current_lang_filter_params())
@@ -348,52 +355,76 @@ class MaterialsPage(RoutablePageMixin, BrowsableMixin, Page):
     def videos(self):
         return VideoPage.objects.live().filter(**current_lang_filter_params())
 
-    def main_view(self, request):
-        return render_to_response("core/materials_page.html", {'self': self, 'request': request})
+    # def main_view(self, request):
+    #     return render_to_response("core/materials_page.html", {'self': self, 'request': request})
+    #
+    # def albums_view(self, request):
+    #     return render_to_response("core/materials_albums_page.html", {'self': self, 'request': request})
+    #
+    # def documents_view(self, request):
+    #     return render_to_response("core/materials_documents_page.html", {'self': self, 'request': request})
+    #
+    # def videos_view(self, request):
+    #     return render_to_response("core/materials_video_page.html", {'self': self, 'request': request})
+    #
+    # def construct_menu(self):
+    #     menu = [
+    #         {'route_name': 'videos', 'title': _('videos')},
+    #         {'route_name': 'albums', 'title': _('albums')},
+    #         {'route_name': 'documents', 'title': _('documents')},
+    #     ]
+    #     return menu
 
-    def albums_view(self, request):
-        return render_to_response("core/materials_albums_page.html", {'self': self, 'request': request})
-
-    def documents_view(self, request):
-        return render_to_response("core/materials_documents_page.html", {'self': self, 'request': request})
-
-    def videos_view(self, request):
-        return render_to_response("core/materials_video_page.html", {'self': self, 'request': request})
-
-    def construct_menu(self):
-        menu = [
-            {'route_name': 'videos', 'title': _('videos')},
-            {'route_name': 'albums', 'title': _('albums')},
-            {'route_name': 'documents', 'title': _('documents')},
-        ]
-        return menu
-
-    subpage_types = ['core.PhotoAlbumPage', 'core.DocumentPage', 'core.VideoPage']
+    subpage_types = ['core.MaterialsAlbumsPage', 'core.MaterialsVideoPage', 'core.MaterialsDocumentsPage']
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 
 register_translatable_interface(MaterialsPage, fields=('title', ), languages=MODELS_LANGUAGES)
 
 
+class MaterialsAlbumsPage(TranslatablePage, BrowsableMixin):
+    subpage_types = ['core.PhotoAlbumPage']
+    parent_page_types = ['core.MaterialsPage']
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+register_translatable_interface(MaterialsAlbumsPage, fields=('title', ), languages=MODELS_LANGUAGES)
+
+
+class MaterialsVideoPage(TranslatablePage, BrowsableMixin):
+    subpage_types = ['core.VideoPage']
+    parent_page_types = ['core.MaterialsPage']
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+register_translatable_interface(MaterialsVideoPage, fields=('title', ), languages=MODELS_LANGUAGES)
+
+
+class MaterialsDocumentsPage(TranslatablePage, BrowsableMixin):
+    subpage_types = ['core.DocumentPage']
+    parent_page_types = ['core.MaterialsPage']
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+register_translatable_interface(MaterialsDocumentsPage, fields=('title', ), languages=MODELS_LANGUAGES)
+
+
 class NewsPageVideo(Orderable):
     page = ParentalKey('core.NewsPage', related_name='videos')
     video = models.ForeignKey('core.VideoPage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 
-    panels = [PageChooserPanel('video', page_type=VideoPage)]
+    panels = [PageParentedChooserPanel('video', page_type=VideoPage, parent_cls=MaterialsVideoPage)]
 
 
 class NewsPagePhotoAlbum(Orderable):
     page = ParentalKey('core.NewsPage', related_name='albums')
     album = models.ForeignKey('core.PhotoAlbumPage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 
-    panels = [PageChooserPanel('album', page_type=PhotoAlbumPage)]
+    panels = [PageParentedChooserPanel('album', page_type=PhotoAlbumPage, parent_cls=MaterialsAlbumsPage)]
 
 
 class NewsPageDocument(Orderable):
     page = ParentalKey('core.NewsPage', related_name='documents')
     doc = models.ForeignKey('core.DocumentPage', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 
-    panels = [PageChooserPanel('doc', page_type=DocumentPage)]
+    panels = [PageParentedChooserPanel('doc', page_type=DocumentPage, parent_cls=MaterialsDocumentsPage)]
 
 
 class NewsPage(TranslatablePage, BrowsableMixin):
@@ -460,7 +491,7 @@ class NewsIndexPage(TranslatablePage, BrowsableMixin):
         context['news'] = news
         return context
 
-    subpage_types = ['core.NewsPage']
+    subpage_types = ['core.NewsPage', 'core.PressTopPage']
 
     content_panels = [
         FieldPanel('title', classname="full title"),
@@ -596,6 +627,9 @@ class ForumIndexPage(TranslatablePage, BrowsableMixin):
         FieldPanel('title', classname="full title"),
     ]
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+    class Meta:
+        verbose_name = 'Forum Archive Page'
 
 
 register_translatable_interface(ForumIndexPage, fields=('title', ), languages=MODELS_LANGUAGES)
@@ -741,6 +775,8 @@ class SpeakerPage(TranslatablePage, BrowsableMixin):
     about_ru = RichTextField(blank=True, null=True, default='', verbose_name='about')
     about_en = RichTextField(blank=True, null=True, default='', verbose_name='about')
 
+    parent_page_types = ['core.AllSpeakersIndexPage']
+
     content_panels = [
         FieldPanel('title', classname="full title"),
         ImageChooserPanel('photo'),
@@ -840,6 +876,8 @@ class ForumSpeakersPage(TranslatablePage, BrowsableMixin):
         letters = set(guess_speaker_lastname(speaker.speaker_page)[0].upper() for speaker in self.speakers.all())
         return letters
 
+    parent_page_types = ['core.ForumPage']
+
 
 ForumSpeakersPage.content_panels = [
     FieldPanel('title', classname='title full'),
@@ -873,6 +911,8 @@ class ForumLocationPage(TranslatablePage, BrowsableMixin):
     zip_code = models.CharField(max_length=20, null=True, blank=True, verbose_name="zip_code")
     map_code = models.CharField(max_length=255, blank=True, default='', verbose_name="map_code")
 
+    parent_page_types = ['core.ForumPage']
+
     content_panels = [
         FieldPanel('title', classname="full title"),
         ImageChooserPanel('logo'),
@@ -904,6 +944,8 @@ register_translatable_interface(ForumLocationPage, fields=('title', 'name', 'cou
 
 
 class ForumRegistrationPage(TranslatablePage, BrowsableMixin):
+
+    parent_page_types = ['core.ForumPage']
 
     content_panels = [
         FieldPanel('title', classname="full title"),
@@ -1173,6 +1215,8 @@ class PressTopPage(TranslatablePage, BrowsableMixin):
     content_ru = RichTextField(blank=True, null=True, default='', verbose_name='content')
     content_en = RichTextField(blank=True, null=True, default='', verbose_name='content')
 
+    parent_page_types = ['core.NewsIndexPage', 'core.PressTopListPage']
+
     content_panels = [
         FieldPanel('title', classname="full title"),
         FieldPanel('date', classname="date"),
@@ -1252,21 +1296,21 @@ class HomePageMaterialVideo(Orderable):
     page = ParentalKey('core.HomePage', related_name='material_videos')
     video = models.ForeignKey('core.VideoPage', related_name='+')
 
-    panels = [PageParentedChooserPanel('video', page_type=VideoPage, parent_cls=MaterialsPage)]
+    panels = [PageParentedChooserPanel('video', page_type=VideoPage, parent_cls=MaterialsVideoPage)]
 
 
 class HomePageMaterialVideoRU(Orderable):
     page = ParentalKey('core.HomePage', related_name='material_videos_ru')
     video = models.ForeignKey('core.VideoPage', related_name='+')
 
-    panels = [PageParentedChooserPanel('video', page_type=VideoPage)]
+    panels = [PageParentedChooserPanel('video', page_type=VideoPage, parent_cls=MaterialsVideoPage)]
 
 
 class HomePageMaterialVideoEN(Orderable):
     page = ParentalKey('core.HomePage', related_name='material_videos_en')
     video = models.ForeignKey('core.VideoPage', related_name='+')
 
-    panels = [PageParentedChooserPanel('video', page_type=VideoPage)]
+    panels = [PageParentedChooserPanel('video', page_type=VideoPage, parent_cls=MaterialsVideoPage)]
 
 
 class HomePage(TranslatablePage, BrowsableMixin):
