@@ -21,5 +21,6 @@ from wagtail.wagtailcore import hooks
 
 @hooks.register('insert_editor_css')
 def editor_css():
-    # return format_html('')
-    return format_html('<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/inline_panel_customization.css">')
+    return format_html('<link rel="stylesheet" href="' +
+                       settings.STATIC_URL +
+                       'css/inline_panel_customization.css">')

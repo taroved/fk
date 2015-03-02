@@ -66,6 +66,10 @@ def trans_field(instance, field):
     return value or ''
 
 
+@register.assignment_tag
+def assign(value):
+    return value
+
 # class TransFieldNode(Node):
 #     def __init__(self, filter_expression, asvar=None):
 #         self.asvar = asvar

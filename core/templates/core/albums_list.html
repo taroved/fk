@@ -5,6 +5,10 @@
 <div class="row">
 
 {% for album in albums %}
+    {# can handle list of AlbumPage or list of crossTable to AlbumPage #}
+    {% if album.album %}
+        {% assign album.album as album %}
+    {% endif %}
 
 {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
 </div><div class="row">
