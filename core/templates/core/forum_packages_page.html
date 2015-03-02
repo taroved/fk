@@ -52,7 +52,7 @@
                     {% for date_range in self.date_ranges.all %}
                     <tr>
                         <td>
-                            {{ date_range.title }}
+                            {% trans_field date_range "title" %}
                         </td>
                         {% with forloop.counter0 as range_index %}
 
