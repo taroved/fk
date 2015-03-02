@@ -12,6 +12,8 @@
 
 {% block content %}
 
+    {% if self.videos %}
+
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
@@ -55,13 +57,16 @@
                     <div class="for_block_all">
                         <a href="{% routablepageurl self "videos" %}">
                             {% trans "all videos" %}
-                            {#                        всі відео#}
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    {% endif %}
+
+    {% if self.albums %}
 
     <div class="for_block_photo_mat">
         <div class="container">
@@ -106,13 +111,17 @@
                     <div class="for_block_all">
                         <a href="{% routablepageurl self "albums" %}">
                             {% trans "all albums" %}
-                            {#                        всі фотоальбоми#}
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    {% endif %}
+
+    {% if self.documents %}
+
 
     <div class="for_block_doc_mat">
         <div class="container">
@@ -169,5 +178,7 @@
             </div>
         </div>
     </div>
+
+    {% endif %}
 
 {% endblock %}
