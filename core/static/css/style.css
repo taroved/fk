@@ -495,6 +495,14 @@ ul {
 .for_block_banners_cont {
   overflow: hidden;
 }
+.for_block_banners_cont .col-xs-6:first-child {
+  padding-left: 0;
+  padding-right: 15px;
+}
+.for_block_banners_cont .col-xs-6:last-child {
+  padding-left: 15px;
+  padding-right: 0;
+}
 .for_block_banner_item a {
   -webkit-transition: opacity 100ms ease-out;
   -moz-transition: opacity 100ms ease-out;
