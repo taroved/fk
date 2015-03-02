@@ -1359,7 +1359,8 @@ ul {
 .for_block_prog_bot {
   font-size: 16px;
   color: #989ca2;
-  font-family: 'PFBeauSansPro-ThinItalic';
+  font-family: 'PFBeauSansPro-ThinItalic', Arial, sans-serif;
+  font-style: italic;
 }
 /********** FOOTER **********/
 footer {
