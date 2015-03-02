@@ -46,11 +46,13 @@
                                     </div>
                                     <div class="for_block_news_title">
                                         <a href="{% pageurl self.top_news.0 %}">
-                                            {{ self.top_news.0.title }}
+{#                                            {{ self.top_news.0.title }}#}
+                                            {% trans_field self.top_news.0 "title" %}
                                         </a>
                                     </div>
                                     <div class="for_block_news_text">
-                                        {{ self.top_news.0.short|linebreaksbr }}
+{#                                        {{ self.top_news.0.short|linebreaksbr }}#}
+                                        {% trans_field self.top_news.0 "short" %}
                                     </div>
                                 </div>
                                 <div class="pad"></div>
@@ -72,7 +74,8 @@
                                                 {{ self.top_news.1.date|date:"d.m.Y" }}
                                             </div>
                                             <div class="for_block_news_small_text">
-                                                {{ self.top_news.1.title|linebreaksbr }}
+                                                {% trans_field self.top_news.1 "title" %}
+{#                                                {{ self.top_news.1.title|linebreaksbr }}#}
                                             </div>
                                         </div>
                                         <div class="pad"></div>
@@ -92,7 +95,8 @@
                                                 {{ self.top_news.2.date|date:"d.m.Y" }}
                                             </div>
                                             <div class="for_block_news_small_text">
-                                                {{ self.top_news.2.title|linebreaksbr }}
+                                                {% trans_field self.top_news.2 "title" %}
+{#                                                {{ self.top_news.2.title|linebreaksbr }}#}
                                             </div>
                                         </div>
                                         <div class="pad"></div>

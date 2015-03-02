@@ -1387,7 +1387,7 @@ class HomePage(TranslatablePage, BrowsableMixin):
 
     @property
     def top_news(self):
-        news = NewsPage.objects.live().descendant_of(self).order_by('-date')  # or get News Page
+        news = NewsPage.objects.live().descendant_of(self).filter(**current_lang_filter_params()).order_by('-date')
         return news
 
     class Meta:
