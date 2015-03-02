@@ -981,14 +981,34 @@ class ForumPackagesPageItem(models.Model):
     page = ParentalKey('core.ForumPackagesPage', related_name='packages')
 
     title = models.CharField(max_length=100, blank=True, default='')
-    title_ru = models.CharField(max_length=100, blank=True, default='')
-    title_en = models.CharField(max_length=100, blank=True, default='')
+    title_ru = models.CharField(max_length=100, blank=True, default='', verbose_name='title')
+    title_en = models.CharField(max_length=100, blank=True, default='', verbose_name='title')
 
     description = SingleLineTextField(null=True, blank=True, default='')
-    description_ru = SingleLineTextField(null=True, blank=True, default='')
-    description_en = SingleLineTextField(null=True, blank=True, default='')
+    description_ru = SingleLineTextField(null=True, blank=True, default='', verbose_name='Description')
+    description_en = SingleLineTextField(null=True, blank=True, default='', verbose_name='Description')
 
     prices = models.CommaSeparatedIntegerField(max_length=100, null=True, blank=True)
+
+    panels = [
+
+        MultiFieldPanel([
+            FieldPanel('title'),
+            FieldPanel('description'),
+            FieldPanel('prices'),
+        ], heading='Default', classname='uk'),
+
+        MultiFieldPanel([
+            FieldPanel('title_ru'),
+            FieldPanel('description_ru'),
+        ], heading='RU', classname='ru'),
+
+        MultiFieldPanel([
+            FieldPanel('title_en'),
+            FieldPanel('description_en'),
+        ], heading='EN', classname='en'),
+
+    ]
 
     @property
     def price_list(self):
