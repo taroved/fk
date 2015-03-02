@@ -1,0 +1,17 @@
+li.multi-field.uk legend,
+li.multi-field.ru legend,
+li.multi-field.en legend {
+    position: static;
+    background: #fcf2f2;
+    width: 100%;
+    height: 30px;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    border: none;
+    margin-left: -20px;
+    vertical-align: middle;
+    line-height: 30px;
+    font-weight: bold;
+    padding-left: 20px;
+}
