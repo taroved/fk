@@ -1,6 +1,7 @@
 # coding=utf-8
 from datetime import date
 import string
+from django.core.cache import cache
 from django.utils import translation
 import re
 
@@ -329,51 +330,19 @@ class VideoPage(TranslatablePage, BrowsableMixin):
 register_translatable_interface(VideoPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
-# class MaterialsPage(RoutablePageMixin, BrowsableMixin, Page):
 class MaterialsPage(TranslatablePage, BrowsableMixin):
-    # subpage_urls = (
-    #     url(r'^$', 'main_view', name='main'),
-    #     url(r'^videos/$', 'videos_view', name='videos'),
-    #     url(r'^albums/$', 'albums_view', name='albums'),
-    #     url(r'^documents/$', 'documents_view', name='documents'),
-    # )
 
-    # has_ru = models.BooleanField(default=False, help_text=_("Is RU translation enabled for this Page"))
-    # has_en = models.BooleanField(default=False, help_text=_("Is EN translation enabled for this Page"))
-    #
-    # title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-    #                             help_text=_("The page title as you'd like it to be seen by the public"))
-    # title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-    #                             help_text=_("The page title as you'd like it to be seen by the public"))
-
+    @property
     def albums(self):
-        return PhotoAlbumPage.objects.live().filter(**current_lang_filter_params())
+        return PhotoAlbumPage.objects.live().descendant_of(self).filter(**current_lang_filter_params())
 
+    @property
     def documents(self):
-        return DocumentPage.objects.live().filter(**current_lang_filter_params())
+        return DocumentPage.objects.live().descendant_of(self).filter(**current_lang_filter_params())
 
+    @property
     def videos(self):
-        return VideoPage.objects.live().filter(**current_lang_filter_params())
-
-    # def main_view(self, request):
-    #     return render_to_response("core/materials_page.html", {'self': self, 'request': request})
-    #
-    # def albums_view(self, request):
-    #     return render_to_response("core/materials_albums_page.html", {'self': self, 'request': request})
-    #
-    # def documents_view(self, request):
-    #     return render_to_response("core/materials_documents_page.html", {'self': self, 'request': request})
-    #
-    # def videos_view(self, request):
-    #     return render_to_response("core/materials_video_page.html", {'self': self, 'request': request})
-    #
-    # def construct_menu(self):
-    #     menu = [
-    #         {'route_name': 'videos', 'title': _('videos')},
-    #         {'route_name': 'albums', 'title': _('albums')},
-    #         {'route_name': 'documents', 'title': _('documents')},
-    #     ]
-    #     return menu
+        return VideoPage.objects.live().descendant_of(self).filter(**current_lang_filter_params())
 
     subpage_types = ['core.MaterialsAlbumsPage', 'core.MaterialsVideoPage', 'core.MaterialsDocumentsPage']
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
@@ -383,6 +352,11 @@ register_translatable_interface(MaterialsPage, fields=('title', ), languages=MOD
 
 
 class MaterialsAlbumsPage(TranslatablePage, BrowsableMixin):
+
+    @property
+    def albums(self):
+        return PhotoAlbumPage.objects.live().descendant_of(self).filter(**current_lang_filter_params())
+
     subpage_types = ['core.PhotoAlbumPage']
     parent_page_types = ['core.MaterialsPage']
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
@@ -391,6 +365,11 @@ register_translatable_interface(MaterialsAlbumsPage, fields=('title', ), languag
 
 
 class MaterialsVideoPage(TranslatablePage, BrowsableMixin):
+
+    @property
+    def videos(self):
+        return VideoPage.objects.live().descendant_of(self).filter(**current_lang_filter_params())
+
     subpage_types = ['core.VideoPage']
     parent_page_types = ['core.MaterialsPage']
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
@@ -399,6 +378,11 @@ register_translatable_interface(MaterialsVideoPage, fields=('title', ), language
 
 
 class MaterialsDocumentsPage(TranslatablePage, BrowsableMixin):
+
+    @property
+    def documents(self):
+        return DocumentPage.objects.live().descendant_of(self).filter(**current_lang_filter_params())
+
     subpage_types = ['core.DocumentPage']
     parent_page_types = ['core.MaterialsPage']
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
@@ -856,11 +840,11 @@ class ForumSpeakersPage(TranslatablePage, BrowsableMixin):
     def get_context(self, request, *args, **kwargs):
         context = super(ForumSpeakersPage, self).get_context(request)
 
-        letter = None  # todo get from request
+        letter = request.GET.get('letter')  # todo get from request
         if not letter:
             speakers = self.speakers.all()
         else:
-            speakers = [link.speaker_page for link in self.speakers.all()
+            speakers = [link for link in self.speakers.all()
                         if guess_speaker_lastname(link.speaker_page)[0].upper() == letter]
 
         context['speakers'] = speakers
@@ -871,10 +855,14 @@ class ForumSpeakersPage(TranslatablePage, BrowsableMixin):
         lang = translation.get_language()
         return globals().get(lang + '_upper', [])
 
+    _speakers_letters = None
+
     @property
     def speakers_letters(self):
-        letters = set(guess_speaker_lastname(speaker.speaker_page)[0].upper() for speaker in self.speakers.all())
-        return letters
+        if not self._speakers_letters:
+            self._speakers_letters = set(guess_speaker_lastname(speaker.speaker_page)[0].upper()
+                                         for speaker in self.speakers.all())
+        return self._speakers_letters
 
     parent_page_types = ['core.ForumPage']
 

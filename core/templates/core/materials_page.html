@@ -21,7 +21,7 @@
                 <div class="for_block_video">
                     <div class="for_block_title for_block_title_video">
                         <div class="for_block_title_top">
-                            <a href="{% pageurl self.videos.0 %}">
+                            <a href="{% pageurl self.videos.0.get_parent %}">
                                 {% trans "videos" %}
                             </a>
                         </div>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="for_block_all">
-                        <a href="{% pageurl self.videos.0 %}">
+                        <a href="{% pageurl self.videos.0.get_parent %}">
                             {% trans "all videos" %}
                         </a>
                     </div>
@@ -75,7 +75,7 @@
                 <div class="col-xs-12">
                     <div class="for_block_title for_block_photo_title">
                         <div class="for_block_title_top">
-                            <a href="{% pageurl self.albums.0 %}">
+                            <a href="{% pageurl self.albums.0.get_parent %}">
                                 {% trans "albums" %}
                             </a>
                         </div>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <div class="for_block_all">
-                        <a href="{% pageurl self.albums.0 %}">
+                        <a href="{% pageurl self.albums.0.get_parent %}">
                             {% trans "all albums" %}
                         </a>
                     </div>
@@ -130,7 +130,7 @@
                 <div class="col-xs-12">
                     <div class="for_block_title">
                         <div class="for_block_title_top">
-                            <a href="{% pageurl self.documents.0 %}">
+                            <a href="{% pageurl self.documents.0.get_parent %}">
                                 {% trans "documents" %}
                             </a>
                         </div>
@@ -170,7 +170,7 @@
                         <div class="pad"></div>
                     </div>
                     <div class="for_block_all">
-                        <a href="{% pageurl self.documents.0 %}">
+                        <a href="{% pageurl self.documents.0.get_parent %}">
                             {% trans "all documents" %}
                         </a>
                     </div>
