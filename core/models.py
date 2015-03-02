@@ -2,7 +2,9 @@
 from datetime import date
 import string
 from django.core.cache import cache
+from django.db.models.fields import Field
 from django.utils import translation
+from django.utils.encoding import smart_text
 import re
 
 from django.conf.urls import url
@@ -12,6 +14,7 @@ from django.shortcuts import render_to_response, redirect
 from django.utils.html import strip_tags
 from modelcluster.fields import ParentalKey
 from django.utils.translation import ugettext_lazy as _, ugettext_lazy
+import six
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
 from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel, PageChooserPanel, \
     FieldRowPanel, \
@@ -942,6 +945,68 @@ class ForumRegistrationPage(TranslatablePage, BrowsableMixin):
 
 register_translatable_interface(ForumRegistrationPage, fields=('title', ), languages=MODELS_LANGUAGES)
 
+from django import forms
+
+
+class SingleLineTextField(Field):
+    description = _("Text")
+
+    def get_internal_type(self):
+        return "TextField"
+
+    def get_prep_value(self, value):
+        value = super(SingleLineTextField, self).get_prep_value(value)
+        if isinstance(value, six.string_types) or value is None:
+            return value
+        return smart_text(value)
+
+    def formfield(self, **kwargs):
+        # Passing max_length to forms.CharField means that the value's length
+        # will be validated twice. This is considered acceptable since we want
+        # the value in the form field (to pass into widget for example).
+        defaults = {'max_length': self.max_length, 'widget': forms.TextInput}
+        defaults.update(kwargs)
+        return super(SingleLineTextField, self).formfield(**defaults)
+
+
+class ForumPackagesPageDateRanges(models.Model):
+    page = ParentalKey('core.ForumPackagesPage', related_name='date_ranges')
+
+    title = models.CharField(max_length=100, blank=True, default='')
+    title_ru = models.CharField(max_length=100, blank=True, default='')
+    title_en = models.CharField(max_length=100, blank=True, default='')
+
+
+class ForumPackagesPageItem(models.Model):
+    page = ParentalKey('core.ForumPackagesPage', related_name='packages')
+
+    title = models.CharField(max_length=100, blank=True, default='')
+    title_ru = models.CharField(max_length=100, blank=True, default='')
+    title_en = models.CharField(max_length=100, blank=True, default='')
+
+    description = SingleLineTextField(null=True, blank=True, default='')
+    description_ru = SingleLineTextField(null=True, blank=True, default='')
+    description_en = SingleLineTextField(null=True, blank=True, default='')
+
+    prices = models.CommaSeparatedIntegerField(max_length=100, null=True, blank=True)
+
+    @property
+    def price_list(self):
+        return self.prices.split(',')
+
+
+class ForumPackagesPage(TranslatablePage, BrowsableMixin):
+    parent_page_types = ['core.ForumPage']
+
+ForumPackagesPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    InlinePanel(ForumPackagesPage, 'date_ranges', label='Date Ranges'),
+    InlinePanel(ForumPackagesPage, 'packages', label='Packages'),
+]
+ForumPackagesPage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+register_translatable_interface(ForumPackagesPage, fields=('title', ), languages=MODELS_LANGUAGES)
+
 
 class ForumPage(TranslatablePage, BrowsableMixin):
     # subpage_urls = (
@@ -966,11 +1031,10 @@ class ForumPage(TranslatablePage, BrowsableMixin):
     description_en = RichTextField(null=True, blank=True, verbose_name='description')
 
     signup_link = models.URLField(blank=True)
-    # report
+
     report_text = RichTextField(null=True, blank=True)
     report_text_ru = RichTextField(null=True, blank=True, verbose_name='report text')
     report_text_en = RichTextField(null=True, blank=True, verbose_name='report text')
-    # end report
 
     def _create_sub_pages(self):
         pass
@@ -991,11 +1055,6 @@ class ForumPage(TranslatablePage, BrowsableMixin):
     def speakers_page(self):
         return self.get_descendants().type(ForumSpeakersPage).live().last()
 
-    @property
-    def speakers_letters(self):
-        letters = sorted(set(guess_speaker_lastname(speaker.speaker_page)[0].upper()
-                             for speaker in self.speakers.all()), key=multilang_alphabet_key)
-        return letters
 
     # def main_view(self, request):
     #     return render_to_response('core/forum_page.html', {'self': self, 'request': request})

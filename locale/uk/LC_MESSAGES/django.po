@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-02 01:09+0200\n"
+"POT-Creation-Date: 2015-03-02 06:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,86 +19,75 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: core/models.py:39
+#: core/models.py:44
 msgid "Common page configuration"
 msgstr ""
 
-#: core/models.py:48
+#: core/models.py:53
 msgid ""
 "Whether a browsable link to this page will appear in automatically generated "
 "menus"
 msgstr ""
 
-#: core/models.py:58 core/models.py:81 core/models.py:333
+#: core/models.py:63 core/models.py:86
 msgid "Is RU translation enabled for this Page"
 msgstr ""
 
-#: core/models.py:59 core/models.py:82 core/models.py:334
+#: core/models.py:64 core/models.py:87
 msgid "Is EN translation enabled for this Page"
 msgstr ""
 
-#: core/models.py:62 core/models.py:64 core/models.py:85 core/models.py:87
-#: core/models.py:184 core/models.py:186 core/models.py:337 core/models.py:339
-#: core/models.py:497 core/models.py:499 core/models.py:501
+#: core/models.py:67 core/models.py:69 core/models.py:90 core/models.py:92
+#: core/models.py:189 core/models.py:191 core/models.py:516 core/models.py:518
+#: core/models.py:520
 msgid "The page title as you'd like it to be seen by the public"
 msgstr ""
 
 # accreditation_page.html
-#: core/models.py:115
+#: core/models.py:120
 msgid "name"
 msgstr "ПІБ"
 
-#: core/models.py:116
+#: core/models.py:121
 msgid "position"
 msgstr "Посада"
 
-#: core/models.py:117
+#: core/models.py:122
 msgid "publisher"
 msgstr "Видання"
 
-#: core/models.py:118
+#: core/models.py:123
 msgid "publisher_link"
 msgstr "Веб-адреса видання"
 
-#: core/models.py:119
+#: core/models.py:124
 msgid "mobile_phone"
 msgstr "Мобільний телефон"
 
-#: core/models.py:120
+#: core/models.py:125
 msgid "work_phone"
 msgstr "Робочий телефон"
 
-#: core/models.py:121
+#: core/models.py:126
 msgid "email"
 msgstr "E-mail"
 
-#: core/models.py:122
+#: core/models.py:127
 msgid "publication_form_date"
 msgstr "Коли і в якому вигляді плануєте публікацію про форум?"
 
-#: core/models.py:123
+#: core/models.py:128
 msgid "need_additional_help"
 msgstr ""
 "Чи необхідна доп. інформація про форум або допомога в організації інтерв'ю?"
 
-#: core/models.py:182
+#: core/models.py:187
 msgid "The title as you'd like it to be seen by the public"
 msgstr ""
 
-#: core/models.py:364 core/templates/core/materials_page.html:22
-msgid "videos"
-msgstr "Відео"
-
-#: core/models.py:365 core/templates/core/forum_page.html:212
-#: core/templates/core/materials_page.html:73
-msgid "albums"
-msgstr "Фото"
-
-#: core/models.py:366 core/templates/core/forum_page.html:239
-#: core/templates/core/materials_documents_page.html:21
-#: core/templates/core/materials_page.html:124
-msgid "documents"
-msgstr "Документи"
+#: core/models.py:952
+msgid "Text"
+msgstr ""
 
 #: core/templates/base.html:165
 msgid "Join Us:"
@@ -116,41 +105,60 @@ msgstr ""
 msgid "location"
 msgstr "Місце проведення"
 
-#: core/templates/core/forum_page.html:42
+#: core/templates/core/forum_packages_page.html:14
+msgid "packages"
+msgstr "Пакети учасників"
+
+#: core/templates/core/forum_packages_page.html:44
+msgid "participation format"
+msgstr "Формат участi"
+
+#: core/templates/core/forum_page.html:32
 #: core/templates/core/home_page.html:178
 msgid "program"
 msgstr "Програма"
 
-#: core/templates/core/forum_page.html:158
+#: core/templates/core/forum_page.html:541
 #: core/templates/core/home_page.html:194
 msgid "Speakers"
 msgstr "Спікери"
 
-#: core/templates/core/forum_page.html:170
+#: core/templates/core/forum_page.html:553
 #: core/templates/core/home_page.html:208
 #, fuzzy
 #| msgid "speakers"
 msgid "all speakers"
 msgstr "повний список спікерів"
 
-#: core/templates/core/forum_page.html:185
+#: core/templates/core/forum_page.html:568
 #: core/templates/core/home_page.html:110
 msgid "Video"
 msgstr "Відео"
 
-#: core/templates/core/forum_page.html:197
-#: core/templates/core/materials_page.html:57
+#: core/templates/core/forum_page.html:580
+#: core/templates/core/materials_page.html:60
 msgid "all videos"
 msgstr "всі відео"
 
-#: core/templates/core/forum_page.html:224
+#: core/templates/core/forum_page.html:595
+#: core/templates/core/materials_page.html:79
+msgid "albums"
+msgstr "Фото"
+
+#: core/templates/core/forum_page.html:607
 msgid "all photos"
 msgstr "всі фото"
 
-#: core/templates/core/forum_page.html:262
-#: core/templates/core/forum_page.html:283
+#: core/templates/core/forum_page.html:622
+#: core/templates/core/materials_documents_page.html:21
+#: core/templates/core/materials_page.html:134
+msgid "documents"
+msgstr "Документи"
+
+#: core/templates/core/forum_page.html:645
+#: core/templates/core/forum_page.html:666
 #: core/templates/core/materials_documents_page.html:51
-#: core/templates/core/materials_page.html:150
+#: core/templates/core/materials_page.html:160
 msgid "download"
 msgstr "Завантажити"
 
@@ -158,7 +166,7 @@ msgstr "Завантажити"
 msgid "speakers"
 msgstr "Спікери"
 
-#: core/templates/core/forum_speakers_page.html:46
+#: core/templates/core/forum_speakers_page.html:48
 msgid "all letters"
 msgstr "ВСІ"
 
@@ -170,11 +178,15 @@ msgstr "Новини"
 msgid "photo albums"
 msgstr "Фотоальбоми"
 
-#: core/templates/core/materials_page.html:108
+#: core/templates/core/materials_page.html:25
+msgid "videos"
+msgstr "Відео"
+
+#: core/templates/core/materials_page.html:114
 msgid "all albums"
 msgstr "всі фотоальбоми"
 
-#: core/templates/core/materials_page.html:164
+#: core/templates/core/materials_page.html:174
 msgid "all documents"
 msgstr "всі документи"
 
@@ -229,17 +241,14 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
-#: core/templates/wagtailadmin/edit_handlers/inline_panel_child.html:42
 #: core/templates/wagtailadmin/edit_handlers/trabslatable_inline_panel_child.html:7
 msgid "Move up"
 msgstr ""
 
-#: core/templates/wagtailadmin/edit_handlers/inline_panel_child.html:43
 #: core/templates/wagtailadmin/edit_handlers/trabslatable_inline_panel_child.html:8
 msgid "Move down"
 msgstr ""
 
-#: core/templates/wagtailadmin/edit_handlers/inline_panel_child.html:45
 #: core/templates/wagtailadmin/edit_handlers/trabslatable_inline_panel_child.html:10
 msgid "Delete"
 msgstr ""
@@ -276,9 +285,6 @@ msgstr ""
 
 #~ msgid "Timetable"
 #~ msgstr "Програма"
-
-#~ msgid "packages"
-#~ msgstr "Пакети учасників"
 
 #~ msgid "registration"
 #~ msgstr "Реєстрація"

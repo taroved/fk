@@ -11,7 +11,7 @@
     <div class="for_block_title">
         <div class="for_block_title_top">
             <a href="{{ self.url }}">
-                ПАКЕТИ УЧАСНИКІВ
+                {% trans "packages" %}
             </a>
         </div>
         <div class="for_block_title_bot">
@@ -27,213 +27,47 @@
 
     <div class="for_block_pack">
 
-        {% if LANGUAGE_CODE == 'uk' %}
-            <div class="for_block_pack_cont">
+        <div class="for_block_pack_cont">
                 <div class="for_block_pack_cont_title">
                     <div class="row">
                         <div class="col-xs-4"></div>
-                        <div class="col-xs-4">
-                            Пакет “Бізнес”
-                        </div>
-                        <div class="col-xs-4">
-                            Пакет “Платинум”
-                        </div>
+                        {% for package in self.packages.all %}
+                            <div class="col-xs-4">
+                                {% trans_field package "title" %}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <table>
                     <tr>
                         <td>
-                            Формат участi
+                            {% trans "participation format" %}
                         </td>
+                        {% for package in self.packages.all %}
                         <td>
-                            Участь у діловій програмі Форуму, фуршет
+                            {% trans_field package "description" %}
                         </td>
-                        <td>
-                            Участь у діловій програмі Форуму, <br />
-                            вечірній банкет-прийом та неформальне <br />
-                            спілкування з визначними спікерами, <br />
-                            бізнесменами, експертами ринку.<br />
-                        </td>
+                        {% endfor %}
                     </tr>
+                    {% for date_range in self.date_ranges.all %}
                     <tr>
                         <td>
-                            Вартість квитка в період<br />
-                            до 31 травня
+                            {{ date_range.title }}
                         </td>
-                        <td>
-                            UAH 2000
-                        </td>
-                        <td>
-                            UAH 8000
-                        </td>
+                        {% with forloop.counter0 as range_index %}
+
+                            {% for package in self.packages.all %}
+                            <td>
+                                UAH {% list_index package.price_list range_index %}
+                            </td>
+                            {% endfor %}
+
+                        {% endwith %}
                     </tr>
-                    <tr>
-                        <td>
-                            Вартість квитка в період<br/>
-                            з 1 травня по 31 серпня
-                        </td>
-                        <td>
-                            UAH 2500
-                        </td>
-                        <td>
-                            UAH 10000
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Вартість квитка в період<br>
-                            з 1 вересня по 7 жовтня
-                        </td>
-                        <td>
-                            UAH 3000
-                        </td>
-                        <td>
-                            UAH 12000
-                        </td>
-                    </tr>
+                    {% endfor %}
+
                 </table>
             </div>
-        {% endif %}
-
-        {% if LANGUAGE_CODE == 'ru' %}
-            <div class="for_block_pack_cont">
-                <div class="for_block_pack_cont_title">
-                    <div class="row">
-                        <div class="col-xs-4"></div>
-                        <div class="col-xs-4">
-                            Пакет “Бізнес”
-                        </div>
-                        <div class="col-xs-4">
-                            Пакет “Платинум”
-                        </div>
-                    </div>
-                </div>
-                <table>
-                    <tr>
-                        <td>
-                            Формат участi
-                        </td>
-                        <td>
-                            Участь у діловій програмі<br>
-                            Форуму та бiзнес-ланч
-                        </td>
-                        <td>
-                            Участь у діловій програмі Форуму,<br>
-                            вечірній банкет-прийом та неформальне<br>
-                            спілкування з визначними спікерами,<br>
-                            бізнесменами, експертами ринку
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Вартість квитка в період<br/>
-                            з 15 березня по 31 травня 2015 року
-                        </td>
-                        <td>
-                            UAH 2000
-                        </td>
-                        <td>
-                            UAH 8000
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Вартість квитка в період<br/>
-                            з 1 травня по 31 серпня
-                        </td>
-                        <td>
-                            UAH 2500
-                        </td>
-                        <td>
-                            UAH 10000
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Вартість квитка в період<br>
-                            з 1 вересня по 7 жовтня
-                        </td>
-                        <td>
-                            UAH 3000
-                        </td>
-                        <td>
-                            UAH 12000
-                        </td>
-                    </tr>
-                </table>
-
-            </div>
-        {% endif %}
-
-        {% if LANGUAGE_CODE == 'en' %}
-            <div class="for_block_pack_cont">
-                <div class="for_block_pack_cont_title">
-                    <div class="row">
-                        <div class="col-xs-4"></div>
-                        <div class="col-xs-4">
-                            Пакет “Бізнес”
-                        </div>
-                        <div class="col-xs-4">
-                            Пакет “Платинум”
-                        </div>
-                    </div>
-                </div>
-                <table>
-                    <tr>
-                        <td>
-                            Формат участi
-                        </td>
-                        <td>
-                            Участь у діловій програмі<br>
-                            Форуму та бiзнес-ланч
-                        </td>
-                        <td>
-                            Участь у діловій програмі Форуму,<br>
-                            вечірній банкет-прийом та неформальне<br>
-                            спілкування з визначними спікерами,<br>
-                            бізнесменами, експертами ринку
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Вартість квитка в період<br/>
-                            з 15 березня по 31 травня 2015 року
-                        </td>
-                        <td>
-                            UAH 2000
-                        </td>
-                        <td>
-                            UAH 8000
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Вартість квитка в період<br/>
-                            з 1 травня по 31 серпня
-                        </td>
-                        <td>
-                            UAH 2500
-                        </td>
-                        <td>
-                            UAH 10000
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Вартість квитка в період<br>
-                            з 1 вересня по 7 жовтня
-                        </td>
-                        <td>
-                            UAH 3000
-                        </td>
-                        <td>
-                            UAH 12000
-                        </td>
-                    </tr>
-                </table>
-
-            </div>
-        {% endif %}
 
     </div>
 </div>

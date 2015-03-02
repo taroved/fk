@@ -66,9 +66,20 @@ def trans_field(instance, field):
     return value or ''
 
 
+@register.simple_tag
+def list_index(lst, index):
+    print lst, index
+    return lst[index]
+
+
 @register.assignment_tag
 def assign(value):
     return value
+
+
+@register.filter
+def split(str, splitter):
+    return str.split(splitter)
 
 # class TransFieldNode(Node):
 #     def __init__(self, filter_expression, asvar=None):

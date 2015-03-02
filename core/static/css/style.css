@@ -1187,8 +1187,9 @@ ul {
   border-right: 1px dashed #b4b4b4;
   border-bottom: 1px dashed #b4b4b4;
   box-sizing: border-box;
-  padding: 15px 0 0 22px;
+  padding: 15px 22px 0 22px;
   color: #0098cf;
+  text-align: left;
 }
 .for_block_pack_cont table tbody tr td:first-child {
   color: #072033;
