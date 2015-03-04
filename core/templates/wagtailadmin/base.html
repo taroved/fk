@@ -6,9 +6,9 @@
 {% block furniture %}
     <div class="nav-wrapper">
         <div class="inner">
-            <a href="{% url 'wagtailadmin_home' %}" class="logo"><img
-                    src="{% static "images/for_top_logo.png" %}" alt="Wagtail"
-                    width="80"/><span>{% trans "Dashboard" %}</span></a>
+            <a href="{% url 'wagtailadmin_home' %}" class="logo">
+                <img src="{% static "images/logo_en.png" %}" alt="Wagtail" width="80"/>
+                <span>{% trans "Dashboard" %}</span></a>
 
             <form class="nav-search" action="{% url 'wagtailadmin_pages_search' %}" method="get">
                 <div>
