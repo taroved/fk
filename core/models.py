@@ -36,12 +36,12 @@ DEFAULT_PAGE_SIZE = 10
 
 BROWSABLE_PAGE_PROMOTE_PANELS = [
     MultiFieldPanel([
-                        FieldPanel('slug'),
-                        FieldPanel('seo_title'),
-                        FieldPanel('show_in_menus'),
-                        FieldPanel('is_browsable'),
-                        FieldPanel('search_description'),
-                    ], ugettext_lazy('Common page configuration'))
+        FieldPanel('slug'),
+        FieldPanel('seo_title'),
+        FieldPanel('show_in_menus'),
+        FieldPanel('is_browsable'),
+        FieldPanel('search_description'),
+    ], ugettext_lazy('Common page configuration'))
 ]
 
 
@@ -106,13 +106,13 @@ AccreditationPage.content_panels = [
     FieldPanel('body', classname="full"),
     FieldPanel('thank_you_text', classname="full"),
     MultiFieldPanel([
-                        FieldPanel('to_address', classname="full"),
-                        FieldPanel('from_address', classname="full"),
-                        FieldPanel('subject', classname="full"),
-                    ], "Email"),
+        FieldPanel('to_address', classname="full"),
+        FieldPanel('from_address', classname="full"),
+        FieldPanel('subject', classname="full"),
+    ], "Email"),
     MultiFieldPanel([
-                        InlinePanel(AccreditationPage, 'form_fields', label="Form fields"),
-                    ], heading='Form fields', classname="collapsible collapsed")
+        InlinePanel(AccreditationPage, 'form_fields', label="Form fields"),
+    ], heading='Form fields', classname="collapsible collapsed")
 ]
 
 AccreditationPage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
@@ -164,20 +164,20 @@ class SliderItem(models.Model):
 
     panels = [
         MultiFieldPanel([
-                            FieldPanel('text', classname="full"),
-                            FieldPanel('button_text'),
-                            FieldPanel('button_link'),
-                        ], heading='Default'),
+            FieldPanel('text', classname="full"),
+            FieldPanel('button_text'),
+            FieldPanel('button_link'),
+        ], heading='Default'),
 
         MultiFieldPanel([
-                            FieldPanel('text_ru', classname="full"),
-                            FieldPanel('button_text_ru'),
-                        ], heading='RU'),
+            FieldPanel('text_ru', classname="full"),
+            FieldPanel('button_text_ru'),
+        ], heading='RU'),
 
         MultiFieldPanel([
-                            FieldPanel('text_en', classname="full"),
-                            FieldPanel('button_text_en'),
-                        ], heading='EN'),
+            FieldPanel('text_en', classname="full"),
+            FieldPanel('button_text_en'),
+        ], heading='EN'),
     ]
 
     def __unicode__(self):
@@ -201,21 +201,21 @@ class Partner(models.Model):
 
     panels = [
         MultiFieldPanel([
-                            FieldPanel('title', classname="title full"),
-                            ImageChooserPanel('logo'),
-                            FieldPanel('link', classname="full link"),
-                            FieldPanel('description', classname="full description"),
-                        ], heading='Default'),
+            FieldPanel('title', classname="title full"),
+            ImageChooserPanel('logo'),
+            FieldPanel('link', classname="full link"),
+            FieldPanel('description', classname="full description"),
+        ], heading='Default'),
 
         MultiFieldPanel([
-                            FieldPanel('title_ru', classname="title full"),
-                            FieldPanel('description_ru', classname="full description"),
-                        ], heading='RU'),
+            FieldPanel('title_ru', classname="title full"),
+            FieldPanel('description_ru', classname="full description"),
+        ], heading='RU'),
 
         MultiFieldPanel([
-                            FieldPanel('title_en', classname="title full"),
-                            FieldPanel('description_en', classname="full description"),
-                        ], heading='EN'),
+            FieldPanel('title_en', classname="title full"),
+            FieldPanel('description_en', classname="full description"),
+        ], heading='EN'),
     ]
 
     def __unicode__(self):
@@ -440,10 +440,10 @@ NewsPage.content_panels = [
     FieldPanel("short"),
     FieldPanel("body", classname="full"),
     MultiFieldPanel([
-                        InlinePanel(NewsPage, 'videos', label='Videos'),
-                        InlinePanel(NewsPage, 'albums', label='Albums'),
-                        InlinePanel(NewsPage, 'documents', label='Documents'),
-                    ], heading="Materials", classname="collapsible collapsed")
+        InlinePanel(NewsPage, 'videos', label='Videos'),
+        InlinePanel(NewsPage, 'albums', label='Albums'),
+        InlinePanel(NewsPage, 'documents', label='Documents'),
+    ], heading="Materials", classname="collapsible collapsed")
 ]
 
 register_translatable_interface(NewsPage, fields=('title', 'short', 'body'), languages=MODELS_LANGUAGES)
@@ -526,21 +526,21 @@ class RadaPageMember(Orderable):
 
     panels = [
         MultiFieldPanel([
-                            FieldPanel('title'),
-                            ImageChooserPanel('photo'),
-                            FieldPanel('position'),
-                            FieldPanel('about'),
-                        ], heading='Default', classname='uk'),
+            FieldPanel('title'),
+            ImageChooserPanel('photo'),
+            FieldPanel('position'),
+            FieldPanel('about'),
+        ], heading='Default', classname='uk'),
         MultiFieldPanel([
-                            FieldPanel('title_ru'),
-                            FieldPanel('position_ru'),
-                            FieldPanel('about_ru'),
-                        ], heading='RU', classname='ru'),
+            FieldPanel('title_ru'),
+            FieldPanel('position_ru'),
+            FieldPanel('about_ru'),
+        ], heading='RU', classname='ru'),
         MultiFieldPanel([
-                            FieldPanel('title_en'),
-                            FieldPanel('position_en'),
-                            FieldPanel('about_en'),
-                        ], heading='EN', classname='en'),
+            FieldPanel('title_en'),
+            FieldPanel('position_en'),
+            FieldPanel('about_en'),
+        ], heading='EN', classname='en'),
     ]
 
 
