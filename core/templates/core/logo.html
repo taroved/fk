@@ -1,0 +1,17 @@
+{% load wagtailcore_tags %}
+{% load i18n %}
+{% load static %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% if LANGUAGE_CODE == 'uk' %}
+    <img src="{% static 'images/logo_uk.png' %}" alt="КМЕФ">
+{% endif %}
+
+{% if LANGUAGE_CODE == 'ru' %}
+    <img src="{% static 'images/logo_ru.png' %}" alt="КМЭФ">
+{% endif %}
+
+{% if LANGUAGE_CODE == 'en' %}
+    <img src="{% static 'images/logo_en.png' %}" alt="KIEF">
+{% endif %}
