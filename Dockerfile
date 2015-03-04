@@ -9,6 +9,8 @@ COPY manage.py /forumkyiv.org/manage.py
 COPY requirements.txt /forumkyiv.org/requirements.txt
 COPY db.sqlite3 /forumkyiv.org/db.sqlite3
 COPY install.sh /forumkyiv.org/install.sh
+COPY copy_db_and_media_to_static.sh /forumkyiv.org/copy_db_and_media_to_static.sh
+
 
 WORKDIR /forumkyiv.org
 RUN ./install.sh
