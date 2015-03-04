@@ -1075,45 +1075,6 @@ class ForumPage(TranslatablePage, BrowsableMixin):
     def speakers_page(self):
         return self.get_descendants().type(ForumSpeakersPage).live().last()
 
-
-    # def main_view(self, request):
-    #     return render_to_response('core/forum_page.html', {'self': self, 'request': request})
-    #
-    # def speakers_view(self, request, letter=None):
-    #     if not letter:
-    #         speakers = self.speakers.all()
-    #     else:
-    #         speakers = [speaker for speaker in self.speakers.all()
-    #                     if guess_speaker_lastname(speaker.speaker_page)[0].upper() == letter]
-    #
-    #     return render_to_response('core/forum_speakers_page.html', {
-    #         'self': self,
-    #         'request': request,
-    #         'speakers': speakers
-    #     })
-    #
-    # def location_view(self, request):
-    #     return render_to_response('core/forum_location_page.html', {'self': self, 'request': request})
-    #
-    # def packages_view(self, request):
-    #     return render_to_response('core/forum_packages_page.html', {'self': self, 'request': request})
-    #
-    # def program_view(self, request):
-    #     return render_to_response('core/forum_program_page.html', {'self': self, 'request': request})
-    #
-    # def registration_view(self, request):
-    #     return redirect(self.signup_link)
-
-    # def construct_menu(self):
-    #     menu = [
-    #         {'route_name': 'location', 'title': _('location')},
-    #         {'route_name': 'packages', 'title': _('packages')},
-    #         {'route_name': 'program', 'title': _('program')},
-    #         {'route_name': 'speakers', 'title': _('speakers')},
-    #         {'route_name': 'registration', 'title': _('registration')},
-    #     ]
-    #     return menu
-
     search_fields = Page.search_fields + (
         index.SearchField('title_ru', partial_match=True, boost=2),
         index.SearchField('title_en', partial_match=True, boost=2),
@@ -1188,12 +1149,6 @@ PAGE_EDIT_HANDLERS[ForumPage] = TranslatableTabbedInterface([
     ObjectList(ForumPage.promote_panels, heading='Promote'),
     ObjectList(ForumPage.settings_panels, heading='Settings', classname="settings")
 ])
-
-# register_translatable_interface(ForumPage,
-# fields=('title', 'title_long', 'description',
-# 'location_name', 'location_city', 'location_street', 'location_country',
-# 'report_text'),
-#                                 languages=MODELS_LANGUAGES)
 
 
 class ForumTimetablePage(TranslatablePage, BrowsableMixin):
