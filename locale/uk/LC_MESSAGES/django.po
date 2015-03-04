@@ -125,8 +125,6 @@ msgstr "Спікери"
 
 #: core/templates/core/forum_page.html:553
 #: core/templates/core/home_page.html:208
-#, fuzzy
-#| msgid "speakers"
 msgid "all speakers"
 msgstr "повний список спікерів"
 
