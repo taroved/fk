@@ -885,6 +885,7 @@ class ForumLocationPage(TranslatablePage, BrowsableMixin):
     country_en = models.CharField(max_length=255, null=True, blank=True, verbose_name="country")
 
     zip_code = models.CharField(max_length=20, null=True, blank=True, verbose_name="zip_code")
+    link = models.URLField(null=True, blank=True)
     map_code = models.CharField(max_length=255, blank=True, default='', verbose_name="map_code")
 
     parent_page_types = ['core.ForumPage']
@@ -897,6 +898,7 @@ class ForumLocationPage(TranslatablePage, BrowsableMixin):
         FieldPanel('city', classname="full"),
         FieldPanel('street', classname="full"),
         FieldPanel('zip_code', classname="full"),
+        FieldPanel('link', classname="full"),
         FieldPanel('map_code', classname="full"),
     ]
     ru_panels = [
