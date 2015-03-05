@@ -191,6 +191,8 @@
 
                     </div>
 
+                    {% if self.forum_page.speakers_page.specific.speakers.count > 0 %}
+
                     <div class="for_block_speakers_arch">
                         <div class="for_block_title">
                             <div class="for_block_title_top">
@@ -214,6 +216,7 @@
                         </div>
 
                     </div>
+                    {% endif %}
 
                 </div>
 
