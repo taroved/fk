@@ -1,0 +1,28 @@
+{% load wagtailimages_tags %}
+{% load static %}
+{% load core_tags %}
+{% load i18n %}
+
+{% for doc in documents %}
+
+<div class="for_block_doc_item">
+    <div class="for_block_doc_img">
+        <a href="#">
+            <img src="{% static doc.doc.preview %}" alt="image">
+        </a>
+    </div>
+    <div class="for_block_doc_right">
+        <div class="for_block_doc_date">{{ doc.doc.date|date:"d.m.Y" }}</div>
+        <div class="for_block_doc_text">
+            {{ doc.doc.description }}
+        </div>
+        <div class="for_block_doc_download">
+            <a href="{{ doc.doc.url }}">
+                {% trans "download" %}
+            </a>
+        </div>
+    </div>
+    <div class="pad"></div>
+</div>
+
+{% endfor %}

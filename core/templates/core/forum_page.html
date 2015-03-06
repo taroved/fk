@@ -552,7 +552,13 @@
                         </div>
                     </div>
                     <div class="for_block_video_cont for_block_video_cont_arch">
-                        {% include "core/videos_list.html" with videos=self.videos.all %}
+                        {% if LANGUAGE_CODE == 'en' %}
+                            {% include "core/videos_list.html" with videos=self.videos_en.all %}
+                        {% elif LANGUAGE_CODE == 'ru' %}
+                            {% include "core/videos_list.html" with videos=self.videos_ru.all %}
+                        {% else %}
+                            {% include "core/videos_list.html" with videos=self.videos.all %}
+                        {% endif %}
                     </div>
                     <div class="for_block_all">
                         <a href="#">
@@ -579,7 +585,13 @@
                         </div>
                     </div>
                     <div class="for_block_photo_cont">
-                        {% include "core/albums_list.html" with albums=self.albums.all %}
+                        {% if LANGUAGE_CODE == 'en' %}
+                            {% include "core/albums_list.html" with albums=self.albums_en.all %}
+                        {% elif LANGUAGE_CODE == 'ru' %}
+                            {% include "core/albums_list.html" with albums=self.albums_ru.all %}
+                        {% else %}
+                            {% include "core/albums_list.html" with albums=self.albums.all %}
+                        {% endif %}
                     </div>
                     <div class="for_block_all">
                         <a href="#">
@@ -606,48 +618,37 @@
                         </div>
                     </div>
                     <div class="for_block_doc_cont">
-                        <div class="for_block_doc_item">
-                            <div class="for_block_doc_img">
-                                <a href="#">
-                                    <img src="/static/images/for_doc_1.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="for_block_doc_right">
-                                <div class="for_block_doc_date">20.12.2013</div>
-                                <div class="for_block_doc_text">
-                                    Дискусія "Як зробити хай-тек<br>
-                                    локомотивом української<br>
-                                    економіки"
-                                </div>
-                                <div class="for_block_doc_download">
-                                    <a href="#">
-                                        {% trans "download" %}
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="pad"></div>
-                        </div>
-                        <div class="for_block_doc_item">
-                            <div class="for_block_doc_img">
-                                <a href="#">
-                                    <img src="/static/images/for_doc_2.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="for_block_doc_right">
-                                <div class="for_block_doc_date">20.12.2013</div>
-                                <div class="for_block_doc_text">
-                                    Дискусія "Як зробити хай-тек<br>
-                                    локомотивом української<br>
-                                    економіки"
-                                </div>
-                                <div class="for_block_doc_download">
-                                    <a href="#">
-                                        {% trans "download" %}
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="pad"></div>
-                        </div>
+                         {% if LANGUAGE_CODE == 'en' %}
+                            {% include "core/documents_list.html" with documents=self.documents_en.all %}
+                        {% elif LANGUAGE_CODE == 'ru' %}
+                            {% include "core/documents_list.html" with documents=self.documents_ru.all %}
+                        {% else %}
+                            {% include "core/documents_list.html" with documents=self.documents.all %}
+                        {% endif %}
+
+
+{#                        #}
+{#                        <div class="for_block_doc_item">#}
+{#                            <div class="for_block_doc_img">#}
+{#                                <a href="#">#}
+{#                                    <img src="/static/images/for_doc_2.jpg" alt="image">#}
+{#                                </a>#}
+{#                            </div>#}
+{#                            <div class="for_block_doc_right">#}
+{#                                <div class="for_block_doc_date">20.12.2013</div>#}
+{#                                <div class="for_block_doc_text">#}
+{#                                    Дискусія "Як зробити хай-тек<br>#}
+{#                                    локомотивом української<br>#}
+{#                                    економіки"#}
+{#                                </div>#}
+{#                                <div class="for_block_doc_download">#}
+{#                                    <a href="#">#}
+{#                                        {% trans "download" %}#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="pad"></div>#}
+{#                        </div>#}
                         <div class="pad"></div>
                     </div>
                 </div>
