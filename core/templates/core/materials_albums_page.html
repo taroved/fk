@@ -13,16 +13,6 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="for_block_title for_block_photo_title">
-                    <div class="for_block_title_top">
-                        <a href="#">
-                            {% trans "photo albums" %}
-                        </a>
-                    </div>
-                    <div class="for_block_title_bot">
-                        <div class="for_block_title_bot_in"></div>
-                    </div>
-                </div>
                 <div class="for_block_photo_cont">
                     {% include "core/albums_list.html" with albums=self.albums %}
                 </div>
