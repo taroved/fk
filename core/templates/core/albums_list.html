@@ -1,36 +1,69 @@
 {% load wagtailimages_tags %}
 {% load static %}
 {% load core_tags %}
+{% load i18n %}
 
-<div class="row">
+{% if albums.count > 0 %}
 
-{% for album in albums %}
-    {# can handle list of AlbumPage or list of crossTable to AlbumPage #}
-    {% if album.album %}
-        {% assign album.album as album %}
-    {% endif %}
 
-{% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
-</div><div class="row">
-{% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="for_block_photo">
+                    <div class="for_block_title for_block_photo_title">
+                        <div class="for_block_title_top">
+                            <a href="#">
+                                {% trans "albums" %}
+                            </a>
+                        </div>
+                        <div class="for_block_title_bot">
+                            <div class="for_block_title_bot_in"></div>
+                        </div>
+                    </div>
+                    <div class="for_block_photo_cont">
 
-    <div class="col-xs-3">
-        <div class="for_block_photo_item">
-            <div class="for_block_video_view">
-                <a href="{{ album.url }}">
-                    <span class="for_video_shadow"></span>
-                    {% image album.preview fill-569x314-c100 %}
-                </a>
-            </div>
-            <div class="for_block_video_date">
-                {{ album.date|date:"d.m.Y" }}
-            </div>
-            <div class="for_block_video_text">
-                {% trans_field album 'title' %}
+                        <div class="row">
+
+                            {% for album in albums %}
+                                {# can handle list of AlbumPage or list of crossTable to AlbumPage #}
+                                {% if album.album %}
+                                    {% assign album.album as album %}
+                                {% endif %}
+
+                                {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                                    </div>
+                                    <div class="row">
+                                {% endif %}
+
+                                <div class="col-xs-3">
+                                    <div class="for_block_photo_item">
+                                        <div class="for_block_video_view">
+                                            <a href="{{ album.url }}">
+                                                <span class="for_video_shadow"></span>
+                                                {% image album.preview fill-569x314-c100 %}
+                                            </a>
+                                        </div>
+                                        <div class="for_block_video_date">
+                                            {{ album.date|date:"d.m.Y" }}
+                                        </div>
+                                        <div class="for_block_video_text">
+                                            {% trans_field album 'title' %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+                            </div>
+                    </div>
+                    <div class="for_block_all">
+                        <a href="#">
+                            {% trans "all photos" %}
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-{% endfor %}
 
-</div>
+{% endif %}
