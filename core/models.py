@@ -30,7 +30,6 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from core.edit_handlers import TranslatableTabbedInterface, register_translatable_interface, PageParentedChooserPanel
 
-
 MODELS_LANGUAGES = ('ru', 'en')
 DEFAULT_PAGE_SIZE = 10
 
@@ -1359,3 +1358,56 @@ PAGE_EDIT_HANDLERS[HomePage] = TranslatableTabbedInterface([
     ObjectList(HomePage.settings_panels, heading='Settings', classname="settings")
 ])
 # register_translatable_interface(HomePage, fields=('title',), languages=MODELS_LANGUAGES)
+
+
+# PROGRAM_SECTION_TYPE_CHOISES = (
+#     ('PD', 'Панельні дискусії'),
+#     ('PZ', 'Пленарне засідання')
+# )
+
+PROGRAM_SECTION_TYPE_CHOISES = (
+    ('PD', _('Plenary discussions')),
+    ('PZ', _('Plenary session'))
+)
+
+class ProgramSectionPage (TranslatablePage, BrowsableMixin, Orderable):
+    section_type = models.CharField(max_length=2, choices=PROGRAM_SECTION_TYPE_CHOISES),
+    time = models.DateTimeField()
+
+    panels = [
+        FieldPanel('section_type'),
+        FieldPanel('time')
+        ]
+
+
+class ForumPanelPage (TranslatablePage, BrowsableMixin, Orderable):
+
+    body = RichTextField(blank=True, null=True)
+    body_ru = RichTextField(blank=True, null=True, verbose_name='body')
+    body_en = RichTextField(blank=True, null=True, verbose_name='body')
+
+    location = models.TextField(null=True, blank=True)
+    location_ru = models.TextField(null=True, blank=True, verbose_name='description')
+    location_en = models.TextField(null=True, blank=True, verbose_name='description')
+
+    panels = [
+
+        MultiFieldPanel([
+                            FieldPanel('title'),
+                            FieldPanel('body'),
+                            FieldPanel('location'),
+                            ], heading='Default', classname='uk'),
+
+        MultiFieldPanel([
+                            FieldPanel('title_ru'),
+                            FieldPanel('body_ru'),
+                            FieldPanel('location_ru'),
+                            ], heading='RU', classname='ru'),
+
+        MultiFieldPanel([
+                            FieldPanel('title_en'),
+                            FieldPanel('body_en'),
+                            FieldPanel('location_en'),
+                            ], heading='EN', classname='en'),
+
+        ]
