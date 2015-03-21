@@ -1,5 +1,5 @@
 #!/bin/sh
-A
+
 apt-get update && apt-get install -y python-dev python-pip g++ libjpeg62-dev zlib1g-dev
 
 cd /forumkyiv.org && pip install -r requirements.txt
