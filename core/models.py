@@ -29,6 +29,7 @@ from wagtail.wagtailsearch import index
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from core.edit_handlers import TranslatableTabbedInterface, register_translatable_interface, PageParentedChooserPanel
+from core.fields import IntegerRangeField
 
 MODELS_LANGUAGES = ('ru', 'en')
 DEFAULT_PAGE_SIZE = 10
@@ -1371,22 +1372,40 @@ PROGRAM_SECTION_TYPE_CHOISES = (
 )
 
 
-class ProgramPage (Page):
+class ProgramPage(Page):
     subpage_types = ['core.ProgramSectionPage']
 
-class ProgramSectionPage (TranslatablePage, BrowsableMixin, Orderable):
-    section_type = models.CharField(max_length=2, choices=PROGRAM_SECTION_TYPE_CHOISES),
-    time = models.DateTimeField()
 
-    panels = [
-        FieldPanel('section_type', classname="full section_type"),
-        FieldPanel('time', classname="datetime"),
-        ]
+def get_forum_start_date():
+    # print forum_child_page
+    return ForumPage.objects.first().date_from
+
+
+class ProgramSectionPage(TranslatablePage, BrowsableMixin):
+    section_type = models.CharField(max_length=2, choices=PROGRAM_SECTION_TYPE_CHOISES, blank=True, null=True)
+    forum_day = IntegerRangeField(min_value=1, max_value=10, default=1)
+    start_time = models.TimeField(verbose_name='Start')
+    end_time = models.TimeField(verbose_name='End')
 
     subpage_types = ['core.ForumPanelPage']
+    parent_page_types = ['core.ProgramPage']
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        FieldPanel('forum_day'),
+        FieldPanel('section_type'),
+        FieldRowPanel([
+            FieldPanel('start_time', classname="col5"),
+            FieldPanel('end_time', classname="col5"),
+        ]),
+    ]
+
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+register_translatable_interface(ProgramSectionPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
-class ForumPanelPage (TranslatablePage, BrowsableMixin, Orderable):
+class ForumPanelPage(TranslatablePage, BrowsableMixin):
     body = RichTextField(blank=True, null=True)
     body_ru = RichTextField(blank=True, null=True, verbose_name='body')
     body_en = RichTextField(blank=True, null=True, verbose_name='body')
@@ -1395,24 +1414,13 @@ class ForumPanelPage (TranslatablePage, BrowsableMixin, Orderable):
     location_ru = models.TextField(null=True, blank=True, verbose_name='description')
     location_en = models.TextField(null=True, blank=True, verbose_name='description')
 
-    panels = [
+    parent_page_types = ['core.ProgramSectionPage']
 
-        MultiFieldPanel([
-                            FieldPanel('title'),
-                            FieldPanel('body'),
-                            FieldPanel('location'),
-                            ], heading='Default', classname='uk'),
+    content_panels = [
+        FieldPanel('title'),
+        FieldPanel('body'),
+        FieldPanel('location'),
+    ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
-        MultiFieldPanel([
-                            FieldPanel('title_ru'),
-                            FieldPanel('body_ru'),
-                            FieldPanel('location_ru'),
-                            ], heading='RU', classname='ru'),
-
-        MultiFieldPanel([
-                            FieldPanel('title_en'),
-                            FieldPanel('body_en'),
-                            FieldPanel('location_en'),
-                            ], heading='EN', classname='en'),
-
-        ]
+register_translatable_interface(ForumPanelPage, fields=('title', 'body', 'location'), languages=MODELS_LANGUAGES)
