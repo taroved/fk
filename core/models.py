@@ -1370,18 +1370,23 @@ PROGRAM_SECTION_TYPE_CHOISES = (
     ('PZ', _('Plenary session'))
 )
 
+
+class ProgramPage (Page):
+    subpage_types = ['core.ProgramSectionPage']
+
 class ProgramSectionPage (TranslatablePage, BrowsableMixin, Orderable):
     section_type = models.CharField(max_length=2, choices=PROGRAM_SECTION_TYPE_CHOISES),
     time = models.DateTimeField()
 
     panels = [
-        FieldPanel('section_type'),
-        FieldPanel('time')
+        FieldPanel('section_type', classname="full section_type"),
+        FieldPanel('time', classname="datetime"),
         ]
+
+    subpage_types = ['core.ForumPanelPage']
 
 
 class ForumPanelPage (TranslatablePage, BrowsableMixin, Orderable):
-
     body = RichTextField(blank=True, null=True)
     body_ru = RichTextField(blank=True, null=True, verbose_name='body')
     body_en = RichTextField(blank=True, null=True, verbose_name='body')
