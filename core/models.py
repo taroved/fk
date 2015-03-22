@@ -1390,6 +1390,9 @@ class ProgramSectionPage(TranslatablePage, BrowsableMixin):
     subpage_types = ['core.ForumPanelPage']
     parent_page_types = ['core.ProgramPage']
 
+    # def __unicode__(self):
+    #     return "{} ({} - {})".format(self.title, self.start_time, self.end_time)
+
     content_panels = [
         FieldPanel('title', classname="full title"),
         FieldPanel('forum_day'),
