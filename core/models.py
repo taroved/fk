@@ -1372,8 +1372,12 @@ PROGRAM_SECTION_TYPE_CHOISES = (
 )
 
 
-class ProgramPage(Page):
+class ProgramPage(TranslatablePage):
     subpage_types = ['core.ProgramSectionPage']
+
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+register_translatable_interface(ProgramPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
 def get_forum_start_date():
@@ -1413,16 +1417,16 @@ class ForumPanelPage(TranslatablePage, BrowsableMixin):
     body_ru = RichTextField(blank=True, null=True, verbose_name='body')
     body_en = RichTextField(blank=True, null=True, verbose_name='body')
 
-    location = models.TextField(null=True, blank=True)
-    location_ru = models.TextField(null=True, blank=True, verbose_name='description')
-    location_en = models.TextField(null=True, blank=True, verbose_name='description')
+    location = models.CharField(max_length=255, null=True, blank=True)
+    location_ru = models.CharField(max_length=255, null=True, blank=True, verbose_name='description')
+    location_en = models.CharField(max_length=255, null=True, blank=True, verbose_name='description')
 
     parent_page_types = ['core.ProgramSectionPage']
 
     content_panels = [
-        FieldPanel('title'),
-        FieldPanel('body'),
-        FieldPanel('location'),
+        FieldPanel('title', classname="full title"),
+        FieldPanel('body', classname="full"),
+        FieldPanel('location', classname="full"),
     ]
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
