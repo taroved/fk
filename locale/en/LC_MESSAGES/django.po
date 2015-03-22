@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-02 06:01+0200\n"
+"POT-Creation-Date: 2015-03-23 01:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,82 +21,111 @@ msgstr ""
 msgid "Common page configuration"
 msgstr ""
 
-#: core/models.py:53
+#: core/models.py:54
 msgid ""
 "Whether a browsable link to this page will appear in automatically generated "
 "menus"
 msgstr ""
 
-#: core/models.py:63 core/models.py:86
+#: core/models.py:64 core/models.py:87
 msgid "Is RU translation enabled for this Page"
 msgstr ""
 
-#: core/models.py:64 core/models.py:87
+#: core/models.py:65 core/models.py:88
 msgid "Is EN translation enabled for this Page"
 msgstr ""
 
-#: core/models.py:67 core/models.py:69 core/models.py:90 core/models.py:92
-#: core/models.py:189 core/models.py:191 core/models.py:516 core/models.py:518
-#: core/models.py:520
+#: core/models.py:68 core/models.py:70 core/models.py:91 core/models.py:93
+#: core/models.py:191 core/models.py:193 core/models.py:511 core/models.py:513
+#: core/models.py:515
 msgid "The page title as you'd like it to be seen by the public"
 msgstr ""
 
 # accreditation_page.html
-#: core/models.py:120
+#: core/models.py:122
 msgid "name"
 msgstr "Full Name"
 
-#: core/models.py:121
+#: core/models.py:123
 msgid "position"
 msgstr "Position"
 
-#: core/models.py:122
+#: core/models.py:124
 msgid "publisher"
 msgstr "Publisher"
 
-#: core/models.py:123
+#: core/models.py:125
 msgid "publisher_link"
 msgstr "Publisher Website"
 
-#: core/models.py:124
+#: core/models.py:126
 msgid "mobile_phone"
 msgstr "Mobile Phone"
 
-#: core/models.py:125
+#: core/models.py:127
 msgid "work_phone"
 msgstr "Work Phone"
 
-#: core/models.py:126
+#: core/models.py:128
 msgid "email"
 msgstr "Email"
 
-#: core/models.py:127
+#: core/models.py:129
 msgid "publication_form_date"
 msgstr "Publication Form and Date?"
 
-#: core/models.py:128
+#: core/models.py:130
 msgid "need_additional_help"
 msgstr "Do you need additional info or help with organizing interview?"
 
-#: core/models.py:187
+#: core/models.py:189
 msgid "The title as you'd like it to be seen by the public"
 msgstr ""
 
-#: core/models.py:952
+#: core/models.py:940
 msgid "Text"
 msgstr ""
 
-#: core/templates/base.html:165
+#: core/models.py:1374
+msgid "Plenary discussions"
+msgstr "Panel discussions"
+
+#: core/models.py:1375
+msgid "Plenary session"
+msgstr "Plenary session"
+
+#: core/templates/base.html:160
 msgid "Join Us:"
 msgstr "Join Us:"
 
-#: core/templates/base.html:181
+#: core/templates/base.html:176
 msgid "Contact Info"
 msgstr "Contact Info"
 
 #: core/templates/core/accreditation_page.html:129
 msgid "submit"
 msgstr "Submit"
+
+#: core/templates/core/albums_list.html:16
+#: core/templates/core/materials_page.html:79
+msgid "albums"
+msgstr "Photos"
+
+#: core/templates/core/albums_list.html:60
+msgid "all photos"
+msgstr "all photos"
+
+#: core/templates/core/documents_list.html:16
+#: core/templates/core/materials_documents_page.html:21
+#: core/templates/core/materials_page.html:134
+msgid "documents"
+msgstr "Documents"
+
+#: core/templates/core/documents_list.html:40
+#: core/templates/core/materials_documents_page.html:51
+#: core/templates/core/materials_page.html:160
+msgid "download"
+msgstr "Download"
 
 #: core/templates/core/forum_location_page.html:12
 msgid "location"
@@ -111,51 +140,19 @@ msgid "participation format"
 msgstr "Participation format"
 
 #: core/templates/core/forum_page.html:32
-#: core/templates/core/home_page.html:178
+#: core/templates/core/home_page.html:182
 msgid "program"
 msgstr "Program"
 
-#: core/templates/core/forum_page.html:541
-#: core/templates/core/home_page.html:194
+#: core/templates/core/forum_page.html:54
+#: core/templates/core/home_page.html:200
 msgid "Speakers"
 msgstr "Speakers"
 
-#: core/templates/core/forum_page.html:553
-#: core/templates/core/home_page.html:208
+#: core/templates/core/forum_page.html:66
+#: core/templates/core/home_page.html:214
 msgid "all speakers"
 msgstr "all speakers"
-
-#: core/templates/core/forum_page.html:568
-#: core/templates/core/home_page.html:110
-msgid "Video"
-msgstr "Video"
-
-#: core/templates/core/forum_page.html:580
-#: core/templates/core/materials_page.html:60
-msgid "all videos"
-msgstr "all videos"
-
-#: core/templates/core/forum_page.html:595
-#: core/templates/core/materials_page.html:79
-msgid "albums"
-msgstr "Photos"
-
-#: core/templates/core/forum_page.html:607
-msgid "all photos"
-msgstr "all photos"
-
-#: core/templates/core/forum_page.html:622
-#: core/templates/core/materials_documents_page.html:21
-#: core/templates/core/materials_page.html:134
-msgid "documents"
-msgstr "Documents"
-
-#: core/templates/core/forum_page.html:645
-#: core/templates/core/forum_page.html:666
-#: core/templates/core/materials_documents_page.html:51
-#: core/templates/core/materials_page.html:160
-msgid "download"
-msgstr "Download"
 
 #: core/templates/core/forum_speakers_page.html:15
 msgid "speakers"
@@ -169,13 +166,20 @@ msgstr "ALL"
 msgid "News"
 msgstr "News"
 
-#: core/templates/core/materials_albums_page.html:19
-msgid "photo albums"
-msgstr "Photo Albums"
+#: core/templates/core/home_page.html:114
+#: core/templates/core/videos_list.html:14
+msgid "Video"
+msgstr "Video"
 
 #: core/templates/core/materials_page.html:25
+#: core/templates/core/materials_video_page.html:19
 msgid "videos"
 msgstr "Videos"
+
+#: core/templates/core/materials_page.html:60
+#: core/templates/core/videos_list.html:57
+msgid "all videos"
+msgstr "all videos"
 
 #: core/templates/core/materials_page.html:114
 msgid "all albums"
@@ -272,6 +276,9 @@ msgstr ""
 #: forumkyiv/settings/base.py:120
 msgid "English"
 msgstr ""
+
+#~ msgid "photo albums"
+#~ msgstr "Photo Albums"
 
 #, fuzzy
 #~| msgid "photo albums"

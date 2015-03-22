@@ -1,0 +1,82 @@
+{% load wagtailcore_tags %}
+{% load core_tags %}
+{% load wagtailimages_tags %}
+{% load static %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+<div class="for_block_prog">
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="for_block_prog_cont">
+
+                <table>
+                    <tbody>
+
+                    <tr>
+                        <td>
+                            <div>
+                                <img src="{% static 'images/for_time.png' %}" alt="image">
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                <img src="{% static 'images/for_message.png' %}" alt="image">
+                            </div>
+                        </td>
+                    </tr>
+
+                    {% for section in sections %}
+
+                        <tr>
+                            <td>
+                                <div class="for_hover_1" style="height: 108px">
+                                    {% if section.section_type != '' %}
+                                        <span>
+{#                                            {% trans_field section "section_type" %}#}
+                                            {{ section.get_section_type_display|default_if_none:"" }}
+                                        </span>
+                                    {% endif %}
+
+                                    {{ section.start_time|time:"H:i"  }} - {{ section.end_time|time:"H:i"  }}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="for_ul_1">
+                                    {% trans_field section "title" %}
+                                    <ul>
+                                        {% for panel in section.panels %}
+
+                                            <li>
+                                                {% if panel.body != '' %}
+                                                    <a href="{{ panel.url }}">{% trans_field panel "title" %}</a>
+                                                {% else %}
+                                                    {% trans_field panel "title" %}
+                                                {% endif %}
+                                            </li>
+
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+{#                <div class="for_block_prog_bot">#}
+{#                    *За окремим запрошенням<br/>#}
+{#                    **Для власників пакету «Платинум»<br/>#}
+{#                    В програмі можливі зміни#}
+{#                </div>#}
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

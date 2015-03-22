@@ -1064,6 +1064,10 @@ class ForumPage(TranslatablePage, BrowsableMixin):
     def speakers_page(self):
         return self.get_descendants().type(ForumSpeakersPage).live().last()
 
+    @property
+    def program(self):
+        return self.get_descendants().type(ProgramPage).live().first().specific.sections
+
     search_fields = Page.search_fields + (
         index.SearchField('title_ru', partial_match=True, boost=2),
         index.SearchField('title_en', partial_match=True, boost=2),
@@ -1375,6 +1379,23 @@ PROGRAM_SECTION_TYPE_CHOISES = (
 class ProgramPage(TranslatablePage):
     subpage_types = ['core.ProgramSectionPage']
 
+    # @property
+    # def program(self):
+    #     db_sections = self.get_descendants().type(ProgramSectionPage).live().all()
+    #     sections =  map(lambda section:section.specific, db_sections)
+    #     return sections
+
+
+    @property
+    def sections(self):
+        db_sections = self.get_descendants().type(ProgramSectionPage).live().all()
+        sections =  map(lambda section:section.specific, db_sections)
+
+        def section_sorter(section):
+            return section.forum_day, section.start_time, section.end_time
+
+        return sorted(sections, key=section_sorter)
+
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 register_translatable_interface(ProgramPage, fields=('title',), languages=MODELS_LANGUAGES)
@@ -1393,6 +1414,9 @@ class ProgramSectionPage(TranslatablePage, BrowsableMixin):
 
     subpage_types = ['core.ForumPanelPage']
     parent_page_types = ['core.ProgramPage']
+
+    def panels(self):
+        return self.get_descendants().type(ForumPanelPage).all().live()
 
     # def __unicode__(self):
     #     return "{} ({} - {})".format(self.title, self.start_time, self.end_time)
