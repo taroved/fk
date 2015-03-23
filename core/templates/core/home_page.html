@@ -120,7 +120,12 @@
                 </div>
                 <div class="for_block_video_cont">
                     <div class="row">
-                        {% for material in self.material_videos.all %}
+                        {% for material in self.videos %}
+
+                            {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                                </div>
+                                <div class="row">
+                            {% endif %}
                             <div class="col-xs-3">
                                 <div class="for_block_video_item">
                                     <div class="for_block_video_view">

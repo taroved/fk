@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from wagtail.wagtailadmin.edit_handlers import EditHandler, extract_panel_definitions_from_model_class, MultiFieldPanel, \
     BaseCompositeEditHandler, get_form_for_model, ObjectList, FieldPanel, BaseMultiFieldPanel, BaseChooserPanel, \
-    BasePageChooserPanel
+    BasePageChooserPanel, InlinePanel
 from django import forms
 from wagtail.wagtailadmin.views.pages import PAGE_EDIT_HANDLERS
 
@@ -13,10 +13,18 @@ class TranslatableBaseTabbedInterface(BaseCompositeEditHandler):
 
     @classmethod
     def get_form_class(cls, model):
+
+        # def clean(form):
+        #     if form.__class__.__name__ == 'ProgramSectionPageForm':
+        #         form.data['title'] = 'TEST - TITLE'
+        #         form.data['slug'] = "{0}-{1}".format(form.data['start_time'], form.data['end_time'])
+        #     return form.clean()
+
         if cls._form_class is None:
             cls._form_class = get_form_for_model(
                 model,
                 formsets=cls.required_formsets(), widgets=cls.widget_overrides())
+            # cls._form_class.clean = clean
         return cls._form_class
 
 
@@ -29,7 +37,7 @@ def TranslatableTabbedInterface(children):
                 {'children': children})
 
 
-def register_translatable_interface(model_class, fields, languages):
+def register_translatable_interface(model_class, fields, languages, materials=False):
     # we should clone content_panels for every language but use only `fields`
     def find_panel(field):
         return next(panel for panel in model_class.content_panels if panel.field_name == field)
@@ -38,13 +46,21 @@ def register_translatable_interface(model_class, fields, languages):
         return FieldPanel("%s_%s" % (panel.field_name, lang), panel.classname)
 
     def lang_tab(lang):
-        return ObjectList([FieldPanel('has_'+lang)] + [copy_panel(find_panel(field), lang) for field in fields], lang)
+        return ObjectList([copy_panel(find_panel(field), lang) for field in fields], lang)
+
+    def materials_tab():
+        return ObjectList([
+            InlinePanel(model_class, 'videos', label='Videos'),
+            InlinePanel(model_class, 'albums', label='Albums'),
+            InlinePanel(model_class, 'documents', label='Documents'),
+        ])
 
     lang_tabs = map(lang_tab, languages)
 
     PAGE_EDIT_HANDLERS[model_class] = TranslatableTabbedInterface(
         [ObjectList(model_class.content_panels, heading='Content')] +
         lang_tabs +
+        # [materials_tab()] if materials else [] +
         [ObjectList(model_class.promote_panels, heading='Promote'),
         ObjectList(model_class.settings_panels, heading='Settings', classname="settings")]
     )

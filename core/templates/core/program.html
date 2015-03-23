@@ -45,10 +45,13 @@
                             </td>
                             <td>
                                 <div class="for_ul_1">
-                                    {% trans_field section "title" %}
+                                    {% if section.panels %}
+                                        <b>{% trans_field section "title" %}</b>
+                                    {% else %}
+                                       {% trans_field section "title" %}
+                                    {% endif %}
                                     <ul>
                                         {% for panel in section.panels %}
-
                                             <li>
                                                 {% if panel.body != '' %}
                                                     <a href="{{ panel.url }}">{% trans_field panel "title" %}</a>

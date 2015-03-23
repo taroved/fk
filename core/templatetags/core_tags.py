@@ -55,8 +55,8 @@ def trans_field(instance, field):
 
     # if has_ru or has_en field is set to false immediately return empty string
     # but always use title it's not title
-    if field != 'title' and hasattr(specific, 'has_'+lang_code) and not getattr(specific, 'has_'+lang_code, False):
-        return ''
+    # if field != 'title' and hasattr(specific, 'has_'+lang_code) and not getattr(specific, 'has_'+lang_code, False):
+    #     return ''
 
     if hasattr(specific, trans_field_name):
         value = getattr(specific, trans_field_name)
