@@ -1039,6 +1039,24 @@ class ForumPage(TranslatablePage, BrowsableMixin):
     def program(self):
         return self.get_descendants().type(ProgramPage).live().first().specific.sections
 
+    def get_videos(self):
+        videos = self.videos.all()
+        lang = translation.get_language()
+        videos = [page for page in videos if page.video.language == lang]
+        return videos
+
+    def get_documents(self):
+        documents = self.documents.all()
+        lang = translation.get_language()
+        documents = [page for page in documents if page.document.language == lang]
+        return documents
+
+    def get_albums(self):
+        albums = self.albums.all()
+        lang = translation.get_language()
+        albums = [page for page in albums if page.album.language == lang]
+        return albums
+
     search_fields = Page.search_fields + (
         index.SearchField('title_ru', partial_match=True, boost=2),
         index.SearchField('title_en', partial_match=True, boost=2),

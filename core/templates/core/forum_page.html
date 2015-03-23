@@ -72,19 +72,8 @@
     </div>
 
 
-    {% if LANGUAGE_CODE == 'en' %}
-        {% include "core/videos_list.html" with videos=self.videos_en.all %}
-        {% include "core/albums_list.html" with albums=self.albums_en.all %}
-        {% include "core/documents_list.html" with documents=self.documents_en.all %}
-    {% elif LANGUAGE_CODE == 'ru' %}
-        {% include "core/videos_list.html" with videos=self.videos_ru.all %}
-        {% include "core/albums_list.html" with albums=self.albums_ru.all %}
-        {% include "core/documents_list.html" with documents=self.documents_ru.all %}
-    {% else %}
-        {% include "core/videos_list.html" with videos=self.videos.all %}
-        {% include "core/albums_list.html" with albums=self.albums.all %}
-        {% include "core/documents_list.html" with documents=self.documents.all %}
-    {% endif %}
-
+        {% include "core/videos_list.html" with videos=self.get_videos %}
+        {% include "core/albums_list.html" with albums=self.get_albums %}
+        {% include "core/documents_list.html" with documents=self.get_documents %}
 
 {% endblock %}
