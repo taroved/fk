@@ -511,14 +511,7 @@ class ParticipationPage(TranslatablePage, BrowsableMixin):
 register_translatable_interface(ParticipationPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
-class RadaPageMember(Orderable):
-    page = ParentalKey('core.RadaPage', related_name='members')
-    title = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                             help_text=_("The page title as you'd like it to be seen by the public"))
-    title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
-    title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
-                                help_text=_("The page title as you'd like it to be seen by the public"))
+class RadaMemberPage(TranslatablePage, BrowsableMixin):
 
     photo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
 
@@ -530,28 +523,33 @@ class RadaPageMember(Orderable):
     about_ru = RichTextField(blank=True, null=True, default='', verbose_name='about')
     about_en = RichTextField(blank=True, null=True, default='', verbose_name='about')
 
-    panels = [
-        MultiFieldPanel([
-            FieldPanel('title'),
-            ImageChooserPanel('photo'),
-            FieldPanel('position'),
-            FieldPanel('about'),
-        ], heading='Default', classname='uk'),
-        MultiFieldPanel([
-            FieldPanel('title_ru'),
-            FieldPanel('position_ru'),
-            FieldPanel('about_ru'),
-        ], heading='RU', classname='ru'),
-        MultiFieldPanel([
-            FieldPanel('title_en'),
-            FieldPanel('position_en'),
-            FieldPanel('about_en'),
-        ], heading='EN', classname='en'),
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        ImageChooserPanel('photo'),
+        FieldPanel('position', classname="full"),
+        FieldPanel('about', classname="full"),
     ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+    search_fields = Page.search_fields + (
+        index.SearchField('title_ru', partial_match=True, boost=2),
+        index.SearchField('title_en', partial_match=True, boost=2),
+        index.SearchField('about', partial_match=True),
+        index.SearchField('about_ru', partial_match=True),
+        index.SearchField('about_en', partial_match=True),
+    )
+
+register_translatable_interface(RadaMemberPage, fields=('title', 'position', 'about'), languages=MODELS_LANGUAGES)
+
 
 
 class RadaPage(TranslatablePage, BrowsableMixin):
-    pass
+
+    @property
+    def members(self):
+        return self.get_descendants().type(RadaMemberPage).live().all()
+
+    subpage_types = ['core.RadaMemberPage']
 
 
 RadaPage.content_panels = [
@@ -563,9 +561,9 @@ RadaPage.ru_panels = [
 RadaPage.en_panels = [
     FieldPanel('title_en', classname="full title"),
 ]
-RadaPage.members_panels = [
-    InlinePanel(RadaPage, 'members', label='Members'),
-]
+# RadaPage.members_panels = [
+#     InlinePanel(RadaPage, 'members', label='Members'),
+# ]
 RadaPage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 # register_translatable_interface(RadaPage, fields=('title',), languages=MODELS_LANGUAGES)
@@ -574,7 +572,6 @@ PAGE_EDIT_HANDLERS[RadaPage] = TranslatableTabbedInterface([
     ObjectList(RadaPage.content_panels, heading='Content'),
     ObjectList(RadaPage.ru_panels, heading='RU'),
     ObjectList(RadaPage.en_panels, heading='EN'),
-    ObjectList(RadaPage.members_panels, heading='Members'),
     ObjectList(RadaPage.promote_panels, heading='Promote'),
     ObjectList(RadaPage.settings_panels, heading='Settings', classname="settings")
 ])
