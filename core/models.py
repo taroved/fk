@@ -1376,7 +1376,7 @@ PROGRAM_SECTION_TYPE_CHOISES = (
 )
 
 
-class ProgramPage(TranslatablePage):
+class ProgramPage(TranslatablePage, BrowsableMixin):
     subpage_types = ['core.ProgramSectionPage']
 
     # @property
