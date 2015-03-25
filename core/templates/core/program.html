@@ -14,7 +14,6 @@
 
                 <table>
                     <tbody>
-
                     <tr>
                         <td>
                             <div>
@@ -46,14 +45,16 @@
                             <td>
                                 <div class="for_ul_1">
                                     {% if section.panels %}
-                                        <b>{% trans_field section "title" %}</b>
+                                        {% if section.section_type != 'PD' %} {# Panel discussion shoud have no title #}
+                                            <b>{% trans_field section "title" %}</b>
+                                        {% endif %}
                                     {% else %}
                                        {% trans_field section "title" %}
                                     {% endif %}
                                     <ul>
                                         {% for panel in section.panels %}
                                             <li>
-                                                {% if panel.body != '' %}
+                                                {% if panel.specific.enable_link %}
                                                     <a href="{{ panel.url }}">{% trans_field panel "title" %}</a>
                                                 {% else %}
                                                     {% trans_field panel "title" %}

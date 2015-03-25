@@ -69,20 +69,10 @@ class BrowsableMixin(models.Model):
 class TranslatablePage(Page):
     is_abstract = True
 
-    # has_ru = models.BooleanField(default=False, help_text=_("Is RU translation enabled for this Page"))
-    # has_en = models.BooleanField(default=False, help_text=_("Is EN translation enabled for this Page"))
-
     title_ru = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
     title_en = models.CharField(max_length=255, blank=True, null=True, verbose_name='title',
                                 help_text=_("The page title as you'd like it to be seen by the public"))
-
-    # def has_language(self, lang=None):
-    #     if lang is None or lang == 'uk':
-    #         return True
-    #     lang_title = getattr(self.specific, 'title_' + lang, '').strip()
-    #     return bool(lang_title)
-
     class Meta:
         abstract = True
 
@@ -1375,10 +1365,13 @@ class ForumPanelPage(TranslatablePage, BrowsableMixin):
     location_ru = models.CharField(max_length=255, null=True, blank=True, verbose_name='description')
     location_en = models.CharField(max_length=255, null=True, blank=True, verbose_name='description')
 
+    enable_link = models.BooleanField(default=False)
+
     parent_page_types = ['core.ProgramSectionPage']
 
     content_panels = [
         FieldPanel('title', classname="full title"),
+        FieldPanel('enable_link'),
         FieldPanel('body', classname="full"),
         FieldPanel('location', classname="full"),
     ]
