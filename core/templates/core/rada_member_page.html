@@ -1,43 +1,50 @@
 {% extends "base.html" %}
 
 {% load static core_tags %}
+{% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
-{% block content %}
+{% block content_title %}
+    <div class="for_block_title_sp">
+        <div class="for_block_title_top">
+            <a href="#">
+                {% trans_field self 'title' %}
+            </a>
+        </div>
+        <div class="for_block_title_bot">
+            <div class="for_block_title_bot_in"></div>
+        </div>
+    </div>
+{% endblock %}
 
+{% block content %}
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="for_block_rada">
-                    <div class="for_block_rada_cont">
-                        <div class="row">
+                <div class="for_block_speaker">
 
-                            <div class="col-xs-3">
-                                <div class="for_block_sp_item">
-                                    <a style="cursor: default;" href="#">
-                                    <span class="for_block_sp_photo">
-                                        {% image self.photo height-300 as photo %}
-                                        <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
-                                             class="grayscale grayscale-fade"/>
-                                    </span>
-                                    <span class="for_block_sp_name">
-                                        {% trans_field self 'title' %}
-                                    </span>
-                                    <span class="for_block_sp_about">
-                                        {% trans_field self 'position' %}
-                                    </span>
-                                    </a>
-                                </div>
+                    <div class="for_block_speaker_cont">
+                        <div class="for_block_speaker_img">
+                            {% image self.photo fill-270x300 %}
+                        </div>
+                        <div class="for_block_speaker_right">
+                            {#                            <div class="for_block_speaker_name">#}
+                            {#                                {% trans_field self 'title' %}#}
+                            {#                            </div>#}
+                            <div class="for_block_speaker_title">
+                                {% trans_field self 'position' %}
                             </div>
-
+                            <div class="for_block_speaker_text">
+                                {#                            {{ self.about|richtext }}#}
+                                {% trans_field self 'about' %}
                             </div>
+                        </div>
+                        <div class="pad"></div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
 {% endblock %}

@@ -33,7 +33,9 @@
                                                      class="grayscale grayscale-fade"/>
                                             </span>
                                             <span class="for_block_sp_name">
-                                                {% trans_field member 'title' %}
+                                                <a href="{{ member.url }}">
+                                                    {% trans_field member 'title' %}
+                                                </a>
                                             </span>
                                             <span class="for_block_sp_about">
                                                 {% trans_field member 'position' %}
