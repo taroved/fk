@@ -1,25 +1,21 @@
 {% extends "base.html" %}
 
 {% load static core_tags %}
-{% load i18n %}
 {% load wagtailimages_tags %}
+{% load i18n %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content_title %}{% endblock %}
 
-
 {% block content %}
-
     <div class="for_block_doc_mat">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="for_block_title">
                         <div class="for_block_title_top">
-                            <a href="#">
-                                {% trans "documents" %}
-                            </a>
+                            {% trans "documents" %}
                         </div>
                         <div class="for_block_title_bot">
                             <div class="for_block_title_bot_in"></div>

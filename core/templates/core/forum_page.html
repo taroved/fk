@@ -71,9 +71,8 @@
         </div>
     </div>
 
-
-        {% include "core/videos_list.html" with videos=self.get_videos %}
-        {% include "core/albums_list.html" with albums=self.get_albums %}
-        {% include "core/documents_list.html" with documents=self.get_documents %}
+    {% include "core/videos_list.html" with videos=self.videos.all %}
+    {% include "core/albums_list.html" with albums=self.albums.all %}
+    {% include "core/documents_list.html" with documents=self.documents.all %}
 
 {% endblock %}
