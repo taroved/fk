@@ -1061,10 +1061,6 @@ ForumPage.ru_panels = [
     FieldPanel('description_ru', classname="full"),
 
     FieldPanel('report_text_ru', classname="full"),
-
-    # InlinePanel(ForumPage, 'videos_ru', label='Videos'),
-    # InlinePanel(ForumPage, 'albums_ru', label='Albums'),
-    # InlinePanel(ForumPage, 'documents_ru', label='Documents'),
 ]
 
 ForumPage.en_panels = [
@@ -1073,10 +1069,6 @@ ForumPage.en_panels = [
     FieldPanel('description_en', classname="full"),
 
     FieldPanel('report_text_en', classname="full"),
-
-    # InlinePanel(ForumPage, 'videos_en', label='Videos'),
-    # InlinePanel(ForumPage, 'albums_en', label='Albums'),
-    # InlinePanel(ForumPage, 'documents_en', label='Documents'),
 ]
 
 ForumPage.materials_panels = [
@@ -1188,6 +1180,25 @@ class PressTopListPage(TranslatablePage, BrowsableMixin):
 register_translatable_interface(PressTopListPage, fields=('title', ), languages=MODELS_LANGUAGES)
 
 
+class HomePageNews(Orderable, models.Model):
+    page = ParentalKey('core.HomePage', related_name='news')
+
+    news = models.ForeignKey(NewsPage,
+                             null=True, blank=True,
+                             on_delete=models.SET_NULL,
+                             related_name='+')
+
+    panels = [
+        PageChooserPanel('news', page_type=NewsPage)
+    ]
+
+    def __unicode__(self):
+        return "%s -> %s" % (self.page.title, self.news.title)
+
+    # class Meta:
+    #     abstract = True
+
+
 class BaseHomePageAdvertPlacement(Orderable, models.Model):
     advert = models.ForeignKey('core.Advert', related_name='+')
 
@@ -1228,9 +1239,16 @@ class HomePage(TranslatablePage, BrowsableMixin):
     forum_page = models.ForeignKey('core.ForumPage', null=True, blank=True,
                                    on_delete=models.SET_NULL, related_name='+')
 
+    # @property
+    # def top_news(self):
+    #     news = NewsPage.objects.live().filter(**current_lang_filter_params()).order_by('-date')
+    #     return news
+
     @property
     def top_news(self):
-        news = NewsPage.objects.live().filter(**current_lang_filter_params()).order_by('-date')
+        news = self.news.all()
+        lang = translation.get_language()
+        news = [page.news for page in news if page.news.language == lang]
         return news
 
     @property
@@ -1264,6 +1282,10 @@ HomePage.videos_panels = [
     InlinePanel(HomePage, 'material_videos', label="Videos"),
 ]
 
+HomePage.news_panels = [
+    InlinePanel(HomePage, 'news', label='News'),
+]
+
 HomePage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 PAGE_EDIT_HANDLERS[HomePage] = TranslatableTabbedInterface([
@@ -1271,6 +1293,7 @@ PAGE_EDIT_HANDLERS[HomePage] = TranslatableTabbedInterface([
     ObjectList(HomePage.ru_panels, heading='RU'),
     ObjectList(HomePage.en_panels, heading='EN'),
     ObjectList(HomePage.videos_panels, heading='Videos'),
+    ObjectList(HomePage.news_panels, heading='News'),
     ObjectList(HomePage.promote_panels, heading='Promote'),
     ObjectList(HomePage.settings_panels, heading='Settings', classname="settings")
 ])
