@@ -1,6 +1,5 @@
 # Киевский международный экономический форум #
-* Production: -
-* Test: 128.199.44.157:8002
+* Url: http://forumkyiv.org
 * Flickr: https://flickr.com/photos/129599628@N03/
 
 #Import links
