@@ -1290,6 +1290,9 @@ ul {
 .for_block_prog_cont ul {
   list-style: none;
 }
+.for_block_prog_cont ul li {
+  max-width: 500px;
+}
 .for_block_prog_cont table {
   width: 100%;
   font-family: 'PFBeauSansPro-Light', Arial, sans-serif;

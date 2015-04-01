@@ -1180,23 +1180,8 @@ class PressTopListPage(TranslatablePage, BrowsableMixin):
 register_translatable_interface(PressTopListPage, fields=('title', ), languages=MODELS_LANGUAGES)
 
 
-class HomePageNews(Orderable, models.Model):
-    page = ParentalKey('core.HomePage', related_name='news')
 
-    news = models.ForeignKey(NewsPage,
-                             null=True, blank=True,
-                             on_delete=models.SET_NULL,
-                             related_name='+')
 
-    panels = [
-        PageChooserPanel('news', page_type=NewsPage)
-    ]
-
-    def __unicode__(self):
-        return "%s -> %s" % (self.page.title, self.news.title)
-
-    # class Meta:
-    #     abstract = True
 
 
 class BaseHomePageAdvertPlacement(Orderable, models.Model):
@@ -1233,6 +1218,21 @@ class HomePageMaterialVideo(Orderable):
     video = models.ForeignKey('core.VideoPage', related_name='+')
 
     panels = [PageParentedChooserPanel('video', page_type=VideoPage, parent_cls=MaterialsVideoPage)]
+
+
+class HomePageNews(Orderable, models.Model):
+    page = ParentalKey('core.HomePage', related_name='news')
+
+    news = models.ForeignKey(NewsPage,
+                             null=True, blank=True,
+                             on_delete=models.SET_NULL,
+                             related_name='+')
+
+    # panels = [ PageChooserPanel('news', page_type=NewsPage) ]
+    panels = [ PageParentedChooserPanel('news', page_type=NewsPage, parent_cls=NewsIndexPage) ]
+
+    def __unicode__(self):
+        return "%s -> %s" % (self.page.title, self.news.title)
 
 
 class HomePage(TranslatablePage, BrowsableMixin):
