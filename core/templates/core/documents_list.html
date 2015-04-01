@@ -26,9 +26,7 @@
 
                             <div class="for_block_doc_item">
                                 <div class="for_block_doc_img">
-                                    <a href="#">
-                                        <img src="{% static doc.doc.doc.preview %}" alt="image">
-                                    </a>
+                                    {% image doc.doc.preview fill-98x146 %}
                                 </div>
                                 <div class="for_block_doc_right">
                                     <div class="for_block_doc_date">{{ doc.doc.date|date:"d.m.Y" }}</div>
