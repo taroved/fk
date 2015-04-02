@@ -2,6 +2,7 @@
 from datetime import date
 from datetime import datetime
 import string
+import urlparse
 from django.core.cache import cache
 from django.db.models.fields import Field
 from django.utils import translation
@@ -31,6 +32,8 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from core.edit_handlers import TranslatableTabbedInterface, register_translatable_interface, PageParentedChooserPanel
 from core.fields import IntegerRangeField
+from urlparse import urlparse
+from os.path import splitext, basename
 
 MODELS_LANGUAGES = ('ru', 'en')
 DEFAULT_PAGE_SIZE = 10
@@ -284,6 +287,12 @@ class DocumentPage(BaseMaterialPage):
         related_name='+'
     )
     description = models.TextField(blank=True, null=True, default='')
+
+    def extension(self):
+        disassembled = urlparse(self.doc.url)
+        filename, ext = splitext(basename(disassembled.path))
+        return ext.upper()
+        #return (filename + ext).upper()
 
     subpage_types = []
     parent_page_types = ['core.MaterialsDocumentsPage']
