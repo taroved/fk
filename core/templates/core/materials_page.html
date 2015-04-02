@@ -151,11 +151,10 @@
                                         </div>
                                         <div class="for_block_doc_text">
                                             {{ document.description }}
-                                            {#                                    {% trans_field document 'description' %}#}
                                         </div>
                                         <div class="for_block_doc_download">
                                             <a href="{{ document.doc.url }}">
-                                                {% trans "download" %}
+                                                {% trans "download" %} {{ document.extension }}
                                             </a>
                                         </div>
                                     </div>
