@@ -1011,24 +1011,21 @@ class ForumPage(TranslatablePage, BrowsableMixin):
         return self.get_descendants().type(ProgramPage).live().first().specific.sections
 
     @property
-    def videos(self):
-        videos = self.videos.all()
+    def videos_list(self):
         lang = translation.get_language()
-        videos = [page for page in videos if page.video.language == lang]
+        videos = [page for page in self.videos.all() if page.video.language == lang]
         return videos
 
     @property
-    def documents(self):
-        documents = self.documents.all()
+    def documents_list(self):
         lang = translation.get_language()
-        documents = [page for page in documents if page.document.language == lang]
+        documents = [page for page in self.documents.all() if page.doc.language == lang]
         return documents
 
     @property
-    def albums(self):
-        albums = self.albums.all()
+    def albums_list(self):
         lang = translation.get_language()
-        albums = [page for page in albums if page.album.language == lang]
+        albums = [page for page in self.albums.all() if page.album.language == lang]
         return albums
 
     search_fields = Page.search_fields + (
