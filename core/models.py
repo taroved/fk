@@ -1,26 +1,22 @@
 # coding=utf-8
+import six
+import re
+import string
 from datetime import date
 from datetime import datetime
-import string
-import urlparse
-from django.core.cache import cache
 from django.db.models.fields import Field
 from django.utils import translation
 from django.utils.encoding import smart_text
-import re
 
-from django.conf.urls import url
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import redirect
 from django.utils.html import strip_tags
 from modelcluster.fields import ParentalKey
 from django.utils.translation import ugettext_lazy as _, ugettext_lazy
-import six
-from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
-from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel, PageChooserPanel, \
-    FieldRowPanel, \
-    ObjectList
+
+from wagtail.wagtailadmin.edit_handlers import InlinePanel, FieldPanel, MultiFieldPanel, FieldRowPanel, ObjectList, \
+    PageChooserPanel
 from wagtail.wagtailadmin.views.pages import PAGE_EDIT_HANDLERS
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page, Orderable
@@ -670,6 +666,7 @@ class MaterialAlbumLinkFields(models.Model):
 class ForumPagePhotoAlbum(Orderable, MaterialAlbumLinkFields):
     page = ParentalKey('core.ForumPage', related_name='albums')
 
+
 class MaterialDocLinkFields(models.Model):
     doc = models.ForeignKey(DocumentPage,
                             null=True, blank=True,
@@ -741,27 +738,6 @@ register_translatable_interface(AllSpeakersIndexPage, fields=('title', ), langua
 def guess_speaker_lastname(speaker, lang=None):
     title = speaker.title if not lang else getattr(speaker, 'title_%s' % lang)
     return title.split()[-1]
-
-
-uk_ru_en_uppercase = list(u'АБВГҐДЕЁЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ') + list(string.ascii_uppercase)
-multilang_alphabet_index = {letter: index for index, letter in enumerate(uk_ru_en_uppercase)}
-
-uk_upper = list(u"АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ")
-ru_upper = list(u"АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ")
-en_upper = list(string.ascii_uppercase)
-
-uk_index = {letter: index for index, letter in enumerate(uk_upper)}
-ru_index = {letter: index for index, letter in enumerate(ru_upper)}
-en_index = {letter: index for index, letter in enumerate(en_upper)}
-_EMPTY_DICT = {}
-
-
-def alphabet_key(lang, letter):
-    return globals().get(lang + '_index', _EMPTY_DICT).get(letter, ord(letter))
-
-
-def multilang_alphabet_key(letter):
-    return multilang_alphabet_index.get(letter, ord(letter))
 
 
 class ForumPageSpeaker(Orderable):
@@ -875,8 +851,11 @@ register_translatable_interface(ForumLocationPage, fields=('title', 'name', 'cou
                                 languages=MODELS_LANGUAGES)
 
 
-class ForumRegistrationPage(TranslatablePage, BrowsableMixin):
-    parent_page_types = ['core.ForumPage']
+class RedirectPage(TranslatablePage, BrowsableMixin):
+    link = models.URLField(blank=True)
+
+    def serve(self, request, *args, **kwargs):
+        redirect(self.link)
 
     content_panels = [
         FieldPanel('title', classname="full title"),
@@ -884,7 +863,8 @@ class ForumRegistrationPage(TranslatablePage, BrowsableMixin):
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 
-register_translatable_interface(ForumRegistrationPage, fields=('title', ), languages=MODELS_LANGUAGES)
+register_translatable_interface(RedirectPage, fields=('title', ), languages=MODELS_LANGUAGES)
+
 
 from django import forms
 
