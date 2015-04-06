@@ -855,10 +855,11 @@ class RedirectPage(TranslatablePage, BrowsableMixin):
     link = models.URLField(blank=True)
 
     def serve(self, request, *args, **kwargs):
-        redirect(self.link)
+        return redirect(self.link)
 
     content_panels = [
         FieldPanel('title', classname="full title"),
+        FieldPanel('link', classname="full"),
     ]
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
@@ -1024,6 +1025,9 @@ class ForumPage(TranslatablePage, BrowsableMixin):
         index.SearchField('report_text_ru', partial_match=True),
         index.SearchField('report_text_en', partial_match=True),
     )
+
+    subpage_types = ['core.ContentPage', 'core.RedirectPage', 'core.ForumSpeakersPage', 'core.ForumLocationPage',
+                     'core.ForumPackagesPage', 'core.ProgramPage']
 
 
 ForumPage.content_panels = [
