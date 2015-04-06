@@ -40,7 +40,7 @@
                                         {{ document.date|date:"d.m.Y" }}
                                     </div>
                                     <div class="for_block_doc_text">
-                                        {% trans_field document 'description' %}
+                                        {{ document.title }}
                                     </div>
                                     <div class="for_block_doc_download">
                                         <a href="{{ document.doc.url }}">

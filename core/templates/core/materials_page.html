@@ -47,8 +47,7 @@
                                                 {{ video.date|date:"d.m.Y" }}
                                             </div>
                                             <div class="for_block_video_text">
-                                                {% trans_field video "description" %}
-                                                {#                                        {{  video.description }}#}
+                                                {{ video.title }}
                                             </div>
                                         </div>
                                     </div>
@@ -150,7 +149,7 @@
                                             {{ document.date|date:"d.m.Y" }}
                                         </div>
                                         <div class="for_block_doc_text">
-                                            {{ document.description }}
+                                            {{ document.title }}
                                         </div>
                                         <div class="for_block_doc_download">
                                             <a href="{{ document.doc.url }}">

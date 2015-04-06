@@ -11,7 +11,7 @@
             <div class="for_block_title">
                 <div class="for_block_title_top">
                     <a href="{{ self.url }}">
-                        Результати пошуку {% if request.GET.q %}"{{ request.GET.q }}"{% endif %}
+                        {% trans "Search Results For" %} {% if request.GET.q %}"{{ request.GET.q }}"{% endif %}
                     </a>
                 </div>
                 <div class="for_block_title_bot">
