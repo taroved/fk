@@ -68,6 +68,9 @@ msgstr "Мобильный телефон"
 msgid "work_phone"
 msgstr "Рабочий телефон"
 
+msgid "phone"
+msgstr "Тел"
+
 #: core/models.py:128
 msgid "email"
 msgstr "E-mail"

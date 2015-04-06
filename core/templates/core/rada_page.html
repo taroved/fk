@@ -16,30 +16,34 @@
 
 
                             {% for member in self.members.all %}
+                                {% with member.specific as member %}
 
-                                {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
-                                    </div>
-                                    <div class="row">
-                                {% endif %}
+                                    {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                                        </div>
+                                        <div class="row">
+                                    {% endif %}
 
-                                <div class="col-xs-3">
-                                    <div class="for_block_sp_item">
-                                        <a style="cursor: default;" href="#">
-                                            {#                                    <a href="{% pageurl member.speaker_page %}">#}
-                                        <span class="for_block_sp_photo">
-                                            {% image member.photo height-300 as photo %}
-                                            <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
-                                                 class="grayscale grayscale-fade"/>
-                                        </span>
-                                        <span class="for_block_sp_name">
-                                            {% trans_field member 'title' %}
-                                        </span>
-                                        <span class="for_block_sp_about">
-                                            {% trans_field member 'position' %}
-                                        </span>
-                                        </a>
+                                    <div class="col-xs-3">
+                                        <div class="for_block_sp_item">
+                                            <a style="cursor: default;" href="{{ member.url }}">
+                                                {#                                    <a href="{% pageurl member.speaker_page %}">#}
+                                            <span class="for_block_sp_photo">
+                                                {% image member.photo height-300 as photo %}
+                                                <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}"
+                                                     class="grayscale grayscale-fade"/>
+                                            </span>
+                                            <span class="for_block_sp_name">
+                                                <a href="{{ member.url }}">
+                                                    {% trans_field member 'title' %}
+                                                </a>
+                                            </span>
+                                            <span class="for_block_sp_about">
+                                                {% trans_field member 'position' %}
+                                            </span>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
+                                {% endwith %}
                             {% endfor %}
 
 

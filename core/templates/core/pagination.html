@@ -3,6 +3,8 @@
     <div class="col-xs-12">
         <div class="pagination">
             <span class="step-links">
+            {% if items.has_previous or items.has_next %}
+
                 {% if items.has_previous %}
                     <a href="?page={{ items.previous_page_number }}">{% trans "previous" %}</a>
                 {% endif %}
@@ -14,6 +16,7 @@
                 {% if items.has_next %}
                     <a href="?page={{ items.next_page_number }}">{% trans "next" %}</a>
                 {% endif %}
+            {% endif %}
             </span>
         </div>
     </div>

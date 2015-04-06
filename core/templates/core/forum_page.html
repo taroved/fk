@@ -50,9 +50,7 @@
                 <div class="for_block_speakers_arch">
                     <div class="for_block_title">
                         <div class="for_block_title_top">
-                            <a href="#">
-                                {% trans "Speakers" %}
-                            </a>
+                            {% trans "Speakers" %}
                         </div>
                         <div class="for_block_title_bot">
                             <div class="for_block_title_bot_in"></div>
@@ -71,20 +69,8 @@
         </div>
     </div>
 
-
-    {% if LANGUAGE_CODE == 'en' %}
-        {% include "core/videos_list.html" with videos=self.videos_en.all %}
-        {% include "core/albums_list.html" with albums=self.albums_en.all %}
-        {% include "core/documents_list.html" with documents=self.documents_en.all %}
-    {% elif LANGUAGE_CODE == 'ru' %}
-        {% include "core/videos_list.html" with videos=self.videos_ru.all %}
-        {% include "core/albums_list.html" with albums=self.albums_ru.all %}
-        {% include "core/documents_list.html" with documents=self.documents_ru.all %}
-    {% else %}
-        {% include "core/videos_list.html" with videos=self.videos.all %}
-        {% include "core/albums_list.html" with albums=self.albums.all %}
-        {% include "core/documents_list.html" with documents=self.documents.all %}
-    {% endif %}
-
+    {% include "core/videos_list.html" with videos=self.videos_list %}
+    {% include "core/albums_list.html" with albums=self.albums_list %}
+    {% include "core/documents_list.html" with documents=self.documents_list %}
 
 {% endblock %}

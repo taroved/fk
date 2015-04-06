@@ -12,23 +12,17 @@
                 <div class="col-xs-12">
                     <div class="for_block_title">
                         <div class="for_block_title_top">
-                            <a href="#">
-                                {% trans "documents" %}
-                            </a>
+                           {% trans "documents" %}
                         </div>
                         <div class="for_block_title_bot">
                             <div class="for_block_title_bot_in for_block_title_bot_back"></div>
                         </div>
                     </div>
                     <div class="for_block_doc_cont">
-
                         {% for doc in documents %}
-
                             <div class="for_block_doc_item">
                                 <div class="for_block_doc_img">
-                                    <a href="#">
-                                        <img src="{% static doc.doc.doc.preview %}" alt="image">
-                                    </a>
+                                    {% image doc.doc.preview fill-98x146 %}
                                 </div>
                                 <div class="for_block_doc_right">
                                     <div class="for_block_doc_date">{{ doc.doc.date|date:"d.m.Y" }}</div>
@@ -36,8 +30,8 @@
                                         {{ doc.doc.description }}
                                     </div>
                                     <div class="for_block_doc_download">
-                                        <a href="{{ doc.doc.url }}">
-                                            {% trans "download" %}
+                                        <a href="{{ doc.doc.doc.url }}">
+                                            {% trans "download" %} {{ doc.doc.extension }}
                                         </a>
                                     </div>
                                 </div>

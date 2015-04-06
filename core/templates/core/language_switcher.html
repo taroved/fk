@@ -5,17 +5,31 @@
     <ul>
         <li {% if LANGUAGE_CODE == 'uk' %} class="active" {% endif %}>
             {% language "uk" %}
-                <a href="{{ self.url }}">Укр</a>
+                {% if self.language %}
+                    <a href="{{ self.get_parent.url }}">Укр</a>
+                {% else %}
+                    <a href="{{ self.url }}">Укр</a>
+                {% endif %}
             {% endlanguage %}
         </li>
+
 {#        <li {% if LANGUAGE_CODE == 'ru' %} class="active" {% endif %}>#}
 {#            {% language "ru" %}#}
-{#                <a href="{{ self.url }}">Рус</a>#}
+{#                {% if self.language %}#}
+        {#                    <a href="{{ self.parent.url }}">Рус</a>#}
+{#                {% else %}#}
+        {#                    <a href="{{ self.url }}">Рус</a>#}
+{#                {% endif %}#}
 {#            {% endlanguage %}#}
 {#        </li>#}
+
         <li {% if LANGUAGE_CODE == 'en' %} class="active" {% endif %}>
             {% language "en" %}
-                <a href="{{ self.url }}">Eng</a>
+                {% if self.language %}
+                    <a href="{{ self.get_parent.url }}">Eng</a>
+                {% else %}
+                    <a href="{{ self.url }}">Eng</a>
+                {% endif %}
             {% endlanguage %}
         </li>
     </ul>

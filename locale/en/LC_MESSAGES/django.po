@@ -66,6 +66,9 @@ msgstr "Mobile Phone"
 msgid "work_phone"
 msgstr "Work Phone"
 
+msgid "phone"
+msgstr "Tel"
+
 #: core/models.py:128
 msgid "email"
 msgstr "Email"

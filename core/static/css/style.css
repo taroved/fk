@@ -76,7 +76,8 @@ ul {
 .container {
   width: 1200px !important;
 }
-/********** HEADER **********/.for_header {
+/********** HEADER **********/
+.for_header {
   background: #0098cf url("/static/images/for_header.jpg") top center no-repeat;
   height: 584px;
   margin-bottom: 20px;
@@ -511,12 +512,13 @@ ul {
   margin-bottom: 40px;
 }
 .for_about_title {
-  font-family: 'PFBeauSansPro-Bold', Arial, sans-serif;
+  font-family: 'PFBeauSansPro-Reg', Arial, sans-serif;
   text-align: center;
-  font-size: 41px;
+  font-size: 43px;
   line-height: 48px;
   color: #0098cf;
   margin-bottom: 75px;
+  text-transform: uppercase;
 }
 .for_about_title span {
   font-size: 51px;
@@ -974,13 +976,16 @@ ul {
   line-height: 19px;
   color: #989ca2;
   padding: 0 0 0 40px;
-  background: url("/static/images/for_mail.png") left center no-repeat;
+  background-image: url("/static/images/for_mail.png");
   cursor: pointer;
   margin-right: -15px;
+  background-repeat: no-repeat;
+  background-position: 1px 3px;
+  background-color: transparent;
 }
 .for_ac_form_go input:hover {
   color: #0098cf;
-  background: url("/static/images/for_mail_hover.png") left center no-repeat;
+  background-image: url("/static/images/for_mail_hover.png");
 }
 .for_block_bussines {
   margin-bottom: 65px;
@@ -1287,6 +1292,9 @@ ul {
 }
 .for_block_prog_cont ul {
   list-style: none;
+}
+.for_block_prog_cont ul li {
+  max-width: 500px;
 }
 .for_block_prog_cont table {
   width: 100%;
