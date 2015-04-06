@@ -1,7 +1,6 @@
 # coding=utf-8
 import six
 import re
-import string
 from datetime import date
 from datetime import datetime
 from django.db.models.fields import Field
@@ -54,7 +53,6 @@ BROWSABLE_PAGE_PROMOTE_PANELS = [
 def current_lang_filter_params():
     lang = translation.get_language()
     return {'language': lang}
-    # return {} if lang == 'uk' else {'has_' + lang: True}
 
 
 class BrowsableMixin(models.Model):
@@ -964,8 +962,6 @@ class ForumPage(TranslatablePage, BrowsableMixin):
     description_ru = RichTextField(null=True, blank=True, verbose_name='description')
     description_en = RichTextField(null=True, blank=True, verbose_name='description')
 
-    signup_link = models.URLField(blank=True)
-
     report_text = RichTextField(null=True, blank=True)
     report_text_ru = RichTextField(null=True, blank=True, verbose_name='report text')
     report_text_en = RichTextField(null=True, blank=True, verbose_name='report text')
@@ -1170,10 +1166,6 @@ class PressTopListPage(TranslatablePage, BrowsableMixin):
 
 
 register_translatable_interface(PressTopListPage, fields=('title', ), languages=MODELS_LANGUAGES)
-
-
-
-
 
 
 class BaseHomePageAdvertPlacement(Orderable, models.Model):
