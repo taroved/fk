@@ -156,16 +156,16 @@
                         <div class="pad"></div>
                     </div>
                     <div class="for_top_right_foot">
-                            <span class="for_add">
-                                {% trans "Join Us:" %}
-                            </span>
-                        <a href="https://www.flickr.com/photos/129599628@N03/">
+                        <span class="for_add">
+                            {% trans "Join Us:" %}
+                        </span>
+                        <a href="{{ settings.core.SocialMediaSettings.flickr }}">
                             <img src="{% static 'images/flickr.png' %}" alt="flickr">
                         </a>
-                        <a href="https://www.facebook.com/kyiveconomicforum">
+                        <a href="{{ settings.core.SocialMediaSettings.facebook }}">
                             <img src="{% static 'images/for_add_1.jpg' %}" alt="facebook">
                         </a>
-                        <a href="https://www.youtube.com/channel/UC0Z72mTJQG5u5RTATcxrhxw">
+                        <a href="{{ settings.core.SocialMediaSettings.youtube }}">
                             <img src="{% static 'images/for_add_2.jpg' %}" alt="youtube">
                         </a>
                     </div>
@@ -174,8 +174,15 @@
                 <div class="for_bot_foot">
                     <div class="for_contacts">
                         <span>{% trans "Contact Info" %}</span>
-                        <br>{% trans "phone" %}.: <a href="tel:+380444963036">+38 (044) 496-30-36</a>
-                        <br><a href="mailto:info@forumkyiv.org">info@forumkyiv.org</a>
+                        <br/>
+                        {% contact_from_settings %}
+{#                        {% for contact in settings.core.ContactsSettings.contacts|split:"\n" %}#}
+{#                            {{ contact }}<br />#}
+{#                        {% endfor %}#}
+
+{#                        {{ settings.core.ContactsSettings.contacts|linebreaksbr }}#}
+{#                        <br>{% trans "phone" %}.: <a href="tel:+380444963036">+38 (044) 496-30-36</a>#}
+{#                        <br><a href="mailto:info@forumkyiv.org">info@forumkyiv.org</a>#}
                     </div>
                     {% bottom_menu %}
                     <div class="pad"></div>

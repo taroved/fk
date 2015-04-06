@@ -27,6 +27,7 @@ from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 from core.edit_handlers import TranslatableTabbedInterface, register_translatable_interface, PageParentedChooserPanel
 from core.fields import IntegerRangeField
+from wagtailsettings.models import BaseSetting, register_setting
 from urlparse import urlparse
 from os.path import splitext, basename
 
@@ -48,6 +49,18 @@ BROWSABLE_PAGE_PROMOTE_PANELS = [
         FieldPanel('search_description'),
     ], ugettext_lazy('Common page configuration'))
 ]
+
+
+@register_setting
+class ContactsSettings(BaseSetting):
+    contacts = models.TextField()
+
+
+@register_setting
+class SocialMediaSettings(BaseSetting):
+    facebook = models.URLField(help_text='Your Facebook page URL')
+    flickr = models.URLField(help_text='Your flickr album')
+    youtube = models.URLField(help_text='Your YouTube channel or user account URL')
 
 
 def current_lang_filter_params():

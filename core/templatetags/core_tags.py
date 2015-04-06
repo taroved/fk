@@ -1,6 +1,7 @@
 # coding=utf-8
 from datetime import date
 from django import template
+from django.core.exceptions import ValidationError
 from django.template import Node, Variable
 from django.template.base import render_value_in_context
 from django.utils import translation
@@ -8,7 +9,8 @@ import six
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
 from wagtail.contrib.wagtailroutablepage.templatetags.wagtailroutablepage_tags import routablepageurl
 from wagtail.wagtailcore.models import Page
-from core.models import SliderItem, Partner, OrganizerPage, NewsIndexPage
+from core.models import SliderItem, Partner, OrganizerPage, NewsIndexPage, SocialMediaSettings, ContactsSettings
+from django.core.validators import validate_email
 
 register = template.Library()
 
@@ -79,7 +81,27 @@ def assign(value):
 
 @register.filter
 def split(str, splitter):
+    print str, splitter, str.split(splitter)
     return str.split(splitter)
+
+
+def is_email(value):
+    try:
+        validate_email(value)
+    except ValidationError:
+        return False
+    else:
+        return True
+
+
+def mail_to(address):
+    return "<a href=\"mailto:%s\">%s</a>" % (address, address)
+
+
+@register.simple_tag(takes_context=True)
+def contact_from_settings(context):
+    contacts = ContactsSettings.for_site(context['request'].site).contacts
+    return '<br>'.join(mail_to(line) if is_email(line) else line for line in contacts.split('\n'))
 
 # class TransFieldNode(Node):
 #     def __init__(self, filter_expression, asvar=None):
