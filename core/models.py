@@ -292,7 +292,6 @@ class DocumentPage(BaseMaterialPage):
         disassembled = urlparse(self.doc.url)
         filename, ext = splitext(basename(disassembled.path))
         return ext.upper()
-        #return (filename + ext).upper()
 
     subpage_types = []
     parent_page_types = ['core.MaterialsDocumentsPage']
@@ -739,8 +738,9 @@ class AllSpeakersIndexPage(TranslatablePage, BrowsableMixin):
 register_translatable_interface(AllSpeakersIndexPage, fields=('title', ), languages=MODELS_LANGUAGES)
 
 
-def guess_speaker_lastname(speaker):
-    return speaker.title.split()[-1]
+def guess_speaker_lastname(speaker, lang=None):
+    title = speaker.title if not lang else getattr(speaker, 'title_%s' % lang)
+    return title.split()[-1]
 
 
 uk_ru_en_uppercase = list(u'АБВГҐДЕЁЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ') + list(string.ascii_uppercase)
@@ -783,8 +783,9 @@ class ForumSpeakersPage(TranslatablePage, BrowsableMixin):
         if not letter:
             speakers = self.speakers.all()
         else:
+            lang = translation.get_language()
             speakers = [link for link in self.speakers.all()
-                        if guess_speaker_lastname(link.speaker_page)[0].upper() == letter]
+                        if guess_speaker_lastname(link.speaker_page, lang)[0].upper() == letter]
 
         context['speakers'] = speakers
         return context
@@ -798,8 +799,9 @@ class ForumSpeakersPage(TranslatablePage, BrowsableMixin):
 
     @property
     def speakers_letters(self):
+        lang = translation.get_language()
         if not self._speakers_letters:
-            self._speakers_letters = set(guess_speaker_lastname(speaker.speaker_page)[0].upper()
+            self._speakers_letters = set(guess_speaker_lastname(speaker.speaker_page, lang)[0].upper()
                                          for speaker in self.speakers.all())
         return self._speakers_letters
 
