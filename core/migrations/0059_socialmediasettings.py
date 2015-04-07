@@ -7,7 +7,6 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailcore', '0011_auto_20150321_1905'),
         ('core', '0058_contactssettings'),
     ]
 
