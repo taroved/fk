@@ -74,7 +74,9 @@
                                                 {{ self.top_news.1.date|date:"d.m.Y" }}
                                             </div>
                                             <div class="for_block_news_small_text">
-                                                {% trans_field self.top_news.1 "title" %}
+                                                <a href="{% pageurl self.top_news.1 %}">
+                                                    {% trans_field self.top_news.1 "title" %}
+                                                </a>
 {#                                                {{ self.top_news.1.title|linebreaksbr }}#}
                                             </div>
                                         </div>
@@ -95,7 +97,9 @@
                                                 {{ self.top_news.2.date|date:"d.m.Y" }}
                                             </div>
                                             <div class="for_block_news_small_text">
-                                                {% trans_field self.top_news.2 "title" %}
+                                                <a href="{% pageurl self.top_news.2 %}">
+                                                    {% trans_field self.top_news.2 "title" %}
+                                                </a>
 {#                                                {{ self.top_news.2.title|linebreaksbr }}#}
                                             </div>
                                         </div>
