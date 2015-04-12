@@ -27,10 +27,10 @@
             <div class="for_speakers">
                 <div class="for_speakers_abc">
                     <ul>
-                        {% with self.speakers_letters as speakers_letters %}
+{#                        {% with self.speakers_letters as speakers_letters %}#}
                             {% for letter in self.all_lang_letters %}
                                 <li>
-                                    {% if letter in speakers_letters %}
+                                    {% if letter in self.speakers_letters %}
                                         <a href="?letter={{ letter }}"> {# letter=letter #}
                                             {{ letter }}
                                         </a>
@@ -40,7 +40,7 @@
 
                                 </li>
                             {% endfor %}
-                        {% endwith %}
+{#                        {% endwith %}#}
                         <li>
                             <a href="{% pageurl self %}">
                                 {% trans "all letters" %}

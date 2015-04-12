@@ -40,6 +40,10 @@ LANGUAGE_CHOICES = (
     ('en', _('English')),
 )
 
+uk_upper = list(u'АБВГҐДЕЁЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ');
+en_upper = list(u'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+ru_upper = list(u'АБВГДЕЁЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ');
+
 BROWSABLE_PAGE_PROMOTE_PANELS = [
     MultiFieldPanel([
         FieldPanel('slug'),
@@ -747,8 +751,10 @@ register_translatable_interface(AllSpeakersIndexPage, fields=('title', ), langua
 
 
 def guess_speaker_lastname(speaker, lang=None):
+    if lang == 'uk':
+        lang = None
     title = speaker.title if not lang else getattr(speaker, 'title_%s' % lang)
-    return title.split()[-1]
+    return title.split()[1]
 
 
 class ForumPageSpeaker(Orderable):
@@ -788,8 +794,7 @@ class ForumSpeakersPage(TranslatablePage, BrowsableMixin):
     def speakers_letters(self):
         lang = translation.get_language()
         if not self._speakers_letters:
-            self._speakers_letters = set(guess_speaker_lastname(speaker.speaker_page, lang)[0].upper()
-                                         for speaker in self.speakers.all())
+            self._speakers_letters = set(guess_speaker_lastname(speaker.speaker_page, lang)[0].upper() for speaker in self.speakers.all())
         return self._speakers_letters
 
     parent_page_types = ['core.ForumPage']
@@ -802,7 +807,6 @@ ForumSpeakersPage.content_panels = [
 ForumSpeakersPage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 register_translatable_interface(ForumSpeakersPage, fields=('title', ), languages=MODELS_LANGUAGES)
-
 
 class ForumLocationPage(TranslatablePage, BrowsableMixin):
     logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True,
