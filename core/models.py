@@ -265,7 +265,7 @@ class PhotoAlbumPage(BaseMaterialPage):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    description = models.TextField(blank=True, null=True, default='')
+    #description = models.TextField(blank=True, null=True, default='')
 
     subpage_types = []
     parent_page_types = ['core.MaterialsAlbumsPage']
@@ -276,7 +276,7 @@ class PhotoAlbumPage(BaseMaterialPage):
         FieldPanel('date', classname="date"),
         FieldPanel('link', classname="link full"),
         ImageChooserPanel('preview'),
-        FieldPanel('description', classname="full"),
+        # FieldPanel('description', classname="full"),
     ]
 
 
@@ -297,7 +297,7 @@ class DocumentPage(BaseMaterialPage):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    description = models.TextField(blank=True, null=True, default='')
+    #description = models.TextField(blank=True, null=True, default='')
 
     def extension(self):
         disassembled = urlparse(self.doc.url)
@@ -313,7 +313,7 @@ class DocumentPage(BaseMaterialPage):
         FieldPanel('date', classname="date"),
         DocumentChooserPanel('doc'),
         ImageChooserPanel('preview'),
-        FieldPanel('description', classname="full")
+        # FieldPanel('description', classname="full")
     ]
 
 
@@ -329,7 +329,7 @@ class VideoPage(BaseMaterialPage):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    description = models.TextField(blank=True, null=True, default='')
+    #description = models.TextField(blank=True, null=True, default='')
 
     subpage_types = []
     parent_page_types = ['core.MaterialsVideoPage']
@@ -341,7 +341,7 @@ class VideoPage(BaseMaterialPage):
         FieldPanel('link', classname="full"),
         FieldPanel('code', classname="full"),
         ImageChooserPanel('preview'),
-        FieldPanel('description', classname="full")
+        # FieldPanel('description', classname="full")
     ]
 
 
