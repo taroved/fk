@@ -40,9 +40,9 @@ LANGUAGE_CHOICES = (
     ('en', _('English')),
 )
 
-uk_upper = list(u'АБВГҐДЕЁЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ');
-en_upper = list(u'ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-ru_upper = list(u'АБВГДЕЁЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ');
+uk_upper = list(u'АБВГҐДЕЁЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ')
+en_upper = list(u'ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+ru_upper = list(u'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ')
 
 BROWSABLE_PAGE_PROMOTE_PANELS = [
     MultiFieldPanel([

@@ -5,7 +5,11 @@
         {% if self.get_ancestors|length > 1 %}
             {% for page in self.get_ancestors %}
                 {% if page.is_root == False %}
-                    <a href="{% pageurl page %}">{% trans_field page 'title' %}</a> >
+                    {% if page.specific.is_browsable == True or page.slug == 'home'%}
+                        <a href="{% pageurl page %}">{% trans_field page 'title' %}</a> >
+                    {% else %}
+                        {% trans_field page 'title' %} >
+                    {% endif %}
                 {% endif %}
             {% endfor %}
 
