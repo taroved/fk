@@ -614,9 +614,11 @@ ul {
   color: #0097cf;
 }
 .for_block_sp_about {
+  text-align: center;
   font-size: 14px;
   line-height: 16px;
   color: #6a737b;
+  display: block;
 }
 .for_block_all {
   font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
