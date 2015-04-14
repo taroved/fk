@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-07 02:27+0300\n"
+"POT-Creation-Date: 2015-04-14 13:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,72 +31,72 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: core/models.py:50
+#: core/models.py:54
 msgid "Common page configuration"
 msgstr ""
 
-#: core/models.py:72
+#: core/models.py:76
 msgid ""
 "Whether a browsable link to this page will appear in automatically generated "
 "menus"
 msgstr ""
 
-#: core/models.py:83 core/models.py:85 core/models.py:107 core/models.py:109
-#: core/models.py:207 core/models.py:209
+#: core/models.py:87 core/models.py:89 core/models.py:111 core/models.py:113
+#: core/models.py:211 core/models.py:213
 msgid "The page title as you'd like it to be seen by the public"
 msgstr ""
 
 # accreditation_page.html
-#: core/models.py:138
+#: core/models.py:142
 msgid "name"
 msgstr "ПІБ"
 
-#: core/models.py:139
+#: core/models.py:143
 msgid "position"
 msgstr "Посада"
 
-#: core/models.py:140
+#: core/models.py:144
 msgid "publisher"
 msgstr "Видання"
 
-#: core/models.py:141
+#: core/models.py:145
 msgid "publisher_link"
 msgstr "Веб-адреса видання"
 
-#: core/models.py:142
+#: core/models.py:146
 msgid "mobile_phone"
 msgstr "Мобільний телефон"
 
-#: core/models.py:143
+#: core/models.py:147
 msgid "work_phone"
 msgstr "Робочий телефон"
 
-#: core/models.py:144
+#: core/models.py:148
 msgid "email"
 msgstr "E-mail"
 
-#: core/models.py:145
+#: core/models.py:149
 msgid "publication_form_date"
 msgstr "Коли і в якому вигляді плануєте публікацію про форум?"
 
-#: core/models.py:146
+#: core/models.py:150
 msgid "need_additional_help"
 msgstr ""
 "Чи необхідна доп. інформація про форум або допомога в організації інтерв'ю?"
 
-#: core/models.py:205
+#: core/models.py:209
 msgid "The title as you'd like it to be seen by the public"
 msgstr ""
 
-#: core/models.py:885
+#: core/models.py:889
 msgid "Text"
 msgstr ""
 
-#: core/models.py:1300
+#: core/models.py:1304
 msgid "Plenary discussions"
 msgstr "Панельні дискусії"
 
-#: core/models.py:1301
+#: core/models.py:1305
 msgid "Plenary session"
 msgstr "Пленарне засідання"
 
@@ -110,7 +110,7 @@ msgstr "Контактна інформація"
 
 #: core/templates/core/accreditation_page.html:129
 msgid "submit"
-msgstr ""
+msgstr "Надіслати"
 
 #: core/templates/core/albums_list.html:15
 #: core/templates/core/materials_page.html:78
@@ -141,17 +141,17 @@ msgstr "Пакети учасників"
 msgid "participation format"
 msgstr "Формат участi"
 
-#: core/templates/core/forum_page.html:32
-#: core/templates/core/home_page.html:187
+#: core/templates/core/forum_page.html:31
+#: core/templates/core/home_page.html:188
 msgid "program"
 msgstr "Програма"
 
-#: core/templates/core/forum_page.html:53
+#: core/templates/core/forum_page.html:51
 #: core/templates/core/home_page.html:205
 msgid "Speakers"
 msgstr "Спікери"
 
-#: core/templates/core/forum_page.html:64
+#: core/templates/core/forum_page.html:62
 #: core/templates/core/home_page.html:219
 msgid "all speakers"
 msgstr "повний список спікерів"
@@ -168,7 +168,7 @@ msgstr "ВСІ"
 msgid "News"
 msgstr "Новини"
 
-#: core/templates/core/home_page.html:114
+#: core/templates/core/home_page.html:117
 #: core/templates/core/videos_list.html:13
 msgid "Video"
 msgstr "Відео"
