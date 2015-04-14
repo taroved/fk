@@ -391,9 +391,7 @@ ul {
 .for_block_title_top {
   text-align: center;
   margin-bottom: 20px;
-}
 
-.for_block_title_top {
   font-family: @default-font-family;
   color: @firm-color;
   -webkit-transition: color 100ms ease-out;
@@ -403,10 +401,10 @@ ul {
   font-size: 28px;
   line-height: 28px;
   text-transform: uppercase;
-}
 
-.for_block_title_top a:hover {
-  color: #015b7b;
+  a, a:hover {
+    color: @firm-color;
+  }
 }
 
 .for_block_title_bot {
@@ -468,8 +466,9 @@ ul {
   margin-bottom: 12px;
 }
 
-.for_block_news_title a {
-  color: @firm-color;
+.for_block_news_title a,
+.for_block_news_title a:hover {
+  color: #0399cf; //@firm-color;
 }
 
 .for_block_news_text {

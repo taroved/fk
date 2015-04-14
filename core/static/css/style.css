@@ -295,8 +295,6 @@ ul {
 .for_block_title_top {
   text-align: center;
   margin-bottom: 20px;
-}
-.for_block_title_top {
   font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
   color: #0098cf;
   -webkit-transition: color 100ms ease-out;
@@ -307,8 +305,9 @@ ul {
   line-height: 28px;
   text-transform: uppercase;
 }
+.for_block_title_top a,
 .for_block_title_top a:hover {
-  color: #015b7b;
+  color: #0098cf;
 }
 .for_block_title_bot {
   position: relative;
@@ -360,8 +359,9 @@ ul {
   text-transform: uppercase;
   margin-bottom: 12px;
 }
-.for_block_news_title a {
-  color: #0098cf;
+.for_block_news_title a,
+.for_block_news_title a:hover {
+  color: #0399cf;
 }
 .for_block_news_text {
   font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
