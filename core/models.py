@@ -1356,6 +1356,12 @@ class ProgramSectionPage(TranslatablePage, BrowsableMixin):
 
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
+    def serve(self, request, *args, **kwargs):
+        if not self.is_browsable:
+            return redirect('/')
+        else:
+            return super(ProgramSectionPage, self).serve(request, *args, **kwargs)
+
 register_translatable_interface(ProgramSectionPage, fields=('title',), languages=MODELS_LANGUAGES)
 
 
@@ -1390,6 +1396,14 @@ class ForumPanelPage(TranslatablePage, BrowsableMixin):
     location_en = models.CharField(max_length=255, null=True, blank=True, verbose_name='description')
 
     enable_link = models.BooleanField(default=False)
+
+
+    def serve(self, request, *args, **kwargs):
+        if not self.enable_link:
+            return redirect('/')
+        else:
+            return super(ForumPanelPage, self).serve(request, *args, **kwargs)
+
 
     parent_page_types = ['core.ProgramSectionPage']
 
