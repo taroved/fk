@@ -1240,11 +1240,6 @@ class HomePage(TranslatablePage, BrowsableMixin):
     forum_page = models.ForeignKey('core.ForumPage', null=True, blank=True,
                                    on_delete=models.SET_NULL, related_name='+')
 
-    # @property
-    # def top_news(self):
-    #     news = NewsPage.objects.live().filter(**current_lang_filter_params()).order_by('-date')
-    #     return news
-
     @property
     def top_news(self):
         news = self.news.all()
@@ -1258,6 +1253,11 @@ class HomePage(TranslatablePage, BrowsableMixin):
         lang = translation.get_language()
         videos = [video_page for video_page in videos if video_page.video.language == lang]
         return videos
+
+    @property
+    def news_link(self):
+        page = NewsIndexPage.objects.first()
+        return page.url
 
     class Meta:
         verbose_name = "Homepage"
