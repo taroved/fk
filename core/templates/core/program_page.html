@@ -11,19 +11,7 @@
 
     <div class="for_block_title">
         <div class="for_block_title_top">
-
-            {% if LANGUAGE_CODE == 'uk' %}
-                <a href="{{ self.url }}">ПРОГРАМА</a>
-            {% endif %}
-
-            {% if LANGUAGE_CODE == 'ru' %}
-                <a href="{{ self.url }}">ПРОГРАМА</a>
-            {% endif %}
-
-            {% if LANGUAGE_CODE == 'en' %}
-                <a href="{{ self.url }}">Program</a>
-            {% endif %}
-
+            {% trans "program" %}
         </div>
         <div class="for_block_title_bot">
             <div class="for_block_title_bot_in"></div>
