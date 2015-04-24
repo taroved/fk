@@ -1048,7 +1048,6 @@ ForumPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('title_long', classname="full title"),
     FieldPanel('description', classname="full"),
-    FieldPanel('signup_link', classname="full"),
 
     MultiFieldPanel([
         FieldRowPanel([
