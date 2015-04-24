@@ -1296,7 +1296,8 @@ ul {
   list-style: none;
 }
 .for_block_prog_cont ul li {
-  max-width: 500px;
+  max-width: 735px;
+  font-size: 14pt;
 }
 .for_block_prog_cont table {
   width: 100%;
@@ -1477,4 +1478,10 @@ img.full-width {
 }
 .error {
   color: #A94442;
+}
+.map-container {
+  width: 100%;
+}
+.map-container .col-xs-12 {
+  padding: 0;
 }
