@@ -1319,6 +1319,7 @@ ul {
 }
 .for_block_prog_cont table tr td {
   padding: 28px 0;
+  padding-left: 10px;
   vertical-align: middle;
   max-width: 650px;
 }
