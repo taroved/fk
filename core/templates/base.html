@@ -16,14 +16,18 @@
 
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    {% block extra_css %} {% endblock %}
+
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>
-        {% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{% trans_field self 'title' %}
-        {% endif %}{% endblock %}
-        {% block title_suffix %}{% endblock %}</title>
+        {% block title %}
+            {% if self.seo_title %}{{ self.seo_title }}{% else %}{% trans_field self 'title' %}
+            {% endif %}
+        {% endblock %}
+
+        {% block title_suffix %}{% endblock %}
+    </title>
 
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}"/>
 
@@ -41,6 +45,8 @@
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     {% endcompress %}
+
+    {% block extra_css %} {% endblock %}
 
     {% compress js %}
         <script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>

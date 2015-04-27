@@ -955,6 +955,9 @@ class ForumPackagesPageItem(models.Model):
 class ForumPackagesPage(TranslatablePage, BrowsableMixin):
     parent_page_types = ['core.ForumPage']
 
+    @property
+    def column_width_percent(self):
+        return 100 / (len(self.packages.all()) +1)
 
 ForumPackagesPage.content_panels = [
     FieldPanel('title', classname="full title"),

@@ -19,6 +19,17 @@
 
 {% endblock %}
 
+
+
+{% block extra_css %}
+    <style>
+        .for_block_pack_cont table tbody tr td,
+        .for_block_pack_cont table thead tr td {
+            width: {{ self.column_width_percent }}%;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
 <div class="container text-center">
     {% get_current_language as LANGUAGE_CODE %}
@@ -26,44 +37,51 @@
     <div class="for_block_pack">
 
         <div class="for_block_pack_cont">
-                <div class="for_block_pack_cont_title">
-                    <div class="row">
-                        <div class="col-xs-4"></div>
-                        {% for package in self.packages.all %}
-                            <div class="col-xs-4">
-                                {% trans_field package "title" %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
+{#                <div class="for_block_pack_cont_title">#}
+{#                    <div class="row">#}
+{#                        <div class="col-xs-4"></div>#}
+{#                        #}
+{#                    </div>#}
+{#                </div>#}
                 <table>
-                    <tr>
-                        <td>
-                            {% trans "participation format" %}
-                        </td>
-                        {% for package in self.packages.all %}
-                        <td>
-                            {% trans_field package "description" %}
-                        </td>
-                        {% endfor %}
-                    </tr>
-                    {% for date_range in self.date_ranges.all %}
-                    <tr>
-                        <td>
-                            {% trans_field date_range "title" %}
-                        </td>
-                        {% with forloop.counter0 as range_index %}
-
+                    <thead class="for_block_pack_cont_title">
+                        <tr>
+                            <td></td>
+                            {% for package in self.packages.all %}
+                                <td>
+                                    {% trans_field package "title" %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {% trans "participation format" %}
+                            </td>
                             {% for package in self.packages.all %}
                             <td>
-                                UAH {% list_index package.price_list range_index %}
+                                {% trans_field package "description" %}
                             </td>
                             {% endfor %}
+                        </tr>
+                        {% for date_range in self.date_ranges.all %}
+                        <tr>
+                            <td>
+                                {% trans_field date_range "title" %}
+                            </td>
+                            {% with forloop.counter0 as range_index %}
 
-                        {% endwith %}
-                    </tr>
-                    {% endfor %}
+                                {% for package in self.packages.all %}
+                                <td>
+                                    UAH {% list_index package.price_list range_index %}
+                                </td>
+                                {% endfor %}
 
+                            {% endwith %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
             </div>
 
