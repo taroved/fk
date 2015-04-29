@@ -1347,6 +1347,7 @@ ul {
 .for_block_prog_cont table tr:first-child td:first-child > div {
   padding: 0;
   display: block;
+  margin-left: 10px;
 }
 .for_block_prog_cont table tr td:first-child div span {
   display: block;

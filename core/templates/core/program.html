@@ -8,79 +8,90 @@
 
 <div class="for_block_prog">
 
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="for_block_prog_cont">
+    <div class="for_block_prog_cont">
 
-                <table>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <div>
-                                <img src="{% static 'images/for_time.png' %}" alt="image">
-                            </div>
-                        </td>
-                        <td>
-                            <div>
-                                <img src="{% static 'images/for_message.png' %}" alt="image">
-                            </div>
-                        </td>
-                    </tr>
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <img src="{% static 'images/for_time.png' %}" alt="Time">
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <img src="{% static 'images/for_location.png' %}" alt="Location">
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <img src="{% static 'images/for_message.png' %}" alt="Description">
+                    </div>
+                </td>
+            </tr>
 
-                    {% for section in sections %}
+            {% for section in sections %}
 
-                        <tr>
-                            <td>
-                                <div class="for_hover_1" style="height: 108px">
-                                    {% if section.section_type != '' %}
-                                        <span>
+                <tr>
+                    <td>
+                        <div class="section-time" style="height: 108px">
+                            {% if section.section_type != '' %}
+                                <span>
 {#                                            {% trans_field section "section_type" %}#}
                                             {{ section.get_section_type_display|default_if_none:"" }}
                                         </span>
-                                    {% endif %}
+                            {% endif %}
 
-                                    {{ section.start_time|time:"H:i"  }} - {{ section.end_time|time:"H:i"  }}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="for_ul_1">
-                                    {% if section.panels %}
-                                        {% if section.section_type != 'PD' %} {# Panel discussion shoud have no title #}
-                                            <b>{% trans_field section "title" %}</b>
+                            {{ section.start_time|time:"H:i" }} - {{ section.end_time|time:"H:i" }}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="section-location">
+                            {% for panel in section.panels %}
+                                <span class="{{ panel.slug }}">
+                                            {% trans_field panel "location" %}
+                                        </span>
+                            {% endfor %}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="section-name">
+                            {% if section.panels %}
+                                {% if section.section_type != 'PD' %} {# Panel discussion shoud have no title #}
+                                    <b>{% trans_field section "title" %}</b>
+                                {% endif %}
+                            {% else %}
+                                {% trans_field section "title" %}
+                            {% endif %}
+                            <ul>
+                                {% for panel in section.panels %}
+                                    <li class="{{ panel.slug }}">
+                                        {% if panel.specific.enable_link %}
+                                            <a href="{{ panel.url }}">{% trans_field panel "title" %}</a>
+                                        {% else %}
+                                            {% trans_field panel "title" %}
                                         {% endif %}
-                                    {% else %}
-                                       {% trans_field section "title" %}
-                                    {% endif %}
-                                    <ul>
-                                        {% for panel in section.panels %}
-                                            <li>
-                                                {% if panel.specific.enable_link %}
-                                                    <a href="{{ panel.url }}">{% trans_field panel "title" %}</a>
-                                                {% else %}
-                                                    {% trans_field panel "title" %}
-                                                {% endif %}
-                                            </li>
+                                    </li>
 
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
 
-                    {% endfor %}
+            {% endfor %}
 
-                    </tbody>
-                </table>
-{#                <div class="for_block_prog_bot">#}
-{#                    *За окремим запрошенням<br/>#}
-{#                    **Для власників пакету «Платинум»<br/>#}
-{#                    В програмі можливі зміни#}
-{#                </div>#}
+            </tbody>
+        </table>
+        {#                <div class="for_block_prog_bot">#}
+        {#                    *За окремим запрошенням<br/>#}
+        {#                    **Для власників пакету «Платинум»<br/>#}
+        {#                    В програмі можливі зміни#}
+        {#                </div>#}
 
 
-            </div>
-
-        </div>
     </div>
 
 </div>
+
+<script src="{% static 'js/forumkyiv.js' %}"></script>
