@@ -9,7 +9,7 @@ $(document).ready(function () {
         //$(timeSelector).css("color",color1);
         $(element).css("color", color2);
 
-        console.log(selector);
+        //console.log(selector);
     }
 
 
