@@ -1394,8 +1394,8 @@ class ForumPanelPage(TranslatablePage, BrowsableMixin):
     body_en = RichTextField(blank=True, null=True, verbose_name='body')
 
     location = models.CharField(max_length=255, null=True, blank=True)
-    location_ru = models.CharField(max_length=255, null=True, blank=True, verbose_name='description')
-    location_en = models.CharField(max_length=255, null=True, blank=True, verbose_name='description')
+    location_ru = models.CharField(max_length=255, null=True, blank=True, verbose_name='location')
+    location_en = models.CharField(max_length=255, null=True, blank=True, verbose_name='location')
 
     enable_link = models.BooleanField(default=False)
 

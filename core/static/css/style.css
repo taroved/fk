@@ -1497,3 +1497,6 @@ img.full-width {
 .map-container .col-xs-12 {
   padding: 0;
 }
+.location {
+  margin-left: -20px;
+}

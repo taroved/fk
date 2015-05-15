@@ -112,7 +112,7 @@ msgstr "Submit"
 #: core/templates/core/albums_list.html:15
 #: core/templates/core/materials_page.html:78
 msgid "albums"
-msgstr "Photos"
+msgstr "Photo"
 
 #: core/templates/core/documents_list.html:15
 #: core/templates/core/materials_documents_page.html:18
