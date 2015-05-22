@@ -173,7 +173,7 @@ msgstr "Video"
 #: core/templates/core/materials_page.html:25
 #: core/templates/core/materials_video_page.html:19
 msgid "videos"
-msgstr "Videos"
+msgstr "Video"
 
 #: core/templates/core/materials_page.html:59
 msgid "all videos"

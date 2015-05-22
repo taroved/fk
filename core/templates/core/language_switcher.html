@@ -13,15 +13,15 @@
             {% endlanguage %}
         </li>
 
-{#        <li {% if LANGUAGE_CODE == 'ru' %} class="active" {% endif %}>#}
-{#            {% language "ru" %}#}
-{#                {% if self.language %}#}
-        {#                    <a href="{{ self.parent.url }}">Рус</a>#}
-{#                {% else %}#}
-        {#                    <a href="{{ self.url }}">Рус</a>#}
-{#                {% endif %}#}
-{#            {% endlanguage %}#}
-{#        </li>#}
+        <li {% if LANGUAGE_CODE == 'ru' %} class="active" {% endif %}>
+            {% language "ru" %}
+                {% if self.language %}
+                            <a href="{{ self.parent.url }}">Рус</a>
+                {% else %}
+                            <a href="{{ self.url }}">Рус</a>
+                {% endif %}
+            {% endlanguage %}
+        </li>
 
         <li {% if LANGUAGE_CODE == 'en' %} class="active" {% endif %}>
             {% language "en" %}
