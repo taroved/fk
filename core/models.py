@@ -868,6 +868,8 @@ register_translatable_interface(ForumLocationPage, fields=('title', 'name', 'cou
 
 class RedirectPage(TranslatablePage, BrowsableMixin):
     link = models.URLField(blank=True)
+    link_en = models.URLField(blank=True, verbose_name="link")
+    link_ru = models.URLField(blank=True, verbose_name="link")
 
     def serve(self, request, *args, **kwargs):
         return redirect(self.link)
@@ -876,10 +878,28 @@ class RedirectPage(TranslatablePage, BrowsableMixin):
         FieldPanel('title', classname="full title"),
         FieldPanel('link', classname="full"),
     ]
+    ru_panels = [
+        FieldPanel('title_ru', classname="full title"),
+        FieldPanel('link_ru', classname="full")
+    ]
+    en_panels = [
+        FieldPanel('title_en', classname="full title"),
+        FieldPanel('link_en', classname="full")
+    ]
+
+    # ru_panels = [
+    #     FieldPanel('title_ru', classname="full title"),
+    #     FieldPanel('link', classname="full"),
+    # ]
+    #
+    # en_panels = [
+    #     FieldPanel('title_en', classname="full title"),
+    #     FieldPanel('link', classname="full"),
+    # ]
+
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
-
-register_translatable_interface(RedirectPage, fields=('title', ), languages=MODELS_LANGUAGES)
+register_translatable_interface(RedirectPage, fields=('title', 'link' ), languages=MODELS_LANGUAGES)
 
 
 from django import forms
