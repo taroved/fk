@@ -1465,6 +1465,19 @@ class ForumPanelPage(TranslatablePage, BrowsableMixin):
 
     enable_link = models.BooleanField(default=False)
 
+    @property
+    def test(self):
+        return 'TEST OK'
+
+    @property
+    def videos(self):
+        return VideoPage.objects.live().descendant_of(self).filter(**current_lang_filter_params())
+
+    @property
+    def speakers(self):
+        return SpeakerPage.objects.live().descendant_of(self)
+
+
     def serve(self, request, *args, **kwargs):
         if not self.enable_link:
             return redirect('/')

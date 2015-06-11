@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
-{% load static core_tags %}
+{% load core_tags %}
+{% load static %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -28,6 +31,106 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="for_pan_speakers">
+        <div class="container">
+
+            <div class="row">
+
+                {% for speaker in self.speakers.all %}
+
+                    {% if forloop.counter0|divisibleby:"2" and forloop.counter0 > 0 %}
+                        </div><div class="row">
+                    {% endif %}
+
+                    <div class="col-xs-6">
+                        <div class="for_pan_speaker">
+                            <a href="#">
+                                <span class="for_pan_speaker_photo">
+                                    {% image speaker.speaker_page.photo height-100 as photo %}
+{#                                    <img src="images/for_pan_speaker_1.jpg" alt="photo">#}
+                                </span>
+                                <span class="for_pan_speaker_right">
+                                    <span class="for_pan_sp_name">
+                                        {% trans_field speaker.speaker_page 'title' %}
+                                    </span>
+                                    <span class="for_pan_sp_text">
+{#                                        Президент Асоціації<br>#}
+{#                                        «Інноваційний розвиток України»#}
+                                        {% trans_field speaker.speaker_page 'position' %}
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div class="container">
+
+        <div class="row">
+
+                <div class="col-xs-12">
+                    <div class="for_pan_video">
+                        <div class="for_pan_video_title">
+                            Відео:
+                        </div>
+                        <div class="for_block_video_cont">
+
+                            <div class="row">
+
+                                {% for video in self.videos.all %}
+
+                                    {% if forloop.counter0|divisibleby:"2" and forloop.counter0 > 0 %}
+                                        </div><div class="row">
+                                    {% endif %}
+
+                                    <div class="col-xs-3">
+                                    <div class="for_block_video_item">
+                                        <div class="for_block_video_view">
+                                            <a href="#">
+                                                <img src="{% static 'images/for_play.png' %}" class="for_play" alt="image">
+                                                <span class="for_video_shadow"></span>
+{#                                                <img src="images/for_block_video_1.jpg" class="for_video_1" alt="image">#}
+                                                {% image video.preview fill-569x314-c100 %}
+                                            </a>
+                                        </div>
+                                        <div class="for_block_video_date">
+                                            20.12.2013
+                                        </div>
+                                        <div class="for_block_video_text">
+{#                                            Віктор Галасюк на дебатах<br>#}
+{#                                            "Яка економічна стратегія<br>#}
+{#                                            потрібна Україні?"#}
+                                            {{ video.title }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
         </div>
     </div>
 
