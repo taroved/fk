@@ -1408,6 +1408,17 @@ class ForumPanelPageDocument(Orderable):
     panels = [PageParentedChooserPanel('doc', page_type=DocumentPage, parent_cls=MaterialsDocumentsPage)]
 
 
+class ForumPanelSpeaker(Orderable):
+    page = ParentalKey('core.ForumPanelPage', related_name='speakers')
+    speaker_page = models.ForeignKey('core.SpeakerPage',
+                                     null=True, blank=True,
+                                     on_delete=models.SET_NULL,
+                                     related_name='+', verbose_name='speaker')
+
+    def __unicode__(self):
+        return "%s -> %s (%s)" % (self.page.title, self.speaker_page.title, self.speaker_page.url)
+
+
 class ForumPanelPage(TranslatablePage, BrowsableMixin):
     body = RichTextField(blank=True, null=True)
     body_ru = RichTextField(blank=True, null=True, verbose_name='body')
@@ -1419,23 +1430,56 @@ class ForumPanelPage(TranslatablePage, BrowsableMixin):
 
     enable_link = models.BooleanField(default=False)
 
-
     def serve(self, request, *args, **kwargs):
         if not self.enable_link:
             return redirect('/')
         else:
             return super(ForumPanelPage, self).serve(request, *args, **kwargs)
 
-
     parent_page_types = ['core.ProgramSectionPage']
 
-    content_panels = [
-        FieldPanel('title', classname="full title"),
-        FieldPanel('enable_link'),
-        FieldPanel('body', classname="full"),
-        FieldPanel('location', classname="full"),
-    ]
-    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
-register_translatable_interface(ForumPanelPage, fields=('title', 'body', 'location'),
-                                languages=MODELS_LANGUAGES, materials=True)
+ForumPanelPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('enable_link'),
+    FieldPanel('body', classname="full"),
+    FieldPanel('location', classname="full"),
+]
+ForumPanelPage.ru_panels = [
+    FieldPanel('title_ru', classname="full title"),
+    FieldPanel('body_ru', classname="full"),
+    FieldPanel('location_ru', classname="full"),
+]
+
+ForumPanelPage.en_panels = [
+    FieldPanel('title_en', classname="full title"),
+    FieldPanel('body_en', classname="full"),
+    FieldPanel('location_en', classname="full"),
+]
+
+ForumPanelPage.materials_panels = [
+    InlinePanel(ForumPanelPage, 'videos', label='Videos'),
+    InlinePanel(ForumPanelPage, 'albums', label='Albums'),
+    InlinePanel(ForumPanelPage, 'documents', label='Documents'),
+]
+
+ForumPanelPage.speakers_panels = [
+    InlinePanel(ForumPanelPage, 'speakers', label='Speakers'),
+]
+
+ForumPanelPage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+
+PAGE_EDIT_HANDLERS[ForumPanelPage] = TranslatableTabbedInterface([
+    ObjectList(ForumPanelPage.content_panels, heading='Content'),
+    ObjectList(ForumPanelPage.ru_panels, heading='RU'),
+    ObjectList(ForumPanelPage.en_panels, heading='EN'),
+    ObjectList(ForumPanelPage.materials_panels, heading='Materials'),
+    ObjectList(ForumPanelPage.speakers_panels, heading='Speakers'),
+    ObjectList(ForumPanelPage.promote_panels, heading='Promote'),
+    ObjectList(ForumPanelPage.settings_panels, heading='Settings', classname="settings")
+])
+
+#
+# register_translatable_interface(ForumPanelPage, fields=('title', 'body', 'location'),
+#                                 languages=MODELS_LANGUAGES, materials=True)
