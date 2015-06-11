@@ -618,6 +618,41 @@ class OrganizerPage(TranslatablePage, BrowsableMixin):
 register_translatable_interface(OrganizerPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
+class PartnerIndexPage(TranslatablePage, BrowsableMixin):
+    @property
+    def partners(self):
+        return PartnerPage.objects.live().all()
+
+    subpage_types = ['core.PartnerPage']
+
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+
+register_translatable_interface(PartnerIndexPage, fields=('title',), languages=MODELS_LANGUAGES)
+
+
+class PartnerPage(TranslatablePage, BrowsableMixin):
+    logo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    link = models.URLField(blank=True, null=True)
+
+    description = models.TextField(blank=True, null=True)
+    description_ru = models.TextField(blank=True, null=True, verbose_name='description')
+    description_en = models.TextField(blank=True, null=True, verbose_name='description')
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        ImageChooserPanel('logo'),
+        FieldPanel('link', classname="full link"),
+        FieldPanel('description', classname="full description"),
+    ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+    parent_page_types = ['core.PartnerIndexPage']
+
+
+register_translatable_interface(PartnerPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
+
+
 class ForumIndexPage(TranslatablePage, BrowsableMixin):
     @property
     def forums(self):
