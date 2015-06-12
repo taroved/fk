@@ -4,6 +4,7 @@
 {% load static %}
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
+{% load i18n %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -34,13 +35,6 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
     <div class="for_pan_speakers">
         <div class="container">
 
@@ -56,7 +50,7 @@
                         <div class="for_pan_speaker">
                             <a href="#">
                                 <span class="for_pan_speaker_photo">
-                                    {% image speaker.speaker_page.photo height-100 as photo %}
+                                    {% image speaker.speaker_page.photo height-100 %}
 {#                                    <img src="images/for_pan_speaker_1.jpg" alt="photo">#}
                                 </span>
                                 <span class="for_pan_speaker_right">
@@ -64,8 +58,6 @@
                                         {% trans_field speaker.speaker_page 'title' %}
                                     </span>
                                     <span class="for_pan_sp_text">
-{#                                        Президент Асоціації<br>#}
-{#                                        «Інноваційний розвиток України»#}
                                         {% trans_field speaker.speaker_page 'position' %}
                                     </span>
                                 </span>
@@ -81,57 +73,131 @@
     </div>
 
 
+    {% if self.videos_list %}
 
-    <div class="container">
+        <div class="container">
 
-        <div class="row">
+            <div class="row">
 
-                <div class="col-xs-12">
-                    <div class="for_pan_video">
-                        <div class="for_pan_video_title">
-                            Відео:
-                        </div>
-                        <div class="for_block_video_cont">
+                    <div class="col-xs-12">
+                        <div class="for_pan_video">
+                            <div class="for_pan_video_title">
+                                {% trans "videos" %}:
+                            </div>
+                            <div class="for_block_video_cont">
 
-                            <div class="row">
+                                <div class="row">
 
-                                {% for video in self.videos.all %}
+                                    {% for material in self.videos_list %}
 
-                                    {% if forloop.counter0|divisibleby:"2" and forloop.counter0 > 0 %}
-                                        </div><div class="row">
-                                    {% endif %}
+                                        {% if forloop.counter0|divisibleby:"2" and forloop.counter0 > 0 %}
+                                            </div><div class="row">
+                                        {% endif %}
 
-                                    <div class="col-xs-3">
-                                    <div class="for_block_video_item">
-                                        <div class="for_block_video_view">
-                                            <a href="#">
-                                                <img src="{% static 'images/for_play.png' %}" class="for_play" alt="image">
-                                                <span class="for_video_shadow"></span>
-{#                                                <img src="images/for_block_video_1.jpg" class="for_video_1" alt="image">#}
-                                                {% image video.preview fill-569x314-c100 %}
-                                            </a>
-                                        </div>
-                                        <div class="for_block_video_date">
-                                            20.12.2013
-                                        </div>
-                                        <div class="for_block_video_text">
-{#                                            Віктор Галасюк на дебатах<br>#}
-{#                                            "Яка економічна стратегія<br>#}
-{#                                            потрібна Україні?"#}
-                                            {{ video.title }}
+
+                                        <div class="col-xs-3">
+                                            <div class="for_block_video_item">
+                                                <div class="for_block_video_view">
+                                                    <a class="fancybox-media" href="{{ material.video.link }}">
+                                                        <img src="{% static 'images/for_play.png' %}" class="for_play"
+                                                             alt="image">
+                                                        <span class="for_video_shadow"></span>
+                                                        {% image material.video.preview fill-569x314-c100 %}
+                                                    </a>
+                                                </div>
+                                                <div class="for_block_video_date">
+                                                    {{ material.video.date|date:"d.m.Y" }}
+                                                </div>
+                                                <div class="for_block_video_text">
+                                                    {{ material.video.title }}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    {% endfor %}
+
                                 </div>
 
-                                {% endfor %}
-
                             </div>
-
                         </div>
                     </div>
-                </div>
 
+            </div>
         </div>
-    </div>
+
+    {% endif %}
+
+
+
+
+    {% if self.documents_list %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="for_block_title">
+                        <div class="for_block_title_top">
+                            {% trans "documents" %}
+                        </div>
+                        <div class="for_block_title_bot">
+                            <div class="for_block_title_bot_in"></div>
+                        </div>
+                    </div>
+                    <div class="for_block_doc_cont for_block_doc_cont_mat">
+                        {% for material in self.documents_list %}
+
+                            {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                                </div>
+                                <div class="row">
+                            {% endif %}
+
+                            <div class="for_block_doc_item">
+                                <div class="for_block_doc_img">
+                                    <a href="{{ material.doc.doc.url }}">
+                                        {% image material.doc.preview fill-98x146 %}
+                                    </a>
+                                </div>
+                                <div class="for_block_doc_right">
+                                    <div class="for_block_doc_date">
+                                        {{ material.doc.date|date:"d.m.Y" }}
+                                    </div>
+                                    <div class="for_block_doc_text">
+                                        {{ material.doc.title }}
+                                    </div>
+                                    <div class="for_block_doc_download">
+                                        <a href="{{ material.doc.doc.url }}">
+                                            {% trans "download" %} {{ material.doc.extension }}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="pad"></div>
+                            </div>
+
+                        {% endfor %}
+
+                        <div class="pad"></div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% endif %}
+
+
+    {% if self.albums_list%}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="for_block_photo_cont">
+                        {% include "core/albums_list.html" with albums=self.albums_list %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
 
 {% endblock %}

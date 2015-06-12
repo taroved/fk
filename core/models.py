@@ -592,6 +592,8 @@ class PartnerListPage(TranslatablePage, BrowsableMixin):
     def partners(self):
         return Partner.objects.all()
 
+    subpage_types = ['core.PartnerPage']
+
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
 
@@ -626,7 +628,6 @@ class PartnerIndexPage(TranslatablePage, BrowsableMixin):
     subpage_types = ['core.PartnerPage']
 
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
-
 
 register_translatable_interface(PartnerIndexPage, fields=('title',), languages=MODELS_LANGUAGES)
 
@@ -1465,18 +1466,36 @@ class ForumPanelPage(TranslatablePage, BrowsableMixin):
 
     enable_link = models.BooleanField(default=False)
 
-    @property
-    def test(self):
-        return 'TEST OK'
+    # @property
+    # def videos_list(self):
+    #     return self.videos.all()
+        # lang = translation.get_language()
+        # videos = [page for page in self.videos.all() if page.video.language == lang]
+        # return videos
 
     @property
-    def videos(self):
-        return VideoPage.objects.live().descendant_of(self).filter(**current_lang_filter_params())
+    def videos_list(self):
+        videos = self.videos.all()
+        lang = translation.get_language()
+        items = [page for page in videos if page.video.language == lang]
+        return items
+
 
     @property
-    def speakers(self):
-        return SpeakerPage.objects.live().descendant_of(self)
+    def documents_list(self):
+        documents = self.documents.all()
+        lang = translation.get_language()
+        items = [page for page in documents if page.doc.language == lang]
+        return items
+        #return documents
 
+    @property
+    def albums_list(self):
+        albums = self.albums.all()
+        #lang = translation.get_language()
+        # items = [page for page in albums if page.album.language == lang]
+        # return items
+        return albums
 
     def serve(self, request, *args, **kwargs):
         if not self.enable_link:

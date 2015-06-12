@@ -8,13 +8,13 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                {% for organizer in self.organizers %}
+                {% for partner in self.partners %}
 
                     <div class="for_block_org">
                         <div class="for_block_title for_block_title_org">
                             <div class="for_block_title_top">
-                                <a href="{{ organizer.link }}">
-                                    {% trans_field organizer 'title' %}
+                                <a href="{{ partner.link }}">
+                                    {% trans_field partner 'title' %}
                                 </a>
                             </div>
                             <div class="for_block_title_bot">
@@ -23,17 +23,17 @@
                         </div>
                         <div class="for_block_org_cont">
                             <div class="for_block_org_logo">
-                                <a href="{{ organizer.link }}">
-                                    {% image organizer.logo max-269x120 %}
+                                <a href="{{ partner.link }}">
+                                    {% image partner.logo max-269x120 %}
                                 </a>
                             </div>
                             <div class="for_block_org_right">
                                 <div class="for_block_org_right_top">
-                                    {% trans_field organizer 'description' %}
+                                    {% trans_field partner 'description' %}
                                 </div>
                                 <div class="for_block_org_right_bot">
-                                    <a href="{{ organizer.link }}">
-                                        {{ organizer.link }}
+                                    <a href="{{ partner.link }}">
+                                        {{ partner.link }}
                                     </a>
                                 </div>
                             </div>
@@ -46,4 +46,50 @@
         </div>
     </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#    {% for partner in self.partners %}#}
+{##}
+{#        {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}#}
+{#            </div><div class="row">#}
+{#        {% endif %}#}
+{##}
+{#        <div class="col-xs-3">#}
+{#            <div class="for_block_pl_photo">#}
+{#                <a href="{{ partner.link }}">#}
+{#                <span class="for_block_sp_photo">#}
+{#                         {% image partner.logo height-150 %}#}
+{#                </span>#}
+{#                <span class="for_block_sp_name">#}
+{#                    {% trans_field partner 'title' %}#}
+{#                </span>#}
+{#                <span class="for_block_sp_about">#}
+{#                </span>#}
+{#                </a>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#    {% endfor %}#}
+</div>
+
 {% endblock %}
+
+
+
+
+

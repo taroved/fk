@@ -578,6 +578,11 @@ ul {
   height: 300px;
   margin-bottom: 18px;
 }
+.for_block_pl_photo {
+  position: relative;
+  height: 200px;
+  margin-bottom: 18px;
+}
 /*.for_block_sp_photo img {*/
 /*position: absolute;*/
 /*left: 0;*/
