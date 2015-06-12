@@ -1082,6 +1082,7 @@ ul {
   font-size: 19px;
   line-height: 19px;
   text-transform: uppercase;
+  text-align: center;
 }
 .for_block_pan_time {
   font-size: 28px !important;

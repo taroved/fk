@@ -1474,6 +1474,12 @@ class ForumPanelPage(TranslatablePage, BrowsableMixin):
         # return videos
 
     @property
+    def section(self):
+        section = self.get_ancestors().type(ProgramSectionPage).live().first().specific
+        return  section
+        #return self.get_descendants().type(ForumPanelPage).all().live()
+
+    @property
     def videos_list(self):
         videos = self.videos.all()
         lang = translation.get_language()
