@@ -40,6 +40,12 @@ LANGUAGE_CHOICES = (
     ('en', _('English')),
 )
 
+SEBINDEXES = (
+    (3, _('Third sebindex')),
+    (2, _('Second sebindex')),
+    (1, _('First sebindex')),
+)
+
 uk_upper = list(u'АБВГҐДЕЁЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ')
 en_upper = list(u'ABCDEFGHIJKLMNOPQRSTUVWXYZ')
 ru_upper = list(u'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ')
@@ -1175,6 +1181,91 @@ class ContentPage(TranslatablePage, BrowsableMixin):
 
 register_translatable_interface(ContentPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
 
+
+class LuckyCountryMainPage(TranslatablePage, BrowsableMixin):
+    title2 = RichTextField(max_length=255, blank=True, null=True, verbose_name='second title',
+                           help_text=_("The page title as you'd like it to be seen by the public (not in menu)"))
+    title2_ru = RichTextField(max_length=255, blank=True, null=True, verbose_name='second title',
+                           help_text=_("The page title as you'd like it to be seen by the public (not in menu)"))
+    title2_en = RichTextField(max_length=255, blank=True, null=True, verbose_name='second title',
+                           help_text=_("The page title as you'd like it to be seen by the public (not in menu)"))
+    
+    body = RichTextField(blank=True, null=True)
+    body_ru = RichTextField(blank=True, null=True, verbose_name='body')
+    body_en = RichTextField(blank=True, null=True, verbose_name='body')
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        FieldPanel('title2', classname="full"),
+        FieldPanel('body', classname="full"),
+    ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+    search_fields = [
+        index.SearchField('title'),
+        index.SearchField('title_ru'),
+        index.SearchField('title_en'),
+        index.SearchField('body', partial_match=True),
+        index.SearchField('body_ru', partial_match=True),
+        index.SearchField('body_en', partial_match=True),
+    ]
+
+
+register_translatable_interface(LuckyCountryMainPage, fields=('title', 'title2', 'body'), languages=MODELS_LANGUAGES)
+
+class LuckyCountryCategoryPage(TranslatablePage, BrowsableMixin):
+    sebindex = models.IntegerField(choices=SEBINDEXES, default=SEBINDEXES[0][0])
+    
+    body = RichTextField(blank=True, null=True)
+    body_ru = RichTextField(blank=True, null=True, verbose_name='body')
+    body_en = RichTextField(blank=True, null=True, verbose_name='body')
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        FieldPanel('sebindex'),
+        FieldPanel('body', classname="full"),
+    ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+    search_fields = [
+        index.SearchField('title'),
+        index.SearchField('title_ru'),
+        index.SearchField('title_en'),
+        index.SearchField('body', partial_match=True),
+        index.SearchField('body_ru', partial_match=True),
+        index.SearchField('body_en', partial_match=True),
+    ]
+    
+    @property
+    def lucky_index(self):
+        # Find closest ancestor which is a index
+        return self.get_ancestors().type(LuckyCountryMainPage).last()
+
+register_translatable_interface(LuckyCountryCategoryPage, fields=('title', 'body'), languages=MODELS_LANGUAGES)
+
+class LuckyCountryItemPreview(TranslatablePage):
+    image = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+    
+    body = RichTextField(blank=True, null=True)
+    body_ru = RichTextField(blank=True, null=True, verbose_name='body')
+    body_en = RichTextField(blank=True, null=True, verbose_name='body')
+
+    doc = models.ForeignKey(
+        'wagtaildocs.Document',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        ImageChooserPanel('image'),
+        FieldPanel('body', classname="full"),
+        DocumentChooserPanel('doc'),
+    ]
+
+register_translatable_interface(LuckyCountryItemPreview, fields=('title', 'body'), languages=MODELS_LANGUAGES)
 
 class ContactsPage(TranslatablePage, BrowsableMixin):
     body = RichTextField(blank=True, null=True)

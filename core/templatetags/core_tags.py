@@ -9,7 +9,7 @@ import six
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
 from wagtail.contrib.wagtailroutablepage.templatetags.wagtailroutablepage_tags import routablepageurl
 from wagtail.wagtailcore.models import Page
-from core.models import SliderItem, Partner, OrganizerPage, NewsIndexPage, SocialMediaSettings, ContactsSettings
+from core.models import SliderItem, Partner, OrganizerPage, NewsIndexPage, SocialMediaSettings, ContactsSettings, LuckyCountryCategoryPage, LuckyCountryItemPreview
 from django.core.validators import validate_email
 
 register = template.Library()
@@ -156,6 +156,35 @@ def get_site_root(context):
 
 def has_menu_children(page):
     return issubclass(page.specific_class, RoutablePageMixin) or page.get_children().live().in_menu().exists()
+
+
+@register.inclusion_tag('core/tags/lucky_country.html', takes_context=True)
+def lucky_country(context, parent=None, calling_page=None):
+    request = context['request']
+    menuitems = LuckyCountryCategoryPage.objects.live()
+    items = []
+
+    if menuitems:
+        for menuitem in menuitems:
+            menuitem.active = False
+        menuitems[0].active = True
+        active = menuitems[0]
+        
+        if calling_page is not None and calling_page.depth==4: # not lucky index page
+            for menuitem in menuitems:
+                if calling_page.url.startswith(menuitem.url):
+                    active = menuitem
+                    menuitem.active = True                               
+        
+        items = active.get_children().live()
+        items = LuckyCountryItemPreview.objects.filter(id__in=[item.id for item in items])
+    return {
+        'calling_page': calling_page,
+        'menuitems': menuitems,
+        # required by the pageurl tag that we want to use within this template
+        'request': request,
+        'items': items
+    }
 
 
 # Retrieves the top menu items - the immediate children of the parent page

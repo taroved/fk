@@ -73,7 +73,7 @@
 {% wagtailuserbar %}
 
 <div id="for_wrapper">
-    <div class="for_header">
+    <div class="{% block header_class %}for_header{% endblock %}">
         <div class="for_top_header">
             <div class="container">
                 <div class="row">
@@ -102,16 +102,17 @@
                 </div>
             </div>
         </div>
-
+        {% block middle_header %}
         {% slider %}
-
+        {% endblock %}
     </div>
 
     <div class="for_body">
 
         <div class="container">
-            {% include "core/breadcrumbs.html" %}
-
+            {% block breadcrumbs %}
+                {% include "core/breadcrumbs.html" %}
+            {% endblock %}
             {% block content_title %}
 
                 <div class="row">

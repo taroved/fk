@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static core_tags %}
+{% load wagtailcore_tags %}
+
+{% block header_class %}for_header_success{% endblock %}
+
+{% block middle_header %}
+    <div class="middle_header_success"></div>
+{% endblock %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content_title %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="for_block_title">
+                <div class="for_block_title_top">
+                    {% trans_field self 'title2' %}
+                </div>
+                <div class="for_block_title_bot">
+                    <div class="for_block_title_bot_in"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% trans_field self 'body' %}
+    </div>
+    <div class="container">
+    {% lucky_country calling_page=self %}
+    </div>
+{% endblock %}

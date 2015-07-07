@@ -1,0 +1,45 @@
+{% load core_tags   %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load i18n %}
+
+<div class="success_country">
+    <div class="menu">
+        <span class="title">{% trans "Структура <br/>индекса глобальной <br/>конкурентоспособности" %}</span>
+        <ul>
+            {% for menuitem in menuitems %}
+                <li class="type-{{ menuitem.sebindex }}">
+                    <a href="{% pageurl menuitem %}">{% trans_field menuitem 'title' %}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        
+        <div class="descript">
+            <i class="square square-3"></i> <span class="history history-3">{% trans "3-й себиндекс" %}</span><br/>
+            <span class="help">{% trans "Факторы развития <br/>и инновационного потенциала" %}</span>
+        </div>
+        <div class="descript">
+            <i class="square square-2"></i> <span class="history history-2">{% trans "2-й себиндекс" %}</span><br/>
+            <span class="help">{% trans "Уселители эффективности" %}</span>
+        </div>
+        <div class="descript">
+            <i class="square square-1"></i> <span class="history history-1">{% trans "1-й себиндекс" %}</span><br/>
+            <span class="help">{% trans "Базовые требования" %}</span>
+        </div>
+    </div>
+    <div class="items">
+        {% for item in items %}
+            <div class="item">
+                {% if item.image %}
+                    <a class="img" href="{{ item.doc.url }}">
+                    {% image item.image fill-170x252 %}
+                    </a>
+                {% endif %}
+                <h3><a href="{{ item.doc.url }}">{% trans_field item 'title' %}</a></h3>
+                <p>{% trans_field item 'body' %}
+                <a href="{{ item.doc.url }}">{% trans "читать полностью" %}</a>
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
