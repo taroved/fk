@@ -3,14 +3,22 @@
 {% load wagtailimages_tags %}
 {% load i18n %}
 
-<div class="success_country">
+<div class="success_country" id="success_country">
     <div class="menu">
         <span class="title">{% trans "Структура <br/>индекса глобальной <br/>конкурентоспособности" %}</span>
         <ul>
             {% for menuitem in menuitems %}
-                <li class="type-{{ menuitem.sebindex }}">
-                    <a href="{% pageurl menuitem %}">{% trans_field menuitem 'title' %}</a>
-                </li>
+                {% if menuitem.active %}
+                    <li class="before-active before-active-{{ menuitem.sebindex }}"></li>
+                    <li class="type-{{ menuitem.sebindex }} active">
+                        <a href="{% pageurl menuitem %}#success_country">{% trans_field menuitem 'title' %}</a>
+                    </li>
+                    <li class="after-active after-active-{{ menuitem.sebindex }}"></li>
+                {% else %}
+                    <li class="type-{{ menuitem.sebindex }}">
+                        <a href="{% pageurl menuitem %}#success_country">{% trans_field menuitem 'title' %}</a>
+                    </li>
+                {% endif %}
             {% endfor %}
         </ul>
         

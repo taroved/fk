@@ -1438,17 +1438,44 @@ ul {
 .success_country .menu ul li a {
     color: white;
 }
+.success_country .menu ul li.before-active {
+    height: 12px;
+}
+.success_country .menu ul li.after-active {
+    height: 12px;
+}
+.success_country .menu ul li.before-active-2 {
+    background: url('/static/images/arrows-sprite.png') top center no-repeat;
+}
+.success_country .menu ul li.after-active-2 {
+    background: url('/static/images/arrows-sprite.png') center -12px no-repeat;
+}
+.success_country .menu ul li.before-active-1 {
+    background: url('/static/images/arrows-sprite.png') center -24px no-repeat;
+}
+.success_country .menu ul li.after-active-1 {
+    background: url('/static/images/arrows-sprite.png') center -36px no-repeat;
+}
 .success_country .menu ul li a:hover {
     color: #06465d;
 }
 .success_country .menu ul li.type-3 {
     background: #c8e1a7;
 }
+.success_country .menu ul li.type-3.active {
+    background: #93c951;
+}
 .success_country .menu ul li.type-2 {
     background: #9bc4d5;
 }
+.success_country .menu ul li.type-2.active {
+    background: #249bb9;
+}
 .success_country .menu ul li.type-1 {
     background: #f9aeb4;
+}
+.success_country .menu ul li.type-1.active {
+    background: #f05e7b;
 }
 
 .success_country .menu .descript {

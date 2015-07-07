@@ -167,14 +167,16 @@ def lucky_country(context, parent=None, calling_page=None):
     if menuitems:
         for menuitem in menuitems:
             menuitem.active = False
-        menuitems[0].active = True
-        active = menuitems[0]
         
         if calling_page is not None and calling_page.depth==4: # not lucky index page
             for menuitem in menuitems:
                 if calling_page.url.startswith(menuitem.url):
                     active = menuitem
-                    menuitem.active = True                               
+                    menuitem.active = True
+        else:
+            menuitems[0].active = True
+            active = menuitems[0]
+                                           
         
         items = active.get_children().live()
         items = LuckyCountryItemPreview.objects.filter(id__in=[item.id for item in items])
