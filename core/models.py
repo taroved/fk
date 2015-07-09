@@ -30,6 +30,7 @@ from core.fields import IntegerRangeField
 from wagtailsettings.models import BaseSetting, register_setting
 from urlparse import urlparse
 from os.path import splitext, basename
+from django.core.urlresolvers import reverse
 
 MODELS_LANGUAGES = ('ru', 'en')
 DEFAULT_PAGE_SIZE = 10
@@ -1268,6 +1269,11 @@ class LuckyCountryItemPreview(TranslatablePage):
         FieldPanel('body', classname="full"),
         DocumentChooserPanel('doc'),
     ]
+    
+    @property
+    def doc_url(self):
+        return reverse('core_document_serve', args=[self.doc.id, self.doc.filename])
+
 
 register_translatable_interface(LuckyCountryItemPreview, fields=('title', 'body'), languages=MODELS_LANGUAGES)
 
