@@ -21,7 +21,7 @@
                 {% endif %}
             {% endfor %}
         </ul>
-        
+        {% if main_page.show_sebindex_help %}
         <div class="descript">
             <i class="square square-3"></i> <span class="history history-3">{% trans "3-й себиндекс" %}</span><br/>
             <span class="help">{% trans "Факторы развития <br/>и инновационного потенциала" %}</span>
@@ -34,6 +34,7 @@
             <i class="square square-1"></i> <span class="history history-1">{% trans "1-й себиндекс" %}</span><br/>
             <span class="help">{% trans "Базовые требования" %}</span>
         </div>
+        {% endif %}
     </div>
     <div class="items">
         {% for item in items %}

@@ -1194,10 +1194,14 @@ class LuckyCountryMainPage(TranslatablePage, BrowsableMixin):
     body_ru = RichTextField(blank=True, null=True, verbose_name='body')
     body_en = RichTextField(blank=True, null=True, verbose_name='body')
 
+    show_sebindex_help = models.BooleanField(default=False,
+                           help_text=_("Whether a sebindex help text will appear in this page"))
+
     content_panels = [
         FieldPanel('title', classname="full title"),
         FieldPanel('title2', classname="full"),
         FieldPanel('body', classname="full"),
+        FieldPanel('show_sebindex_help'),
     ]
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 

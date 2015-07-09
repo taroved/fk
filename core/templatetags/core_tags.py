@@ -9,7 +9,7 @@ import six
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
 from wagtail.contrib.wagtailroutablepage.templatetags.wagtailroutablepage_tags import routablepageurl
 from wagtail.wagtailcore.models import Page
-from core.models import SliderItem, Partner, OrganizerPage, NewsIndexPage, SocialMediaSettings, ContactsSettings, LuckyCountryCategoryPage, LuckyCountryItemPreview
+from core.models import SliderItem, Partner, OrganizerPage, NewsIndexPage, SocialMediaSettings, ContactsSettings, LuckyCountryCategoryPage, LuckyCountryItemPreview, LuckyCountryMainPage
 from django.core.validators import validate_email
 
 register = template.Library()
@@ -180,8 +180,10 @@ def lucky_country(context, parent=None, calling_page=None):
         
         items = active.get_children().live()
         items = LuckyCountryItemPreview.objects.filter(id__in=[item.id for item in items])
+        main_page = LuckyCountryMainPage.objects.all()[:1].get()
     return {
         'calling_page': calling_page,
+        'main_page': main_page,
         'menuitems': menuitems,
         # required by the pageurl tag that we want to use within this template
         'request': request,
