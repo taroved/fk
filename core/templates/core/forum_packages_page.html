@@ -37,13 +37,7 @@
     <div class="for_block_pack">
 
         <div class="for_block_pack_cont">
-{#                <div class="for_block_pack_cont_title">#}
-{#                    <div class="row">#}
-{#                        <div class="col-xs-4"></div>#}
-{#                        #}
-{#                    </div>#}
-{#                </div>#}
-                <table>
+            <table>
                     <thead class="for_block_pack_cont_title">
                         <tr>
                             <td></td>
@@ -83,8 +77,13 @@
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
+        </div>
+
+        <div class="for_block_pack_sale">
+            {% trans_field self 'description' %}
+        </div>
 
     </div>
+
 </div>
 {% endblock %}

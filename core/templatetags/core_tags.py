@@ -70,7 +70,7 @@ def trans_field(instance, field):
 
 @register.simple_tag
 def list_index(lst, index):
-    print lst, index
+    # print lst, index
     return lst[index]
 
 
@@ -81,7 +81,7 @@ def assign(value):
 
 @register.filter
 def split(str, splitter):
-    print str, splitter, str.split(splitter)
+    # print str, splitter, str.split(splitter)
     return str.split(splitter)
 
 

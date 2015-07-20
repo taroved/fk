@@ -1018,18 +1018,23 @@ class ForumPackagesPageItem(models.Model):
 class ForumPackagesPage(TranslatablePage, BrowsableMixin):
     parent_page_types = ['core.ForumPage']
 
+    description = RichTextField(null=True, blank=True)
+    description_ru = RichTextField(null=True, blank=True, verbose_name='description')
+    description_en = RichTextField(null=True, blank=True, verbose_name='description')
+
     @property
     def column_width_percent(self):
-        return 100 / (len(self.packages.all()) +1)
+        return 100 / (len(self.packages.all()) + 1)
 
 ForumPackagesPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('description', classname="full"),
     InlinePanel(ForumPackagesPage, 'date_ranges', label='Date Ranges'),
     InlinePanel(ForumPackagesPage, 'packages', label='Packages'),
 ]
 ForumPackagesPage.promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
-register_translatable_interface(ForumPackagesPage, fields=('title', ), languages=MODELS_LANGUAGES)
+register_translatable_interface(ForumPackagesPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
 
 
 class ForumPage(TranslatablePage, BrowsableMixin):
