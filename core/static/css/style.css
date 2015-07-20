@@ -1443,6 +1443,12 @@ ul {
 .success_country .menu ul li.after-active {
   height: 12px;
 }
+.success_country .menu ul li.before-active-3 {
+  background: url('/static/images/arrows-sprite.png') center -48px no-repeat;
+}
+.success_country .menu ul li.after-active-3 {
+  background: url('/static/images/arrows-sprite.png') center -60px no-repeat;
+}
 .success_country .menu ul li.before-active-2 {
   background: url('/static/images/arrows-sprite.png') top center no-repeat;
 }
