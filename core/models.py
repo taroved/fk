@@ -1,11 +1,14 @@
 # coding=utf-8
+from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator, RegexValidator
+from django.utils.deconstruct import deconstructible
 import six
 import re
 from datetime import date
 from datetime import datetime
 from django.db.models.fields import Field
 from django.utils import translation
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_text, force_text
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models
@@ -249,8 +252,15 @@ class Partner(models.Model):
         return "%s (%s)" % (self.title, self.link)
 
 
+def validate_flickr_album(value):
+    match = re.search("sets/(?P<id>\d+)", value)
+    if not match:
+        raise ValidationError('Enter a valid flickr album link.', code='invalid')
+
+
 class PhotoAlbumPage(BaseMaterialPage):
-    link = models.URLField(default='')
+    link = models.URLField(default='', validators=[validate_flickr_album],
+                           help_text="example: https://www.flickr.com/photos/129599628@N03/sets/72157650435543677/")
     date = models.DateField(default=datetime.now)
 
     @property
@@ -261,8 +271,7 @@ class PhotoAlbumPage(BaseMaterialPage):
 
         album_id = match.group("id")
         preview_url = 'http://flickrit.com/slideshowholder.php?height=100&size=big&setId={0}' \
-                      '&counter=true&thumbnails=2&transition=0&layoutType=responsive&sort=0&theme=1' \
-            .format(album_id)
+                      '&counter=true&thumbnails=2&transition=0&layoutType=responsive&sort=0&theme=1'.format(album_id)
         return preview_url
 
     preview = models.ForeignKey(
@@ -281,7 +290,7 @@ class PhotoAlbumPage(BaseMaterialPage):
         FieldPanel('title', classname="title full"),
         FieldPanel('language'),
         FieldPanel('date', classname="date"),
-        FieldPanel('link', classname="link full"),
+        FieldPanel('link', classname="link"),
         ImageChooserPanel('preview'),
         # FieldPanel('description', classname="full"),
     ]
