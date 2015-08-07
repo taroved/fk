@@ -33,8 +33,10 @@
 
     {% compress css %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.css' %}">
+{#        <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">#}
+{#        <link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.css' %}">#}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/gray.css' %}">
 
         <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.fancybox.css' %}">
@@ -50,7 +52,8 @@
 
     {% compress js %}
         <script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
-        <script src="{% static 'js/owl.carousel.js' %}"></script>
+{#        <script src="{% static 'js/owl.carousel.js' %}"></script>#}
+        <script src="{% static 'js/slick.js' %}"></script>
         <script src="{% static 'js/jquery.gray.js' %}"></script>
 
         <script src="{% static 'js/jquery.fancybox.js' %}"></script>
@@ -206,25 +209,36 @@
 
 <script>
     $(document).ready(function () {
-        $("#for_top_slider").owlCarousel({
-            autoPlay: 5000,
-            slideSpeed: 300,
-            paginationSpeed: 400,
-            singleItem: true
-        });
-    });
-</script>
+{#        $("#for_top_slider").owlCarousel({#}
+{#            autoPlay: 5000,#}
+{#            slideSpeed: 300,#}
+{#            paginationSpeed: 400,#}
+{#            singleItem: true#}
+{#        });#}
 
-<script>
-    $(document).ready(function () {
-        $("#for_bot_slider").owlCarousel({
-            navigation: true,
-            autoPlay: 5000,
-            items: 10,
-{#            itemsCustom: [1199, 10],#}
-{#            itemsCustom: [979, 10],#}
-{#            itemsCustom: [768, 10],#}
-{#            itemsCustom: [479, 10]#}
+{#        $("#for_bot_slider").owlCarousel({#}
+{#            navigation: true,#}
+{#            autoPlay: 5000,#}
+{#            items: 10,#}
+{#        });#}
+
+        $("#for_top_slider").slick({
+            dots: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            arrows: false
+        });
+
+        $("#for_bot_slider").slick({
+            dots: false,
+            autoplay: true,
+            arrows: true,
+            autoplaySpeed: 3000,
+            slidesToShow: 7,
+            slidesToScroll: 1,
+            variableWidth: true
         });
 
         $('.fancybox-media')

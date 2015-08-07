@@ -6,9 +6,9 @@
         {% trans "Partners" %}
     </div>
     <div class="for_block_part_cont">
-        <div id="for_bot_slider" class="owl-carousel owl-theme">
+        <div id="for_bot_slider">
             {% for partner in partners %}
-            <div class="item">
+            <div>
                 <a href="{{ partner.link }}">
                     {% image partner.logo height-35 %}
                 </a>
