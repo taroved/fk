@@ -74,6 +74,8 @@
 <body class="{% block body_class %}{% endblock %}">
 {% wagtailuserbar %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 <div id="for_wrapper">
     <div class="{% block header_class %}for_header{% endblock %}">
         <div class="for_top_header">
@@ -82,7 +84,7 @@
                     <div class="col-xs-12">
                         <div class="for_left_header">
                             <div class="for_top_logo">
-                                <a href="/">
+                                <a href="/{{ LANGUAGE_CODE }}/">
                                     {% include "core/logo.html" %}
                                 </a>
                             </div>
