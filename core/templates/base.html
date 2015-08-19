@@ -33,8 +33,6 @@
 
     {% compress css %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
-{#        <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">#}
-{#        <link rel="stylesheet" type="text/css" href="{% static 'css/owl.theme.css' %}">#}
         <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/gray.css' %}">
@@ -52,7 +50,6 @@
 
     {% compress js %}
         <script src="{% static 'js/jquery-1.9.1.min.js' %}"></script>
-{#        <script src="{% static 'js/owl.carousel.js' %}"></script>#}
         <script src="{% static 'js/slick.js' %}"></script>
         <script src="{% static 'js/jquery.gray.js' %}"></script>
 
@@ -211,18 +208,6 @@
 
 <script>
     $(document).ready(function () {
-{#        $("#for_top_slider").owlCarousel({#}
-{#            autoPlay: 5000,#}
-{#            slideSpeed: 300,#}
-{#            paginationSpeed: 400,#}
-{#            singleItem: true#}
-{#        });#}
-
-{#        $("#for_bot_slider").owlCarousel({#}
-{#            navigation: true,#}
-{#            autoPlay: 5000,#}
-{#            items: 10,#}
-{#        });#}
 
         $("#for_top_slider").slick({
             dots: true,
