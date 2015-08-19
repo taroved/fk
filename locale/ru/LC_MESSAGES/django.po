@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-14 13:12+0300\n"
+"POT-Creation-Date: 2015-08-19 21:52+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,91 +19,111 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: core/models.py:38 forumkyiv/settings/base.py:119
+#: core/models.py:42 forumkyiv/settings/base.py:119
 msgid "Ukrainian"
 msgstr ""
 
-#: core/models.py:39
+#: core/models.py:43 forumkyiv/settings/base.py:120
 msgid "Russian"
 msgstr ""
 
-#: core/models.py:40 forumkyiv/settings/base.py:121
+#: core/models.py:44 forumkyiv/settings/base.py:121
 msgid "English"
 msgstr ""
 
-#: core/models.py:54
+#: core/models.py:48
+msgid "Third sebindex"
+msgstr ""
+
+#: core/models.py:49
+msgid "Second sebindex"
+msgstr ""
+
+#: core/models.py:50
+msgid "First sebindex"
+msgstr ""
+
+#: core/models.py:64
 msgid "Common page configuration"
 msgstr ""
 
-#: core/models.py:76
+#: core/models.py:86
 msgid ""
 "Whether a browsable link to this page will appear in automatically generated "
 "menus"
 msgstr ""
 
-#: core/models.py:87 core/models.py:89 core/models.py:111 core/models.py:113
-#: core/models.py:211 core/models.py:213
+#: core/models.py:97 core/models.py:99 core/models.py:121 core/models.py:123
+#: core/models.py:221 core/models.py:223
 msgid "The page title as you'd like it to be seen by the public"
 msgstr ""
 
 # accreditation_page.html
-#: core/models.py:142
+#: core/models.py:152
 msgid "name"
 msgstr "ФИО"
 
-#: core/models.py:143
+#: core/models.py:153
 msgid "position"
 msgstr "Должность"
 
-#: core/models.py:144
+#: core/models.py:154
 msgid "publisher"
 msgstr "Издание"
 
-#: core/models.py:145
+#: core/models.py:155
 msgid "publisher_link"
 msgstr "Веб-адрес издания"
 
-#: core/models.py:146
+#: core/models.py:156
 msgid "mobile_phone"
 msgstr "Мобильный телефон"
 
-#: core/models.py:147
+#: core/models.py:157
 msgid "work_phone"
 msgstr "Рабочий телефон"
 
-#: core/models.py:148
+#: core/models.py:158
 msgid "email"
 msgstr "E-mail"
 
-#: core/models.py:149
+#: core/models.py:159
 msgid "publication_form_date"
 msgstr "Когда и в каком виде планируете публикацию про форум?"
 
-#: core/models.py:150
+#: core/models.py:160
 msgid "need_additional_help"
 msgstr "Нужна ли доп. информация про форум или помощь в организации интервью?"
 
-#: core/models.py:209
+#: core/models.py:219
 msgid "The title as you'd like it to be seen by the public"
 msgstr ""
 
-#: core/models.py:889
+#: core/models.py:999
 msgid "Text"
 msgstr ""
 
-#: core/models.py:1304
+#: core/models.py:1240 core/models.py:1242 core/models.py:1244
+msgid "The page title as you'd like it to be seen by the public (not in menu)"
+msgstr ""
+
+#: core/models.py:1251
+msgid "Whether a sebindex help text will appear in this page"
+msgstr ""
+
+#: core/models.py:1515
 msgid "Plenary discussions"
 msgstr "Панельные дискуссии"
 
-#: core/models.py:1305
+#: core/models.py:1516
 msgid "Plenary session"
 msgstr "Пленарное заседание"
 
-#: core/templates/base.html:162
+#: core/templates/base.html:170
 msgid "Join Us:"
 msgstr "Присоединяйтесь к нам:"
 
-#: core/templates/base.html:178
+#: core/templates/base.html:186
 msgid "Contact Info"
 msgstr "Контактная информация"
 
@@ -117,12 +137,14 @@ msgid "albums"
 msgstr "Фото"
 
 #: core/templates/core/documents_list.html:15
+#: core/templates/core/forum_panel_page.html:141
 #: core/templates/core/materials_documents_page.html:18
 #: core/templates/core/materials_page.html:133
 msgid "documents"
 msgstr "Документы"
 
 #: core/templates/core/documents_list.html:34
+#: core/templates/core/forum_panel_page.html:170
 #: core/templates/core/materials_documents_page.html:47
 #: core/templates/core/materials_page.html:156
 msgid "download"
@@ -136,24 +158,30 @@ msgstr "Место проведения"
 msgid "packages"
 msgstr "Пакеты участников"
 
-#: core/templates/core/forum_packages_page.html:42
+#: core/templates/core/forum_packages_page.html:54
 msgid "participation format"
 msgstr "Формат участия"
 
 #: core/templates/core/forum_page.html:31
-#: core/templates/core/home_page.html:188
+#: core/templates/core/home_page.html:27
+#: core/templates/core/program_page.html:14
 msgid "program"
 msgstr "Программа"
 
 #: core/templates/core/forum_page.html:51
-#: core/templates/core/home_page.html:205
+#: core/templates/core/home_page.html:61
 msgid "Speakers"
 msgstr "Спикеры"
 
 #: core/templates/core/forum_page.html:62
-#: core/templates/core/home_page.html:219
+#: core/templates/core/home_page.html:75
 msgid "all speakers"
 msgstr "полный список спикеров"
+
+#: core/templates/core/forum_panel_page.html:85
+#: core/templates/core/materials_video_page.html:19
+msgid "videos"
+msgstr "Видео"
 
 #: core/templates/core/forum_speakers_page.html:14
 msgid "speakers"
@@ -163,18 +191,14 @@ msgstr "Спикеры"
 msgid "all letters"
 msgstr "ВСЕ"
 
-#: core/templates/core/home_page.html:27
+#: core/templates/core/home_page.html:94
 msgid "News"
 msgstr "Новости"
 
-#: core/templates/core/home_page.html:117
+#: core/templates/core/home_page.html:184
+#: core/templates/core/materials_page.html:25
 #: core/templates/core/videos_list.html:13
 msgid "Video"
-msgstr "Видео"
-
-#: core/templates/core/materials_page.html:25
-#: core/templates/core/materials_video_page.html:19
-msgid "videos"
 msgstr "Видео"
 
 #: core/templates/core/materials_page.html:59
@@ -197,6 +221,10 @@ msgstr "Поделиться"
 #: core/templates/core/press_top_list_page.html:25
 msgid "read more"
 msgstr "читать полностью"
+
+#: core/templates/core/org_page.html:53
+msgid "Organizational Committee"
+msgstr "Организационный комитет"
 
 #: core/templates/core/pagination.html:9
 msgid "previous"
@@ -221,6 +249,38 @@ msgstr "Результаты поиска"
 #: core/templates/core/search_results.html:57
 msgid "nothing found"
 msgstr "Ничего не найдено"
+
+#: core/templates/core/tags/lucky_country.html:8
+msgid "Структура <br/>индекса глобальной <br/>конкурентоспособности"
+msgstr ""
+
+#: core/templates/core/tags/lucky_country.html:26
+msgid "3-й себиндекс"
+msgstr ""
+
+#: core/templates/core/tags/lucky_country.html:27
+msgid "Факторы развития <br/>и инновационного потенциала"
+msgstr ""
+
+#: core/templates/core/tags/lucky_country.html:30
+msgid "2-й себиндекс"
+msgstr ""
+
+#: core/templates/core/tags/lucky_country.html:31
+msgid "Уселители эффективности"
+msgstr ""
+
+#: core/templates/core/tags/lucky_country.html:34
+msgid "1-й себиндекс"
+msgstr ""
+
+#: core/templates/core/tags/lucky_country.html:35
+msgid "Базовые требования"
+msgstr ""
+
+#: core/templates/core/tags/lucky_country.html:49
+msgid "читать полностью"
+msgstr ""
 
 #: core/templates/core/tags/organizers.html:6
 msgid "Organizers"

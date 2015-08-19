@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load static core_tags wagtailcore_tags wagtailimages_tags %}
+{% load static core_tags wagtailcore_tags wagtailimages_tags i18n %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -50,7 +50,7 @@
     <br>
      <div class="for_block_title">
         <div class="for_block_title_top">
-            Организационный комитет
+            {% trans "Organizational Committee" %}
         </div>
         <div class="for_block_title_bot">
             <div class="for_block_title_bot_in"></div>
@@ -69,8 +69,6 @@
 
                     <div class="col-xs-3 col-centered">
                         <div class="for_block_sp_item" style="height: 350px; overflow: hidden">
-                            {# aling only in last row #}
-                                {#<a href="{% pageurl member.speaker_page %}">#}
                             <span class="for_block_sp_photo">
                                 {% image organizer.photo height-300 as photo %}
                                 <a href="{{ organizer.url }}">
@@ -87,32 +85,6 @@
                             </span>
                         </div>
                     </div>
-
-{#                    <div class="for_block_org">#}
-{#                        <div class="for_block_title for_block_title_org">#}
-{#                            <div class="for_block_title_top">#}
-{#                                <a href="{% pageurl organizer %}">#}
-{#                                    {% trans_field organizer 'title' %}#}
-{#                                </a>#}
-{#                            </div>#}
-{#                            <div class="for_block_title_bot">#}
-{#                                <div class="for_block_title_bot_in"></div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="for_block_org_cont">#}
-{#                            <div class="for_block_org_logo">#}
-{#                                <a href="{% pageurl organizer %}">#}
-{#                                    {% image organizer.photo max-269x120 %}#}
-{#                                </a>#}
-{#                            </div>#}
-{#                            <div class="for_block_org_right">#}
-{#                                <div class="for_block_org_right_top">#}
-{#                                    {% trans_field organizer 'description' %}#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="pad"></div>#}
-{#                        </div>#}
-{#                    </div>#}
 
                 {% endfor %}
         </div>
