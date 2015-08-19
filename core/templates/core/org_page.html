@@ -46,4 +46,78 @@
         </div>
     </div>
 
+    <br>
+    <br>
+     <div class="for_block_title">
+        <div class="for_block_title_top">
+            Организационный комитет
+        </div>
+        <div class="for_block_title_bot">
+            <div class="for_block_title_bot_in"></div>
+        </div>
+    </div>
+
+    {% with org_committee=self.org_committee_persons %}
+
+    <div class="container">
+        <div class="row row-centered">
+                {% for organizer in org_committee %}
+                    {# split every 4 items #}
+                    {% if forloop.counter0|divisibleby:"4" and forloop.counter0 > 0 %}
+                        </div><div class="row row-centered">
+                    {% endif %}
+
+                    <div class="col-xs-3 col-centered">
+                        <div class="for_block_sp_item" style="height: 350px; overflow: hidden">
+                            {# aling only in last row #}
+                                {#<a href="{% pageurl member.speaker_page %}">#}
+                            <span class="for_block_sp_photo">
+                                {% image organizer.photo height-300 as photo %}
+                                <a href="{{ organizer.url }}">
+                                    <img src="{{ photo.url }}" width="270" height="300" alt="{{ photo.alt }}" />
+                                </a>
+                            </span>
+                            <span class="for_block_sp_name">
+                              <a href="{{ organizer.url }}" style="margin-top: 10px; margin-bottom: 5px">
+                                {% trans_field organizer 'title' %}
+                              </a>
+                            </span>
+                            <span class="for_block_sp_about">
+                                {% trans_field organizer 'position' %}
+                            </span>
+                        </div>
+                    </div>
+
+{#                    <div class="for_block_org">#}
+{#                        <div class="for_block_title for_block_title_org">#}
+{#                            <div class="for_block_title_top">#}
+{#                                <a href="{% pageurl organizer %}">#}
+{#                                    {% trans_field organizer 'title' %}#}
+{#                                </a>#}
+{#                            </div>#}
+{#                            <div class="for_block_title_bot">#}
+{#                                <div class="for_block_title_bot_in"></div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="for_block_org_cont">#}
+{#                            <div class="for_block_org_logo">#}
+{#                                <a href="{% pageurl organizer %}">#}
+{#                                    {% image organizer.photo max-269x120 %}#}
+{#                                </a>#}
+{#                            </div>#}
+{#                            <div class="for_block_org_right">#}
+{#                                <div class="for_block_org_right_top">#}
+{#                                    {% trans_field organizer 'description' %}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="pad"></div>#}
+{#                        </div>#}
+{#                    </div>#}
+
+                {% endfor %}
+        </div>
+    </div>
+
+    {% endwith  %}
+
 {% endblock %}

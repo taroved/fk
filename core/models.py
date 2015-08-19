@@ -521,7 +521,11 @@ class OrgPage(TranslatablePage, BrowsableMixin):
     def organizers(self):
         return OrganizerPage.objects.live().all()
 
-    subpage_types = ['core.OrganizerPage']
+    @property
+    def org_committee_persons(self):
+        return OrgCommitteePersonPage.objects.live().all()
+
+    subpage_types = ['core.OrganizerPage', 'core.OrgCommitteePersonPage']
 
     promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
 
@@ -624,6 +628,8 @@ class OrganizerPage(TranslatablePage, BrowsableMixin):
     description_ru = models.TextField(blank=True, null=True, verbose_name='description')
     description_en = models.TextField(blank=True, null=True, verbose_name='description')
 
+    parent_page_types = ['core.OrgPage']
+
     content_panels = [
         FieldPanel('title', classname="full title"),
         ImageChooserPanel('logo'),
@@ -634,6 +640,38 @@ class OrganizerPage(TranslatablePage, BrowsableMixin):
 
 
 register_translatable_interface(OrganizerPage, fields=('title', 'description'), languages=MODELS_LANGUAGES)
+
+
+class OrgCommitteePersonPage(TranslatablePage, BrowsableMixin):
+    photo = models.ForeignKey('wagtailimages.Image', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
+
+    about = RichTextField(blank=True, null=True, default='')
+    about_ru = RichTextField(blank=True, null=True, default='', verbose_name='about')
+    about_en = RichTextField(blank=True, null=True, default='', verbose_name='about')
+
+    position = models.CharField(max_length=255, blank=True, null=True, default='')
+    position_ru = models.CharField(max_length=255, blank=True, null=True, default='', verbose_name='position')
+    position_en = models.CharField(max_length=255, blank=True, null=True, default='', verbose_name='position')
+
+    parent_page_types = ['core.OrgPage']
+
+    content_panels = [
+        FieldPanel('title', classname="full title"),
+        ImageChooserPanel('photo'),
+        FieldPanel('position', classname="full"),
+        FieldPanel('about', classname="full"),
+    ]
+    promote_panels = BROWSABLE_PAGE_PROMOTE_PANELS
+
+    search_fields = Page.search_fields + (
+        index.SearchField('title_ru', partial_match=True, boost=2),
+        index.SearchField('title_en', partial_match=True, boost=2),
+        index.SearchField('about', partial_match=True),
+        index.SearchField('about_ru', partial_match=True),
+        index.SearchField('about_en', partial_match=True),
+    )
+
+register_translatable_interface(OrgCommitteePersonPage, fields=('title', 'position',  'about'), languages=MODELS_LANGUAGES)
 
 
 class PartnerIndexPage(TranslatablePage, BrowsableMixin):
