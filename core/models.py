@@ -1619,18 +1619,13 @@ class ForumPanelPage(TranslatablePage, BrowsableMixin):
 
     enable_link = models.BooleanField(default=False)
 
-    # @property
-    # def videos_list(self):
-    #     return self.videos.all()
-        # lang = translation.get_language()
-        # videos = [page for page in self.videos.all() if page.video.language == lang]
-        # return videos
+    start_time = models.TimeField(verbose_name='Start')
+    end_time = models.TimeField(verbose_name='End')
 
     @property
     def section(self):
         section = self.get_ancestors().type(ProgramSectionPage).live().first().specific
-        return  section
-        #return self.get_descendants().type(ForumPanelPage).all().live()
+        return section
 
     @property
     def videos_list(self):
@@ -1639,14 +1634,12 @@ class ForumPanelPage(TranslatablePage, BrowsableMixin):
         items = [page for page in videos if page.video.language == lang]
         return items
 
-
     @property
     def documents_list(self):
         documents = self.documents.all()
         lang = translation.get_language()
         items = [page for page in documents if page.doc.language == lang]
         return items
-        #return documents
 
     @property
     def albums_list(self):
@@ -1670,6 +1663,10 @@ ForumPanelPage.content_panels = [
     FieldPanel('enable_link'),
     FieldPanel('body', classname="full"),
     FieldPanel('location', classname="full"),
+    FieldRowPanel([
+        FieldPanel('start_time', classname="col5"),
+        FieldPanel('end_time', classname="col5"),
+    ]),
 ]
 ForumPanelPage.ru_panels = [
     FieldPanel('title_ru', classname="full title"),
@@ -1705,7 +1702,3 @@ PAGE_EDIT_HANDLERS[ForumPanelPage] = TranslatableTabbedInterface([
     ObjectList(ForumPanelPage.promote_panels, heading='Promote'),
     ObjectList(ForumPanelPage.settings_panels, heading='Settings', classname="settings")
 ])
-
-#
-# register_translatable_interface(ForumPanelPage, fields=('title', 'body', 'location'),
-#                                 languages=MODELS_LANGUAGES, materials=True)
