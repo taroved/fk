@@ -17,7 +17,11 @@
                     <div class="for_block_pan_cont">
                         <div class="for_block_pan_left">
                             <div class="for_block_pan_time">
-                                {{ self.section.start_time|time:"H:i"  }} - {{ self.section.end_time|time:"H:i"  }}
+                                {% if self.start_time %}
+                                    {{ self.start_time|time:"H:i"  }} - {{ self.end_time|time:"H:i"  }}
+                                {% else %}
+                                    {{ self.section.start_time|time:"H:i"  }} - {{ self.section.end_time|time:"H:i"  }}
+                                {% endif %}
                             </div>
                             <div>
                                 {% trans_field self 'location' %}
