@@ -1619,8 +1619,8 @@ class ForumPanelPage(TranslatablePage, BrowsableMixin):
 
     enable_link = models.BooleanField(default=False)
 
-    start_time = models.TimeField(verbose_name='Start')
-    end_time = models.TimeField(verbose_name='End')
+    start_time = models.TimeField(blank=True, null=True, verbose_name='Start')
+    end_time = models.TimeField(blank=True, null=True, verbose_name='End')
 
     @property
     def section(self):
@@ -1668,6 +1668,7 @@ ForumPanelPage.content_panels = [
         FieldPanel('end_time', classname="col5"),
     ]),
 ]
+
 ForumPanelPage.ru_panels = [
     FieldPanel('title_ru', classname="full title"),
     FieldPanel('body_ru', classname="full"),

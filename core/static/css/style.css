@@ -1366,12 +1366,18 @@ ul {
 .for_block_prog_cont table tr td:first-child > div {
   display: table-cell;
   vertical-align: middle;
-  width: 200px;
   border-right: 1px solid #dadada;
   padding-right: 14px;
+  width: 200px;
   text-align: right;
   font-size: 20px;
   color: #061f33;
+}
+.for_block_prog_cont table tr td:first-child > div > div.program-time {
+  font-size: 18px;
+  color: #061f33;
+  vertical-align: middle;
+  text-align: right;
 }
 .for_block_prog_cont table tr:first-child td:first-child > div {
   padding: 0;

@@ -37,27 +37,44 @@
                         <div class="section-time" style="height: 108px">
                             {% if section.section_type != '' %}
                                 <span>
-{#                                            {% trans_field section "section_type" %}#}
-                                            {{ section.get_section_type_display|default_if_none:"" }}
-                                        </span>
+                                    {{ section.get_section_type_display|default_if_none:"" }}
+                                </span>
                             {% endif %}
-
-                            {{ section.start_time|time:"H:i" }} - {{ section.end_time|time:"H:i" }}
+                            {% if section.section_type == 'PD' %}
+                                {% for panel in section.panels %}
+                                    {% with panel.specific as specific_panel %}
+                                        <div class="program-time {{ panel.slug }}">
+                                            {{ specific_panel.start_time|time:"H:i" }}
+                                            {% if specific_panel.end_time %}
+                                                - {{ specific_panel.end_time|time:"H:i" }}
+                                            {% endif %}&nbsp;
+                                        </div>
+                                    {% endwith %}
+                                {% endfor %}
+                            {% else %}
+                                {{ section.start_time|time:"H:i" }} - {{ section.end_time|time:"H:i" }}
+                            {% endif %}
                         </div>
                     </td>
                     <td>
                         <div class="section-location">
+                            {% if section.section_type == 'PD' %} {# empty span to push following items down 1 row #}
+                                <span>&nbsp;</span>
+                            {% endif %}
                             {% for panel in section.panels %}
                                 <span class="{{ panel.slug }}">
-                                            {% trans_field panel "location" %}
-                                        </span>
+                                    {% trans_field panel "location" %}
+                                </span>&nbsp;
                             {% endfor %}
                         </div>
                     </td>
                     <td>
                         <div class="section-name">
+                            {% if section.section_type == 'PD' %} {# empty span to push following items down 1 row #}
+                                <span>&nbsp;</span>
+                            {% endif %}
                             {% if section.panels %}
-                                {% if section.section_type != 'PD' %} {# Panel discussion shoud have no title #}
+                                {% if section.section_type != 'PD' %} {# Panel discussion should have no title #}
                                     <b>{% trans_field section "title" %}</b>
                                 {% endif %}
                             {% else %}
