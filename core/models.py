@@ -182,9 +182,9 @@ class Advert(models.Model):
 
 @register_snippet
 class SliderItem(models.Model):
-    text = RichTextField(null=True, blank=True)
-    text_ru = RichTextField(null=True, blank=True, verbose_name='text')
-    text_en = RichTextField(null=True, blank=True, verbose_name='text')
+    text = models.TextField(null=True, blank=True)
+    text_ru = models.TextField(null=True, blank=True, verbose_name='text')
+    text_en = models.TextField(null=True, blank=True, verbose_name='text')
 
     button_text = models.CharField(max_length=50, null=True, blank=True)
     button_text_ru = models.CharField(max_length=50, null=True, blank=True, verbose_name='button text')
@@ -211,7 +211,7 @@ class SliderItem(models.Model):
     ]
 
     def __unicode__(self):
-        return strip_tags(self.text.replace(">", "> "))
+        return strip_tags(self.text.replace(">", "> ")) + self.button_text
 
 
 @register_snippet
