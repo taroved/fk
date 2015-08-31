@@ -186,32 +186,22 @@ class SliderItem(models.Model):
     text_ru = models.TextField(null=True, blank=True, verbose_name='text')
     text_en = models.TextField(null=True, blank=True, verbose_name='text')
 
-    button_text = models.CharField(max_length=50, null=True, blank=True)
-    button_text_ru = models.CharField(max_length=50, null=True, blank=True, verbose_name='button text')
-    button_text_en = models.CharField(max_length=50, null=True, blank=True, verbose_name='button text')
-
-    button_link = models.URLField(null=True, blank=True)
-
     panels = [
         MultiFieldPanel([
             FieldPanel('text', classname="full"),
-            FieldPanel('button_text'),
-            FieldPanel('button_link'),
         ], heading='Default'),
 
         MultiFieldPanel([
             FieldPanel('text_ru', classname="full"),
-            FieldPanel('button_text_ru'),
         ], heading='RU'),
 
         MultiFieldPanel([
             FieldPanel('text_en', classname="full"),
-            FieldPanel('button_text_en'),
         ], heading='EN'),
     ]
 
     def __unicode__(self):
-        return strip_tags(self.text.replace(">", "> ")) + self.button_text
+        return "{} {}".format(self._meta.verbose_name, self.id)
 
 
 @register_snippet

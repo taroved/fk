@@ -253,10 +253,9 @@ ul {
   color: #c3c3c3;
 }
 .for_slider {
-  padding-top: 138px;
+  padding-top: 70px;
 }
 .for_slider .item {
-  margin-left: 196px;
   color: #fff;
 }
 #for_top_slider .item img {
@@ -292,12 +291,30 @@ ul {
   background: #fff;
   height: 39px;
   padding: 0 9px;
-  -webkit-transition: opacity 300ms ease-out;
-  -moz-transition: opacity 300ms ease-out;
   -o-transition: opacity 300ms ease-out;
+  -moz-transition: opacity 300ms ease-out;
+  -webkit-transition: opacity 300ms ease-out;
   transition: opacity 300ms ease-out;
 }
 .for_slide_block_4 a:hover {
+  opacity: 0.9;
+}
+.slider-button {
+  display: inline-block;
+  font-family: 'PFBeauSansPro-Reg', Arial, sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #0098cf;
+  background: #fff;
+  height: 1.7em;
+  line-height: 1.9em;
+  padding: 0 9px;
+  -o-transition: opacity 300ms ease-out;
+  -moz-transition: opacity 300ms ease-out;
+  -webkit-transition: opacity 300ms ease-out;
+  transition: opacity 300ms ease-out;
+}
+.slider-button:hover {
   opacity: 0.9;
 }
 /********** BODY **********/
