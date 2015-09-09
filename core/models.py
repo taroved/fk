@@ -165,6 +165,23 @@ register_translatable_interface(AccreditationPage, fields=('title', 'body', 'tha
 
 
 @register_snippet
+class HeaderItem(models.Model):
+    html = models.TextField(null=True, blank=True)
+    html_ru = models.TextField(null=True, blank=True, verbose_name='html')
+    html_en = models.TextField(null=True, blank=True, verbose_name='html')
+
+    panels = [
+        MultiFieldPanel([FieldPanel('html', classname="full")], heading='Default'),
+        MultiFieldPanel([FieldPanel('html_ru', classname="full")], heading='RU'),
+        MultiFieldPanel([FieldPanel('html_en', classname="full")], heading='EN'),
+    ]
+
+    def __unicode__(self):
+        return "{} {}".format(self._meta.verbose_name, self.id)
+
+
+
+@register_snippet
 class Advert(models.Model):
     text = models.CharField(max_length=255, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
@@ -187,17 +204,9 @@ class SliderItem(models.Model):
     text_en = models.TextField(null=True, blank=True, verbose_name='text')
 
     panels = [
-        MultiFieldPanel([
-            FieldPanel('text', classname="full"),
-        ], heading='Default'),
-
-        MultiFieldPanel([
-            FieldPanel('text_ru', classname="full"),
-        ], heading='RU'),
-
-        MultiFieldPanel([
-            FieldPanel('text_en', classname="full"),
-        ], heading='EN'),
+        MultiFieldPanel([FieldPanel('text', classname="full")], heading='Default'),
+        MultiFieldPanel([FieldPanel('text_ru', classname="full")], heading='RU'),
+        MultiFieldPanel([FieldPanel('text_en', classname="full")], heading='EN'),
     ]
 
     def __unicode__(self):

@@ -1,0 +1,6 @@
+{% load wagtailcore_tags core_tags %}
+<div class="for_snippets">
+    {% for item in items %}
+        {%  trans_field item 'html' %}
+    {% endfor %}
+</div>

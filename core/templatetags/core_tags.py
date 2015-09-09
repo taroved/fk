@@ -9,11 +9,19 @@ import six
 from wagtail.contrib.wagtailroutablepage.models import RoutablePageMixin
 from wagtail.contrib.wagtailroutablepage.templatetags.wagtailroutablepage_tags import routablepageurl
 from wagtail.wagtailcore.models import Page
-from core.models import SliderItem, Partner, OrganizerPage, NewsIndexPage, SocialMediaSettings, ContactsSettings, LuckyCountryCategoryPage, LuckyCountryItemPreview, LuckyCountryMainPage
+from core.models import SliderItem, Partner, OrganizerPage, NewsIndexPage, SocialMediaSettings, ContactsSettings, LuckyCountryCategoryPage, LuckyCountryItemPreview, LuckyCountryMainPage, \
+    HeaderItem
 from django.core.validators import validate_email
 
 register = template.Library()
 
+
+@register.inclusion_tag('core/tags/header_snippets.html', takes_context=True)
+def header_snippets(context):
+    return {
+        'items': HeaderItem.objects.all(),
+        'request': context['request'],
+    }
 
 @register.inclusion_tag('core/tags/slider.html', takes_context=True)
 def slider(context):

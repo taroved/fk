@@ -111,6 +111,7 @@ ul {
 .for_lang_search {
   overflow: hidden;
   margin-bottom: 18px;
+  height: 22px;
 }
 .for_lang_search > div {
   float: right;
@@ -158,6 +159,10 @@ ul {
 .for_search > form > input {
   display: block;
   float: left;
+}
+.for_snippets {
+  margin-right: 34px;
+  float: right;
 }
 .for_form_text {
   border: none;
@@ -316,6 +321,9 @@ ul {
 }
 .slider-button:hover {
   opacity: 0.9;
+}
+.slider-button.small {
+  font-size: 14px;
 }
 /********** BODY **********/
 .for_body {

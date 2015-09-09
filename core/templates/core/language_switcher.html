@@ -16,9 +16,9 @@
         <li {% if LANGUAGE_CODE == 'ru' %} class="active" {% endif %}>
             {% language "ru" %}
                 {% if self.language %}
-                            <a href="{{ self.parent.url }}">Рус</a>
+                    <a href="{{ self.parent.url }}">Рус</a>
                 {% else %}
-                            <a href="{{ self.url }}">Рус</a>
+                    <a href="{{ self.url }}">Рус</a>
                 {% endif %}
             {% endlanguage %}
         </li>
