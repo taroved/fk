@@ -139,6 +139,39 @@ ul {
 .for_top_header {
   background: rgba(16, 22, 54, 0.1);
   height: 85px;
+  //position:fixed;
+  left:0;
+  right:0;
+  width:100%;
+  z-index: 50;
+}
+
+@keyframes stick-header-animation {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  50% {
+    height: 60px;
+    opacity: 0.8;
+  }
+  100% {
+    height: 85px;
+    opacity: 0.8;
+  }
+}
+
+.for_top_header.affix {
+  //background:  rgba(16, 22, 54, 0.9);
+  //transition: height 1.5s ease;
+  animation: stick-header-animation 0.5s;
+  height: 85px;
+  opacity: 0.8;
+  background: #33acd8 url("/static/images/for_header.jpg") top center no-repeat;
+}
+
+.for_top_header.affix .for_top_menu > ul > li > ul {
+  background-color: #0198cf;
 }
 
 .for_header_success .for_top_header {
