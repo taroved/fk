@@ -180,7 +180,6 @@ class HeaderItem(models.Model):
         return "{} {}".format(self._meta.verbose_name, self.id)
 
 
-
 @register_snippet
 class Advert(models.Model):
     text = models.CharField(max_length=255, null=True, blank=True)
