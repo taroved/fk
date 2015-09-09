@@ -80,7 +80,6 @@ ul {
 .for_header {
   background: #0098cf url("/static/images/for_header.jpg") top center no-repeat;
   height: 584px;
-  margin-bottom: 20px;
 }
 .for_header_success {
   background: #0098cf url("/static/images/for_header_success.jpg") top center no-repeat;
@@ -750,6 +749,7 @@ ul {
   font-family: 'PFBeauSansPro-Light', Arial, sans-serif;
   font-size: 13px;
   color: #0098cf;
+  margin-top: 20px;
   margin-bottom: 40px;
 }
 .for_pathway a {

@@ -1,19 +1,23 @@
 {% load wagtailcore_tags core_tags %}
 
-<div class="col-xs-12">
-    <div class="for_pathway">
-        {% if self.get_ancestors|length > 1 %}
-            {% for page in self.get_ancestors %}
-                {% if page.is_root == False %}
-                    {% if page.specific.is_browsable == True or page.slug == 'home'%}
-                        <a href="{% pageurl page %}">{% trans_field page 'title' %}</a> >
-                    {% else %}
-                        {% trans_field page 'title' %} >
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
 
-            <a href="{{ self.url }}">{% trans_field self 'title' %}</a>
-        {% endif %}
+{% if self.get_ancestors|length > 1 %}
+
+    <div class="col-xs-12">
+        <div class="for_pathway">
+                {% for page in self.get_ancestors %}
+                    {% if page.is_root == False %}
+                        {% if page.specific.is_browsable == True or page.slug == 'home'%}
+                            <a href="{% pageurl page %}">{% trans_field page 'title' %}</a> >
+                        {% else %}
+                            {% trans_field page 'title' %} >
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                <a href="{{ self.url }}">{% trans_field self 'title' %}</a>
+
+        </div>
     </div>
-</div>
+
+{% endif %}
